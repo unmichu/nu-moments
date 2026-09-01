@@ -1,0 +1,9 @@
+action_type,prev_%_1d,prev_%_3d,prev_%_7d,prev_%_14d
+bill_payment,0.88,2.62,8.63,17.63
+card_payment,1.78,4.94,11.05,20.67
+deposit_in,1.03,2.92,9.53,20.84
+investment_buy,0.29,0.83,1.89,3.58
+limit_increase_request,0.22,0.69,1.52,2.89
+loan_request,0.18,0.51,1.24,2.45
+savings_move,0.43,1.38,4.51,9.75
+spei_out,3.83,10.85,23.92,41.93

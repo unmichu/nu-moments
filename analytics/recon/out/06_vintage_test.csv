@@ -1,0 +1,6 @@
+columna_customers,target,corr_1a_mitad,corr_2a_mitad,diff
+savings_rate_90d_pct,savings_move,0.2885,0.2762,-0.0123
+card_utilization_pct,loan_request,0.1007,0.1109,0.0101
+engagement_score,todas las acciones,0.0771,0.076,-0.0011
+revenue_ltm_mxn,todas las acciones,0.0408,0.0418,0.001
+days_negative_90d,loan_request,0.0156,0.0106,-0.005

@@ -1,0 +1,14 @@
+target_7d,feature,media_pos,media_neg,ratio,corr
+y_savings,savings_rate_90d_pct,32.49,24.26,1.339,0.1071
+y_savings,has_cajita_turbo,0.43,0.13,3.22,0.1748
+y_savings,avg_balance_mxn,6308.14,3792.27,1.663,0.0836
+y_loan,card_utilization_pct,53.0,45.12,1.175,0.0404
+y_loan,has_personal_loan,0.25,0.06,3.863,0.0813
+y_loan,days_negative_90d,0.8,0.73,1.099,0.0083
+y_loan,revenue_ltm_mxn,1235.37,1100.7,1.122,0.0284
+y_limit,card_utilization_pct,53.58,45.09,1.188,0.0481
+y_limit,has_personal_loan,0.2,0.06,3.2,0.0692
+y_limit,days_negative_90d,0.79,0.73,1.084,0.0078
+y_invest,has_investments,0.35,0.04,7.751,0.1879
+y_invest,monthly_income_est_mxn,19033.15,19351.9,0.984,-0.0035
+y_invest,avg_balance_mxn,3863.4,3906.43,0.989,-0.0009

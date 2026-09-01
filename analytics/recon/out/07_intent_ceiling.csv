@@ -1,0 +1,5 @@
+lookback_h,clientes_activos,pct_con_senal,acc_donde_hay_senal,acc_hibrida_vs_mayoritaria,baseline_mayoritaria,lift_pp
+24,18606,16.1,63.45,44.72,41.62,3.1
+48,18606,25.5,52.34,43.88,41.62,2.26
+72,18606,33.0,45.71,42.7,41.62,1.08
+168,18606,59.8,34.55,37.32,41.62,-4.3

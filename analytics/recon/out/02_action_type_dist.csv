@@ -1,0 +1,9 @@
+action_type,n,pct_filas,clientes,pct_clientes_con_1+,monto_medio,pct_recurrente
+spei_out,178502,31.5,37621,99.0,3001.0,8.1
+deposit_in,121060,21.36,36158,95.2,13558.0,55.3
+bill_payment,106275,18.75,28532,75.1,1392.0,54.9
+card_payment,74758,13.19,32285,85.0,4830.0,8.0
+savings_move,55714,9.83,19013,50.0,2335.0,7.9
+investment_buy,12826,2.26,6575,17.3,6204.0,7.6
+limit_increase_request,9277,1.64,6932,18.2,34145.0,8.3
+loan_request,8270,1.46,6479,17.0,67063.0,7.6

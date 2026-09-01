@@ -1,0 +1,18 @@
+tabla,columna,uso,motivo
+nudge_outcomes,delta_card_utilization_pct_90d,TARGET / NUNCA feature,"posterior al nudge, +90d"
+nudge_outcomes,delta_savings_rate_pct_90d,TARGET / NUNCA feature,"posterior al nudge, +90d"
+nudge_outcomes,delta_days_negative_90d,TARGET / NUNCA feature,"posterior al nudge, +90d"
+nudge_outcomes,delta_revenue_mxn_90d,TARGET / NUNCA feature,"posterior al nudge, +90d"
+nudges,engaged,TARGET del modelo de momento,resultado del nudge
+nudges,dismissed,TARGET / NUNCA feature,resultado del nudge
+nudges,opted_out_after,TARGET (coste) / NUNCA feature,posterior al nudge
+nudges,exposure_no,FEATURE VALIDA,conocida antes de enviar
+nudges,hours_since_last_nudge,FEATURE VALIDA,conocida antes de enviar
+customers,savings_rate_90d_pct,RIESGO: recalcular as-of corte,"ventana 90d sin fecha, solapa el label"
+customers,days_negative_90d,RIESGO: recalcular as-of corte,"ventana 90d sin fecha, solapa el label"
+customers,card_utilization_pct,RIESGO: sin timestamp,snapshot sin vintage declarado
+customers,revenue_ltm_mxn,RIESGO: sin timestamp,LTM sin vintage; correlaciona con util
+customers,engagement_score,RIESGO ALTO,determina volumen de eventos Y de nudges: casi el label
+customers,avg_balance_mxn,RIESGO: sin timestamp,snapshot sin vintage
+customers,nps_last_score,FEATURE DEBIL,69% nulo; correlaciona con fragilidad -> imputar es informativo
+customers,has_* / demograficos / payday_day_of_month,FEATURE VALIDA,"estables, no posteriores"

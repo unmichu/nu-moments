@@ -1,0 +1,11 @@
+chequeo,n
+app_events.customer_id huerfanos,0
+financial_actions.customer_id huerfanos,0
+nudges.customer_id huerfanos,0
+nudge_outcomes sin nudge,0
+nudges sin outcome,0
+clientes sin ningun app_event,0
+clientes sin ninguna financial_action,0
+clientes sin ningun nudge,89
+engaged & dismissed a la vez,0
+engaged & opted_out_after a la vez,0

@@ -1,0 +1,7 @@
+nudge_type,n,engaged_%,optout_%,d_savings_rate_pp,d_days_negative,d_card_util_pp,d_revenue_mxn
+limit_increase,47497,18.9,0.956,-0.414,0.174,2.037,46.5
+payroll_portability,47397,13.85,0.933,0.433,-0.001,-0.003,5.7
+bill_reminder,47562,11.3,0.99,0.007,-0.094,-0.0,-8.4
+savings_goal,47708,8.95,0.964,0.566,-0.043,-0.228,1.0
+loan_offer,47440,8.58,0.974,-0.187,-0.001,0.423,22.4
+invest_start,47396,7.17,0.996,-0.004,0.001,-0.009,6.7

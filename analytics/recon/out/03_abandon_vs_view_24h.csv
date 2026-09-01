@@ -1,0 +1,11 @@
+screen,abandon,start,view,lift_start_vs_view,lift_abandon_vs_view
+bill_payment,2.29,62.75,55.58,1.13,0.04
+card_settings,0.0,0.0,0.0,,
+card_statement,1.7,55.29,46.29,1.19,0.04
+home,2.57,52.55,40.01,1.31,0.06
+investments,0.3,46.66,34.59,1.35,0.01
+limit_increase,0.2,42.91,28.56,1.5,0.01
+loan_simulation,0.15,36.48,23.33,1.56,0.01
+savings_cajita,1.02,58.27,47.65,1.22,0.02
+support,0.0,0.0,0.0,,
+transfer_spei,3.74,60.81,55.72,1.09,0.07

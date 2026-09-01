@@ -1,0 +1,13 @@
+nudge_type,fragil,n,engaged_%,optout_%,d_savings_rate_pp,d_days_negative,d_card_util_pp,d_revenue_mxn
+bill_reminder,False,38622,11.36,0.963,0.005,-0.095,-0.001,-8.4
+bill_reminder,True,8940,11.02,1.107,0.014,-0.09,0.006,-8.2
+invest_start,False,38504,7.17,1.015,-0.005,0.001,-0.01,6.8
+invest_start,True,8892,7.16,0.911,-0.002,0.002,-0.005,6.4
+limit_increase,False,38512,17.39,1.015,-0.38,0.093,1.473,37.4
+limit_increase,True,8985,25.36,0.701,-0.561,0.524,4.453,85.2
+loan_offer,False,38502,8.21,0.987,-0.18,-0.001,0.326,21.4
+loan_offer,True,8938,10.14,0.917,-0.217,-0.002,0.841,26.7
+payroll_portability,False,38540,13.86,0.957,0.434,0.0,-0.002,5.8
+payroll_portability,True,8857,13.79,0.824,0.429,-0.006,-0.009,5.3
+savings_goal,False,38626,9.12,0.976,0.577,-0.044,-0.231,1.0
+savings_goal,True,9082,8.23,0.914,0.516,-0.04,-0.212,1.3
