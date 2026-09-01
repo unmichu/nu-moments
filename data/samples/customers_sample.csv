@@ -1,0 +1,1001 @@
+customer_id,tenure_months,age,state,income_band,monthly_income_est_mxn,payday_day_of_month,engagement_score,avg_balance_mxn,card_utilization_pct,days_negative_90d,savings_rate_90d_pct,revenue_ltm_mxn,nps_last_score,has_cuenta_nu,has_cajita_turbo,has_personal_loan,has_investments,has_payroll_portability
+6000000,28,21,Guanajuato,30k-60k,20000.0,30,62.9,64432.0,49.6,0,26.5,1191.0,,True,False,False,False,False
+6000001,30,55,Chihuahua,>60k,48900.0,30,48.2,1153.0,81.2,0,7.6,1985.0,,False,False,False,False,False
+6000002,10,29,Chihuahua,15k-30k,27000.0,1,91.8,1977.0,55.6,1,24.5,1973.0,8.0,False,False,False,False,False
+6000003,28,29,Puebla,8k-15k,14500.0,30,4.2,5819.0,74.0,2,27.9,1408.0,,True,False,False,False,False
+6000004,49,21,Chihuahua,15k-30k,22500.0,15,55.9,1204.0,66.2,3,28.8,1514.0,,False,False,False,False,False
+6000005,8,37,CDMX,15k-30k,25100.0,1,73.6,3485.0,25.0,0,9.2,1047.0,7.0,False,False,False,False,False
+6000006,48,35,Veracruz,30k-60k,37400.0,30,76.4,901.0,46.5,0,16.1,1196.0,,True,False,False,False,False
+6000007,53,30,Guanajuato,30k-60k,45800.0,30,74.0,396.0,42.1,1,8.2,1116.0,,False,False,False,False,False
+6000008,3,38,Queretaro,30k-60k,18400.0,30,54.6,788.0,24.5,0,20.8,875.0,,True,False,False,False,False
+6000009,56,32,Guanajuato,>60k,38800.0,15,32.0,3233.0,63.9,1,46.5,1079.0,,True,False,False,True,False
+6000010,37,29,Nuevo Leon,<8k,8500.0,30,35.7,824.0,42.3,0,17.3,651.0,,True,False,False,False,False
+6000011,3,42,Chihuahua,15k-30k,11300.0,15,60.6,1030.0,28.3,0,13.3,487.0,9.0,True,False,False,False,True
+6000012,59,28,Estado de Mexico,8k-15k,17200.0,15,19.1,2110.0,40.7,0,7.4,993.0,9.0,True,False,False,False,False
+6000013,17,40,Estado de Mexico,8k-15k,19100.0,15,43.2,36059.0,67.6,2,52.1,1394.0,9.0,True,False,False,False,True
+6000014,58,33,Puebla,<8k,5500.0,1,55.5,1927.0,70.7,0,0.0,929.0,5.0,False,False,False,False,False
+6000015,1,32,Queretaro,30k-60k,27400.0,15,71.6,4103.0,67.4,0,13.0,1656.0,,True,True,True,False,True
+6000016,10,47,Queretaro,15k-30k,13300.0,30,25.4,803.0,16.9,1,16.2,349.0,,False,False,False,False,False
+6000017,37,50,Puebla,30k-60k,8000.0,15,22.9,7695.0,39.5,1,4.6,849.0,,False,False,True,False,True
+6000018,14,44,Baja California,>60k,15200.0,1,51.5,2046.0,76.1,0,25.4,1390.0,,True,False,False,False,False
+6000019,59,48,Baja California,15k-30k,28600.0,15,36.5,806.0,63.7,2,4.7,1716.0,,True,False,False,False,False
+6000020,58,32,Veracruz,30k-60k,31400.0,1,59.7,3149.0,92.2,0,0.0,1994.0,,True,False,False,False,True
+6000021,23,29,Guanajuato,<8k,16000.0,15,40.0,1301.0,63.9,0,16.5,1541.0,,False,False,False,False,False
+6000022,47,30,Queretaro,<8k,17300.0,30,44.7,1537.0,47.2,0,51.5,880.0,,False,False,False,False,False
+6000023,2,23,Veracruz,<8k,10700.0,30,63.1,4157.0,17.5,1,29.6,395.0,,True,False,False,False,False
+6000024,29,38,Puebla,8k-15k,13200.0,15,25.7,1774.0,35.5,1,42.4,702.0,,True,False,False,False,False
+6000025,59,33,Estado de Mexico,15k-30k,6300.0,30,65.6,3201.0,67.6,0,1.3,1088.0,7.0,True,False,False,False,False
+6000026,20,38,Puebla,15k-30k,35300.0,1,49.4,3745.0,75.0,0,28.9,1611.0,9.0,True,False,False,False,False
+6000027,15,31,Jalisco,15k-30k,26700.0,15,37.6,6805.0,30.5,0,38.8,1707.0,,True,False,True,False,False
+6000028,36,35,Estado de Mexico,15k-30k,20200.0,30,37.3,4331.0,27.1,0,20.9,1198.0,,False,True,False,False,True
+6000029,53,46,Chihuahua,8k-15k,27100.0,1,24.1,2944.0,34.0,0,26.5,1311.0,8.0,True,True,False,False,False
+6000030,44,46,Baja California,<8k,27000.0,15,89.3,2204.0,13.7,0,30.2,560.0,9.0,False,False,False,False,False
+6000031,31,27,Baja California,15k-30k,40400.0,15,48.3,518.0,51.1,1,11.3,1506.0,,True,False,False,False,False
+6000032,33,47,Queretaro,30k-60k,57000.0,15,47.5,1627.0,38.0,0,22.3,3260.0,,False,True,False,False,False
+6000033,16,43,Queretaro,<8k,7300.0,30,41.9,16046.0,28.0,1,20.1,488.0,,False,False,False,False,False
+6000034,50,18,Baja California,15k-30k,8800.0,15,74.8,3641.0,45.6,0,9.3,832.0,8.0,True,False,False,False,True
+6000035,58,30,Guanajuato,<8k,6200.0,15,76.8,351.0,85.0,1,49.6,1235.0,,True,False,False,False,False
+6000036,3,41,Veracruz,30k-60k,24100.0,15,34.5,15107.0,35.9,0,28.0,1191.0,7.0,False,False,False,False,False
+6000037,60,43,Veracruz,30k-60k,24200.0,30,74.5,3777.0,42.9,0,30.5,1203.0,,False,False,False,False,True
+6000038,16,31,Puebla,8k-15k,5500.0,30,58.7,2587.0,41.0,4,10.9,606.0,7.0,False,False,False,False,False
+6000039,53,31,Baja California,8k-15k,17000.0,30,42.2,2872.0,51.4,1,15.3,1090.0,6.0,False,False,False,True,False
+6000040,23,29,Veracruz,15k-30k,14800.0,30,35.2,5472.0,35.2,0,10.2,684.0,,False,False,False,True,False
+6000041,35,23,Chihuahua,15k-30k,12300.0,1,80.0,613.0,68.4,5,3.1,1278.0,,True,False,False,False,True
+6000042,10,39,Puebla,15k-30k,12000.0,15,64.3,266.0,49.8,1,22.8,763.0,,True,False,False,False,False
+6000043,33,61,CDMX,15k-30k,9100.0,30,55.7,2615.0,44.0,0,36.2,729.0,,False,False,False,False,False
+6000044,13,46,Puebla,15k-30k,12100.0,30,55.1,1730.0,37.2,1,42.3,577.0,,True,False,False,False,False
+6000045,15,18,Guanajuato,8k-15k,6700.0,15,82.2,681.0,46.7,2,45.1,726.0,8.0,True,False,False,False,False
+6000046,36,42,Jalisco,15k-30k,10000.0,1,21.6,3414.0,6.6,0,46.0,320.0,6.0,False,False,False,False,False
+6000047,38,48,Veracruz,<8k,14000.0,15,42.1,656.0,97.3,1,0.0,1762.0,,True,False,False,False,False
+6000048,32,30,Nuevo Leon,15k-30k,28000.0,15,79.9,952.0,97.0,4,13.3,1829.0,6.0,True,False,False,False,False
+6000049,53,39,Queretaro,8k-15k,30600.0,30,89.3,1147.0,59.1,1,0.0,1667.0,,True,False,False,False,True
+6000050,7,36,Puebla,15k-30k,21100.0,15,55.4,3501.0,30.7,1,7.4,1161.0,,True,False,False,False,False
+6000051,26,33,Puebla,<8k,9900.0,1,56.1,2300.0,78.7,1,16.2,1105.0,6.0,True,False,False,False,False
+6000052,15,39,Jalisco,<8k,3700.0,1,21.3,3496.0,47.2,0,47.0,743.0,7.0,False,False,False,False,False
+6000053,7,65,CDMX,>60k,36200.0,30,59.5,3973.0,15.1,0,28.8,715.0,10.0,True,True,False,False,False
+6000054,45,40,Nuevo Leon,30k-60k,59200.0,15,87.7,413.0,92.1,1,52.8,3920.0,,False,False,True,False,False
+6000055,18,31,Guanajuato,15k-30k,19500.0,30,37.2,794.0,40.3,0,2.1,790.0,,True,False,False,False,False
+6000056,47,33,Puebla,8k-15k,8300.0,1,69.8,7534.0,37.6,0,15.3,615.0,5.0,True,True,False,False,False
+6000057,3,29,Chihuahua,8k-15k,8500.0,30,78.6,5252.0,53.5,0,41.5,964.0,,False,False,False,False,True
+6000058,57,34,Nuevo Leon,8k-15k,17400.0,1,20.7,10578.0,11.9,0,27.0,959.0,,True,False,False,False,True
+6000059,50,38,Estado de Mexico,30k-60k,24100.0,15,38.5,560.0,29.5,0,25.5,922.0,,False,True,False,False,False
+6000060,25,24,Baja California,15k-30k,15400.0,30,33.4,2548.0,49.5,2,7.9,1082.0,,True,False,False,False,False
+6000061,10,61,Puebla,<8k,13600.0,15,58.0,3730.0,13.0,0,38.0,515.0,,False,True,False,False,False
+6000062,12,22,Chihuahua,>60k,16300.0,1,22.5,2093.0,58.1,0,16.9,1390.0,9.0,True,False,False,False,False
+6000063,26,41,Nuevo Leon,>60k,14200.0,1,66.9,1008.0,52.8,0,23.7,1277.0,,True,True,False,False,False
+6000064,47,21,Nuevo Leon,8k-15k,11900.0,30,7.1,864.0,26.5,2,6.0,403.0,,True,False,False,False,False
+6000065,31,50,Chihuahua,<8k,14500.0,15,66.0,342.0,75.3,2,17.1,1176.0,5.0,False,False,False,False,False
+6000066,52,30,Jalisco,15k-30k,22500.0,15,90.4,1559.0,63.4,1,0.0,1058.0,,True,False,False,False,True
+6000067,30,41,Nuevo Leon,15k-30k,8200.0,15,75.3,9920.0,14.3,0,35.1,257.0,,True,True,False,False,False
+6000068,2,35,Nuevo Leon,8k-15k,12800.0,1,64.7,388.0,7.1,2,2.8,522.0,,True,False,False,False,True
+6000069,39,33,Guanajuato,30k-60k,19800.0,15,50.4,3987.0,30.7,0,66.1,611.0,8.0,True,False,False,False,False
+6000070,18,38,CDMX,15k-30k,44900.0,30,74.0,3103.0,15.6,0,37.3,1029.0,6.0,True,False,False,False,False
+6000071,41,32,CDMX,15k-30k,16800.0,1,63.2,4379.0,49.6,3,1.3,1206.0,,False,False,False,False,True
+6000072,58,52,Puebla,<8k,23300.0,15,76.7,9739.0,21.8,2,25.4,879.0,8.0,False,False,False,False,False
+6000073,34,36,Baja California,8k-15k,14700.0,30,23.7,4479.0,12.6,0,33.2,845.0,,True,False,False,False,False
+6000074,34,46,Estado de Mexico,30k-60k,39600.0,1,40.4,9038.0,74.6,1,13.9,2552.0,7.0,True,False,False,False,False
+6000075,2,32,Nuevo Leon,8k-15k,24100.0,15,65.6,654.0,25.3,0,28.4,1274.0,,True,False,False,False,False
+6000076,52,37,Guanajuato,15k-30k,35900.0,30,47.9,5544.0,49.5,0,35.2,1524.0,,False,False,True,False,False
+6000077,34,24,CDMX,>60k,32300.0,15,44.0,1941.0,45.6,1,9.5,1528.0,,True,False,False,False,False
+6000078,56,18,Guanajuato,8k-15k,23600.0,15,85.7,4334.0,38.5,2,28.2,1130.0,,True,False,False,False,False
+6000079,43,20,Guanajuato,30k-60k,20000.0,15,47.8,161.0,74.6,0,7.9,1890.0,,True,False,False,False,False
+6000080,9,43,Queretaro,30k-60k,19300.0,15,72.2,486.0,70.6,0,41.1,1666.0,,False,False,False,True,False
+6000081,17,38,Jalisco,15k-30k,7700.0,15,40.3,642.0,65.9,2,23.3,933.0,,True,False,False,False,False
+6000082,12,35,Queretaro,<8k,15000.0,15,39.2,3708.0,42.4,2,0.0,744.0,,True,False,False,False,False
+6000083,18,23,Guanajuato,30k-60k,34200.0,1,43.4,6401.0,64.4,0,12.2,2008.0,7.0,False,False,False,False,False
+6000084,36,52,Veracruz,30k-60k,16100.0,15,37.8,2537.0,38.6,0,23.2,668.0,,True,False,False,False,False
+6000085,12,22,Queretaro,<8k,10200.0,1,48.8,6828.0,72.3,3,19.5,1141.0,7.0,True,False,False,False,False
+6000086,56,48,Guanajuato,30k-60k,16100.0,15,62.7,401.0,29.2,0,10.9,829.0,,False,False,False,False,True
+6000087,10,34,Puebla,<8k,15400.0,15,13.0,5138.0,52.1,0,42.4,911.0,9.0,True,True,False,False,False
+6000088,28,43,Nuevo Leon,8k-15k,22000.0,30,79.8,7104.0,94.2,2,2.9,1506.0,3.0,True,False,False,False,False
+6000089,13,42,Chihuahua,15k-30k,44500.0,15,65.1,1086.0,15.0,0,50.8,820.0,8.0,False,False,False,False,True
+6000090,40,24,Nuevo Leon,8k-15k,12200.0,1,83.2,2013.0,68.5,1,0.0,1029.0,,True,False,True,False,False
+6000091,9,29,Guanajuato,15k-30k,28700.0,30,47.3,319.0,20.4,0,13.1,985.0,8.0,True,False,False,False,False
+6000092,14,42,Estado de Mexico,8k-15k,15700.0,30,26.0,1699.0,6.3,0,25.1,192.0,,True,False,False,False,True
+6000093,3,55,Estado de Mexico,15k-30k,24700.0,30,73.2,1887.0,55.4,1,4.4,1857.0,,False,False,False,False,False
+6000094,49,46,Estado de Mexico,15k-30k,14200.0,15,18.3,3901.0,65.0,0,43.0,1191.0,8.0,True,False,False,False,False
+6000095,5,18,Nuevo Leon,8k-15k,19600.0,1,77.6,2950.0,55.3,0,0.0,1613.0,,True,False,False,False,False
+6000096,26,47,Chihuahua,30k-60k,36800.0,1,76.8,4978.0,44.6,1,27.4,1239.0,,True,False,False,False,False
+6000097,49,24,Guanajuato,30k-60k,35000.0,15,46.6,7729.0,64.2,0,35.9,2430.0,,True,True,False,False,False
+6000098,25,38,Queretaro,8k-15k,9200.0,30,43.9,2076.0,35.1,0,40.3,666.0,,True,False,True,False,True
+6000099,54,26,Jalisco,15k-30k,6000.0,15,61.5,900.0,17.9,1,31.6,510.0,,True,False,False,False,False
+6000100,57,26,Estado de Mexico,8k-15k,7400.0,15,54.3,651.0,33.5,1,20.2,697.0,,True,False,False,False,False
+6000101,3,53,Puebla,30k-60k,19200.0,30,63.1,6266.0,28.2,0,6.3,694.0,,False,False,False,False,False
+6000102,42,46,Guanajuato,30k-60k,16300.0,1,33.8,947.0,45.0,0,48.0,736.0,,True,True,False,True,False
+6000103,48,51,Guanajuato,30k-60k,43200.0,15,83.6,1174.0,61.4,2,22.7,2941.0,,False,False,False,False,False
+6000104,36,33,Queretaro,<8k,18400.0,15,46.8,689.0,5.1,0,18.2,805.0,,True,False,False,False,False
+6000105,18,45,Guanajuato,15k-30k,9400.0,30,62.3,1190.0,65.8,0,32.6,1064.0,,False,True,False,False,False
+6000106,13,32,Baja California,15k-30k,17800.0,1,49.3,2505.0,24.8,2,7.9,787.0,,False,False,False,False,False
+6000107,49,28,Jalisco,30k-60k,44300.0,15,34.4,662.0,60.8,0,6.5,1358.0,,True,False,False,False,False
+6000108,14,38,Chihuahua,30k-60k,25700.0,1,44.6,2373.0,35.9,0,16.0,845.0,,False,False,False,False,False
+6000109,50,41,CDMX,30k-60k,18200.0,15,66.8,2160.0,63.9,2,3.5,1550.0,8.0,True,False,False,False,False
+6000110,45,33,Puebla,>60k,39700.0,30,67.4,2275.0,34.1,3,22.8,863.0,,True,False,False,False,True
+6000111,52,37,Puebla,15k-30k,31300.0,1,78.2,2578.0,39.8,0,42.3,1176.0,,False,False,False,False,True
+6000112,33,36,Nuevo Leon,>60k,30700.0,1,54.2,701.0,22.8,1,23.4,1439.0,,False,False,False,False,False
+6000113,42,47,Veracruz,30k-60k,20200.0,30,53.2,8707.0,14.8,0,28.7,535.0,,False,False,False,False,False
+6000114,33,50,Nuevo Leon,8k-15k,3900.0,1,50.4,1323.0,15.0,0,40.8,368.0,,True,False,False,False,False
+6000115,10,46,Baja California,15k-30k,13900.0,15,52.9,2035.0,40.5,3,37.3,786.0,,False,False,False,False,False
+6000116,50,54,Veracruz,<8k,5100.0,15,49.7,2900.0,81.2,0,15.2,1167.0,,True,True,False,False,False
+6000117,2,40,CDMX,<8k,11500.0,30,60.8,3918.0,24.3,1,15.6,838.0,,True,False,False,False,True
+6000118,44,39,Puebla,15k-30k,17000.0,15,68.1,3320.0,43.8,1,0.0,1323.0,,True,False,False,False,False
+6000119,48,46,Chihuahua,<8k,8700.0,1,51.3,6529.0,9.0,0,48.5,513.0,,True,False,False,False,False
+6000120,19,26,CDMX,8k-15k,7800.0,15,54.4,183.0,77.2,1,32.8,1014.0,6.0,True,False,False,False,False
+6000121,43,39,Veracruz,>60k,38600.0,15,39.1,1198.0,64.5,0,31.9,1736.0,,True,False,False,False,False
+6000122,20,54,Queretaro,8k-15k,24400.0,1,82.1,705.0,40.1,0,6.8,1565.0,,False,False,False,False,True
+6000123,33,33,Chihuahua,8k-15k,21200.0,30,16.2,10190.0,4.5,0,4.6,933.0,7.0,True,False,False,False,True
+6000124,23,53,Veracruz,<8k,9500.0,15,70.4,5057.0,58.3,0,48.2,1116.0,10.0,False,True,False,False,False
+6000125,1,31,CDMX,15k-30k,32700.0,1,88.1,11725.0,86.3,0,50.6,1453.0,,False,False,False,False,False
+6000126,18,29,Baja California,15k-30k,38700.0,15,68.0,3688.0,18.5,0,29.0,1752.0,,False,True,False,False,False
+6000127,30,33,Puebla,<8k,17100.0,15,27.4,543.0,77.2,1,12.0,1608.0,9.0,True,False,False,False,True
+6000128,34,25,CDMX,<8k,5900.0,15,86.8,2240.0,47.2,1,24.6,868.0,8.0,True,False,False,False,True
+6000129,14,18,Chihuahua,8k-15k,21200.0,30,82.8,7041.0,61.3,1,0.0,1401.0,10.0,True,False,True,False,False
+6000130,44,51,Baja California,<8k,7600.0,1,47.6,891.0,64.5,2,2.7,1118.0,,True,False,False,False,False
+6000131,7,43,Estado de Mexico,8k-15k,23000.0,30,51.7,1045.0,23.0,0,1.0,1124.0,7.0,True,False,False,False,False
+6000132,38,46,CDMX,8k-15k,14200.0,15,30.8,468.0,42.5,0,29.3,595.0,,True,False,False,False,False
+6000133,2,44,Guanajuato,8k-15k,16000.0,15,59.2,4282.0,53.1,1,30.8,1017.0,9.0,False,False,False,False,False
+6000134,47,37,Jalisco,15k-30k,36200.0,30,61.9,471.0,7.4,1,13.9,812.0,,True,False,False,False,False
+6000135,22,20,Guanajuato,8k-15k,9400.0,1,68.0,3077.0,65.4,0,40.5,965.0,9.0,False,True,False,False,False
+6000136,10,36,Queretaro,8k-15k,15300.0,30,79.9,3948.0,21.8,1,13.0,813.0,,True,False,True,False,False
+6000137,30,38,Guanajuato,30k-60k,33000.0,1,48.1,3999.0,56.9,4,17.2,1473.0,,False,False,False,True,False
+6000138,48,38,Estado de Mexico,<8k,9000.0,15,60.2,982.0,42.5,1,4.7,628.0,,True,False,False,False,True
+6000139,24,49,Veracruz,<8k,33300.0,30,61.0,2353.0,48.1,0,39.6,1563.0,6.0,True,False,False,False,True
+6000140,15,20,Estado de Mexico,8k-15k,12400.0,1,66.8,428.0,56.4,0,9.7,1152.0,,False,False,False,False,True
+6000141,48,35,Puebla,8k-15k,8800.0,15,65.4,754.0,48.9,0,32.4,923.0,,True,False,False,False,False
+6000142,48,49,Queretaro,15k-30k,55400.0,30,75.0,2876.0,56.2,2,20.2,1271.0,10.0,False,False,False,False,False
+6000143,38,49,Puebla,15k-30k,13500.0,15,48.7,2499.0,80.9,1,3.5,1398.0,,True,False,False,False,True
+6000144,31,50,Baja California,15k-30k,9200.0,1,69.6,1235.0,42.4,0,74.9,857.0,,True,True,False,False,False
+6000145,24,34,Chihuahua,<8k,12000.0,15,46.7,2806.0,30.1,1,20.5,815.0,10.0,True,False,False,False,False
+6000146,36,46,Jalisco,<8k,8600.0,30,90.5,16050.0,37.8,0,47.3,553.0,7.0,True,True,False,False,False
+6000147,12,36,Jalisco,<8k,17600.0,15,22.3,7671.0,7.7,0,33.9,215.0,7.0,False,True,False,False,False
+6000148,20,24,Nuevo Leon,15k-30k,12900.0,30,17.4,1214.0,26.2,1,46.3,696.0,,True,False,False,True,False
+6000149,35,27,Puebla,15k-30k,13100.0,1,30.8,4400.0,61.5,1,31.1,1207.0,9.0,True,False,False,False,False
+6000150,33,31,Guanajuato,15k-30k,17900.0,1,37.7,1014.0,72.5,1,7.3,1570.0,6.0,False,False,False,False,False
+6000151,39,20,Jalisco,8k-15k,8800.0,30,73.4,4635.0,27.6,1,23.7,590.0,,True,False,False,False,False
+6000152,9,37,CDMX,8k-15k,46600.0,15,65.7,2132.0,19.7,1,23.6,535.0,,False,False,False,False,False
+6000153,15,45,Veracruz,30k-60k,24700.0,30,20.4,1432.0,23.6,1,15.1,568.0,,True,False,False,False,False
+6000154,3,47,Jalisco,30k-60k,16100.0,30,97.8,7042.0,64.7,0,6.5,1124.0,,False,False,True,False,False
+6000155,17,40,Guanajuato,8k-15k,3800.0,15,37.4,455.0,36.2,0,43.4,567.0,,False,False,False,False,False
+6000156,38,42,Puebla,>60k,23900.0,15,65.0,1750.0,15.4,3,4.5,846.0,,False,False,False,False,False
+6000157,34,22,Baja California,30k-60k,7000.0,15,20.8,918.0,73.5,1,31.2,1187.0,6.0,True,False,True,False,False
+6000158,46,33,Chihuahua,<8k,10500.0,15,29.7,3271.0,72.6,0,17.2,1114.0,,True,True,False,False,False
+6000159,55,43,Veracruz,8k-15k,15000.0,1,45.6,32446.0,18.2,0,42.4,613.0,,True,False,False,False,True
+6000160,17,54,Estado de Mexico,15k-30k,4200.0,1,22.8,7293.0,27.1,1,54.3,403.0,,True,False,False,False,True
+6000161,19,41,Nuevo Leon,<8k,6400.0,15,49.3,2710.0,30.2,0,29.7,470.0,,True,False,False,False,False
+6000162,17,49,Queretaro,30k-60k,14600.0,30,54.8,3428.0,14.9,0,32.7,658.0,,False,True,False,False,False
+6000163,10,49,Puebla,15k-30k,36100.0,30,82.7,727.0,45.0,0,25.0,1953.0,,False,False,False,False,False
+6000164,49,38,Veracruz,15k-30k,20000.0,30,55.9,1073.0,79.5,0,0.0,1879.0,,True,False,False,False,False
+6000165,43,25,Chihuahua,30k-60k,23700.0,1,44.6,283.0,76.9,2,4.6,1723.0,,True,False,False,False,False
+6000166,21,50,Guanajuato,<8k,17100.0,30,78.5,1963.0,44.0,0,14.6,694.0,6.0,True,False,False,False,False
+6000167,60,29,Nuevo Leon,<8k,10000.0,1,54.5,522.0,55.9,0,29.9,969.0,10.0,True,False,False,False,False
+6000168,51,53,Veracruz,15k-30k,10400.0,30,69.5,1396.0,85.7,2,9.8,1312.0,,False,False,False,False,False
+6000169,11,27,Baja California,<8k,11800.0,1,65.2,906.0,30.2,0,3.6,591.0,,True,False,False,False,False
+6000170,43,44,Puebla,>60k,39400.0,1,41.0,10196.0,44.6,2,6.5,2128.0,,True,False,False,False,False
+6000171,32,34,Veracruz,15k-30k,40500.0,15,20.6,4339.0,64.1,0,18.7,1236.0,7.0,True,False,False,False,False
+6000172,20,20,Puebla,<8k,28200.0,1,74.5,1348.0,28.5,0,27.4,1170.0,,True,False,False,True,False
+6000173,25,47,Puebla,<8k,14000.0,15,69.9,4043.0,19.4,0,49.3,728.0,,False,False,False,False,False
+6000174,10,31,Veracruz,15k-30k,18200.0,30,57.1,2051.0,30.5,0,21.9,649.0,,True,False,False,False,False
+6000175,24,52,CDMX,15k-30k,17700.0,1,28.2,4699.0,68.1,1,40.3,1076.0,7.0,True,False,False,True,False
+6000176,29,33,Guanajuato,8k-15k,32500.0,1,79.9,2345.0,22.8,0,20.1,606.0,,True,False,False,False,True
+6000177,42,36,Nuevo Leon,30k-60k,15600.0,30,82.6,629.0,40.8,0,9.3,1299.0,,True,False,True,False,False
+6000178,17,29,Nuevo Leon,8k-15k,26700.0,15,73.5,686.0,31.6,0,24.7,1286.0,,True,False,False,False,False
+6000179,12,50,Veracruz,8k-15k,8600.0,15,8.0,8103.0,61.8,1,22.7,948.0,,True,False,False,False,False
+6000180,44,39,Estado de Mexico,8k-15k,8100.0,30,40.5,11432.0,24.4,1,26.7,390.0,10.0,True,False,False,False,True
+6000181,47,32,Puebla,30k-60k,15300.0,15,30.6,3554.0,23.3,3,10.3,494.0,,True,False,False,False,False
+6000182,47,20,Guanajuato,30k-60k,5900.0,15,25.7,5202.0,49.8,1,22.7,879.0,,True,False,False,False,False
+6000183,58,29,Guanajuato,15k-30k,15700.0,1,31.1,1140.0,53.6,0,61.8,883.0,,True,False,False,False,False
+6000184,57,24,Estado de Mexico,15k-30k,26300.0,15,75.2,11556.0,29.6,0,37.0,1034.0,7.0,False,False,False,False,False
+6000185,4,43,Nuevo Leon,<8k,12900.0,1,34.9,5709.0,68.6,0,23.6,1123.0,,True,True,True,False,False
+6000186,39,37,Puebla,>60k,34900.0,30,11.0,630.0,61.8,0,2.5,958.0,10.0,False,False,False,False,True
+6000187,18,31,Baja California,15k-30k,5500.0,15,59.4,11601.0,75.3,0,17.9,1214.0,,False,True,True,False,False
+6000188,55,28,Veracruz,8k-15k,11700.0,15,54.7,169.0,18.3,2,14.3,406.0,,True,False,False,False,True
+6000189,11,50,Jalisco,<8k,14000.0,1,43.3,387.0,77.6,1,0.2,1095.0,,True,False,False,False,False
+6000190,32,45,Chihuahua,8k-15k,36600.0,1,41.9,170.0,60.2,1,48.5,1640.0,,True,False,False,False,True
+6000191,13,26,Chihuahua,15k-30k,38800.0,15,59.8,3697.0,58.4,1,21.0,1230.0,9.0,False,False,False,False,False
+6000192,35,18,Queretaro,15k-30k,22800.0,15,28.9,10008.0,55.8,0,17.5,1729.0,,False,False,False,False,False
+6000193,17,32,Veracruz,<8k,10600.0,1,84.8,12597.0,60.0,0,39.0,941.0,,False,False,False,True,True
+6000194,19,18,Baja California,<8k,3500.0,30,43.4,743.0,59.4,0,21.0,807.0,,False,False,False,False,False
+6000195,47,34,Puebla,>60k,47300.0,15,56.8,1261.0,10.3,1,12.2,1004.0,,True,False,False,False,False
+6000196,51,42,Guanajuato,8k-15k,26600.0,1,44.3,6005.0,6.5,0,16.6,729.0,6.0,True,False,False,False,False
+6000197,47,52,Estado de Mexico,>60k,39700.0,1,58.7,8793.0,57.0,2,25.9,2070.0,,False,False,False,False,False
+6000198,25,34,Estado de Mexico,15k-30k,18700.0,30,59.8,494.0,34.5,2,2.9,846.0,,True,False,False,False,False
+6000199,4,37,Guanajuato,<8k,7300.0,1,44.9,4945.0,64.1,0,35.3,1047.0,,True,False,False,False,True
+6000200,9,42,Estado de Mexico,15k-30k,36200.0,15,56.4,10413.0,79.7,0,13.4,2147.0,4.0,True,False,True,False,False
+6000201,31,36,Puebla,<8k,7700.0,15,51.2,1074.0,35.2,0,21.1,586.0,,True,False,False,False,False
+6000202,43,25,Queretaro,8k-15k,21900.0,1,51.9,870.0,32.1,0,42.9,1033.0,,True,False,True,False,False
+6000203,40,40,Veracruz,30k-60k,28000.0,15,49.2,29553.0,31.0,0,73.3,1721.0,,True,True,True,False,True
+6000204,50,30,Jalisco,<8k,26200.0,30,62.7,1929.0,79.3,1,5.7,1779.0,,True,False,False,False,False
+6000205,50,18,Queretaro,15k-30k,45500.0,15,51.5,1830.0,61.6,0,30.6,2750.0,,True,False,False,False,False
+6000206,40,24,Nuevo Leon,<8k,14600.0,1,16.2,24915.0,48.3,0,21.4,1049.0,5.0,False,False,False,False,False
+6000207,10,37,Veracruz,>60k,28900.0,30,48.5,11225.0,11.4,0,19.0,1175.0,,True,False,False,False,False
+6000208,45,30,Queretaro,15k-30k,27100.0,15,67.1,828.0,12.7,2,12.7,1212.0,,True,False,False,False,False
+6000209,17,43,Jalisco,30k-60k,19500.0,15,43.5,3254.0,62.5,0,12.4,1573.0,,False,False,False,False,False
+6000210,48,26,Guanajuato,15k-30k,6700.0,30,49.8,1836.0,11.9,0,14.0,269.0,9.0,False,False,False,False,True
+6000211,1,23,CDMX,30k-60k,37900.0,15,52.8,4069.0,17.4,0,67.4,478.0,,True,False,False,False,True
+6000212,13,44,Veracruz,<8k,11100.0,1,70.0,2303.0,38.3,2,0.0,868.0,,True,False,False,False,False
+6000213,19,18,Chihuahua,15k-30k,25300.0,15,58.8,2337.0,83.8,0,59.9,2343.0,,False,True,False,False,True
+6000214,4,47,Jalisco,15k-30k,8600.0,1,64.2,3110.0,41.5,3,34.8,748.0,6.0,True,False,False,False,True
+6000215,33,45,Puebla,30k-60k,24700.0,30,28.4,964.0,34.0,2,18.0,1146.0,,True,False,False,False,False
+6000216,58,55,Chihuahua,>60k,16000.0,1,85.8,2871.0,47.6,1,39.2,1352.0,9.0,False,False,False,False,False
+6000217,9,46,Nuevo Leon,30k-60k,27600.0,15,29.8,8584.0,39.3,0,65.1,1216.0,,False,False,False,False,False
+6000218,29,32,Chihuahua,8k-15k,12800.0,30,64.9,5547.0,48.6,1,16.7,982.0,,True,False,False,False,False
+6000219,9,48,CDMX,>60k,32400.0,30,50.8,8315.0,47.1,0,19.8,1010.0,8.0,True,False,True,False,False
+6000220,33,36,Jalisco,30k-60k,51100.0,1,57.9,4463.0,60.2,3,0.0,1747.0,,True,False,False,False,False
+6000221,19,31,Baja California,8k-15k,10300.0,30,54.9,2682.0,50.2,1,14.4,842.0,,False,False,False,False,True
+6000222,46,21,Puebla,15k-30k,30200.0,1,38.0,1616.0,26.5,5,10.9,1884.0,,True,False,False,False,False
+6000223,29,39,Puebla,>60k,47900.0,15,78.1,1921.0,28.7,0,38.8,2027.0,9.0,True,False,False,False,False
+6000224,8,39,Queretaro,>60k,29000.0,15,55.8,8360.0,19.6,0,73.8,465.0,,False,True,False,False,False
+6000225,53,41,Baja California,8k-15k,14000.0,30,41.8,2424.0,41.1,1,12.6,618.0,,True,False,False,False,False
+6000226,29,56,CDMX,15k-30k,20700.0,15,52.7,1425.0,75.4,1,9.6,1923.0,7.0,True,False,False,False,True
+6000227,52,39,Guanajuato,30k-60k,11200.0,15,31.6,1883.0,25.2,1,12.3,860.0,,False,False,False,False,False
+6000228,59,31,Estado de Mexico,8k-15k,5900.0,30,43.8,941.0,82.8,2,5.6,1198.0,,True,False,False,False,False
+6000229,36,36,Baja California,8k-15k,14700.0,1,65.3,1311.0,11.2,0,58.5,638.0,,False,False,False,False,False
+6000230,40,47,Queretaro,8k-15k,13900.0,15,63.3,3204.0,77.8,0,21.5,1378.0,6.0,True,False,False,False,False
+6000231,41,48,Jalisco,8k-15k,15400.0,15,22.8,348.0,10.8,1,14.4,542.0,10.0,True,False,False,False,False
+6000232,40,39,Estado de Mexico,15k-30k,18400.0,1,62.2,3933.0,14.9,0,50.6,387.0,,False,False,False,False,False
+6000233,36,35,Queretaro,15k-30k,13500.0,15,91.7,844.0,20.0,1,38.4,774.0,,False,False,False,False,False
+6000234,32,19,Veracruz,<8k,9300.0,30,40.4,4150.0,18.8,0,47.7,295.0,,True,True,False,False,False
+6000235,21,25,Nuevo Leon,15k-30k,17100.0,30,72.9,1241.0,25.2,1,27.6,1003.0,,False,False,False,False,False
+6000236,7,24,Estado de Mexico,30k-60k,36000.0,1,80.2,176.0,32.2,1,2.2,2119.0,8.0,True,False,False,False,False
+6000237,5,43,Baja California,30k-60k,16100.0,15,25.7,898.0,9.1,1,16.1,453.0,,False,False,False,False,False
+6000238,21,30,Chihuahua,8k-15k,21000.0,15,39.0,2967.0,73.8,0,34.2,1265.0,,True,False,False,False,False
+6000239,11,42,Estado de Mexico,15k-30k,18500.0,15,34.4,1737.0,51.1,1,51.0,1307.0,10.0,True,False,False,False,True
+6000240,49,19,Baja California,15k-30k,23700.0,15,36.8,6584.0,47.5,0,34.5,1292.0,,True,False,False,False,True
+6000241,49,40,Veracruz,30k-60k,20600.0,1,65.4,1698.0,20.2,1,9.3,538.0,7.0,False,False,False,False,False
+6000242,23,31,Guanajuato,30k-60k,34700.0,15,14.9,2184.0,27.7,0,21.5,661.0,,False,False,False,False,False
+6000243,53,29,Estado de Mexico,30k-60k,12500.0,1,29.7,653.0,52.9,1,14.5,1025.0,,False,False,False,False,True
+6000244,60,29,Chihuahua,<8k,8700.0,15,22.7,5370.0,32.2,0,28.5,564.0,,True,False,True,False,False
+6000245,13,43,Guanajuato,15k-30k,6700.0,15,22.1,2159.0,61.3,1,13.2,876.0,,True,True,False,False,False
+6000246,10,21,Jalisco,15k-30k,29800.0,1,56.2,12217.0,64.6,0,28.0,1066.0,,False,False,False,False,False
+6000247,5,32,Jalisco,<8k,4500.0,30,94.3,1190.0,54.2,0,27.0,796.0,,True,False,False,False,True
+6000248,43,26,Nuevo Leon,15k-30k,29600.0,1,33.0,298.0,53.0,1,47.8,1033.0,,True,False,False,False,False
+6000249,5,20,Puebla,30k-60k,33500.0,1,65.4,915.0,18.0,1,20.9,1241.0,,True,False,False,False,False
+6000250,9,42,Nuevo Leon,8k-15k,22400.0,1,22.3,14577.0,62.0,0,45.9,1018.0,,False,False,False,False,False
+6000251,4,22,Jalisco,<8k,11300.0,30,70.5,3260.0,59.8,0,33.6,1110.0,10.0,False,True,False,False,False
+6000252,28,50,Veracruz,8k-15k,21700.0,15,67.0,3647.0,35.3,0,26.2,582.0,9.0,True,False,False,False,False
+6000253,32,18,Chihuahua,<8k,7400.0,1,35.8,912.0,35.2,1,25.4,751.0,,True,False,False,False,True
+6000254,49,29,CDMX,15k-30k,15000.0,15,25.7,4843.0,33.1,0,64.1,640.0,6.0,False,False,False,False,True
+6000255,21,30,Jalisco,8k-15k,7400.0,1,77.5,1177.0,54.6,1,46.3,732.0,10.0,False,False,False,False,False
+6000256,32,39,Puebla,30k-60k,11300.0,15,88.9,5295.0,93.9,0,18.4,1428.0,,False,False,False,False,False
+6000257,18,25,Guanajuato,<8k,6300.0,15,35.3,3294.0,70.6,0,33.3,1090.0,,False,False,False,False,False
+6000258,25,35,Veracruz,15k-30k,29600.0,15,41.9,5741.0,69.3,0,34.1,1623.0,8.0,False,False,False,False,True
+6000259,44,28,Veracruz,8k-15k,9500.0,15,43.3,745.0,73.3,1,37.5,1252.0,,False,False,False,False,False
+6000260,54,56,Nuevo Leon,15k-30k,13100.0,1,79.8,3265.0,49.8,0,2.0,1051.0,,True,False,False,False,False
+6000261,27,37,Nuevo Leon,8k-15k,15900.0,15,81.5,5829.0,14.5,0,56.3,960.0,10.0,True,False,False,False,False
+6000262,26,43,CDMX,8k-15k,17100.0,15,67.2,3632.0,89.2,0,11.9,1458.0,,False,True,False,False,False
+6000263,48,41,Queretaro,8k-15k,12500.0,1,67.7,4833.0,88.2,0,30.3,1532.0,,False,False,False,False,False
+6000264,31,37,Estado de Mexico,<8k,10100.0,30,66.5,3552.0,19.5,2,29.2,670.0,,False,False,False,False,False
+6000265,8,30,Baja California,8k-15k,14300.0,1,13.1,905.0,20.7,0,25.7,948.0,,False,False,False,False,False
+6000266,58,34,Puebla,15k-30k,24700.0,15,54.7,2245.0,19.2,0,17.0,758.0,,False,False,False,False,False
+6000267,38,20,Jalisco,8k-15k,22000.0,30,86.7,435.0,70.0,0,39.8,1504.0,,True,False,False,False,False
+6000268,24,29,Puebla,<8k,10300.0,1,78.3,541.0,21.6,2,27.2,375.0,,True,False,False,False,False
+6000269,32,20,Jalisco,<8k,5900.0,30,95.6,2641.0,40.0,1,12.8,563.0,,True,False,False,False,False
+6000270,13,25,Jalisco,<8k,8500.0,30,70.2,1642.0,37.4,1,38.4,825.0,,False,False,False,False,False
+6000271,46,41,Queretaro,>60k,31400.0,1,90.8,5763.0,77.0,0,18.7,1409.0,,False,False,False,False,False
+6000272,9,51,Puebla,8k-15k,9300.0,15,32.9,562.0,54.3,1,16.6,882.0,,True,False,False,False,True
+6000273,58,27,Estado de Mexico,30k-60k,20400.0,30,73.2,1827.0,96.2,1,11.9,1986.0,7.0,True,False,False,False,False
+6000274,18,24,Jalisco,<8k,11300.0,15,68.1,699.0,33.8,1,31.0,789.0,9.0,False,False,False,False,False
+6000275,13,43,Puebla,8k-15k,13100.0,30,32.7,4413.0,30.5,1,22.7,1002.0,,True,False,False,True,False
+6000276,15,26,Queretaro,30k-60k,34800.0,15,12.7,905.0,41.3,2,2.5,1992.0,,True,False,False,False,False
+6000277,6,65,Baja California,30k-60k,59400.0,15,41.1,8027.0,37.0,1,11.1,1356.0,7.0,False,False,False,False,True
+6000278,31,46,Jalisco,15k-30k,11400.0,30,78.3,2037.0,19.6,3,26.8,759.0,,False,False,False,False,False
+6000279,35,44,Nuevo Leon,<8k,5700.0,15,29.8,495.0,63.9,3,29.0,1025.0,5.0,False,False,False,False,False
+6000280,44,34,Veracruz,<8k,13400.0,30,86.3,470.0,60.7,1,32.3,1213.0,,True,False,False,False,False
+6000281,47,52,Veracruz,15k-30k,21500.0,1,55.7,1782.0,48.2,1,9.0,907.0,7.0,False,False,False,False,False
+6000282,49,38,Jalisco,15k-30k,25000.0,1,51.2,7920.0,35.3,0,17.2,1248.0,,True,False,False,False,False
+6000283,12,18,Veracruz,8k-15k,14500.0,30,56.1,1513.0,33.3,1,38.4,837.0,,True,False,False,False,False
+6000284,13,38,Puebla,15k-30k,15800.0,15,54.5,312.0,6.4,1,17.6,319.0,7.0,True,False,False,False,False
+6000285,59,35,Baja California,15k-30k,21200.0,15,45.7,2960.0,100.0,0,35.5,1889.0,8.0,False,False,False,False,True
+6000286,30,34,Chihuahua,15k-30k,32500.0,1,22.6,790.0,13.5,0,10.8,1487.0,7.0,True,False,False,False,False
+6000287,45,25,Baja California,8k-15k,14500.0,1,38.0,7422.0,41.7,0,48.8,781.0,6.0,True,True,False,False,False
+6000288,19,23,Baja California,15k-30k,5800.0,15,69.4,3307.0,39.6,0,5.6,718.0,,False,False,False,False,False
+6000289,42,22,Puebla,<8k,8300.0,30,30.8,4681.0,20.2,2,45.0,621.0,,True,False,False,False,False
+6000290,32,31,Nuevo Leon,<8k,6300.0,1,94.8,3501.0,46.4,1,31.5,677.0,,False,False,False,False,False
+6000291,14,53,Puebla,15k-30k,12800.0,1,47.3,2770.0,58.8,0,15.7,1257.0,10.0,True,False,True,False,False
+6000292,46,42,Queretaro,30k-60k,30900.0,15,56.0,579.0,53.4,1,55.8,1476.0,,True,False,False,False,False
+6000293,34,44,Queretaro,>60k,20400.0,1,63.1,2317.0,24.0,1,7.5,426.0,,False,False,False,False,False
+6000294,7,26,Estado de Mexico,8k-15k,22400.0,15,29.1,4024.0,52.8,1,18.1,1563.0,7.0,True,False,False,False,False
+6000295,50,45,CDMX,8k-15k,31300.0,30,7.5,5489.0,41.8,0,58.6,1860.0,,False,False,False,False,False
+6000296,8,29,CDMX,8k-15k,15000.0,15,27.2,767.0,61.6,0,27.9,1192.0,9.0,True,False,False,False,False
+6000297,38,27,Baja California,<8k,5500.0,1,64.8,403.0,65.9,1,19.3,955.0,,False,False,False,False,True
+6000298,3,42,CDMX,15k-30k,25100.0,1,41.1,1846.0,86.7,1,0.0,2282.0,5.0,False,False,False,False,True
+6000299,60,45,Guanajuato,<8k,7900.0,30,45.3,137.0,59.7,1,0.0,794.0,,True,False,False,False,False
+6000300,41,32,Estado de Mexico,<8k,8800.0,15,51.4,706.0,51.7,0,41.9,970.0,,False,False,False,False,False
+6000301,23,46,Baja California,<8k,10800.0,15,44.6,867.0,48.3,0,65.9,1153.0,,True,False,False,False,False
+6000302,20,38,Jalisco,15k-30k,18200.0,15,26.5,6788.0,59.6,1,18.8,994.0,,True,False,False,False,True
+6000303,50,46,Guanajuato,30k-60k,14800.0,1,5.5,1584.0,51.1,5,14.1,778.0,,False,False,False,False,False
+6000304,36,30,Veracruz,8k-15k,15000.0,15,55.7,8996.0,18.8,0,36.7,370.0,,True,True,False,False,False
+6000305,35,32,Veracruz,8k-15k,10200.0,30,46.8,1277.0,56.0,1,12.9,837.0,,True,False,False,False,False
+6000306,10,41,Queretaro,<8k,11200.0,30,55.6,419.0,91.8,0,0.0,1585.0,,True,False,False,False,False
+6000307,52,44,Jalisco,8k-15k,21700.0,1,53.3,7678.0,51.1,2,41.1,1345.0,10.0,True,False,False,False,False
+6000308,37,32,Estado de Mexico,15k-30k,29300.0,15,74.9,550.0,65.6,5,29.0,2234.0,,False,False,False,False,False
+6000309,20,36,Baja California,>60k,15700.0,15,78.8,2216.0,31.4,1,12.6,1094.0,6.0,True,False,False,False,False
+6000310,11,35,Estado de Mexico,8k-15k,23300.0,1,46.3,3793.0,64.9,0,48.2,1341.0,6.0,False,True,False,False,False
+6000311,39,61,Estado de Mexico,<8k,6200.0,30,46.5,1879.0,56.6,0,18.2,874.0,,True,False,True,False,False
+6000312,52,32,Puebla,<8k,9700.0,15,89.4,3128.0,14.8,2,49.5,275.0,,False,False,False,False,True
+6000313,16,44,Estado de Mexico,30k-60k,31600.0,15,29.0,1936.0,79.7,1,11.2,2505.0,,True,False,False,False,False
+6000314,33,46,Puebla,8k-15k,6900.0,15,54.1,571.0,15.2,0,14.9,448.0,,True,False,False,False,False
+6000315,58,44,Nuevo Leon,15k-30k,10900.0,1,52.3,5655.0,85.2,0,23.2,1373.0,,False,True,False,False,False
+6000316,12,41,Guanajuato,15k-30k,25700.0,1,82.3,1216.0,10.7,1,11.4,1099.0,9.0,True,False,False,False,False
+6000317,54,56,Estado de Mexico,15k-30k,15700.0,30,15.5,2583.0,58.6,2,4.9,975.0,,False,False,False,False,False
+6000318,10,30,Estado de Mexico,15k-30k,18300.0,15,41.7,2630.0,7.3,0,32.8,554.0,,False,False,False,False,False
+6000319,15,41,Veracruz,<8k,8100.0,1,51.5,395.0,44.6,1,8.8,676.0,,True,False,False,False,False
+6000320,27,43,Baja California,8k-15k,8300.0,30,22.1,15940.0,52.2,0,19.3,823.0,,True,False,False,False,False
+6000321,14,18,Nuevo Leon,<8k,8000.0,1,31.0,10362.0,63.6,0,38.5,925.0,,True,True,False,False,False
+6000322,8,38,Chihuahua,<8k,8200.0,15,30.8,1435.0,34.1,0,16.9,753.0,,True,False,False,False,False
+6000323,14,28,Nuevo Leon,8k-15k,21600.0,15,6.5,2540.0,26.6,1,30.3,1358.0,,True,False,False,False,False
+6000324,35,45,CDMX,<8k,3900.0,15,21.4,391.0,47.5,2,2.5,724.0,,False,False,False,False,False
+6000325,55,43,Guanajuato,30k-60k,20800.0,15,88.0,1173.0,6.7,2,18.2,676.0,,False,False,False,False,False
+6000326,12,40,Puebla,8k-15k,14500.0,1,41.1,451.0,21.6,0,5.1,690.0,,True,False,False,False,False
+6000327,47,35,Queretaro,30k-60k,17100.0,1,80.2,21749.0,58.8,0,0.5,1059.0,,False,False,False,False,False
+6000328,5,34,Puebla,8k-15k,5400.0,30,16.2,314.0,64.7,2,3.6,1035.0,6.0,True,False,False,False,False
+6000329,14,19,CDMX,30k-60k,18600.0,1,82.4,5042.0,26.8,0,58.3,831.0,,True,True,False,False,False
+6000330,46,33,Baja California,30k-60k,27000.0,15,61.6,3731.0,66.2,0,42.0,1806.0,,True,True,False,False,False
+6000331,38,35,CDMX,15k-30k,14600.0,1,48.0,1505.0,20.4,3,9.9,820.0,2.0,True,False,False,False,False
+6000332,35,33,CDMX,8k-15k,9600.0,30,65.4,15485.0,28.6,0,33.4,810.0,,False,False,False,False,False
+6000333,13,28,Estado de Mexico,8k-15k,11000.0,15,49.8,14086.0,22.2,0,37.3,596.0,,True,False,False,False,False
+6000334,33,18,Nuevo Leon,30k-60k,48700.0,15,50.3,5289.0,13.4,0,69.0,1306.0,10.0,False,False,False,False,False
+6000335,10,29,Puebla,8k-15k,9400.0,15,58.2,523.0,76.9,1,0.0,1096.0,,True,False,False,False,False
+6000336,15,37,Nuevo Leon,8k-15k,6400.0,15,34.8,17601.0,24.4,0,29.4,511.0,,False,False,False,False,False
+6000337,33,33,Queretaro,8k-15k,14800.0,1,71.6,650.0,27.2,0,34.0,939.0,,True,False,False,True,False
+6000338,60,33,Chihuahua,<8k,10000.0,30,66.2,14803.0,35.3,0,22.6,751.0,,True,False,False,False,False
+6000339,47,18,Nuevo Leon,30k-60k,34400.0,30,45.1,53.0,93.8,3,31.0,1733.0,6.0,True,False,False,False,False
+6000340,11,48,Chihuahua,8k-15k,35900.0,15,59.5,1526.0,57.4,2,40.7,2038.0,9.0,True,False,False,False,False
+6000341,30,40,Queretaro,<8k,9400.0,15,71.7,19249.0,35.6,0,17.2,632.0,,False,True,False,False,False
+6000342,49,25,Veracruz,30k-60k,40500.0,15,28.4,3060.0,46.3,0,38.8,1749.0,,True,False,False,False,False
+6000343,2,49,Chihuahua,<8k,12400.0,1,67.2,549.0,7.7,0,56.2,540.0,,True,False,False,False,False
+6000344,25,58,CDMX,15k-30k,86900.0,30,44.6,2831.0,10.8,0,38.1,2439.0,,True,True,False,True,False
+6000345,36,35,Queretaro,>60k,18400.0,30,6.9,748.0,67.3,1,8.7,1775.0,,False,False,False,True,True
+6000346,12,29,Estado de Mexico,15k-30k,29500.0,15,25.4,467.0,55.8,0,3.6,1469.0,9.0,True,False,False,False,False
+6000347,9,39,Jalisco,15k-30k,25200.0,15,44.3,1951.0,39.9,4,0.0,1294.0,,False,False,False,False,False
+6000348,27,39,Chihuahua,15k-30k,43100.0,15,47.9,22449.0,53.4,0,43.6,2193.0,,True,True,False,False,True
+6000349,46,42,Nuevo Leon,15k-30k,29800.0,15,53.0,3769.0,50.3,0,21.2,1434.0,,True,True,False,False,True
+6000350,34,28,Estado de Mexico,15k-30k,34400.0,1,75.7,2866.0,33.4,0,22.1,1408.0,9.0,False,False,False,False,False
+6000351,16,33,CDMX,30k-60k,22800.0,30,21.0,414.0,24.0,2,13.6,849.0,,True,False,False,False,False
+6000352,29,18,Puebla,8k-15k,12700.0,15,81.4,5386.0,31.3,0,46.9,924.0,7.0,True,False,False,False,True
+6000353,58,47,Nuevo Leon,30k-60k,21000.0,15,33.8,1466.0,76.0,0,18.6,1855.0,8.0,True,True,False,False,True
+6000354,24,18,Veracruz,8k-15k,17000.0,1,34.8,3600.0,74.2,0,23.5,1327.0,,True,False,False,False,False
+6000355,54,40,Baja California,8k-15k,20000.0,1,38.9,911.0,12.5,0,15.2,1084.0,,False,False,False,False,True
+6000356,26,29,Guanajuato,8k-15k,18500.0,1,61.4,1135.0,38.4,0,18.8,1257.0,,False,True,False,True,True
+6000357,29,29,Chihuahua,30k-60k,20700.0,30,33.0,3905.0,39.3,1,2.2,1114.0,,True,False,False,False,False
+6000358,31,46,Guanajuato,30k-60k,19200.0,30,42.9,573.0,60.6,2,34.9,878.0,,False,False,False,False,False
+6000359,15,22,Queretaro,30k-60k,28200.0,1,33.0,2167.0,18.8,1,61.1,616.0,,True,False,False,False,False
+6000360,18,50,Estado de Mexico,8k-15k,16700.0,15,77.2,4121.0,64.9,0,10.8,1622.0,4.0,True,False,True,False,True
+6000361,3,41,Nuevo Leon,30k-60k,45300.0,1,67.1,2774.0,23.9,0,5.2,721.0,,False,False,False,True,False
+6000362,36,49,Jalisco,15k-30k,27800.0,1,62.5,8147.0,25.9,1,6.7,707.0,,True,False,False,False,False
+6000363,41,41,Guanajuato,15k-30k,22600.0,15,73.4,1133.0,39.9,0,1.7,1095.0,,True,False,False,False,True
+6000364,54,30,Queretaro,<8k,5400.0,1,48.5,2487.0,42.9,0,43.0,834.0,8.0,True,False,False,False,False
+6000365,43,18,Baja California,15k-30k,25000.0,1,46.4,10517.0,6.4,0,23.6,813.0,7.0,True,False,False,False,False
+6000366,34,29,CDMX,8k-15k,22800.0,1,39.9,7987.0,62.0,0,13.2,1934.0,,False,True,True,False,False
+6000367,54,41,Nuevo Leon,15k-30k,25600.0,30,23.2,3416.0,87.4,3,0.2,1546.0,,True,False,False,False,False
+6000368,40,33,Jalisco,30k-60k,50000.0,1,18.5,6340.0,40.8,0,48.0,2327.0,6.0,True,False,False,False,False
+6000369,19,27,Puebla,8k-15k,6700.0,1,71.5,378.0,71.9,2,8.4,923.0,8.0,True,False,False,False,False
+6000370,53,46,CDMX,8k-15k,40500.0,15,31.5,1973.0,18.3,1,23.0,1769.0,,True,False,False,False,False
+6000371,51,29,Nuevo Leon,15k-30k,12900.0,15,52.1,816.0,49.3,1,0.0,821.0,,True,False,False,False,False
+6000372,5,27,Guanajuato,<8k,42900.0,15,38.0,88.0,32.7,0,11.4,1798.0,7.0,True,False,False,False,True
+6000373,2,34,Nuevo Leon,30k-60k,32900.0,30,67.7,621.0,43.0,0,18.0,923.0,,True,False,False,False,False
+6000374,58,28,Veracruz,>60k,17900.0,15,32.8,5587.0,21.1,1,13.8,620.0,9.0,True,False,False,False,False
+6000375,35,31,Puebla,8k-15k,11800.0,30,52.3,228.0,55.8,2,16.4,1045.0,10.0,False,False,False,False,False
+6000376,33,38,Jalisco,15k-30k,36300.0,15,17.0,1860.0,56.2,0,14.9,1208.0,,False,False,False,True,False
+6000377,3,27,Puebla,8k-15k,17800.0,30,90.4,100.0,11.9,0,3.4,814.0,,True,False,False,False,False
+6000378,45,25,Queretaro,<8k,10900.0,15,58.3,4147.0,33.2,0,27.0,631.0,,True,False,False,False,False
+6000379,26,43,Baja California,15k-30k,22500.0,15,34.9,2182.0,51.2,1,0.0,1113.0,9.0,True,False,False,False,False
+6000380,52,20,Jalisco,15k-30k,19100.0,15,14.3,3222.0,42.6,0,40.5,786.0,7.0,True,True,False,False,False
+6000381,51,50,Chihuahua,15k-30k,17900.0,30,54.2,829.0,44.6,0,26.5,696.0,,True,False,False,False,True
+6000382,18,36,Estado de Mexico,<8k,11800.0,1,46.1,4346.0,68.3,1,0.0,1405.0,9.0,False,False,False,False,False
+6000383,24,43,Puebla,15k-30k,19300.0,30,85.4,3737.0,38.9,1,42.9,1420.0,,False,False,False,False,True
+6000384,5,38,Guanajuato,8k-15k,6400.0,15,90.2,1851.0,17.3,1,36.7,418.0,7.0,True,False,False,False,False
+6000385,12,27,CDMX,>60k,12100.0,15,65.2,2196.0,29.2,3,25.2,471.0,,True,False,False,False,False
+6000386,23,26,CDMX,8k-15k,16100.0,15,34.4,8910.0,50.5,2,9.3,1338.0,,False,False,False,False,True
+6000387,51,53,Veracruz,<8k,5500.0,1,40.2,2669.0,32.8,2,26.6,508.0,8.0,True,False,False,False,False
+6000388,54,46,Puebla,15k-30k,15600.0,30,4.2,1365.0,53.4,1,16.0,957.0,,False,False,False,False,False
+6000389,15,31,Chihuahua,15k-30k,31300.0,15,70.0,3833.0,15.7,0,55.1,1696.0,8.0,True,False,False,False,False
+6000390,29,47,Veracruz,15k-30k,28400.0,1,30.4,728.0,34.5,0,15.9,783.0,,True,False,False,False,False
+6000391,22,27,Queretaro,15k-30k,25000.0,30,22.2,763.0,34.6,0,18.8,1307.0,10.0,False,True,False,False,False
+6000392,20,60,Jalisco,8k-15k,15100.0,30,68.8,8245.0,35.4,1,33.0,1132.0,6.0,True,False,False,False,True
+6000393,42,38,Guanajuato,15k-30k,25000.0,1,70.8,904.0,41.5,2,4.1,733.0,,True,False,False,False,False
+6000394,7,34,CDMX,15k-30k,15500.0,15,98.0,5962.0,44.2,1,16.6,1240.0,9.0,True,False,False,False,False
+6000395,11,55,Guanajuato,8k-15k,10800.0,15,19.0,2868.0,17.2,0,29.7,454.0,4.0,False,False,False,False,False
+6000396,48,19,Estado de Mexico,<8k,16400.0,15,68.4,5401.0,62.5,0,49.6,1301.0,,False,False,True,False,False
+6000397,25,36,Queretaro,15k-30k,17800.0,15,11.1,2507.0,41.3,2,15.0,1305.0,,False,False,False,False,True
+6000398,26,39,Queretaro,8k-15k,12200.0,1,45.9,6663.0,61.2,0,20.5,1252.0,,True,True,True,False,False
+6000399,38,27,Guanajuato,15k-30k,46700.0,30,68.4,2229.0,34.4,0,17.7,1470.0,,True,True,False,True,False
+6000400,59,34,Estado de Mexico,8k-15k,27300.0,15,61.0,2556.0,65.3,0,27.2,2000.0,7.0,True,False,False,False,False
+6000401,15,37,Nuevo Leon,8k-15k,16700.0,15,42.4,2276.0,32.7,0,34.4,748.0,,False,False,False,False,False
+6000402,36,42,Jalisco,8k-15k,12100.0,1,27.7,6812.0,65.5,1,47.9,1454.0,,True,False,False,False,False
+6000403,10,30,Chihuahua,15k-30k,9400.0,1,47.0,6989.0,35.2,3,39.4,505.0,,True,False,False,False,True
+6000404,50,36,Nuevo Leon,8k-15k,19800.0,1,72.7,2904.0,56.7,1,34.3,1445.0,,True,False,False,False,False
+6000405,44,41,CDMX,>60k,58700.0,1,58.1,598.0,42.9,0,58.2,1063.0,,False,True,False,False,False
+6000406,11,33,Nuevo Leon,8k-15k,22700.0,15,66.2,3198.0,33.2,0,0.8,1281.0,9.0,False,False,False,False,False
+6000407,5,56,Queretaro,30k-60k,18100.0,1,74.2,6113.0,22.3,1,0.3,665.0,,False,False,False,False,False
+6000408,4,18,Chihuahua,30k-60k,10400.0,15,65.9,1995.0,61.4,0,16.0,1147.0,,True,False,False,False,True
+6000409,33,38,Queretaro,8k-15k,34100.0,15,12.1,4226.0,18.6,0,20.1,689.0,,True,True,False,False,False
+6000410,1,27,Estado de Mexico,<8k,7400.0,30,68.0,4885.0,54.7,0,65.0,931.0,,True,True,False,False,False
+6000411,46,45,Guanajuato,30k-60k,26100.0,15,81.9,6789.0,6.4,0,36.9,452.0,10.0,False,False,False,False,False
+6000412,52,18,Guanajuato,8k-15k,27700.0,15,71.2,613.0,86.3,2,5.8,1541.0,,True,False,False,False,False
+6000413,14,31,Chihuahua,<8k,6200.0,15,91.1,1259.0,66.0,2,25.1,1091.0,,True,False,False,False,False
+6000414,53,29,Puebla,8k-15k,12500.0,30,78.3,2775.0,67.6,0,29.9,1229.0,,True,True,True,False,False
+6000415,35,60,Chihuahua,8k-15k,48000.0,15,81.2,638.0,53.3,2,0.0,2778.0,,True,False,False,True,False
+6000416,51,59,Queretaro,15k-30k,15500.0,15,39.7,3378.0,20.8,0,15.3,1012.0,,True,False,False,False,False
+6000417,8,27,Estado de Mexico,<8k,8300.0,15,46.9,1048.0,41.1,2,52.8,791.0,,True,False,False,False,False
+6000418,29,27,Puebla,>60k,18800.0,30,29.0,2781.0,51.8,2,12.7,1021.0,,True,False,False,False,False
+6000419,13,41,Jalisco,<8k,5800.0,1,69.0,889.0,54.5,0,43.0,744.0,9.0,False,False,False,False,True
+6000420,28,38,Queretaro,>60k,20300.0,1,65.1,2761.0,29.8,0,29.0,1044.0,,True,False,False,False,False
+6000421,54,34,Baja California,30k-60k,56300.0,1,47.8,1597.0,18.8,2,41.5,2641.0,,True,False,False,False,False
+6000422,50,21,Veracruz,30k-60k,20700.0,15,29.3,1583.0,79.4,0,35.7,1900.0,,False,False,False,False,False
+6000423,16,43,Veracruz,30k-60k,30200.0,15,77.6,1123.0,49.0,2,21.4,1828.0,8.0,False,False,False,False,True
+6000424,42,31,CDMX,15k-30k,15800.0,1,18.8,256.0,55.9,2,30.5,1068.0,,True,False,False,False,True
+6000425,42,33,Queretaro,8k-15k,5900.0,15,53.4,867.0,33.6,0,18.0,621.0,10.0,True,False,False,False,False
+6000426,53,44,Nuevo Leon,30k-60k,22800.0,30,65.4,1291.0,31.8,1,0.0,835.0,,False,False,False,False,True
+6000427,3,27,CDMX,30k-60k,13800.0,1,39.1,4798.0,53.2,3,21.8,810.0,,True,False,False,False,False
+6000428,24,28,Puebla,30k-60k,19600.0,30,43.8,5411.0,60.5,2,22.8,1101.0,,True,False,False,False,False
+6000429,20,48,Jalisco,8k-15k,7900.0,15,35.9,1138.0,3.9,1,33.3,363.0,9.0,False,True,False,False,False
+6000430,34,30,Guanajuato,15k-30k,19600.0,15,58.1,646.0,35.2,1,5.2,664.0,6.0,False,False,False,False,True
+6000431,19,44,Guanajuato,8k-15k,17300.0,30,43.0,545.0,52.8,1,20.6,892.0,,True,False,False,False,True
+6000432,20,18,Nuevo Leon,>60k,17200.0,1,61.9,123.0,12.8,2,10.3,820.0,6.0,True,False,False,False,False
+6000433,12,59,Queretaro,8k-15k,9100.0,15,57.7,13431.0,16.2,0,28.8,297.0,,False,False,False,False,False
+6000434,49,50,Puebla,<8k,9000.0,30,69.6,547.0,51.8,3,34.3,727.0,,False,False,False,False,False
+6000435,24,35,Nuevo Leon,<8k,5900.0,15,78.1,6882.0,37.0,0,32.1,513.0,,False,True,False,False,False
+6000436,8,48,Jalisco,8k-15k,16600.0,1,46.7,918.0,51.6,0,55.5,1346.0,,False,True,False,False,False
+6000437,9,37,Veracruz,30k-60k,24200.0,30,61.2,493.0,26.3,2,6.5,1498.0,,True,False,False,True,False
+6000438,51,36,CDMX,<8k,9200.0,1,56.4,2429.0,54.7,0,51.0,788.0,,True,True,False,False,False
+6000439,56,18,Queretaro,15k-30k,30000.0,1,30.9,2120.0,39.6,2,12.1,853.0,,True,False,False,False,False
+6000440,11,26,Puebla,30k-60k,42100.0,30,86.3,2014.0,34.4,1,9.2,1040.0,,False,False,False,False,False
+6000441,23,24,Jalisco,30k-60k,34300.0,30,20.1,7886.0,41.2,1,17.8,777.0,,False,False,False,False,False
+6000442,23,39,Veracruz,15k-30k,24800.0,1,37.0,2073.0,42.1,0,61.1,1585.0,,True,True,False,False,False
+6000443,31,29,Estado de Mexico,8k-15k,8800.0,30,79.6,1695.0,64.7,2,17.8,884.0,,True,False,False,False,True
+6000444,24,41,Puebla,<8k,8600.0,1,66.8,2362.0,81.2,0,9.1,1281.0,,False,False,False,False,False
+6000445,15,34,Baja California,15k-30k,28200.0,30,40.7,6597.0,94.7,1,1.0,1820.0,,True,False,True,True,False
+6000446,30,28,Baja California,<8k,11000.0,15,66.8,603.0,56.8,1,25.1,929.0,,False,False,False,False,True
+6000447,30,42,Guanajuato,8k-15k,19000.0,15,52.0,5805.0,92.5,0,24.6,1617.0,8.0,False,False,False,False,False
+6000448,30,44,Nuevo Leon,<8k,5500.0,1,45.8,1238.0,32.1,0,20.9,447.0,,True,False,False,True,False
+6000449,35,18,Chihuahua,<8k,8900.0,15,30.8,268.0,82.1,2,19.6,1498.0,,True,False,False,False,False
+6000450,47,44,Guanajuato,>60k,12200.0,15,26.0,2978.0,59.9,0,22.1,1308.0,,True,True,False,False,True
+6000451,7,35,Nuevo Leon,15k-30k,17800.0,15,52.7,1545.0,90.8,4,26.3,1682.0,,True,False,False,False,False
+6000452,35,28,Baja California,8k-15k,18300.0,30,50.7,586.0,69.0,0,21.6,1250.0,,True,False,False,False,False
+6000453,10,37,CDMX,15k-30k,35400.0,1,26.2,4120.0,56.8,0,70.0,1616.0,,True,False,True,False,False
+6000454,31,47,Veracruz,30k-60k,13100.0,30,81.4,293.0,33.5,3,0.0,727.0,,True,False,False,False,False
+6000455,37,51,Jalisco,30k-60k,25700.0,1,47.6,7466.0,34.0,0,12.4,1465.0,,True,False,False,False,False
+6000456,48,27,Guanajuato,15k-30k,30900.0,30,47.5,2875.0,42.6,2,27.0,1225.0,9.0,True,False,False,False,False
+6000457,58,50,Nuevo Leon,30k-60k,12400.0,30,27.5,1121.0,51.0,2,20.7,742.0,10.0,True,False,False,False,False
+6000458,53,24,Queretaro,30k-60k,39500.0,30,81.5,7462.0,31.5,2,7.7,1378.0,,False,False,False,False,False
+6000459,22,36,Guanajuato,15k-30k,16100.0,15,79.5,2975.0,22.6,1,10.7,750.0,,False,False,False,False,False
+6000460,60,46,Queretaro,8k-15k,21400.0,30,91.5,10330.0,24.3,0,21.0,1412.0,,True,False,False,False,False
+6000461,34,29,Queretaro,15k-30k,15400.0,15,27.8,1144.0,38.6,0,11.2,587.0,,False,False,False,False,False
+6000462,37,37,Queretaro,8k-15k,17200.0,15,48.3,4371.0,65.2,0,16.1,1082.0,,False,True,False,False,True
+6000463,48,39,Baja California,8k-15k,10000.0,30,19.6,4280.0,69.2,2,29.0,901.0,,True,False,False,False,False
+6000464,57,49,Chihuahua,30k-60k,64300.0,30,78.5,151.0,14.9,0,28.3,1121.0,,False,False,False,False,False
+6000465,28,32,Veracruz,<8k,14400.0,15,64.1,1928.0,29.3,0,64.4,1120.0,10.0,True,True,False,True,False
+6000466,53,37,Queretaro,<8k,3500.0,1,19.6,3694.0,65.8,0,22.3,832.0,9.0,True,True,False,False,False
+6000467,50,48,Veracruz,15k-30k,15100.0,15,24.2,1008.0,73.2,2,1.0,1020.0,,False,False,False,False,False
+6000468,10,35,Veracruz,<8k,12900.0,1,25.0,638.0,51.3,0,34.4,759.0,6.0,False,False,False,False,False
+6000469,29,29,Baja California,15k-30k,14600.0,30,14.5,782.0,30.0,2,34.0,810.0,,False,False,False,False,False
+6000470,24,26,Jalisco,30k-60k,19300.0,30,74.3,2720.0,79.8,0,23.9,1807.0,,True,False,False,False,False
+6000471,25,18,Veracruz,8k-15k,19800.0,1,19.1,2478.0,51.2,2,36.2,1439.0,,False,False,False,False,False
+6000472,43,35,Jalisco,<8k,3600.0,30,71.5,777.0,52.6,1,33.2,704.0,,True,False,False,False,True
+6000473,20,40,Veracruz,15k-30k,19300.0,15,53.6,9664.0,19.9,0,21.0,707.0,,False,True,False,False,True
+6000474,45,45,Queretaro,<8k,14400.0,1,53.7,618.0,48.5,1,62.3,885.0,,True,False,False,False,True
+6000475,16,27,Queretaro,8k-15k,15800.0,15,42.9,5550.0,18.3,0,9.3,889.0,8.0,False,False,False,False,True
+6000476,33,63,Nuevo Leon,30k-60k,19400.0,30,42.4,4991.0,48.4,1,6.5,1460.0,,True,False,False,False,False
+6000477,45,18,Nuevo Leon,15k-30k,10900.0,30,38.4,2225.0,73.6,0,12.5,1308.0,,True,True,False,False,True
+6000478,11,58,Puebla,<8k,17900.0,15,50.9,299.0,73.6,0,29.2,1347.0,5.0,True,False,False,False,False
+6000479,2,40,Guanajuato,15k-30k,17600.0,1,84.1,747.0,90.7,2,16.3,1513.0,,False,False,False,False,True
+6000480,41,18,Veracruz,15k-30k,21800.0,30,50.5,2224.0,91.4,2,12.2,1579.0,7.0,True,False,True,False,False
+6000481,48,39,Estado de Mexico,30k-60k,19200.0,30,67.0,1987.0,35.5,0,24.5,1197.0,,True,False,False,False,False
+6000482,23,39,Chihuahua,30k-60k,15500.0,1,20.6,857.0,25.0,0,38.0,1023.0,,True,False,False,False,True
+6000483,12,32,Chihuahua,15k-30k,37100.0,30,75.5,3580.0,72.6,2,2.5,1510.0,4.0,True,False,False,False,False
+6000484,53,35,Estado de Mexico,<8k,11500.0,30,40.2,477.0,57.0,1,13.9,794.0,,False,False,False,False,False
+6000485,58,55,CDMX,8k-15k,9900.0,15,62.5,1958.0,43.5,0,31.0,651.0,,False,True,False,False,True
+6000486,14,37,Chihuahua,<8k,3900.0,15,49.8,877.0,40.7,1,35.7,565.0,4.0,True,False,False,False,True
+6000487,60,54,Puebla,30k-60k,13200.0,15,30.3,201.0,32.0,1,24.2,618.0,,True,False,True,False,True
+6000488,27,42,Baja California,30k-60k,20200.0,15,51.9,6887.0,93.1,0,25.5,1442.0,2.0,False,True,False,False,False
+6000489,36,26,Puebla,<8k,11600.0,15,81.8,41.0,41.7,1,32.5,1030.0,,True,False,False,False,False
+6000490,16,48,Chihuahua,8k-15k,9900.0,15,90.7,902.0,64.4,0,0.0,942.0,,True,False,False,False,False
+6000491,57,42,Veracruz,15k-30k,14700.0,30,53.5,3900.0,84.8,0,37.4,1431.0,,True,True,True,False,True
+6000492,20,56,Veracruz,<8k,24400.0,1,8.3,9009.0,53.7,1,24.2,844.0,7.0,True,False,False,True,False
+6000493,2,27,Queretaro,30k-60k,18400.0,30,84.2,11752.0,17.9,0,18.1,594.0,10.0,True,True,False,False,False
+6000494,5,48,Veracruz,30k-60k,19300.0,30,73.5,5840.0,49.5,1,26.8,961.0,,False,False,False,False,True
+6000495,7,59,Guanajuato,15k-30k,51500.0,30,49.8,644.0,80.6,0,13.4,3401.0,,True,True,True,False,True
+6000496,57,33,Veracruz,8k-15k,32900.0,15,81.2,661.0,6.2,0,17.4,1147.0,,True,False,False,False,True
+6000497,60,40,Chihuahua,8k-15k,41300.0,15,53.0,1419.0,28.3,2,12.6,1031.0,,False,False,False,False,False
+6000498,21,62,CDMX,30k-60k,15800.0,1,41.9,1206.0,51.6,1,20.3,1022.0,,True,False,False,False,False
+6000499,7,33,Puebla,8k-15k,30200.0,15,51.0,466.0,72.5,1,1.6,1894.0,,True,False,False,False,False
+6000500,2,40,Jalisco,15k-30k,23600.0,15,83.0,2287.0,71.6,2,26.5,1129.0,,False,False,False,False,False
+6000501,42,18,Nuevo Leon,<8k,7200.0,1,79.4,4917.0,100.0,0,7.4,1367.0,,True,False,True,False,False
+6000502,45,52,Queretaro,30k-60k,18100.0,15,44.6,1516.0,53.1,1,30.9,1011.0,10.0,True,False,False,False,False
+6000503,58,24,Queretaro,<8k,10000.0,1,67.8,1927.0,68.7,1,27.7,1039.0,,True,False,False,False,False
+6000504,44,18,Baja California,15k-30k,13100.0,1,68.5,141.0,65.0,0,12.9,958.0,,True,False,False,False,False
+6000505,46,27,Veracruz,15k-30k,13100.0,15,17.9,10721.0,16.0,0,42.5,499.0,,True,False,False,False,True
+6000506,53,31,Jalisco,15k-30k,18600.0,15,53.3,1898.0,44.0,2,0.3,983.0,9.0,False,False,False,False,False
+6000507,58,33,Veracruz,8k-15k,22400.0,15,6.0,18727.0,23.6,0,31.1,1297.0,7.0,False,False,False,False,False
+6000508,14,27,Veracruz,>60k,32900.0,15,67.3,911.0,26.4,0,47.6,1667.0,9.0,False,False,False,False,True
+6000509,8,49,Veracruz,15k-30k,9400.0,30,80.2,1815.0,73.8,0,32.7,1243.0,,False,True,False,False,False
+6000510,23,30,Baja California,30k-60k,9200.0,15,61.1,277.0,41.2,1,17.6,785.0,,True,False,True,False,False
+6000511,41,35,Baja California,>60k,56100.0,1,58.1,1040.0,18.6,0,9.9,2021.0,,False,False,False,False,False
+6000512,31,43,Puebla,8k-15k,16700.0,30,16.8,1374.0,13.6,0,25.3,604.0,10.0,True,False,False,False,False
+6000513,35,42,Baja California,30k-60k,26800.0,1,48.9,588.0,33.6,1,17.6,1083.0,,False,False,False,False,False
+6000514,6,48,Guanajuato,8k-15k,16600.0,15,52.8,4442.0,42.0,0,26.5,1020.0,,False,False,False,False,True
+6000515,18,52,Jalisco,30k-60k,26500.0,1,70.4,1801.0,41.4,4,13.5,1591.0,7.0,False,False,False,False,False
+6000516,19,39,Guanajuato,30k-60k,26500.0,30,21.7,2147.0,16.5,0,50.5,661.0,8.0,False,False,False,False,False
+6000517,12,28,Queretaro,8k-15k,18700.0,30,23.4,2866.0,53.9,3,0.1,1630.0,7.0,True,False,False,False,False
+6000518,41,36,Estado de Mexico,8k-15k,10600.0,30,54.5,4387.0,11.5,0,25.1,433.0,7.0,True,True,False,False,False
+6000519,23,51,Jalisco,15k-30k,16100.0,15,29.5,1349.0,77.2,0,4.4,1594.0,,True,False,False,False,True
+6000520,15,28,Veracruz,15k-30k,35300.0,1,13.0,6537.0,36.9,1,10.5,1047.0,,True,False,False,False,False
+6000521,58,33,Chihuahua,8k-15k,14400.0,30,37.3,1154.0,36.4,0,19.9,923.0,,True,False,False,False,True
+6000522,28,46,Jalisco,<8k,4100.0,30,35.9,232.0,61.5,0,0.0,900.0,10.0,True,False,False,False,False
+6000523,41,59,Estado de Mexico,8k-15k,15900.0,15,64.2,1063.0,38.3,0,8.4,1124.0,9.0,False,False,False,False,False
+6000524,54,39,Veracruz,15k-30k,10600.0,30,23.2,667.0,60.2,0,17.2,850.0,,True,False,False,False,False
+6000525,42,44,CDMX,<8k,8400.0,1,34.7,2217.0,43.1,2,51.2,855.0,9.0,True,False,False,False,False
+6000526,33,53,Guanajuato,30k-60k,61100.0,1,68.2,2565.0,54.5,0,52.9,3492.0,,False,False,False,False,False
+6000527,40,64,Baja California,8k-15k,9400.0,15,73.8,353.0,66.4,2,5.7,1162.0,9.0,False,False,False,False,False
+6000528,13,39,Queretaro,<8k,4600.0,15,63.9,6157.0,56.0,0,20.6,720.0,,False,False,False,False,False
+6000529,24,33,Puebla,8k-15k,19000.0,15,39.1,4739.0,62.2,1,30.8,1250.0,,False,False,False,False,False
+6000530,13,37,Jalisco,8k-15k,13900.0,30,25.1,1034.0,25.3,1,5.9,510.0,,False,False,False,False,False
+6000531,13,26,Queretaro,8k-15k,15100.0,15,48.2,11186.0,19.6,0,46.4,689.0,10.0,True,False,False,False,True
+6000532,28,24,Guanajuato,<8k,5700.0,30,71.4,2206.0,27.0,1,14.8,378.0,,False,False,False,True,False
+6000533,38,50,Baja California,8k-15k,23400.0,30,31.2,1244.0,57.1,1,25.7,1675.0,,True,False,False,False,False
+6000534,31,28,CDMX,15k-30k,17200.0,30,34.1,2562.0,63.7,0,48.3,1430.0,,True,True,False,False,False
+6000535,8,32,Veracruz,8k-15k,5700.0,30,20.3,724.0,40.8,0,28.4,753.0,5.0,False,False,False,False,False
+6000536,33,60,Jalisco,8k-15k,25400.0,30,76.2,8633.0,9.9,2,40.4,972.0,,True,False,False,False,False
+6000537,28,59,Veracruz,>60k,36700.0,1,77.8,3242.0,37.9,0,47.3,736.0,,False,True,False,False,False
+6000538,22,29,Chihuahua,<8k,17900.0,15,13.6,3799.0,12.9,0,27.1,621.0,,False,False,False,False,True
+6000539,35,49,Guanajuato,8k-15k,20200.0,15,45.3,1400.0,31.7,1,42.8,911.0,7.0,False,False,False,False,True
+6000540,51,25,Guanajuato,8k-15k,12100.0,1,56.3,4256.0,17.0,1,18.0,664.0,,False,False,False,False,True
+6000541,51,23,Jalisco,8k-15k,15000.0,1,74.8,2529.0,93.8,4,39.8,1333.0,,True,False,False,False,False
+6000542,52,37,Guanajuato,<8k,8200.0,30,57.1,394.0,33.2,2,18.0,475.0,,True,False,False,False,False
+6000543,10,30,Guanajuato,15k-30k,17100.0,15,79.6,6479.0,16.6,0,7.6,569.0,,True,False,False,False,False
+6000544,18,33,Puebla,15k-30k,35700.0,15,21.8,24478.0,53.1,0,22.4,1945.0,,True,True,False,False,True
+6000545,13,42,Queretaro,<8k,9900.0,15,31.2,7801.0,50.8,0,53.7,1010.0,9.0,True,False,True,False,True
+6000546,43,46,Guanajuato,<8k,6000.0,15,86.5,3560.0,21.0,0,37.7,318.0,8.0,False,True,False,False,True
+6000547,31,32,CDMX,15k-30k,43300.0,30,68.6,1744.0,68.6,1,19.4,1578.0,,False,False,False,False,False
+6000548,11,40,Puebla,8k-15k,17800.0,30,79.9,3291.0,39.7,0,0.9,910.0,,False,False,False,False,False
+6000549,43,45,Veracruz,8k-15k,13200.0,15,40.3,5787.0,24.3,0,43.7,1015.0,5.0,True,True,False,False,False
+6000550,58,18,Baja California,8k-15k,8500.0,30,57.0,2097.0,43.1,0,38.5,1021.0,,False,False,False,False,False
+6000551,39,38,Baja California,<8k,6900.0,15,35.0,1131.0,9.0,0,5.3,209.0,,True,False,False,False,False
+6000552,56,28,Nuevo Leon,8k-15k,34700.0,15,23.6,2795.0,50.5,1,0.0,1913.0,,True,False,False,False,False
+6000553,36,25,Estado de Mexico,>60k,18800.0,15,17.7,3375.0,64.2,1,13.8,1556.0,,True,False,False,False,False
+6000554,29,42,Queretaro,<8k,10700.0,1,58.6,3744.0,28.3,3,31.0,594.0,,True,False,False,False,False
+6000555,3,23,Estado de Mexico,15k-30k,10100.0,1,66.7,2055.0,36.6,0,10.7,564.0,,True,False,False,False,True
+6000556,47,40,Veracruz,8k-15k,14800.0,1,75.3,1813.0,25.1,0,64.6,820.0,8.0,True,False,False,False,False
+6000557,34,51,Queretaro,8k-15k,7200.0,15,86.6,2188.0,44.8,0,37.5,697.0,7.0,True,False,False,False,False
+6000558,6,37,CDMX,8k-15k,11800.0,30,46.6,277.0,8.2,0,5.7,450.0,,True,False,False,False,False
+6000559,50,35,Jalisco,8k-15k,18300.0,15,58.5,13112.0,47.3,0,40.9,827.0,,False,False,False,False,False
+6000560,46,48,Baja California,>60k,24800.0,15,30.0,3020.0,71.9,2,21.0,1810.0,,False,False,False,False,True
+6000561,42,29,Nuevo Leon,30k-60k,49700.0,15,8.1,6409.0,66.9,1,28.7,1541.0,,False,False,False,False,False
+6000562,52,47,Chihuahua,8k-15k,9300.0,15,61.3,1308.0,41.9,1,14.5,1022.0,,False,False,False,False,False
+6000563,37,37,Jalisco,<8k,8600.0,1,57.5,377.0,3.2,0,3.2,197.0,,True,False,False,False,False
+6000564,24,38,Queretaro,15k-30k,26000.0,15,69.5,6456.0,37.9,1,33.5,627.0,,True,False,False,False,False
+6000565,22,27,Nuevo Leon,8k-15k,13800.0,15,39.8,3442.0,72.1,0,33.7,1293.0,4.0,True,False,True,False,False
+6000566,50,18,Baja California,15k-30k,8100.0,15,42.2,2454.0,56.7,1,0.0,976.0,,False,False,False,False,False
+6000567,20,38,Chihuahua,15k-30k,30200.0,15,84.9,833.0,29.0,1,39.8,1224.0,,True,False,False,False,False
+6000568,39,40,Guanajuato,8k-15k,25300.0,15,36.3,3239.0,24.4,1,50.4,760.0,,True,False,False,False,True
+6000569,31,41,Estado de Mexico,8k-15k,16500.0,1,61.7,819.0,59.9,5,27.6,1227.0,,False,False,False,False,False
+6000570,19,20,Jalisco,8k-15k,6300.0,1,79.5,7555.0,44.4,0,57.3,749.0,,False,False,False,False,False
+6000571,21,27,Guanajuato,15k-30k,18300.0,1,65.7,2834.0,57.0,0,31.0,1413.0,,True,False,False,False,True
+6000572,8,34,Estado de Mexico,15k-30k,32000.0,1,32.9,4582.0,34.1,0,31.4,980.0,8.0,True,False,False,False,True
+6000573,26,25,Estado de Mexico,8k-15k,9400.0,30,59.0,2320.0,82.8,1,59.2,1052.0,,True,False,False,False,False
+6000574,13,32,Baja California,8k-15k,20500.0,15,66.1,23056.0,18.2,0,39.8,1056.0,,True,False,False,False,False
+6000575,10,34,Chihuahua,30k-60k,21700.0,1,6.5,1750.0,20.3,1,7.3,853.0,,False,False,False,False,False
+6000576,31,33,Puebla,<8k,5700.0,15,35.6,1445.0,92.8,0,13.2,1180.0,,False,True,False,False,False
+6000577,52,27,Baja California,8k-15k,30500.0,15,86.0,4602.0,29.5,0,12.1,866.0,,True,False,False,False,False
+6000578,42,32,CDMX,>60k,45000.0,1,71.5,3349.0,69.0,0,48.8,2983.0,8.0,True,False,True,False,True
+6000579,14,30,Nuevo Leon,8k-15k,27100.0,30,53.3,1146.0,61.6,1,9.8,1198.0,6.0,True,False,False,False,False
+6000580,15,43,CDMX,8k-15k,9700.0,1,58.9,1333.0,93.1,2,40.4,1382.0,,False,False,True,False,False
+6000581,49,59,Queretaro,8k-15k,11400.0,15,69.4,1027.0,23.1,0,37.7,775.0,,True,False,False,False,True
+6000582,31,41,Guanajuato,15k-30k,19700.0,1,37.3,4550.0,36.7,0,29.8,1193.0,,False,False,False,False,False
+6000583,9,38,Veracruz,8k-15k,17700.0,15,78.4,16346.0,39.9,0,43.8,955.0,,False,True,False,False,False
+6000584,4,34,Baja California,15k-30k,36500.0,30,36.1,1781.0,46.2,2,18.3,2203.0,7.0,True,False,False,False,False
+6000585,46,18,Veracruz,8k-15k,17600.0,15,71.5,663.0,71.6,1,2.8,1417.0,9.0,True,False,False,True,True
+6000586,47,18,Baja California,8k-15k,20000.0,30,68.7,45371.0,62.9,1,14.4,1015.0,,False,True,False,False,False
+6000587,5,42,Jalisco,>60k,13600.0,15,16.2,20395.0,50.1,0,43.3,1180.0,,True,False,False,True,True
+6000588,53,19,Puebla,30k-60k,49500.0,30,59.3,3015.0,39.9,0,27.9,2455.0,10.0,True,False,True,False,False
+6000589,2,36,Jalisco,8k-15k,18000.0,15,42.9,5340.0,81.3,0,44.9,1625.0,,False,True,False,False,False
+6000590,43,25,CDMX,8k-15k,14600.0,30,44.9,13300.0,25.7,3,31.6,747.0,,True,False,False,False,False
+6000591,16,54,Guanajuato,15k-30k,18800.0,30,73.5,468.0,45.8,0,50.0,1268.0,10.0,True,True,False,False,False
+6000592,38,44,Nuevo Leon,15k-30k,14300.0,30,65.7,334.0,29.6,0,23.8,1071.0,,True,False,True,False,True
+6000593,59,37,Estado de Mexico,<8k,29000.0,30,38.0,1395.0,21.7,2,20.0,1279.0,8.0,True,False,False,False,False
+6000594,39,36,CDMX,8k-15k,10200.0,30,91.5,412.0,61.5,0,8.0,891.0,,True,False,False,False,False
+6000595,30,40,CDMX,30k-60k,28300.0,30,63.7,13110.0,48.0,0,51.7,1984.0,,False,True,False,False,False
+6000596,11,30,Estado de Mexico,15k-30k,15900.0,15,50.4,925.0,76.8,1,28.8,1205.0,,True,False,False,False,False
+6000597,21,35,Baja California,8k-15k,9600.0,30,73.7,3388.0,61.8,1,10.9,1148.0,,False,False,False,False,False
+6000598,37,36,Nuevo Leon,15k-30k,28000.0,15,94.9,4464.0,36.2,0,14.6,1271.0,10.0,False,False,False,False,False
+6000599,16,38,Estado de Mexico,15k-30k,8000.0,1,64.6,4141.0,70.3,3,5.3,1007.0,8.0,True,False,False,False,False
+6000600,4,29,Jalisco,15k-30k,23600.0,15,31.0,1144.0,56.7,0,50.8,1354.0,,True,False,False,False,False
+6000601,36,33,Puebla,>60k,17600.0,30,19.3,3713.0,34.8,0,0.0,1074.0,7.0,False,False,False,False,False
+6000602,7,43,Nuevo Leon,>60k,30400.0,1,54.1,4365.0,17.8,0,0.0,1378.0,,True,False,False,False,False
+6000603,58,53,Chihuahua,15k-30k,24900.0,30,82.4,6166.0,60.0,1,32.6,1477.0,,True,True,False,False,False
+6000604,49,21,Estado de Mexico,<8k,8200.0,15,73.8,725.0,38.4,0,18.6,786.0,,False,False,False,False,False
+6000605,49,36,Estado de Mexico,<8k,11700.0,15,42.7,422.0,49.6,0,8.7,870.0,7.0,False,False,False,False,False
+6000606,19,44,Jalisco,15k-30k,20100.0,15,56.2,512.0,13.3,0,53.0,642.0,,False,False,False,False,True
+6000607,51,49,Queretaro,8k-15k,9000.0,30,55.1,3747.0,3.7,0,21.0,140.0,,False,False,False,False,False
+6000608,14,46,Queretaro,30k-60k,12800.0,1,77.7,643.0,24.0,3,6.6,642.0,6.0,True,False,False,False,False
+6000609,46,35,Queretaro,15k-30k,23700.0,1,35.3,5741.0,39.6,1,6.1,1062.0,,False,False,False,False,False
+6000610,12,32,Veracruz,15k-30k,35600.0,30,90.7,11000.0,65.6,1,30.5,1699.0,,True,False,True,False,False
+6000611,20,18,Veracruz,<8k,4600.0,15,47.4,1265.0,72.0,3,48.2,1090.0,,True,False,False,False,False
+6000612,56,27,Veracruz,8k-15k,10000.0,15,60.4,6055.0,57.5,0,18.3,1140.0,,True,False,False,False,False
+6000613,34,24,Veracruz,30k-60k,14100.0,15,67.7,5573.0,68.4,0,24.5,1003.0,7.0,True,True,False,False,False
+6000614,19,36,Guanajuato,15k-30k,38400.0,1,65.3,107.0,55.8,1,8.5,1093.0,3.0,True,False,False,False,False
+6000615,16,42,Guanajuato,<8k,8500.0,1,51.3,1472.0,64.8,0,8.3,944.0,7.0,False,False,False,False,False
+6000616,18,22,Guanajuato,<8k,5000.0,1,31.6,8278.0,66.7,1,1.2,865.0,7.0,False,False,False,False,False
+6000617,10,39,Guanajuato,15k-30k,11600.0,1,54.4,3950.0,30.1,0,31.4,463.0,8.0,True,False,False,False,False
+6000618,58,27,Baja California,8k-15k,10500.0,1,88.6,6109.0,41.3,0,28.7,572.0,,True,False,False,False,False
+6000619,13,36,Puebla,<8k,6200.0,15,63.4,1885.0,47.2,0,31.7,782.0,,True,False,False,False,True
+6000620,34,18,Veracruz,8k-15k,11900.0,30,79.6,1996.0,45.4,1,19.3,1181.0,,True,False,False,False,True
+6000621,23,45,Veracruz,<8k,13400.0,15,70.0,3877.0,53.4,0,27.9,1282.0,,True,False,True,False,False
+6000622,13,44,CDMX,>60k,18100.0,15,41.6,1850.0,60.1,1,3.3,1128.0,7.0,True,False,False,False,False
+6000623,35,41,Puebla,15k-30k,27800.0,30,43.4,8051.0,21.5,0,24.5,1180.0,,True,True,False,False,False
+6000624,59,18,CDMX,8k-15k,39300.0,15,30.9,1405.0,81.9,0,13.0,2744.0,6.0,True,False,False,False,False
+6000625,19,38,Chihuahua,15k-30k,40100.0,15,38.9,3005.0,78.2,2,26.8,2483.0,,True,False,False,False,False
+6000626,32,38,Veracruz,>60k,22300.0,30,25.5,1826.0,79.3,0,37.4,2020.0,8.0,True,False,False,False,False
+6000627,45,55,Chihuahua,8k-15k,10300.0,15,10.4,11239.0,59.5,0,24.3,961.0,,False,True,False,False,True
+6000628,43,21,Queretaro,15k-30k,14300.0,30,60.7,1798.0,12.9,0,18.6,728.0,10.0,False,False,False,False,False
+6000629,52,32,Puebla,15k-30k,13700.0,30,63.9,1583.0,62.5,3,42.4,916.0,7.0,False,False,False,False,False
+6000630,26,19,Baja California,>60k,31600.0,15,54.0,537.0,51.7,0,51.0,1068.0,10.0,True,False,False,False,False
+6000631,6,18,Jalisco,15k-30k,26500.0,30,80.8,1355.0,38.4,3,21.5,886.0,,False,False,False,False,False
+6000632,6,38,Baja California,8k-15k,12700.0,1,38.9,135.0,37.4,1,9.9,679.0,10.0,True,False,False,False,False
+6000633,17,54,Baja California,8k-15k,8300.0,15,35.6,4766.0,33.6,0,24.0,735.0,,False,False,False,False,False
+6000634,21,21,Nuevo Leon,30k-60k,21500.0,15,25.1,6702.0,15.0,0,9.1,1249.0,,False,False,False,False,False
+6000635,51,26,Queretaro,>60k,33000.0,15,42.2,3751.0,61.8,0,22.5,1347.0,,True,True,False,False,True
+6000636,24,36,Queretaro,15k-30k,35700.0,1,37.9,322.0,7.3,0,24.0,1172.0,,False,False,False,True,False
+6000637,5,55,Puebla,30k-60k,9700.0,1,75.0,5287.0,61.3,0,28.8,980.0,,True,True,False,False,True
+6000638,24,37,CDMX,30k-60k,27900.0,15,44.6,32010.0,41.9,0,27.6,1322.0,,True,True,False,False,False
+6000639,17,42,CDMX,8k-15k,13800.0,30,69.4,1439.0,64.0,0,34.8,1061.0,9.0,False,False,False,False,False
+6000640,6,71,Queretaro,15k-30k,14600.0,30,25.7,7290.0,62.6,1,16.6,1345.0,8.0,True,False,False,False,False
+6000641,4,25,Nuevo Leon,30k-60k,7900.0,30,79.2,1149.0,39.9,1,35.3,830.0,,True,True,False,False,False
+6000642,12,21,Estado de Mexico,8k-15k,13500.0,1,45.1,4069.0,37.0,2,32.1,1032.0,10.0,True,False,False,False,False
+6000643,46,44,Estado de Mexico,>60k,25700.0,15,33.1,2829.0,74.9,0,43.4,2070.0,,False,False,False,False,False
+6000644,7,45,Puebla,15k-30k,40900.0,1,59.1,1721.0,41.9,1,7.7,1358.0,,False,False,False,False,False
+6000645,49,32,Guanajuato,30k-60k,28400.0,1,45.0,2270.0,48.5,2,28.9,799.0,,True,False,False,False,False
+6000646,8,18,Queretaro,15k-30k,27900.0,15,56.6,883.0,36.7,0,14.8,1107.0,,True,False,False,False,False
+6000647,60,30,Queretaro,<8k,6400.0,30,91.6,46.0,33.5,1,9.6,611.0,,False,False,False,False,False
+6000648,38,22,Chihuahua,<8k,8200.0,15,33.9,7358.0,10.5,0,19.5,216.0,,False,False,False,False,False
+6000649,30,37,Jalisco,<8k,7500.0,30,20.4,2381.0,85.9,1,12.7,1400.0,,True,False,False,False,False
+6000650,49,45,Puebla,15k-30k,20400.0,15,69.3,6872.0,77.7,0,71.9,1663.0,5.0,False,False,False,False,False
+6000651,5,49,Chihuahua,30k-60k,40900.0,1,87.1,1947.0,61.8,0,5.1,1453.0,,True,False,False,False,False
+6000652,45,48,Guanajuato,15k-30k,25300.0,1,97.8,497.0,72.4,1,19.2,1818.0,,False,False,True,False,False
+6000653,17,41,Baja California,8k-15k,9500.0,30,42.1,590.0,49.4,0,25.4,956.0,8.0,True,True,False,False,False
+6000654,12,27,Estado de Mexico,15k-30k,17700.0,1,29.6,6590.0,95.8,1,21.6,1871.0,,False,False,False,False,False
+6000655,17,41,CDMX,8k-15k,22200.0,15,31.8,1665.0,6.2,0,15.8,367.0,,False,False,False,False,False
+6000656,57,42,Nuevo Leon,30k-60k,8300.0,30,11.1,1352.0,71.0,1,40.8,1025.0,4.0,False,False,False,False,True
+6000657,49,40,Baja California,8k-15k,17700.0,30,74.2,4210.0,19.8,0,53.0,682.0,8.0,False,False,False,False,False
+6000658,32,18,Guanajuato,<8k,6400.0,1,76.0,1277.0,37.7,0,66.7,615.0,,True,True,False,False,False
+6000659,56,35,Veracruz,>60k,9600.0,30,68.5,10168.0,55.1,0,26.1,829.0,10.0,True,True,False,False,False
+6000660,5,32,Guanajuato,8k-15k,22000.0,1,70.7,2193.0,44.9,1,5.1,1631.0,,False,False,False,False,False
+6000661,49,42,Queretaro,15k-30k,50000.0,30,34.6,10204.0,65.7,1,2.6,3186.0,,False,False,False,False,False
+6000662,22,27,CDMX,15k-30k,12000.0,30,18.5,3364.0,95.2,2,5.8,1242.0,7.0,True,False,False,False,True
+6000663,40,33,Queretaro,15k-30k,31500.0,15,28.7,5229.0,47.0,3,27.6,1837.0,,True,False,False,False,False
+6000664,44,40,Veracruz,15k-30k,17900.0,15,78.6,3480.0,50.5,0,30.7,1034.0,,True,True,False,False,False
+6000665,53,28,Nuevo Leon,<8k,12000.0,1,52.7,10735.0,49.4,1,7.9,1103.0,9.0,True,False,False,False,False
+6000666,40,34,CDMX,15k-30k,33200.0,15,33.2,7253.0,48.4,1,17.3,930.0,,True,False,False,False,False
+6000667,8,25,Puebla,15k-30k,57300.0,15,76.8,3332.0,44.5,2,35.9,1707.0,,False,False,False,True,False
+6000668,58,38,Jalisco,8k-15k,9100.0,15,30.8,728.0,15.0,0,24.4,433.0,,False,False,False,False,True
+6000669,59,21,Puebla,30k-60k,23400.0,30,75.9,194.0,12.8,0,12.1,354.0,10.0,True,False,False,False,True
+6000670,1,30,Jalisco,30k-60k,14100.0,1,78.4,2171.0,35.8,0,38.5,942.0,,True,False,False,False,False
+6000671,17,31,Veracruz,15k-30k,8700.0,15,26.5,25153.0,14.3,0,72.2,271.0,,False,True,False,False,False
+6000672,16,59,Estado de Mexico,30k-60k,24100.0,15,29.5,2544.0,62.9,3,23.4,1485.0,,False,False,False,False,True
+6000673,23,49,Chihuahua,<8k,10100.0,15,77.7,1769.0,63.1,0,47.2,1146.0,8.0,False,False,False,False,False
+6000674,44,32,Queretaro,>60k,45700.0,30,80.2,4282.0,76.8,0,31.5,2403.0,,True,False,False,False,False
+6000675,13,31,CDMX,30k-60k,18300.0,30,26.3,2830.0,28.2,0,51.0,1020.0,8.0,False,False,False,False,False
+6000676,10,26,Queretaro,8k-15k,15000.0,1,29.3,2396.0,71.2,0,45.1,1157.0,7.0,False,True,False,False,False
+6000677,42,37,Chihuahua,15k-30k,22000.0,15,61.6,402.0,44.4,3,21.8,955.0,,False,False,False,False,True
+6000678,56,40,Queretaro,8k-15k,22700.0,30,26.8,3118.0,44.9,1,15.0,1214.0,,True,False,False,False,True
+6000679,44,31,Chihuahua,<8k,6600.0,30,25.7,5330.0,24.9,2,23.6,618.0,,False,False,False,False,False
+6000680,5,30,Guanajuato,<8k,5500.0,15,64.1,5968.0,86.2,3,29.6,1230.0,,False,False,False,False,False
+6000681,28,39,Chihuahua,15k-30k,17000.0,15,35.4,3298.0,64.2,0,32.3,1126.0,,True,True,False,False,False
+6000682,47,45,Jalisco,>60k,20600.0,1,51.1,5193.0,33.6,1,2.6,599.0,,False,False,False,False,False
+6000683,52,55,Puebla,8k-15k,14900.0,15,59.0,1922.0,35.4,1,28.7,593.0,,True,False,False,False,True
+6000684,9,30,Estado de Mexico,15k-30k,6400.0,30,29.6,426.0,53.5,0,6.3,957.0,,True,False,False,False,False
+6000685,55,28,Queretaro,8k-15k,5500.0,15,54.4,1007.0,7.7,1,46.0,221.0,9.0,False,False,False,False,False
+6000686,21,33,Queretaro,15k-30k,33900.0,30,60.5,12503.0,74.1,0,23.5,1736.0,,True,True,False,False,False
+6000687,8,31,Jalisco,>60k,21200.0,30,55.4,4411.0,32.4,0,25.4,775.0,,False,True,False,False,False
+6000688,24,42,CDMX,<8k,7600.0,30,37.2,320.0,67.9,3,21.1,1066.0,,False,False,False,False,False
+6000689,16,18,CDMX,15k-30k,10800.0,15,26.0,961.0,53.0,1,23.7,860.0,7.0,False,False,False,False,True
+6000690,43,24,Nuevo Leon,8k-15k,21300.0,15,85.4,2042.0,27.2,0,14.4,704.0,,True,False,False,False,False
+6000691,26,48,Puebla,15k-30k,36900.0,30,25.2,3981.0,39.6,1,17.9,804.0,,True,False,False,False,False
+6000692,34,26,Estado de Mexico,15k-30k,11500.0,15,69.8,11160.0,63.1,0,0.6,1106.0,,False,False,True,False,False
+6000693,31,45,Queretaro,<8k,4800.0,1,51.4,1699.0,40.4,0,56.0,542.0,,True,False,False,False,False
+6000694,33,37,Nuevo Leon,15k-30k,22700.0,1,28.9,434.0,39.4,0,21.8,1597.0,6.0,True,False,False,False,False
+6000695,28,40,Jalisco,<8k,9400.0,15,39.8,829.0,72.0,0,14.5,1029.0,,True,False,False,False,False
+6000696,36,37,CDMX,8k-15k,16500.0,30,85.0,3210.0,36.2,0,25.3,920.0,10.0,True,True,False,False,True
+6000697,22,30,Jalisco,30k-60k,31000.0,30,73.8,2263.0,60.8,0,16.7,1872.0,,True,False,False,False,False
+6000698,30,41,Jalisco,15k-30k,16800.0,1,82.0,744.0,13.5,0,24.6,880.0,7.0,True,True,False,False,False
+6000699,22,49,Queretaro,<8k,9600.0,30,66.5,807.0,38.8,0,34.3,924.0,,True,False,False,False,False
+6000700,42,27,Chihuahua,15k-30k,9900.0,30,36.0,4557.0,44.1,0,31.5,959.0,9.0,True,False,False,False,True
+6000701,29,18,Veracruz,8k-15k,6800.0,1,77.3,3473.0,34.4,1,45.9,595.0,,True,False,False,False,False
+6000702,20,37,CDMX,8k-15k,15300.0,15,13.7,7152.0,32.3,0,34.9,1095.0,,True,False,False,False,False
+6000703,36,34,Queretaro,8k-15k,7100.0,1,78.8,3111.0,66.5,2,5.9,968.0,10.0,True,False,False,False,False
+6000704,8,38,Veracruz,15k-30k,25500.0,15,46.5,1965.0,49.5,1,0.0,1639.0,,True,False,False,False,False
+6000705,53,25,Jalisco,30k-60k,24200.0,1,66.5,775.0,56.4,1,14.4,1012.0,9.0,True,False,False,False,False
+6000706,56,19,Nuevo Leon,15k-30k,7700.0,1,85.1,2068.0,53.8,2,31.6,752.0,,True,False,False,False,False
+6000707,55,37,Jalisco,30k-60k,33400.0,15,41.8,7692.0,33.4,1,8.5,1269.0,,False,False,False,False,True
+6000708,57,46,Jalisco,8k-15k,13400.0,15,27.2,1866.0,25.2,1,5.8,412.0,10.0,True,False,False,False,False
+6000709,20,30,Baja California,<8k,12100.0,1,19.5,446.0,48.5,0,40.4,1082.0,,True,False,False,False,False
+6000710,35,27,Puebla,8k-15k,23500.0,1,69.7,1062.0,10.6,0,41.0,741.0,7.0,True,False,False,False,False
+6000711,48,26,Chihuahua,<8k,7200.0,1,57.6,2795.0,28.6,2,11.0,480.0,,True,False,False,False,True
+6000712,32,32,Queretaro,30k-60k,14300.0,15,47.8,1210.0,46.5,0,37.2,691.0,,True,True,False,False,False
+6000713,15,30,Queretaro,<8k,12100.0,30,58.1,6444.0,55.5,0,7.0,937.0,7.0,True,False,False,False,True
+6000714,21,18,CDMX,<8k,19400.0,15,35.7,1934.0,66.0,0,14.1,968.0,,False,False,False,False,False
+6000715,55,29,Queretaro,8k-15k,15000.0,1,80.9,6835.0,35.2,0,32.2,522.0,,True,False,False,False,False
+6000716,49,31,Nuevo Leon,8k-15k,11400.0,15,23.5,4463.0,36.5,1,18.9,976.0,,True,False,False,False,False
+6000717,24,51,Guanajuato,8k-15k,25800.0,15,68.0,528.0,40.0,0,9.7,1065.0,10.0,False,False,False,False,False
+6000718,22,40,Queretaro,8k-15k,4700.0,15,76.2,5516.0,33.2,0,15.5,513.0,,True,False,False,False,False
+6000719,5,38,CDMX,8k-15k,18600.0,1,54.3,6344.0,43.4,0,35.3,817.0,,False,False,False,False,False
+6000720,15,29,Nuevo Leon,15k-30k,28800.0,15,6.8,22531.0,33.7,0,41.9,993.0,,False,True,False,False,False
+6000721,47,37,Nuevo Leon,30k-60k,24500.0,30,31.7,314.0,59.2,0,12.6,1695.0,7.0,False,False,False,False,False
+6000722,4,42,Guanajuato,8k-15k,16000.0,15,53.5,3738.0,35.6,0,55.0,875.0,,False,False,False,False,False
+6000723,21,22,Estado de Mexico,30k-60k,29900.0,15,85.2,4856.0,59.7,0,56.9,1215.0,6.0,False,True,False,False,False
+6000724,19,27,Queretaro,30k-60k,13300.0,15,77.2,1737.0,30.1,0,24.1,798.0,,True,False,False,False,False
+6000725,12,27,Baja California,8k-15k,7900.0,15,50.7,678.0,64.7,0,0.0,1115.0,,True,False,False,False,False
+6000726,2,49,Jalisco,30k-60k,24500.0,1,62.0,1862.0,78.2,1,34.7,1468.0,,True,False,False,False,True
+6000727,50,19,Chihuahua,<8k,16700.0,1,33.3,791.0,73.5,0,10.7,1111.0,,True,False,False,False,True
+6000728,13,28,Guanajuato,<8k,7300.0,15,39.1,1966.0,24.4,0,23.1,435.0,9.0,False,False,False,False,True
+6000729,50,18,Veracruz,15k-30k,37000.0,15,14.7,609.0,43.7,1,23.8,2295.0,,True,False,False,False,False
+6000730,43,37,Chihuahua,>60k,15000.0,1,19.5,6437.0,61.6,0,0.0,1366.0,,True,False,False,False,False
+6000731,41,35,CDMX,<8k,13200.0,15,35.5,7391.0,48.2,2,14.9,943.0,,False,False,False,False,False
+6000732,9,23,Veracruz,<8k,4000.0,1,69.0,2473.0,17.7,2,18.0,240.0,8.0,True,False,False,False,False
+6000733,46,45,Baja California,8k-15k,14600.0,15,59.2,571.0,60.9,2,6.1,1227.0,,False,False,False,False,False
+6000734,12,35,Veracruz,15k-30k,9700.0,15,31.7,2328.0,38.6,0,30.2,721.0,,False,True,False,False,False
+6000735,45,39,Jalisco,8k-15k,33800.0,15,39.8,2159.0,52.7,0,41.9,965.0,7.0,False,True,False,False,False
+6000736,19,29,Estado de Mexico,>60k,24600.0,15,56.7,330.0,44.7,0,5.7,1605.0,,False,False,False,False,False
+6000737,56,45,Estado de Mexico,15k-30k,15700.0,30,71.7,3734.0,82.9,0,27.8,1401.0,,True,False,False,False,False
+6000738,52,46,Nuevo Leon,>60k,19500.0,1,28.7,6349.0,38.0,3,61.6,969.0,6.0,False,False,False,False,False
+6000739,2,23,Veracruz,<8k,10400.0,15,50.6,3080.0,43.2,2,6.4,999.0,7.0,False,False,True,False,False
+6000740,56,18,Veracruz,8k-15k,8100.0,1,71.5,2721.0,90.8,0,26.6,1491.0,,True,True,False,False,True
+6000741,24,48,Puebla,30k-60k,18300.0,30,32.1,347.0,57.1,2,3.3,1348.0,,False,False,False,False,False
+6000742,52,32,Nuevo Leon,8k-15k,32600.0,15,78.2,6272.0,30.2,0,7.3,1893.0,,True,False,False,False,True
+6000743,40,26,Baja California,30k-60k,8800.0,30,77.8,1513.0,57.6,0,40.5,769.0,,True,True,False,False,False
+6000744,1,33,Estado de Mexico,8k-15k,8500.0,1,25.6,94.0,38.1,0,17.4,763.0,7.0,True,False,False,False,True
+6000745,57,27,Queretaro,15k-30k,6900.0,15,15.7,995.0,57.1,0,21.8,989.0,,True,False,False,False,False
+6000746,39,34,CDMX,8k-15k,16600.0,30,44.1,1012.0,2.0,0,3.9,821.0,,True,False,False,False,False
+6000747,28,32,CDMX,8k-15k,20500.0,30,89.3,40312.0,70.3,0,21.7,1772.0,,True,False,False,False,False
+6000748,3,29,Chihuahua,15k-30k,13500.0,15,71.0,2683.0,80.5,0,26.5,1637.0,,True,True,False,False,False
+6000749,30,43,Jalisco,<8k,8400.0,30,48.6,2009.0,46.8,1,20.7,914.0,7.0,False,False,False,False,False
+6000750,13,41,Guanajuato,30k-60k,87700.0,15,66.6,6752.0,43.8,0,27.7,2272.0,10.0,True,True,False,False,False
+6000751,5,40,Nuevo Leon,30k-60k,31800.0,15,60.3,4178.0,38.4,0,19.8,1743.0,,True,False,False,False,False
+6000752,46,26,Puebla,8k-15k,7900.0,15,51.4,12019.0,32.1,0,21.2,634.0,,False,True,False,False,False
+6000753,29,37,Chihuahua,<8k,19400.0,1,43.6,1632.0,51.6,0,31.7,1154.0,,False,False,False,False,True
+6000754,9,48,Queretaro,8k-15k,17500.0,1,52.7,3738.0,27.2,1,26.2,1066.0,9.0,True,False,False,False,False
+6000755,3,21,Queretaro,8k-15k,7800.0,15,45.1,4242.0,53.3,1,47.2,890.0,7.0,True,False,False,False,False
+6000756,55,32,Veracruz,15k-30k,9400.0,1,50.4,5455.0,48.0,2,20.2,1020.0,,True,False,False,False,False
+6000757,31,54,Estado de Mexico,30k-60k,9300.0,1,29.1,2946.0,19.5,0,28.0,664.0,,True,False,False,False,False
+6000758,19,24,Veracruz,>60k,31500.0,30,48.9,1316.0,23.4,0,43.4,1179.0,9.0,True,False,False,False,False
+6000759,13,30,Estado de Mexico,8k-15k,38900.0,15,47.9,1689.0,4.7,1,9.4,1489.0,,True,False,False,False,True
+6000760,50,27,Chihuahua,15k-30k,17600.0,30,76.8,2672.0,37.1,1,17.0,1278.0,,False,False,False,False,False
+6000761,47,26,Baja California,30k-60k,13200.0,1,78.5,1477.0,60.3,1,2.4,1234.0,,False,False,False,True,False
+6000762,60,35,CDMX,8k-15k,25000.0,30,50.4,3167.0,31.8,0,30.1,568.0,,True,True,False,False,False
+6000763,13,46,Puebla,8k-15k,35600.0,30,61.0,3153.0,24.8,0,52.4,1313.0,8.0,False,True,False,False,False
+6000764,34,47,Veracruz,8k-15k,5700.0,15,90.9,92669.0,31.5,0,24.9,435.0,6.0,True,False,False,True,False
+6000765,28,39,Jalisco,8k-15k,7200.0,15,14.7,1239.0,40.2,1,5.4,760.0,10.0,False,False,False,False,False
+6000766,11,35,Chihuahua,15k-30k,13600.0,1,53.3,1578.0,76.6,0,51.0,1458.0,,True,True,False,False,False
+6000767,51,28,Estado de Mexico,15k-30k,26000.0,30,67.5,2597.0,65.7,1,6.2,961.0,6.0,False,False,False,False,False
+6000768,55,23,Veracruz,8k-15k,14900.0,1,60.7,13401.0,36.6,0,34.1,1050.0,,False,False,False,False,False
+6000769,57,44,CDMX,8k-15k,18900.0,15,53.6,998.0,18.6,1,62.1,492.0,,True,False,False,False,False
+6000770,23,55,Queretaro,30k-60k,28200.0,30,68.7,455.0,37.6,2,24.0,796.0,,True,False,False,False,False
+6000771,44,36,Estado de Mexico,15k-30k,15100.0,15,46.5,17401.0,61.6,0,28.7,1162.0,10.0,True,False,True,False,False
+6000772,49,39,CDMX,8k-15k,13500.0,30,47.6,4204.0,67.0,0,51.7,893.0,7.0,True,True,False,False,False
+6000773,27,35,Puebla,15k-30k,18900.0,30,62.5,2475.0,52.6,0,0.0,1461.0,,False,False,False,False,False
+6000774,42,65,Estado de Mexico,8k-15k,11600.0,15,60.3,603.0,42.5,1,50.4,615.0,9.0,True,False,False,False,False
+6000775,42,18,Puebla,<8k,13400.0,15,83.8,12846.0,21.0,0,29.2,777.0,,True,True,False,False,False
+6000776,31,46,Guanajuato,15k-30k,28900.0,1,25.9,1035.0,40.1,3,35.2,1726.0,,False,False,False,False,False
+6000777,49,53,Guanajuato,8k-15k,6400.0,15,61.5,196.0,46.1,0,14.7,603.0,,True,False,False,False,False
+6000778,45,42,Puebla,<8k,5200.0,15,37.8,2763.0,11.7,0,20.9,183.0,9.0,True,False,False,False,False
+6000779,15,30,Veracruz,30k-60k,14400.0,15,59.1,3872.0,38.9,1,13.7,776.0,,True,False,False,False,False
+6000780,30,43,Puebla,8k-15k,25700.0,15,86.1,500.0,16.7,0,39.4,1370.0,6.0,False,False,False,False,False
+6000781,29,29,Puebla,<8k,15100.0,30,39.1,1262.0,52.8,1,41.5,953.0,,True,False,False,False,True
+6000782,9,44,Guanajuato,15k-30k,8000.0,30,61.7,1160.0,87.7,1,2.1,1356.0,,True,False,False,False,False
+6000783,27,56,Guanajuato,15k-30k,12800.0,15,91.6,1275.0,46.0,4,19.0,650.0,,True,False,False,False,False
+6000784,46,36,Veracruz,8k-15k,14100.0,30,63.4,220.0,65.9,1,29.7,1534.0,,True,False,True,False,True
+6000785,42,41,Baja California,8k-15k,33800.0,15,84.4,1252.0,18.3,1,12.9,1721.0,,False,False,False,False,False
+6000786,44,55,Nuevo Leon,8k-15k,16600.0,30,68.5,868.0,58.3,1,9.9,952.0,,True,False,False,False,False
+6000787,43,40,Chihuahua,15k-30k,20800.0,1,20.5,2039.0,71.6,0,43.3,1004.0,6.0,True,False,False,False,False
+6000788,11,30,Jalisco,15k-30k,10400.0,15,26.5,1031.0,43.8,1,29.3,870.0,,False,False,False,False,False
+6000789,37,18,Jalisco,8k-15k,10900.0,15,39.3,980.0,23.8,0,37.3,410.0,6.0,True,False,False,False,True
+6000790,2,37,Guanajuato,8k-15k,19300.0,30,34.5,212.0,62.5,1,39.4,1237.0,10.0,True,False,False,False,False
+6000791,44,37,Nuevo Leon,8k-15k,19300.0,15,53.7,1636.0,30.0,3,32.2,1033.0,,True,False,False,False,False
+6000792,13,44,Chihuahua,>60k,22900.0,1,88.6,760.0,50.2,1,26.0,1355.0,9.0,False,False,False,False,False
+6000793,53,42,Estado de Mexico,<8k,3700.0,30,35.6,788.0,45.8,1,0.0,618.0,10.0,True,False,False,False,False
+6000794,32,28,Estado de Mexico,<8k,7800.0,1,86.6,914.0,86.2,0,43.0,1081.0,,False,True,False,False,True
+6000795,24,33,Veracruz,8k-15k,5500.0,1,30.6,227.0,42.2,1,8.6,809.0,,True,False,False,False,False
+6000796,15,28,Estado de Mexico,<8k,5100.0,1,30.9,5895.0,64.6,0,32.0,1001.0,,False,False,False,False,False
+6000797,39,46,Queretaro,15k-30k,22300.0,15,68.1,4634.0,27.8,2,2.1,906.0,8.0,True,False,False,False,False
+6000798,52,45,Chihuahua,<8k,8300.0,1,79.9,782.0,71.7,3,3.5,1207.0,3.0,False,False,False,False,True
+6000799,3,32,Nuevo Leon,8k-15k,9500.0,30,58.5,1834.0,40.1,1,23.9,881.0,,False,False,False,False,False
+6000800,12,20,Nuevo Leon,8k-15k,14800.0,30,65.3,12948.0,14.6,2,26.5,687.0,,True,False,False,False,False
+6000801,19,43,Guanajuato,15k-30k,10300.0,1,42.8,831.0,29.6,0,37.5,809.0,10.0,True,True,False,False,True
+6000802,49,26,Chihuahua,15k-30k,24900.0,1,67.8,3303.0,34.8,0,13.4,586.0,,True,False,False,True,True
+6000803,30,34,Veracruz,8k-15k,10300.0,15,77.6,414.0,39.6,1,41.8,624.0,,False,False,False,False,False
+6000804,48,18,CDMX,<8k,5700.0,15,61.0,2081.0,34.7,0,80.6,554.0,,False,False,False,False,False
+6000805,45,35,Nuevo Leon,30k-60k,10700.0,1,55.8,3726.0,41.5,0,24.4,725.0,9.0,False,False,False,False,False
+6000806,10,33,Baja California,8k-15k,14900.0,1,56.4,563.0,19.5,1,43.4,956.0,,False,False,False,False,False
+6000807,37,44,Baja California,8k-15k,5900.0,30,19.0,443.0,37.7,3,7.0,689.0,,False,False,False,False,False
+6000808,12,44,Estado de Mexico,8k-15k,6700.0,15,68.0,1073.0,51.1,1,18.1,842.0,,False,False,False,False,False
+6000809,48,44,Baja California,8k-15k,20300.0,1,24.6,887.0,64.7,0,12.8,1860.0,7.0,False,False,True,False,False
+6000810,25,22,Guanajuato,8k-15k,17600.0,1,86.9,4314.0,46.8,1,30.0,733.0,,True,False,False,False,False
+6000811,17,41,Nuevo Leon,8k-15k,7900.0,30,68.4,6384.0,69.0,1,2.9,1293.0,6.0,True,False,True,False,False
+6000812,15,22,Guanajuato,15k-30k,19300.0,15,38.1,1599.0,50.2,0,24.2,843.0,,True,False,False,False,False
+6000813,9,27,Guanajuato,>60k,28300.0,15,64.1,3650.0,22.7,1,20.8,1096.0,,False,False,False,False,True
+6000814,17,40,Queretaro,15k-30k,17400.0,15,50.8,1384.0,28.2,0,42.5,869.0,10.0,True,False,True,False,False
+6000815,29,22,Baja California,15k-30k,22400.0,15,61.6,3930.0,40.9,0,9.9,651.0,,False,False,False,False,False
+6000816,15,38,Jalisco,8k-15k,31200.0,1,90.4,6250.0,39.8,0,20.9,1901.0,7.0,False,True,False,False,False
+6000817,46,38,Guanajuato,8k-15k,9700.0,1,48.6,3176.0,30.2,0,39.5,465.0,,True,False,False,False,False
+6000818,41,18,Jalisco,8k-15k,16800.0,15,46.4,6608.0,33.7,0,25.6,1058.0,10.0,True,False,False,False,True
+6000819,48,44,Queretaro,>60k,26900.0,1,53.9,4350.0,67.6,0,19.0,1099.0,,False,True,False,False,False
+6000820,60,33,Guanajuato,15k-30k,32300.0,1,25.6,2660.0,17.0,2,68.9,1055.0,,False,False,False,False,False
+6000821,58,24,Guanajuato,8k-15k,11400.0,1,12.1,13808.0,76.6,1,14.8,1091.0,,True,False,False,False,False
+6000822,27,33,Jalisco,8k-15k,34100.0,30,82.6,402.0,36.5,1,41.1,2002.0,8.0,True,False,False,False,False
+6000823,58,33,CDMX,8k-15k,5300.0,15,57.7,2886.0,41.2,1,36.2,721.0,9.0,True,False,False,False,False
+6000824,50,34,Guanajuato,>60k,34600.0,1,88.1,794.0,87.5,1,26.0,1295.0,,True,False,False,False,False
+6000825,41,34,CDMX,8k-15k,15600.0,1,57.9,756.0,8.5,0,31.7,520.0,6.0,True,False,False,False,False
+6000826,39,55,Nuevo Leon,>60k,42500.0,1,39.3,8735.0,34.2,0,55.6,1843.0,,False,False,False,False,False
+6000827,31,26,Chihuahua,15k-30k,19100.0,15,67.9,2001.0,53.1,0,4.2,1184.0,,True,False,False,True,True
+6000828,2,40,Queretaro,15k-30k,9900.0,15,65.8,1795.0,43.2,0,54.4,1000.0,,False,True,False,False,False
+6000829,40,22,Chihuahua,15k-30k,5100.0,30,35.6,1968.0,13.6,0,35.7,207.0,,True,False,False,False,False
+6000830,46,22,Puebla,8k-15k,24000.0,30,70.4,1985.0,61.1,0,57.4,1131.0,,True,False,False,False,False
+6000831,28,57,Guanajuato,<8k,8900.0,1,69.7,974.0,16.2,0,25.2,494.0,,False,False,False,False,False
+6000832,46,27,Baja California,30k-60k,18700.0,1,53.8,4577.0,38.8,0,19.2,1125.0,,True,True,False,False,False
+6000833,38,50,Estado de Mexico,15k-30k,5300.0,30,25.3,3424.0,52.6,0,57.3,860.0,,False,False,False,False,False
+6000834,49,40,Nuevo Leon,<8k,18200.0,1,54.2,1120.0,29.1,2,25.8,988.0,,True,False,False,False,False
+6000835,32,43,Guanajuato,<8k,6800.0,15,36.6,3120.0,52.8,0,36.5,824.0,,False,True,False,False,True
+6000836,27,22,Nuevo Leon,15k-30k,17600.0,30,60.2,881.0,91.9,1,10.3,1389.0,,False,False,False,True,False
+6000837,57,30,Estado de Mexico,8k-15k,16300.0,1,51.3,1417.0,44.0,0,36.4,936.0,,True,True,False,False,True
+6000838,11,44,Queretaro,8k-15k,10000.0,15,51.8,31290.0,50.4,0,14.9,766.0,9.0,True,False,False,False,False
+6000839,49,38,Nuevo Leon,30k-60k,21800.0,1,43.8,1445.0,82.1,3,3.6,1608.0,,False,False,False,False,False
+6000840,9,48,Baja California,8k-15k,12200.0,15,22.2,5786.0,83.9,0,44.8,1477.0,,True,True,False,False,False
+6000841,9,44,Jalisco,<8k,3700.0,15,39.7,868.0,23.0,0,23.2,307.0,10.0,False,False,False,False,False
+6000842,49,58,Jalisco,8k-15k,16700.0,15,44.6,1164.0,60.9,2,25.4,1024.0,,False,False,False,False,True
+6000843,41,36,Nuevo Leon,8k-15k,16300.0,15,65.9,19034.0,21.2,0,51.0,456.0,,True,False,False,True,False
+6000844,52,44,Baja California,<8k,34500.0,15,8.9,24628.0,53.1,0,41.3,1943.0,,False,True,False,False,False
+6000845,32,18,Queretaro,>60k,29300.0,1,61.1,8535.0,26.8,1,61.5,984.0,10.0,True,True,False,False,False
+6000846,4,27,Veracruz,15k-30k,72600.0,30,38.4,947.0,21.7,1,26.5,1443.0,,True,False,False,False,False
+6000847,24,40,Baja California,8k-15k,12100.0,15,73.0,4446.0,67.7,0,23.5,1233.0,6.0,True,True,False,False,False
+6000848,30,34,Guanajuato,30k-60k,10400.0,15,13.5,331.0,25.9,0,7.0,801.0,,False,False,False,False,False
+6000849,46,40,Puebla,8k-15k,19800.0,1,54.1,867.0,59.6,0,27.2,1545.0,7.0,True,False,False,False,False
+6000850,5,31,Puebla,8k-15k,16400.0,15,29.2,1579.0,56.9,3,17.5,1502.0,8.0,True,False,False,False,True
+6000851,2,31,Nuevo Leon,8k-15k,15900.0,30,64.7,253.0,71.3,0,11.7,1654.0,,False,False,False,False,False
+6000852,21,18,Puebla,30k-60k,10400.0,15,35.0,768.0,36.9,4,12.1,650.0,,True,False,False,False,False
+6000853,31,30,Veracruz,30k-60k,10400.0,15,19.1,1164.0,92.8,2,0.0,1457.0,,True,False,False,False,True
+6000854,12,18,Queretaro,30k-60k,92800.0,15,71.3,1992.0,54.0,0,16.8,5358.0,,False,False,False,False,False
+6000855,33,44,CDMX,8k-15k,32200.0,1,49.5,877.0,66.9,2,42.2,1218.0,,False,False,True,True,False
+6000856,43,34,CDMX,8k-15k,9400.0,15,51.9,1161.0,41.2,1,3.9,769.0,,False,False,False,False,True
+6000857,25,42,Nuevo Leon,15k-30k,31200.0,15,80.6,962.0,21.9,0,38.8,1240.0,,False,False,False,False,False
+6000858,4,37,Veracruz,<8k,28700.0,15,7.6,992.0,80.0,0,30.0,2220.0,,True,False,False,False,False
+6000859,40,24,Nuevo Leon,30k-60k,17000.0,1,55.6,4047.0,46.2,2,24.0,1281.0,,False,False,False,False,True
+6000860,30,47,Chihuahua,<8k,10400.0,15,29.0,4509.0,65.1,1,14.6,1337.0,,True,False,True,True,False
+6000861,50,31,Puebla,8k-15k,13000.0,30,44.3,507.0,28.4,1,18.4,419.0,,False,False,False,False,True
+6000862,43,38,Chihuahua,<8k,11100.0,30,34.8,2082.0,51.4,0,38.3,881.0,6.0,False,True,False,False,False
+6000863,21,23,CDMX,<8k,11200.0,15,60.3,1880.0,49.2,0,62.4,997.0,,False,False,False,False,False
+6000864,29,43,CDMX,15k-30k,19200.0,1,89.9,488.0,76.3,3,24.7,1779.0,,False,False,True,False,True
+6000865,13,32,Estado de Mexico,30k-60k,11500.0,15,40.5,9148.0,22.2,0,29.0,623.0,,True,False,False,False,False
+6000866,30,52,Nuevo Leon,8k-15k,7800.0,30,45.2,448.0,38.3,0,36.0,763.0,9.0,False,False,False,False,True
+6000867,22,37,Queretaro,<8k,9600.0,30,65.5,1654.0,81.1,3,45.4,1060.0,,False,False,False,False,False
+6000868,38,54,Veracruz,<8k,8100.0,30,63.0,3796.0,77.5,0,0.3,1204.0,,False,False,False,False,False
+6000869,15,18,Nuevo Leon,15k-30k,13200.0,15,34.2,1805.0,49.3,2,13.5,1067.0,10.0,False,False,False,False,False
+6000870,35,45,Jalisco,15k-30k,37100.0,15,67.3,1471.0,19.2,3,11.8,781.0,,True,False,False,False,False
+6000871,33,42,Guanajuato,8k-15k,24300.0,15,44.7,8310.0,65.8,0,23.6,1633.0,,True,True,False,False,False
+6000872,12,39,Nuevo Leon,8k-15k,27100.0,15,58.1,170.0,73.8,4,10.6,1265.0,,False,False,False,False,True
+6000873,30,34,Puebla,30k-60k,31500.0,30,67.0,288.0,46.6,0,10.6,1260.0,8.0,True,True,False,True,False
+6000874,10,27,Baja California,8k-15k,22800.0,15,43.3,710.0,19.7,0,51.9,939.0,9.0,False,False,False,False,False
+6000875,12,45,Chihuahua,<8k,14900.0,15,81.0,7005.0,33.8,2,33.5,897.0,,False,False,False,False,False
+6000876,8,28,Puebla,30k-60k,12300.0,1,28.7,2375.0,50.3,0,27.1,1136.0,,False,True,False,False,True
+6000877,50,37,Queretaro,<8k,12100.0,1,13.2,357.0,38.9,2,23.6,742.0,9.0,True,False,False,False,True
+6000878,12,36,CDMX,8k-15k,15300.0,15,78.1,4600.0,53.4,1,18.8,771.0,7.0,True,False,False,False,True
+6000879,14,27,Estado de Mexico,8k-15k,25000.0,15,81.1,3358.0,77.3,0,44.9,1511.0,,False,True,False,False,False
+6000880,35,30,CDMX,8k-15k,11500.0,15,36.2,1511.0,45.5,0,1.6,798.0,,True,False,False,False,False
+6000881,11,40,Queretaro,15k-30k,43500.0,1,69.0,6253.0,58.2,0,26.4,1478.0,,True,False,False,False,False
+6000882,38,26,Estado de Mexico,8k-15k,38200.0,30,66.7,907.0,68.4,1,47.1,1490.0,,True,False,False,False,False
+6000883,2,63,Puebla,<8k,6800.0,30,83.8,1884.0,31.6,1,27.4,450.0,8.0,True,False,False,False,False
+6000884,52,25,Veracruz,15k-30k,21200.0,30,42.2,2559.0,56.0,1,30.2,935.0,,False,False,False,False,True
+6000885,4,18,Chihuahua,30k-60k,23800.0,1,35.8,728.0,64.1,0,33.2,1791.0,,True,False,False,True,False
+6000886,43,27,Estado de Mexico,<8k,23500.0,15,64.5,1708.0,44.5,1,31.8,1422.0,,True,False,False,False,False
+6000887,26,18,Nuevo Leon,>60k,16100.0,30,48.2,525.0,32.7,0,16.0,573.0,,False,False,False,False,False
+6000888,5,27,Nuevo Leon,<8k,8000.0,1,54.1,180.0,44.9,2,48.4,832.0,,False,False,False,False,False
+6000889,22,43,Nuevo Leon,8k-15k,6100.0,15,48.5,2098.0,92.1,0,34.8,1346.0,,False,False,True,False,True
+6000890,42,35,Queretaro,<8k,8500.0,30,46.8,7297.0,64.3,2,39.6,1126.0,6.0,False,False,False,False,False
+6000891,50,30,Puebla,15k-30k,11700.0,15,59.3,1459.0,86.5,0,6.0,1282.0,,True,False,False,False,False
+6000892,15,21,Jalisco,15k-30k,7500.0,30,66.1,1124.0,42.4,2,18.2,771.0,6.0,True,False,False,False,False
+6000893,19,48,Baja California,8k-15k,16400.0,15,61.8,2467.0,28.2,1,16.3,905.0,,True,False,False,False,True
+6000894,57,52,Puebla,8k-15k,3500.0,1,76.3,11230.0,27.0,0,21.2,385.0,,False,True,False,False,False
+6000895,48,50,Chihuahua,<8k,11800.0,15,28.6,10910.0,56.0,3,16.2,885.0,,False,False,False,False,False
+6000896,27,34,Estado de Mexico,8k-15k,11900.0,15,55.1,1777.0,59.2,0,12.9,1067.0,,True,True,False,False,False
+6000897,55,33,Guanajuato,<8k,7500.0,15,40.7,1240.0,63.8,0,30.3,969.0,,False,False,False,False,True
+6000898,28,53,Baja California,15k-30k,26200.0,1,94.1,966.0,7.2,0,33.0,517.0,10.0,True,True,False,False,True
+6000899,47,40,Puebla,30k-60k,30000.0,15,34.7,917.0,36.7,1,29.5,1331.0,,True,False,False,False,False
+6000900,29,58,Nuevo Leon,15k-30k,9800.0,15,51.4,11902.0,59.6,0,72.0,951.0,,True,True,False,False,False
+6000901,3,42,Estado de Mexico,8k-15k,10800.0,30,5.2,2494.0,40.4,2,15.8,823.0,,False,False,False,False,False
+6000902,46,27,Nuevo Leon,30k-60k,18900.0,1,28.7,1162.0,26.9,2,16.9,737.0,9.0,True,False,False,False,False
+6000903,51,46,Guanajuato,8k-15k,7400.0,1,73.1,690.0,30.5,3,33.0,677.0,,False,False,False,False,False
+6000904,7,53,Veracruz,>60k,13500.0,1,63.9,1712.0,43.0,0,20.8,1141.0,9.0,True,False,False,False,True
+6000905,45,25,Estado de Mexico,8k-15k,15300.0,15,41.8,846.0,76.2,0,58.1,1487.0,,False,True,False,False,False
+6000906,29,24,Baja California,8k-15k,37800.0,30,63.3,986.0,51.4,3,18.8,1489.0,,False,False,False,False,False
+6000907,41,33,Veracruz,15k-30k,8800.0,15,44.7,395.0,26.7,3,24.0,534.0,,True,False,True,False,False
+6000908,23,18,Jalisco,8k-15k,9200.0,1,64.0,3492.0,49.7,0,10.3,1016.0,9.0,False,True,False,False,False
+6000909,54,37,Guanajuato,<8k,23200.0,15,59.6,3722.0,7.2,0,4.8,342.0,,False,False,False,False,True
+6000910,31,21,Estado de Mexico,<8k,15800.0,1,20.8,15771.0,53.0,0,16.8,802.0,10.0,True,False,False,False,False
+6000911,37,18,Estado de Mexico,8k-15k,8100.0,15,81.0,611.0,41.1,0,38.2,689.0,,True,False,False,False,False
+6000912,49,23,Chihuahua,>60k,29700.0,15,65.4,2594.0,23.0,1,11.4,559.0,,True,False,False,False,False
+6000913,50,34,Queretaro,8k-15k,7800.0,15,25.2,872.0,53.4,3,16.3,804.0,,True,False,False,False,False
+6000914,14,22,Nuevo Leon,15k-30k,21200.0,1,33.4,967.0,22.5,2,17.3,1127.0,,True,False,False,False,False
+6000915,9,29,Veracruz,8k-15k,17200.0,1,61.5,2340.0,55.1,2,9.6,1161.0,10.0,False,False,False,False,False
+6000916,37,49,Estado de Mexico,15k-30k,17800.0,1,21.6,15730.0,86.9,0,38.6,1635.0,,True,False,False,False,True
+6000917,48,38,Nuevo Leon,15k-30k,25300.0,30,50.8,2660.0,76.0,0,24.0,1972.0,5.0,False,False,False,False,False
+6000918,30,32,Queretaro,<8k,9000.0,15,68.5,14843.0,20.3,0,30.8,494.0,8.0,True,True,False,True,False
+6000919,29,40,Chihuahua,15k-30k,13800.0,30,47.7,349.0,63.0,3,27.0,1181.0,,True,False,False,False,False
+6000920,20,22,Estado de Mexico,15k-30k,49500.0,15,63.0,8498.0,81.8,4,14.0,2891.0,6.0,True,False,True,False,False
+6000921,5,33,Puebla,>60k,23500.0,1,50.1,2997.0,11.8,1,31.6,293.0,9.0,True,False,False,False,False
+6000922,51,44,Veracruz,<8k,12500.0,1,64.1,1307.0,30.5,3,7.1,857.0,,True,False,False,False,True
+6000923,23,41,Jalisco,15k-30k,25200.0,1,44.3,1229.0,11.4,0,23.5,895.0,10.0,True,True,False,False,False
+6000924,2,37,Queretaro,<8k,17500.0,1,23.6,2581.0,67.0,0,52.9,1197.0,,False,False,False,False,False
+6000925,36,30,CDMX,8k-15k,10600.0,1,16.5,6839.0,16.1,0,56.4,706.0,,True,True,False,False,True
+6000926,56,32,Guanajuato,30k-60k,18700.0,1,44.0,296.0,43.2,0,43.9,1003.0,10.0,False,True,False,False,False
+6000927,59,40,Guanajuato,30k-60k,34100.0,15,30.2,1617.0,68.7,0,9.7,1821.0,10.0,False,False,False,False,True
+6000928,56,44,CDMX,<8k,3600.0,1,75.6,2214.0,71.9,0,39.7,1002.0,,False,True,False,False,False
+6000929,49,30,Nuevo Leon,8k-15k,11300.0,15,52.8,15189.0,46.0,0,16.5,958.0,,True,False,False,False,False
+6000930,37,33,Nuevo Leon,30k-60k,11900.0,15,77.2,7670.0,54.2,1,26.9,1142.0,10.0,True,False,False,False,False
+6000931,17,26,Veracruz,30k-60k,49900.0,1,52.1,2037.0,55.5,2,18.6,2123.0,,True,False,False,False,False
+6000932,32,57,CDMX,<8k,13300.0,30,92.8,3111.0,48.7,1,22.4,927.0,,True,False,False,False,False
+6000933,44,37,Guanajuato,30k-60k,37300.0,1,40.1,1548.0,58.0,1,0.0,1476.0,,True,False,False,False,True
+6000934,22,21,CDMX,8k-15k,8000.0,1,90.3,1435.0,64.6,1,33.8,958.0,10.0,False,False,False,False,False
+6000935,14,60,Estado de Mexico,<8k,12400.0,30,66.4,4779.0,49.8,0,21.5,998.0,10.0,True,True,False,False,False
+6000936,2,36,Guanajuato,15k-30k,14000.0,1,9.5,1640.0,35.9,2,12.4,606.0,10.0,False,False,False,False,False
+6000937,25,38,Jalisco,15k-30k,14600.0,1,59.6,1245.0,81.4,0,0.5,1716.0,,True,False,False,False,False
+6000938,39,27,Estado de Mexico,15k-30k,10100.0,30,45.2,2468.0,50.7,0,7.1,930.0,6.0,False,False,False,False,True
+6000939,46,50,Nuevo Leon,8k-15k,8500.0,1,64.6,935.0,42.8,1,23.2,925.0,,True,False,False,False,False
+6000940,43,29,Guanajuato,<8k,28900.0,1,88.2,2266.0,53.7,0,23.5,1671.0,,False,False,False,False,True
+6000941,47,37,Chihuahua,8k-15k,14000.0,15,76.2,7555.0,38.2,0,25.3,909.0,,True,False,False,True,False
+6000942,14,34,Baja California,30k-60k,23800.0,15,43.4,422.0,52.3,0,4.1,817.0,,True,False,False,False,True
+6000943,54,32,Guanajuato,8k-15k,4300.0,15,18.5,2052.0,49.7,1,7.5,665.0,,False,False,False,False,False
+6000944,59,61,Guanajuato,8k-15k,12800.0,30,37.3,632.0,24.9,1,13.7,712.0,,True,False,False,False,False
+6000945,55,22,Jalisco,8k-15k,12000.0,15,92.6,1807.0,61.8,0,9.1,1139.0,10.0,True,False,False,False,True
+6000946,33,38,Baja California,8k-15k,23000.0,1,63.5,3223.0,94.7,2,7.4,1839.0,,True,False,False,False,False
+6000947,42,32,Puebla,15k-30k,13800.0,1,45.9,6361.0,69.1,0,11.6,1392.0,,False,False,False,False,True
+6000948,40,19,Guanajuato,15k-30k,15800.0,1,29.8,349.0,50.8,1,26.0,886.0,4.0,True,False,False,False,False
+6000949,7,38,Jalisco,>60k,29300.0,30,39.5,8730.0,23.2,0,16.9,641.0,6.0,False,False,False,False,False
+6000950,21,46,Baja California,8k-15k,9000.0,15,44.1,6197.0,12.1,0,14.4,237.0,9.0,True,False,False,False,False
+6000951,20,40,Nuevo Leon,8k-15k,11100.0,15,54.1,1073.0,44.9,0,24.2,802.0,,True,False,False,False,False
+6000952,21,30,Jalisco,15k-30k,36400.0,1,4.2,2498.0,60.1,3,12.8,1120.0,5.0,True,False,True,False,False
+6000953,28,50,Veracruz,>60k,19300.0,15,73.0,925.0,31.7,1,18.5,673.0,,False,False,False,False,False
+6000954,53,40,Baja California,<8k,10600.0,15,29.7,1123.0,24.4,3,34.0,865.0,6.0,True,False,False,False,True
+6000955,45,29,Guanajuato,>60k,28200.0,1,81.6,4608.0,59.2,0,21.1,2095.0,,False,False,False,False,True
+6000956,24,34,Jalisco,30k-60k,17100.0,1,50.3,5450.0,55.4,0,61.9,1323.0,9.0,False,False,False,False,True
+6000957,25,36,CDMX,<8k,8600.0,15,59.7,21664.0,36.7,0,12.4,747.0,9.0,True,False,False,False,False
+6000958,8,18,Guanajuato,8k-15k,27100.0,30,65.0,1344.0,32.0,1,6.0,1578.0,,True,False,False,False,False
+6000959,35,35,Queretaro,<8k,22800.0,15,68.8,2593.0,30.9,0,18.0,606.0,,True,False,False,False,False
+6000960,34,32,Queretaro,8k-15k,11600.0,15,26.2,227.0,37.1,0,7.8,672.0,,True,False,False,False,False
+6000961,58,37,Queretaro,>60k,38400.0,15,13.2,958.0,54.1,1,5.9,1835.0,9.0,False,False,False,False,False
+6000962,27,44,Puebla,15k-30k,10500.0,30,81.8,2597.0,63.7,1,18.5,921.0,,True,False,False,False,False
+6000963,56,27,Jalisco,15k-30k,22300.0,1,47.1,444.0,34.2,2,0.0,1326.0,,False,False,False,False,False
+6000964,14,40,Chihuahua,<8k,15900.0,15,83.3,1354.0,23.8,2,6.5,980.0,,True,False,False,False,False
+6000965,38,24,Guanajuato,<8k,8500.0,15,39.3,1171.0,34.9,0,16.0,746.0,7.0,True,False,False,False,True
+6000966,35,35,Veracruz,15k-30k,28100.0,15,57.9,301.0,28.3,3,7.5,1070.0,,True,False,False,False,False
+6000967,19,51,Queretaro,30k-60k,15600.0,15,61.6,1201.0,68.8,2,0.0,1294.0,,True,False,False,False,False
+6000968,11,29,Baja California,15k-30k,10100.0,30,56.6,6771.0,45.1,0,23.1,1101.0,,True,True,False,False,False
+6000969,49,34,Veracruz,>60k,22500.0,1,75.8,987.0,37.0,0,51.0,1168.0,10.0,False,False,False,False,True
+6000970,41,36,Nuevo Leon,<8k,13200.0,1,83.1,2415.0,66.5,2,53.4,1181.0,10.0,True,False,False,False,False
+6000971,17,37,Puebla,<8k,18500.0,30,58.5,139.0,45.9,0,24.2,915.0,,True,False,False,False,False
+6000972,32,40,Nuevo Leon,30k-60k,22900.0,15,48.5,5251.0,17.1,0,25.7,774.0,6.0,False,False,False,False,False
+6000973,47,25,Baja California,8k-15k,16000.0,15,54.0,2508.0,73.7,2,17.6,1463.0,,True,False,True,False,False
+6000974,19,41,Nuevo Leon,30k-60k,49500.0,15,68.2,9806.0,62.4,0,57.4,1847.0,,False,True,True,False,False
+6000975,2,43,Jalisco,>60k,31300.0,1,71.9,1635.0,5.1,0,26.1,768.0,,True,False,False,False,True
+6000976,7,43,Nuevo Leon,8k-15k,18900.0,30,40.4,8544.0,62.5,0,34.5,1692.0,9.0,True,False,False,False,False
+6000977,38,35,CDMX,<8k,24000.0,30,59.6,1351.0,28.5,0,7.0,533.0,,True,False,False,False,False
+6000978,19,35,Veracruz,<8k,10700.0,30,56.4,451.0,78.2,1,0.0,1087.0,7.0,True,False,False,False,False
+6000979,1,32,Baja California,8k-15k,4400.0,15,25.6,2559.0,18.6,0,68.6,323.0,,False,False,False,False,False
+6000980,60,23,Puebla,15k-30k,17600.0,15,81.5,2169.0,45.6,1,10.7,794.0,7.0,False,False,False,False,False
+6000981,21,40,Queretaro,8k-15k,11500.0,30,81.6,17877.0,45.9,0,14.6,764.0,9.0,True,False,False,False,False
+6000982,60,26,Queretaro,8k-15k,9900.0,15,80.0,1406.0,75.9,0,13.7,1292.0,7.0,True,False,False,False,False
+6000983,23,23,Baja California,8k-15k,18800.0,15,32.9,1868.0,37.4,2,8.4,639.0,7.0,False,False,False,False,False
+6000984,39,44,Chihuahua,15k-30k,21200.0,15,50.6,1527.0,18.5,1,26.1,517.0,10.0,False,False,False,False,False
+6000985,37,36,Chihuahua,8k-15k,23500.0,1,33.1,2774.0,61.3,0,43.5,970.0,8.0,False,False,False,False,False
+6000986,37,52,Veracruz,15k-30k,10100.0,15,37.6,4186.0,36.3,2,31.4,794.0,,True,False,False,False,True
+6000987,32,37,CDMX,15k-30k,14900.0,1,64.1,2024.0,44.6,3,19.6,946.0,5.0,True,False,False,False,False
+6000988,40,27,Nuevo Leon,8k-15k,19200.0,1,29.4,406.0,16.7,0,28.9,752.0,,False,False,False,False,False
+6000989,24,22,Veracruz,30k-60k,5200.0,15,68.4,1543.0,60.1,1,0.0,851.0,7.0,False,False,False,False,False
+6000990,12,43,Veracruz,8k-15k,21600.0,15,80.3,898.0,43.8,1,3.8,897.0,8.0,True,False,False,False,False
+6000991,37,25,Estado de Mexico,8k-15k,10400.0,30,13.5,14423.0,36.5,0,40.9,901.0,,True,False,True,False,True
+6000992,8,46,Veracruz,30k-60k,31600.0,30,75.5,2219.0,35.5,0,13.0,1701.0,,False,False,False,False,False
+6000993,30,23,Chihuahua,<8k,7300.0,15,94.1,1320.0,73.1,1,4.3,1267.0,,True,False,False,False,True
+6000994,5,45,Nuevo Leon,8k-15k,20800.0,30,62.5,4326.0,15.8,1,18.0,448.0,,False,False,False,False,False
+6000995,3,18,Veracruz,15k-30k,14000.0,30,36.9,1118.0,64.1,2,10.6,1389.0,,False,False,False,False,False
+6000996,43,31,Jalisco,8k-15k,21500.0,30,74.4,70.0,86.5,1,4.0,1624.0,,False,False,False,False,False
+6000997,52,40,Nuevo Leon,30k-60k,49300.0,1,69.4,26319.0,40.2,0,33.5,2136.0,,False,True,False,False,True
+6000998,16,26,CDMX,8k-15k,13700.0,1,51.4,843.0,8.7,0,26.3,371.0,10.0,True,False,False,False,True
+6000999,41,53,Estado de Mexico,30k-60k,16400.0,30,30.4,7666.0,62.7,0,33.1,1436.0,,True,False,False,False,False

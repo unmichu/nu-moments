@@ -1,0 +1,16 @@
+# entorno
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# artefactos pesados generados
+pipeline/out/
+analytics/scan_*.csv
+*.log
+
+# material de trabajo interno — NO se publica
+notas-orador.md
+slides-internas.pdf
+/privado/
