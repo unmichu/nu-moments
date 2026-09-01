@@ -1,0 +1,4164 @@
+{
+  "generado_por": "recon/demo/02_casos_ejemplo.py",
+  "cortes": {
+    "principal": "2026-06-16",
+    "modelo_d100": "2026-06-09"
+  },
+  "n_casos": 9,
+  "casos": [
+    {
+      "clave": "ahorro_fresco",
+      "titulo": "Señal fresca de ahorro → Cajita",
+      "customer_id": 6024615,
+      "corte": "2026-06-16",
+      "narrativa": "Abrió Cajitas en las últimas 24 h y llegó a iniciar el flujo (start vale 1.09–1.56x más que un view). Está en el 5.9% de la base con señal fresca: enganche 41.63% contra 10.30% de quien nunca visitó la pantalla.",
+      "decision": {
+        "enviar": true,
+        "nudge_type": "savings_goal",
+        "surface": "in_app_modal",
+        "etiqueta_boton": "Crear una Cajita",
+        "momento": "on_time",
+        "razon_silencio": null,
+        "leyenda": "Entró a Cajitas hace 16 h y llegó a iniciar el flujo. Es su exposición #1 de 2 a este mensaje.",
+        "sustituye_a": null
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6024615,
+          "edad": 25,
+          "estado": "Guanajuato",
+          "antiguedad_meses": 15,
+          "banda_ingreso": "8k-15k",
+          "ingreso_mensual_est_mxn": 22200.0,
+          "dia_de_pago": 1,
+          "productos": {
+            "cuenta_nu": true,
+            "cajita_turbo": true,
+            "prestamo_personal": false,
+            "inversiones": false,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 6584.0,
+            "utilizacion_tarjeta_pct": 55.4,
+            "dias_en_negativo_90d": 0,
+            "tasa_ahorro_90d_pct": 21.2,
+            "nps_ultimo": 7.0
+          },
+          "solo_modelo": {
+            "engagement_score": 37.2,
+            "revenue_ltm_mxn": 1645.0,
+            "es_fragil": false
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 19,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 1,
+              "monto_total_mxn": 1556.85,
+              "monto_prom_mxn": 1556.85,
+              "n_recurrentes": 0
+            },
+            "deposit_in": {
+              "n": 2,
+              "monto_total_mxn": 23249.99,
+              "monto_prom_mxn": 11625.0,
+              "n_recurrentes": 1
+            },
+            "savings_move": {
+              "n": 5,
+              "monto_total_mxn": 12279.61,
+              "monto_prom_mxn": 2455.92,
+              "n_recurrentes": 0
+            },
+            "card_payment": {
+              "n": 1,
+              "monto_total_mxn": 4626.14,
+              "monto_prom_mxn": 4626.14,
+              "n_recurrentes": 0
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 2,
+              "monto_total_mxn": 2355.8,
+              "monto_prom_mxn": 1177.9,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 1,
+              "monto_total_mxn": 1601.84,
+              "monto_prom_mxn": 1601.84,
+              "n_recurrentes": 0
+            },
+            "deposit_in": {
+              "n": 5,
+              "monto_total_mxn": 58400.32,
+              "monto_prom_mxn": 11680.06,
+              "n_recurrentes": 2
+            },
+            "savings_move": {
+              "n": 7,
+              "monto_total_mxn": 15924.94,
+              "monto_prom_mxn": 2274.99,
+              "n_recurrentes": 0
+            },
+            "card_payment": {
+              "n": 3,
+              "monto_total_mxn": 16386.92,
+              "monto_prom_mxn": 5462.31,
+              "n_recurrentes": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-06 17:17:22",
+              "tipo": "spei_out",
+              "monto_mxn": 1556.8499755859375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-05 08:20:59",
+              "tipo": "deposit_in",
+              "monto_mxn": 14699.330078125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-03 22:24:10",
+              "tipo": "savings_move",
+              "monto_mxn": 797.0,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-01 12:02:07",
+              "tipo": "savings_move",
+              "monto_mxn": 2293.219970703125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-01 07:18:10",
+              "tipo": "savings_move",
+              "monto_mxn": 3717.340087890625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-31 20:56:56",
+              "tipo": "savings_move",
+              "monto_mxn": 808.9500122070312,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-29 20:43:28",
+              "tipo": "savings_move",
+              "monto_mxn": 4663.10009765625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-28 22:35:32",
+              "tipo": "deposit_in",
+              "monto_mxn": 8550.66015625,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-28 09:34:11",
+              "tipo": "card_payment",
+              "monto_mxn": 4626.14013671875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-14 06:03:51",
+              "tipo": "card_payment",
+              "monto_mxn": 6780.18994140625,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 1,
+          "n_eventos_72h": 1,
+          "n_eventos_7d": 1,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-06-02 23:53:33",
+              "horas_desde": 312.11,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-06-05 07:22:09",
+              "horas_desde": 256.63,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "bill_payment": {
+              "ultima_vista": "2026-03-13 14:09:26",
+              "horas_desde": 2265.84,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "card_statement": {
+              "ultima_vista": "2026-05-27 20:44:44",
+              "horas_desde": 459.25,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "savings_cajita": {
+              "ultima_vista": "2026-06-15 08:26:01",
+              "horas_desde": 15.57,
+              "n_24h": 1,
+              "n_72h": 1,
+              "n_7d": 1,
+              "hubo_start_24h": true
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-15 08:26:01",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-05 07:22:09",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-05 03:32:00",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-03 03:26:39",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-02 23:53:33",
+              "pantalla": "home",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-02 22:15:43",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-01 09:21:46",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-31 14:59:49",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-29 12:57:37",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-28 14:34:51",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-28 13:55:55",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-28 10:48:44",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-27 20:44:44",
+              "pantalla": "card_statement",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-18 18:29:20",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-12 17:40:09",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 6,
+          "opt_out": false,
+          "horas_desde_ultimo": 555.3,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "limit_increase": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-23 20:42:15",
+              "cupo_restante": 1
+            },
+            "bill_reminder": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "loan_offer": {
+              "exposiciones": 3,
+              "exposure_no_max": 3,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-04-17 13:06:56",
+              "cupo_restante": 0
+            },
+            "invest_start": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "payroll_portability": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 0,
+              "n_descartados": 2,
+              "ultimo_ts": "2026-05-14 15:21:38",
+              "cupo_restante": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-05-23 20:42:15",
+              "tipo": "limit_increase",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-14 15:21:38",
+              "tipo": "payroll_portability",
+              "superficie": "in_app_modal",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-04-17 13:06:56",
+              "tipo": "loan_offer",
+              "superficie": "in_app_modal",
+              "exposure_no": 3,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-16 20:07:17",
+              "tipo": "payroll_portability",
+              "superficie": "in_app_modal",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-03-13 14:10:13",
+              "tipo": "loan_offer",
+              "superficie": "home_card",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-11 08:25:16",
+              "tipo": "loan_offer",
+              "superficie": "push",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-16 00:00:00",
+          "es_fragil": false,
+          "motivo_fragilidad": [],
+          "dias_a_payday": 15,
+          "ventana_payday": false,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": 15.57,
+              "momento": "on_time",
+              "hubo_start_24h": true,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": 2265.84,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 4,
+              "cupo_agotado": true
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 312.11,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "clave": "prestamo_fresco",
+      "titulo": "Señal fresca de préstamo → oferta de préstamo",
+      "customer_id": 6019773,
+      "corte": "2026-06-16",
+      "narrativa": "Simuló un préstamo en las últimas 24 h. loan_simulation→loan_request es lift 30.16x sobre la tasa base: es la clase rara y por eso la más predecible condicionalmente. No es frágil, así que la oferta no le hace daño (Δ días negativos de loan_offer = −0.008).",
+      "decision": {
+        "enviar": true,
+        "nudge_type": "loan_offer",
+        "surface": "in_app_modal",
+        "etiqueta_boton": "Simular un préstamo",
+        "momento": "on_time",
+        "razon_silencio": null,
+        "leyenda": "Entró a simulador de préstamo hace 20 h. Es su exposición #2 de 2 a este mensaje.",
+        "sustituye_a": null
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6019773,
+          "edad": 37,
+          "estado": "Nuevo Leon",
+          "antiguedad_meses": 42,
+          "banda_ingreso": "8k-15k",
+          "ingreso_mensual_est_mxn": 5400.0,
+          "dia_de_pago": 30,
+          "productos": {
+            "cuenta_nu": false,
+            "cajita_turbo": false,
+            "prestamo_personal": false,
+            "inversiones": false,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 827.0,
+            "utilizacion_tarjeta_pct": 29.2,
+            "dias_en_negativo_90d": 0,
+            "tasa_ahorro_90d_pct": 42.6,
+            "nps_ultimo": null
+          },
+          "solo_modelo": {
+            "engagement_score": 48.5,
+            "revenue_ltm_mxn": 618.0,
+            "es_fragil": false
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 18,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 1,
+              "monto_total_mxn": 1180.33,
+              "monto_prom_mxn": 1180.33,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 4,
+              "monto_total_mxn": 6379.89,
+              "monto_prom_mxn": 1594.97,
+              "n_recurrentes": 1
+            },
+            "deposit_in": {
+              "n": 2,
+              "monto_total_mxn": 5740.82,
+              "monto_prom_mxn": 2870.41,
+              "n_recurrentes": 0
+            },
+            "savings_move": {
+              "n": 1,
+              "monto_total_mxn": 413.02,
+              "monto_prom_mxn": 413.02,
+              "n_recurrentes": 0
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 6,
+              "monto_total_mxn": 6964.29,
+              "monto_prom_mxn": 1160.71,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 4,
+              "monto_total_mxn": 6379.89,
+              "monto_prom_mxn": 1594.97,
+              "n_recurrentes": 1
+            },
+            "deposit_in": {
+              "n": 3,
+              "monto_total_mxn": 9246.19,
+              "monto_prom_mxn": 3082.06,
+              "n_recurrentes": 1
+            },
+            "savings_move": {
+              "n": 1,
+              "monto_total_mxn": 413.02,
+              "monto_prom_mxn": 413.02,
+              "n_recurrentes": 0
+            },
+            "card_payment": {
+              "n": 1,
+              "monto_total_mxn": 965.2,
+              "monto_prom_mxn": 965.2,
+              "n_recurrentes": 1
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-15 16:22:15",
+              "tipo": "spei_out",
+              "monto_mxn": 1180.3299560546875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-12 07:06:53",
+              "tipo": "savings_move",
+              "monto_mxn": 413.0199890136719,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-02 16:17:50",
+              "tipo": "deposit_in",
+              "monto_mxn": 3546.77001953125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-01 17:26:13",
+              "tipo": "bill_payment",
+              "monto_mxn": 1038.739990234375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-31 13:13:09",
+              "tipo": "deposit_in",
+              "monto_mxn": 2194.050048828125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-30 14:40:53",
+              "tipo": "bill_payment",
+              "monto_mxn": 2076.0400390625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-30 12:21:30",
+              "tipo": "bill_payment",
+              "monto_mxn": 1979.1300048828125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-18 19:22:58",
+              "tipo": "bill_payment",
+              "monto_mxn": 1285.97998046875,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-16 11:48:44",
+              "tipo": "spei_out",
+              "monto_mxn": 1519.8499755859375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-09 20:30:55",
+              "tipo": "spei_out",
+              "monto_mxn": 931.3300170898438,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 2,
+          "n_eventos_72h": 3,
+          "n_eventos_7d": 4,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-06-01 22:25:10",
+              "horas_desde": 337.58,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-06-15 08:15:00",
+              "horas_desde": 15.75,
+              "n_24h": 1,
+              "n_72h": 1,
+              "n_7d": 1,
+              "hubo_start_24h": true
+            },
+            "bill_payment": {
+              "ultima_vista": "2026-06-01 10:23:40",
+              "horas_desde": 349.61,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "card_statement": {
+              "ultima_vista": "2026-04-03 13:34:20",
+              "horas_desde": 1762.43,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "savings_cajita": {
+              "ultima_vista": "2026-06-12 04:31:23",
+              "horas_desde": 91.48,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "loan_simulation": {
+              "ultima_vista": "2026-06-15 03:30:56",
+              "horas_desde": 20.48,
+              "n_24h": 1,
+              "n_72h": 2,
+              "n_7d": 2,
+              "hubo_start_24h": false
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-15 08:15:00",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-15 03:30:56",
+              "pantalla": "loan_simulation",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-13 08:47:41",
+              "pantalla": "loan_simulation",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-12 04:31:23",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-05 20:22:58",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-01 22:25:10",
+              "pantalla": "home",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-01 10:23:40",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-01 03:42:14",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-30 00:19:41",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-29 17:42:21",
+              "pantalla": "bill_payment",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-23 20:42:10",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-18 06:00:02",
+              "pantalla": "bill_payment",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-18 04:42:04",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-15 17:21:16",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-15 13:31:43",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 5,
+          "opt_out": false,
+          "horas_desde_ultimo": 855.54,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-11 08:27:43",
+              "cupo_restante": 1
+            },
+            "limit_increase": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-04-23 20:36:20",
+              "cupo_restante": 1
+            },
+            "bill_reminder": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-03-02 17:18:46",
+              "cupo_restante": 1
+            },
+            "loan_offer": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-05-06 18:54:40",
+              "cupo_restante": 1
+            },
+            "invest_start": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-04-02 10:57:56",
+              "cupo_restante": 1
+            },
+            "payroll_portability": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-05-11 08:27:43",
+              "tipo": "savings_goal",
+              "superficie": "in_app_modal",
+              "exposure_no": 1,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-06 18:54:40",
+              "tipo": "loan_offer",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-04-23 20:36:20",
+              "tipo": "limit_increase",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-02 10:57:56",
+              "tipo": "invest_start",
+              "superficie": "in_app_modal",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-03-02 17:18:46",
+              "tipo": "bill_reminder",
+              "superficie": "push",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-16 00:00:00",
+          "es_fragil": false,
+          "motivo_fragilidad": [],
+          "dias_a_payday": 14,
+          "ventana_payday": false,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": 91.48,
+              "momento": "warm",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": 349.61,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": 20.48,
+              "momento": "on_time",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 337.58,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "clave": "fragil_sustituye",
+      "titulo": "Frágil pide línea → el sistema sustituye la oferta",
+      "customer_id": 6007107,
+      "corte": "2026-06-16",
+      "narrativa": "Entró a aumento de línea, pero está frágil. limit_increase engancha 25.36% a los frágiles vs 17.39% al resto (+46%) y les cuesta +17.52pp de utilización y +2.06 días en negativo. El sistema veta la oferta que él pidió y pone en su lugar la que sí le sirve. Ese es el producto: no obedecer la señal, entenderla.",
+      "decision": {
+        "enviar": true,
+        "nudge_type": "bill_reminder",
+        "surface": "in_app_modal",
+        "etiqueta_boton": "Programar tu pago",
+        "momento": "warm",
+        "razon_silencio": null,
+        "leyenda": "Entró a pago de servicios hace 4 días. Es su exposición #2 de 2 a este mensaje. Sustituimos el aumento de línea, que hoy le haría daño.",
+        "sustituye_a": "limit_increase"
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6007107,
+          "edad": 35,
+          "estado": "Chihuahua",
+          "antiguedad_meses": 48,
+          "banda_ingreso": "15k-30k",
+          "ingreso_mensual_est_mxn": 9200.0,
+          "dia_de_pago": 30,
+          "productos": {
+            "cuenta_nu": true,
+            "cajita_turbo": false,
+            "prestamo_personal": true,
+            "inversiones": false,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 701.0,
+            "utilizacion_tarjeta_pct": 83.4,
+            "dias_en_negativo_90d": 2,
+            "tasa_ahorro_90d_pct": 14.2,
+            "nps_ultimo": null
+          },
+          "solo_modelo": {
+            "engagement_score": 78.5,
+            "revenue_ltm_mxn": 1387.0,
+            "es_fragil": true
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 17,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 1,
+              "monto_total_mxn": 2476.88,
+              "monto_prom_mxn": 2476.88,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 1,
+              "monto_total_mxn": 654.81,
+              "monto_prom_mxn": 654.81,
+              "n_recurrentes": 0
+            },
+            "deposit_in": {
+              "n": 1,
+              "monto_total_mxn": 7387.77,
+              "monto_prom_mxn": 7387.77,
+              "n_recurrentes": 1
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 3,
+              "monto_total_mxn": 6525.36,
+              "monto_prom_mxn": 2175.12,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 6,
+              "monto_total_mxn": 6006.23,
+              "monto_prom_mxn": 1001.04,
+              "n_recurrentes": 3
+            },
+            "deposit_in": {
+              "n": 3,
+              "monto_total_mxn": 17834.86,
+              "monto_prom_mxn": 5944.95,
+              "n_recurrentes": 2
+            },
+            "savings_move": {
+              "n": 2,
+              "monto_total_mxn": 732.02,
+              "monto_prom_mxn": 366.01,
+              "n_recurrentes": 0
+            },
+            "limit_increase_request": {
+              "n": 1,
+              "monto_total_mxn": 13469.9,
+              "monto_prom_mxn": 13469.9,
+              "n_recurrentes": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-12 14:59:29",
+              "tipo": "bill_payment",
+              "monto_mxn": 654.8099975585938,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-02 09:34:33",
+              "tipo": "deposit_in",
+              "monto_mxn": 7387.77001953125,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-18 10:46:12",
+              "tipo": "spei_out",
+              "monto_mxn": 2476.8798828125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-01 13:27:11",
+              "tipo": "bill_payment",
+              "monto_mxn": 1025.0999755859375,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-04-30 15:34:40",
+              "tipo": "deposit_in",
+              "monto_mxn": 4486.2998046875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-24 19:11:24",
+              "tipo": "deposit_in",
+              "monto_mxn": 5960.7900390625,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-04-23 23:23:39",
+              "tipo": "bill_payment",
+              "monto_mxn": 193.6999969482422,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-04-20 09:51:02",
+              "tipo": "spei_out",
+              "monto_mxn": 2172.010009765625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-18 22:07:44",
+              "tipo": "limit_increase_request",
+              "monto_mxn": 13469.900390625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-10 23:15:11",
+              "tipo": "bill_payment",
+              "monto_mxn": 1965.1199951171875,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 1,
+          "n_eventos_72h": 1,
+          "n_eventos_7d": 2,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-06-01 17:43:29",
+              "horas_desde": 342.28,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-04-19 19:33:58",
+              "horas_desde": 1372.43,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "bill_payment": {
+              "ultima_vista": "2026-06-12 02:56:29",
+              "horas_desde": 93.06,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "card_statement": {
+              "ultima_vista": "2026-05-26 19:58:28",
+              "horas_desde": 484.03,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "savings_cajita": {
+              "ultima_vista": "2026-03-27 12:20:42",
+              "horas_desde": 1931.65,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "limit_increase": {
+              "ultima_vista": "2026-06-15 15:26:49",
+              "horas_desde": 8.55,
+              "n_24h": 1,
+              "n_72h": 1,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-15 15:26:49",
+              "pantalla": "limit_increase",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-12 02:56:29",
+              "pantalla": "bill_payment",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-01 17:43:29",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-01 10:06:18",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-26 19:58:28",
+              "pantalla": "card_statement",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-04-30 20:27:35",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-30 09:43:38",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-30 06:47:54",
+              "pantalla": "home",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-04-29 04:01:41",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-27 13:43:05",
+              "pantalla": "card_statement",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-24 00:56:31",
+              "pantalla": "home",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-04-23 19:59:56",
+              "pantalla": "home",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-04-22 22:17:12",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-22 11:23:48",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-19 19:33:58",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 6,
+          "opt_out": false,
+          "horas_desde_ultimo": 99.79,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-05-14 15:20:31",
+              "cupo_restante": 1
+            },
+            "limit_increase": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-03-03 18:54:09",
+              "cupo_restante": 1
+            },
+            "bill_reminder": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-06-11 20:12:33",
+              "cupo_restante": 1
+            },
+            "loan_offer": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-20 19:35:10",
+              "cupo_restante": 0
+            },
+            "invest_start": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "payroll_portability": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-04-27 14:07:29",
+              "cupo_restante": 1
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-11 20:12:33",
+              "tipo": "bill_reminder",
+              "superficie": "push",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-20 19:35:10",
+              "tipo": "loan_offer",
+              "superficie": "home_card",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-14 15:20:31",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-04-27 14:07:29",
+              "tipo": "payroll_portability",
+              "superficie": "in_app_modal",
+              "exposure_no": 1,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-06 19:40:03",
+              "tipo": "loan_offer",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-03 18:54:09",
+              "tipo": "limit_increase",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-16 00:00:00",
+          "es_fragil": true,
+          "motivo_fragilidad": [
+            "utilizacion 83.4% > 70"
+          ],
+          "dias_a_payday": 14,
+          "ventana_payday": false,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": 1931.65,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": 8.55,
+              "momento": "on_time",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": 93.06,
+              "momento": "warm",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 342.28,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "clave": "fragil_silencio",
+      "titulo": "Frágil pide línea → silencio por veto",
+      "customer_id": 6016480,
+      "corte": "2026-06-16",
+      "narrativa": "Misma señal, sin alternativa sana disponible: el asistente no dice nada. El veto toca solo el 3.2% del volumen y da la vuelta al signo del sistema (+1,679 → −3,031 días en descubierto). Cuesta 21.8% del revenue: 165 MXN por día de descubierto evitado.",
+      "decision": {
+        "enviar": false,
+        "nudge_type": null,
+        "surface": null,
+        "razon_silencio": "veto_fragilidad",
+        "leyenda": "Detectamos que quiere ampliar su línea, pero utilizacion 89.6% > 70. Ofrecerle más crédito hoy le costaría días en descubierto mañana. Nos callamos.",
+        "vetados": [
+          "limit_increase"
+        ]
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6016480,
+          "edad": 47,
+          "estado": "Baja California",
+          "antiguedad_meses": 38,
+          "banda_ingreso": ">60k",
+          "ingreso_mensual_est_mxn": 30900.0,
+          "dia_de_pago": 1,
+          "productos": {
+            "cuenta_nu": false,
+            "cajita_turbo": false,
+            "prestamo_personal": false,
+            "inversiones": false,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 1213.0,
+            "utilizacion_tarjeta_pct": 89.6,
+            "dias_en_negativo_90d": 2,
+            "tasa_ahorro_90d_pct": 24.2,
+            "nps_ultimo": null
+          },
+          "solo_modelo": {
+            "engagement_score": 19.0,
+            "revenue_ltm_mxn": 2113.0,
+            "es_fragil": true
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 12,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 1,
+              "monto_total_mxn": 3812.18,
+              "monto_prom_mxn": 3812.18,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 2,
+              "monto_total_mxn": 678.79,
+              "monto_prom_mxn": 339.39,
+              "n_recurrentes": 2
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 3,
+              "monto_total_mxn": 14707.26,
+              "monto_prom_mxn": 4902.42,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 6,
+              "monto_total_mxn": 3939.73,
+              "monto_prom_mxn": 656.62,
+              "n_recurrentes": 4
+            },
+            "deposit_in": {
+              "n": 1,
+              "monto_total_mxn": 22900.45,
+              "monto_prom_mxn": 22900.45,
+              "n_recurrentes": 1
+            },
+            "card_payment": {
+              "n": 1,
+              "monto_total_mxn": 9102.76,
+              "monto_prom_mxn": 9102.76,
+              "n_recurrentes": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-13 18:35:29",
+              "tipo": "spei_out",
+              "monto_mxn": 3812.179931640625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-02 13:36:15",
+              "tipo": "bill_payment",
+              "monto_mxn": 361.1099853515625,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-06-02 10:44:57",
+              "tipo": "bill_payment",
+              "monto_mxn": 317.67999267578125,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-15 07:14:32",
+              "tipo": "bill_payment",
+              "monto_mxn": 800.27001953125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-10 14:40:15",
+              "tipo": "card_payment",
+              "monto_mxn": 9102.759765625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-07 18:52:52",
+              "tipo": "spei_out",
+              "monto_mxn": 3046.93994140625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-01 06:39:05",
+              "tipo": "bill_payment",
+              "monto_mxn": 637.6599731445312,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-04-24 21:14:29",
+              "tipo": "spei_out",
+              "monto_mxn": 7848.14013671875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-05 21:14:28",
+              "tipo": "deposit_in",
+              "monto_mxn": 22900.44921875,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-04-02 20:39:19",
+              "tipo": "bill_payment",
+              "monto_mxn": 829.52001953125,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 1,
+          "n_eventos_72h": 1,
+          "n_eventos_7d": 1,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-04-05 09:02:23",
+              "horas_desde": 1718.96,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-04-07 22:53:18",
+              "horas_desde": 1657.11,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "bill_payment": {
+              "ultima_vista": "2026-06-01 00:07:55",
+              "horas_desde": 359.87,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "limit_increase": {
+              "ultima_vista": "2026-06-15 21:04:54",
+              "horas_desde": 2.92,
+              "n_24h": 1,
+              "n_72h": 1,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "card_settings": {
+              "ultima_vista": "2026-05-05 10:23:21",
+              "horas_desde": 997.61,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-15 21:04:54",
+              "pantalla": "limit_increase",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-01 00:07:55",
+              "pantalla": "bill_payment",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-05 10:23:21",
+              "pantalla": "card_settings",
+              "accion": "abandon"
+            },
+            {
+              "ts": "2026-04-07 22:53:18",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-05 09:02:23",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-04 01:45:21",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-02 03:35:37",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-01 13:11:16",
+              "pantalla": "bill_payment",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-04-01 01:11:49",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-03-31 01:24:52",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-03-03 10:15:03",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-03-01 14:47:55",
+              "pantalla": "bill_payment",
+              "accion": "start"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 2,
+          "opt_out": false,
+          "horas_desde_ultimo": 125.64,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "limit_increase": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "bill_reminder": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-04-11 12:33:50",
+              "cupo_restante": 1
+            },
+            "loan_offer": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "invest_start": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-06-10 18:21:42",
+              "cupo_restante": 1
+            },
+            "payroll_portability": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-10 18:21:42",
+              "tipo": "invest_start",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-04-11 12:33:50",
+              "tipo": "bill_reminder",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-16 00:00:00",
+          "es_fragil": true,
+          "motivo_fragilidad": [
+            "utilizacion 89.6% > 70"
+          ],
+          "dias_a_payday": 15,
+          "ventana_payday": false,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": 2.92,
+              "momento": "on_time",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": 359.87,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 1718.96,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "clave": "fatigado",
+      "titulo": "Cupo agotado → silencio por fatiga",
+      "customer_id": 6035011,
+      "corte": "2026-06-16",
+      "narrativa": "Tiene la intención Y el historial: ya vio ese mensaje 3+ veces. En la 3ª exposición el enganche es 3.51% y el opt-out 2.53% → 0.72 bajas por cada clic; en la 4ª, 1.89. Por eso el cap es 2. Y no es cuestión de esperar: hours_since_last_nudge no tiene efecto controlando por exposure_no. Lo que fatiga es el CONTEO, no el reloj.",
+      "decision": {
+        "enviar": false,
+        "nudge_type": null,
+        "surface": null,
+        "razon_silencio": "cupo_agotado",
+        "leyenda": "Tiene la intención (crear una cajita), pero ya vio ese mensaje 6 veces. La 3ª exposición convierte 3.51% y provoca 2.53% de opt-out —0.72 bajas por cada clic—. El cupo es 2: gastaríamos al cliente, no el cupo.",
+        "vetados": []
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6035011,
+          "edad": 46,
+          "estado": "Queretaro",
+          "antiguedad_meses": 27,
+          "banda_ingreso": "8k-15k",
+          "ingreso_mensual_est_mxn": 16000.0,
+          "dia_de_pago": 1,
+          "productos": {
+            "cuenta_nu": true,
+            "cajita_turbo": false,
+            "prestamo_personal": false,
+            "inversiones": false,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 7314.0,
+            "utilizacion_tarjeta_pct": 52.9,
+            "dias_en_negativo_90d": 0,
+            "tasa_ahorro_90d_pct": 25.3,
+            "nps_ultimo": null
+          },
+          "solo_modelo": {
+            "engagement_score": 86.5,
+            "revenue_ltm_mxn": 868.0,
+            "es_fragil": false
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 20,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 2,
+              "monto_total_mxn": 2885.66,
+              "monto_prom_mxn": 1442.83,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 1,
+              "monto_total_mxn": 447.98,
+              "monto_prom_mxn": 447.98,
+              "n_recurrentes": 1
+            },
+            "deposit_in": {
+              "n": 1,
+              "monto_total_mxn": 10745.06,
+              "monto_prom_mxn": 10745.06,
+              "n_recurrentes": 0
+            },
+            "savings_move": {
+              "n": 1,
+              "monto_total_mxn": 1840.35,
+              "monto_prom_mxn": 1840.35,
+              "n_recurrentes": 0
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 5,
+              "monto_total_mxn": 13812.08,
+              "monto_prom_mxn": 2762.42,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 3,
+              "monto_total_mxn": 3951.69,
+              "monto_prom_mxn": 1317.23,
+              "n_recurrentes": 3
+            },
+            "deposit_in": {
+              "n": 4,
+              "monto_total_mxn": 46152.49,
+              "monto_prom_mxn": 11538.12,
+              "n_recurrentes": 0
+            },
+            "savings_move": {
+              "n": 1,
+              "monto_total_mxn": 1840.35,
+              "monto_prom_mxn": 1840.35,
+              "n_recurrentes": 0
+            },
+            "card_payment": {
+              "n": 2,
+              "monto_total_mxn": 12217.92,
+              "monto_prom_mxn": 6108.96,
+              "n_recurrentes": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-13 16:44:19",
+              "tipo": "spei_out",
+              "monto_mxn": 1827.010009765625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-07 23:52:13",
+              "tipo": "savings_move",
+              "monto_mxn": 1840.3499755859375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-05 14:29:08",
+              "tipo": "spei_out",
+              "monto_mxn": 1058.6500244140625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-02 16:58:52",
+              "tipo": "deposit_in",
+              "monto_mxn": 10745.0595703125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-01 20:17:49",
+              "tipo": "bill_payment",
+              "monto_mxn": 447.9800109863281,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-15 07:33:41",
+              "tipo": "bill_payment",
+              "monto_mxn": 974.4299926757812,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-12 23:47:14",
+              "tipo": "deposit_in",
+              "monto_mxn": 10192.6103515625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-09 15:51:13",
+              "tipo": "card_payment",
+              "monto_mxn": 5123.56982421875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-08 20:47:04",
+              "tipo": "spei_out",
+              "monto_mxn": 1970.300048828125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-03 08:03:29",
+              "tipo": "deposit_in",
+              "monto_mxn": 12007.9296875,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 1,
+          "n_eventos_72h": 2,
+          "n_eventos_7d": 3,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-05-12 13:26:01",
+              "horas_desde": 826.57,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-06-11 17:38:18",
+              "horas_desde": 102.36,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "bill_payment": {
+              "ultima_vista": "2026-06-01 12:48:35",
+              "horas_desde": 347.19,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "card_statement": {
+              "ultima_vista": "2026-05-09 05:19:03",
+              "horas_desde": 906.68,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "savings_cajita": {
+              "ultima_vista": "2026-06-15 13:44:05",
+              "horas_desde": 10.27,
+              "n_24h": 1,
+              "n_72h": 2,
+              "n_7d": 2,
+              "hubo_start_24h": false
+            },
+            "investments": {
+              "ultima_vista": "2026-05-23 22:49:05",
+              "horas_desde": 553.18,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "support": {
+              "ultima_vista": "2026-06-05 12:40:51",
+              "horas_desde": 251.32,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-15 13:44:05",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-14 14:03:50",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-11 17:38:18",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-07 22:02:19",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-05 12:40:51",
+              "pantalla": "support",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-05 12:23:31",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-05 00:33:41",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-04 22:12:49",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-01 12:48:35",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-01 02:38:57",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-30 07:10:33",
+              "pantalla": "support",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-23 22:49:05",
+              "pantalla": "investments",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-12 13:26:01",
+              "pantalla": "home",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-11 14:55:06",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-09 05:19:03",
+              "pantalla": "card_statement",
+              "accion": "view"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 13,
+          "opt_out": false,
+          "horas_desde_ultimo": 81.23,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 6,
+              "exposure_no_max": 6,
+              "n_enganchados": 0,
+              "n_descartados": 3,
+              "ultimo_ts": "2026-05-31 19:36:43",
+              "cupo_restante": 0
+            },
+            "limit_increase": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "bill_reminder": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-05-08 11:31:57",
+              "cupo_restante": 0
+            },
+            "loan_offer": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-11 12:36:22",
+              "cupo_restante": 1
+            },
+            "invest_start": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-05-23 15:19:28",
+              "cupo_restante": 0
+            },
+            "payroll_portability": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-06-12 14:46:26",
+              "cupo_restante": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-12 14:46:26",
+              "tipo": "payroll_portability",
+              "superficie": "in_app_modal",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-31 19:36:43",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 6,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-23 15:19:28",
+              "tipo": "invest_start",
+              "superficie": "home_card",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-11 12:36:22",
+              "tipo": "loan_offer",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-08 11:31:57",
+              "tipo": "bill_reminder",
+              "superficie": "in_app_modal",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-06 10:48:06",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 5,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-03 16:19:34",
+              "tipo": "savings_goal",
+              "superficie": "in_app_modal",
+              "exposure_no": 4,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-04-08 17:25:04",
+              "tipo": "invest_start",
+              "superficie": "push",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-16 00:00:00",
+          "es_fragil": false,
+          "motivo_fragilidad": [],
+          "dias_a_payday": 15,
+          "ventana_payday": false,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": 10.27,
+              "momento": "on_time",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 7,
+              "cupo_agotado": true
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": 347.19,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": 553.18,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 826.57,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "clave": "sin_senal",
+      "titulo": "Sin señal reciente → silencio",
+      "customer_id": 6033683,
+      "corte": "2026-06-16",
+      "narrativa": "Cliente activo con historial rico, pero cero señal de intención en 7 días en las pantallas acopladas a una oferta. El 59.9% de los nudges de hoy se mandan así y convierten 10.30%. Aquí el asistente se calla — y ese silencio ES el producto.",
+      "decision": {
+        "enviar": false,
+        "nudge_type": null,
+        "surface": null,
+        "razon_silencio": "sin_senal",
+        "leyenda": "No hay ninguna señal fresca de intención en la app. Sin señal el enganche cae a 10%: hoy el asistente permanece en silencio.",
+        "vetados": []
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6033683,
+          "edad": 24,
+          "estado": "Chihuahua",
+          "antiguedad_meses": 45,
+          "banda_ingreso": "8k-15k",
+          "ingreso_mensual_est_mxn": 25000.0,
+          "dia_de_pago": 1,
+          "productos": {
+            "cuenta_nu": true,
+            "cajita_turbo": true,
+            "prestamo_personal": false,
+            "inversiones": true,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 6164.0,
+            "utilizacion_tarjeta_pct": 58.9,
+            "dias_en_negativo_90d": 0,
+            "tasa_ahorro_90d_pct": 24.9,
+            "nps_ultimo": null
+          },
+          "solo_modelo": {
+            "engagement_score": 68.0,
+            "revenue_ltm_mxn": 1265.0,
+            "es_fragil": false
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 37,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 3,
+              "monto_total_mxn": 14559.53,
+              "monto_prom_mxn": 4853.18,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 2,
+              "monto_total_mxn": 1896.4,
+              "monto_prom_mxn": 948.2,
+              "n_recurrentes": 2
+            },
+            "savings_move": {
+              "n": 4,
+              "monto_total_mxn": 15662.21,
+              "monto_prom_mxn": 3915.55,
+              "n_recurrentes": 0
+            },
+            "card_payment": {
+              "n": 3,
+              "monto_total_mxn": 21492.24,
+              "monto_prom_mxn": 7164.08,
+              "n_recurrentes": 0
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 8,
+              "monto_total_mxn": 30853.29,
+              "monto_prom_mxn": 3856.66,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 4,
+              "monto_total_mxn": 3776.15,
+              "monto_prom_mxn": 944.04,
+              "n_recurrentes": 3
+            },
+            "deposit_in": {
+              "n": 2,
+              "monto_total_mxn": 36770.2,
+              "monto_prom_mxn": 18385.1,
+              "n_recurrentes": 1
+            },
+            "savings_move": {
+              "n": 8,
+              "monto_total_mxn": 28652.98,
+              "monto_prom_mxn": 3581.62,
+              "n_recurrentes": 0
+            },
+            "loan_request": {
+              "n": 3,
+              "monto_total_mxn": 275532.19,
+              "monto_prom_mxn": 91844.06,
+              "n_recurrentes": 1
+            },
+            "card_payment": {
+              "n": 5,
+              "monto_total_mxn": 29770.66,
+              "monto_prom_mxn": 5954.13,
+              "n_recurrentes": 1
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-15 19:12:29",
+              "tipo": "savings_move",
+              "monto_mxn": 4956.7998046875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-15 13:25:22",
+              "tipo": "savings_move",
+              "monto_mxn": 564.1900024414062,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-15 12:16:23",
+              "tipo": "spei_out",
+              "monto_mxn": 4626.08984375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-12 22:28:05",
+              "tipo": "card_payment",
+              "monto_mxn": 2602.6298828125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-04 14:33:01",
+              "tipo": "card_payment",
+              "monto_mxn": 8408.349609375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-02 13:02:43",
+              "tipo": "bill_payment",
+              "monto_mxn": 1366.3499755859375,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-06-01 17:33:47",
+              "tipo": "savings_move",
+              "monto_mxn": 4782.0498046875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-01 12:44:20",
+              "tipo": "bill_payment",
+              "monto_mxn": 530.0499877929688,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-25 08:56:44",
+              "tipo": "spei_out",
+              "monto_mxn": 5068.22021484375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-20 22:41:49",
+              "tipo": "spei_out",
+              "monto_mxn": 4865.22021484375,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 0,
+          "n_eventos_72h": 2,
+          "n_eventos_7d": 3,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-04-01 01:32:38",
+              "horas_desde": 1822.46,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-06-14 19:53:39",
+              "horas_desde": 28.11,
+              "n_24h": 0,
+              "n_72h": 2,
+              "n_7d": 2,
+              "hubo_start_24h": false
+            },
+            "bill_payment": {
+              "ultima_vista": "2026-05-31 21:03:34",
+              "horas_desde": 362.94,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "card_statement": {
+              "ultima_vista": "2026-06-12 04:25:38",
+              "horas_desde": 91.57,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "savings_cajita": {
+              "ultima_vista": "2026-05-30 00:11:27",
+              "horas_desde": 407.81,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "loan_simulation": {
+              "ultima_vista": "2026-04-18 21:51:28",
+              "horas_desde": 1394.14,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "limit_increase": {
+              "ultima_vista": "2026-05-25 21:09:32",
+              "horas_desde": 506.84,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-14 19:53:39",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-13 19:39:59",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-12 04:25:38",
+              "pantalla": "card_statement",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-31 21:03:34",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-31 08:55:31",
+              "pantalla": "bill_payment",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-30 00:11:27",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-25 21:09:32",
+              "pantalla": "limit_increase",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-24 20:24:50",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-16 17:53:08",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-05-14 00:23:52",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-13 07:47:41",
+              "pantalla": "bill_payment",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-11 08:13:00",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-18 21:51:28",
+              "pantalla": "loan_simulation",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-17 18:54:34",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-04-03 14:18:40",
+              "pantalla": "loan_simulation",
+              "accion": "view"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 9,
+          "opt_out": false,
+          "horas_desde_ultimo": 8.78,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 5,
+              "exposure_no_max": 5,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-06-15 15:13:01",
+              "cupo_restante": 0
+            },
+            "limit_increase": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-04-22 12:58:46",
+              "cupo_restante": 0
+            },
+            "bill_reminder": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "loan_offer": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "invest_start": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "payroll_portability": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-25 10:14:48",
+              "cupo_restante": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-15 15:13:01",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 5,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-25 10:14:48",
+              "tipo": "payroll_portability",
+              "superficie": "home_card",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-03 20:06:55",
+              "tipo": "savings_goal",
+              "superficie": "in_app_modal",
+              "exposure_no": 4,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-22 12:58:46",
+              "tipo": "limit_increase",
+              "superficie": "push",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-04-17 15:43:44",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 3,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-10 09:03:57",
+              "tipo": "payroll_portability",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-16 20:03:32",
+              "tipo": "savings_goal",
+              "superficie": "push",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-11 10:08:33",
+              "tipo": "limit_increase",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-16 00:00:00",
+          "es_fragil": false,
+          "motivo_fragilidad": [],
+          "dias_a_payday": 15,
+          "ventana_payday": false,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": 407.81,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 6,
+              "cupo_agotado": true
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": 506.84,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": 362.94,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": 1394.14,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 1822.46,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "clave": "payday",
+      "titulo": "Ventana de payday + señal → timing óptimo",
+      "customer_id": 6028999,
+      "corte": "2026-06-16",
+      "narrativa": "Está a ≤1 día de su día de pago Y acaba de entrar a Cajitas. En payday hay 3.9x más probabilidad de que exista señal fresca (4.6% vs 1.2%) y savings_move sube hasta 5.4x. Pero el efecto payday sobre el engagement es 100% MEDIADO: dentro de cada estrato de momento el enganche es idéntico. No mandamos por calendario; mandamos porque la señal apareció, y el calendario explica por qué apareció hoy.",
+      "decision": {
+        "enviar": true,
+        "nudge_type": "savings_goal",
+        "surface": "in_app_modal",
+        "etiqueta_boton": "Crear una Cajita",
+        "momento": "on_time",
+        "razon_silencio": null,
+        "leyenda": "Entró a Cajitas hace 18 h y llegó a iniciar el flujo. Es su exposición #2 de 2 a este mensaje. Además está a 1 días de su día de pago, cuando esa acción es hasta 5x más probable.",
+        "sustituye_a": null
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6028999,
+          "edad": 46,
+          "estado": "CDMX",
+          "antiguedad_meses": 15,
+          "banda_ingreso": "8k-15k",
+          "ingreso_mensual_est_mxn": 19500.0,
+          "dia_de_pago": 15,
+          "productos": {
+            "cuenta_nu": false,
+            "cajita_turbo": false,
+            "prestamo_personal": true,
+            "inversiones": false,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 2620.0,
+            "utilizacion_tarjeta_pct": 68.9,
+            "dias_en_negativo_90d": 0,
+            "tasa_ahorro_90d_pct": 13.7,
+            "nps_ultimo": 9.0
+          },
+          "solo_modelo": {
+            "engagement_score": 81.0,
+            "revenue_ltm_mxn": 1301.0,
+            "es_fragil": false
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 30,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 5,
+              "monto_total_mxn": 19720.17,
+              "monto_prom_mxn": 3944.03,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 1,
+              "monto_total_mxn": 2057.35,
+              "monto_prom_mxn": 2057.35,
+              "n_recurrentes": 0
+            },
+            "deposit_in": {
+              "n": 1,
+              "monto_total_mxn": 9068.13,
+              "monto_prom_mxn": 9068.13,
+              "n_recurrentes": 1
+            },
+            "savings_move": {
+              "n": 2,
+              "monto_total_mxn": 2761.43,
+              "monto_prom_mxn": 1380.72,
+              "n_recurrentes": 0
+            },
+            "loan_request": {
+              "n": 1,
+              "monto_total_mxn": 43723.45,
+              "monto_prom_mxn": 43723.45,
+              "n_recurrentes": 0
+            },
+            "investment_buy": {
+              "n": 3,
+              "monto_total_mxn": 4327.44,
+              "monto_prom_mxn": 1442.48,
+              "n_recurrentes": 0
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 8,
+              "monto_total_mxn": 24201.09,
+              "monto_prom_mxn": 3025.14,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 1,
+              "monto_total_mxn": 2057.35,
+              "monto_prom_mxn": 2057.35,
+              "n_recurrentes": 0
+            },
+            "deposit_in": {
+              "n": 5,
+              "monto_total_mxn": 74719.18,
+              "monto_prom_mxn": 14943.84,
+              "n_recurrentes": 3
+            },
+            "savings_move": {
+              "n": 6,
+              "monto_total_mxn": 13932.15,
+              "monto_prom_mxn": 2322.03,
+              "n_recurrentes": 1
+            },
+            "loan_request": {
+              "n": 2,
+              "monto_total_mxn": 109442.67,
+              "monto_prom_mxn": 54721.34,
+              "n_recurrentes": 1
+            },
+            "card_payment": {
+              "n": 2,
+              "monto_total_mxn": 14750.96,
+              "monto_prom_mxn": 7375.48,
+              "n_recurrentes": 0
+            },
+            "investment_buy": {
+              "n": 3,
+              "monto_total_mxn": 4327.44,
+              "monto_prom_mxn": 1442.48,
+              "n_recurrentes": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-15 22:37:13",
+              "tipo": "savings_move",
+              "monto_mxn": 1849.280029296875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-15 07:36:26",
+              "tipo": "deposit_in",
+              "monto_mxn": 9068.1298828125,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-06-12 16:58:04",
+              "tipo": "spei_out",
+              "monto_mxn": 3884.760009765625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-09 17:53:27",
+              "tipo": "bill_payment",
+              "monto_mxn": 2057.35009765625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-07 21:04:58",
+              "tipo": "loan_request",
+              "monto_mxn": 43723.44921875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-06 22:31:50",
+              "tipo": "investment_buy",
+              "monto_mxn": 1018.5900268554688,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-03 12:23:43",
+              "tipo": "investment_buy",
+              "monto_mxn": 1085.6099853515625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-02 22:29:55",
+              "tipo": "spei_out",
+              "monto_mxn": 5410.52978515625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-24 10:39:32",
+              "tipo": "spei_out",
+              "monto_mxn": 2658.530029296875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-24 10:22:45",
+              "tipo": "spei_out",
+              "monto_mxn": 3434.469970703125,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 1,
+          "n_eventos_72h": 3,
+          "n_eventos_7d": 6,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-06-13 22:56:41",
+              "horas_desde": 49.06,
+              "n_24h": 0,
+              "n_72h": 1,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-06-12 14:03:05",
+              "horas_desde": 81.95,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 2,
+              "hubo_start_24h": false
+            },
+            "bill_payment": {
+              "ultima_vista": "2026-06-09 12:24:13",
+              "horas_desde": 155.6,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "card_statement": {
+              "ultima_vista": "2026-04-27 23:58:41",
+              "horas_desde": 1176.02,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "savings_cajita": {
+              "ultima_vista": "2026-06-15 05:43:53",
+              "horas_desde": 18.27,
+              "n_24h": 1,
+              "n_72h": 2,
+              "n_7d": 2,
+              "hubo_start_24h": true
+            },
+            "loan_simulation": {
+              "ultima_vista": "2026-06-07 02:08:33",
+              "horas_desde": 213.86,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "investments": {
+              "ultima_vista": "2026-06-05 21:16:23",
+              "horas_desde": 242.73,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-15 05:43:53",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-13 22:56:41",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-13 03:31:49",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-12 14:03:05",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-10 10:32:28",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-09 12:24:13",
+              "pantalla": "bill_payment",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-07 02:08:33",
+              "pantalla": "loan_simulation",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-05 21:16:23",
+              "pantalla": "investments",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-02 22:17:04",
+              "pantalla": "investments",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-02 13:17:00",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-30 21:50:44",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-23 21:20:38",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-23 06:58:23",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-22 10:34:02",
+              "pantalla": "investments",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-21 04:55:14",
+              "pantalla": "investments",
+              "accion": "view"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 6,
+          "opt_out": false,
+          "horas_desde_ultimo": 147.28,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-06-04 16:01:23",
+              "cupo_restante": 1
+            },
+            "limit_increase": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-04-30 10:59:29",
+              "cupo_restante": 1
+            },
+            "bill_reminder": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-03-31 17:16:04",
+              "cupo_restante": 1
+            },
+            "loan_offer": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-06-09 20:42:59",
+              "cupo_restante": 1
+            },
+            "invest_start": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-18 11:37:41",
+              "cupo_restante": 1
+            },
+            "payroll_portability": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-21 09:44:39",
+              "cupo_restante": 1
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-09 20:42:59",
+              "tipo": "loan_offer",
+              "superficie": "push",
+              "exposure_no": 1,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-06-04 16:01:23",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-21 09:44:39",
+              "tipo": "payroll_portability",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-18 11:37:41",
+              "tipo": "invest_start",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-30 10:59:29",
+              "tipo": "limit_increase",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-31 17:16:04",
+              "tipo": "bill_reminder",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-16 00:00:00",
+          "es_fragil": false,
+          "motivo_fragilidad": [],
+          "dias_a_payday": 1,
+          "ventana_payday": true,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": 18.27,
+              "momento": "on_time",
+              "hubo_start_24h": true,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": 155.6,
+              "momento": "warm",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": 213.86,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": 242.73,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 49.06,
+              "momento": "warm",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "clave": "opt_out",
+      "titulo": "Ya se dio de baja → silencio absoluto",
+      "customer_id": 6011629,
+      "corte": "2026-06-16",
+      "narrativa": "Apagó las notificaciones tras un nudge anterior. Hoy tiene señal perfecta y no le hablamos: el opt-out es irreversible desde la app y en MX cambiar preferencias exige PIN Challenge (CNBV Art. 313). El costo de la fatiga no se paga una vez, se paga para siempre.",
+      "decision": {
+        "enviar": false,
+        "nudge_type": null,
+        "surface": null,
+        "razon_silencio": "opt_out",
+        "leyenda": "Este cliente desactivó las notificaciones. No le hablamos."
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6011629,
+          "edad": 28,
+          "estado": "Estado de Mexico",
+          "antiguedad_meses": 21,
+          "banda_ingreso": "<8k",
+          "ingreso_mensual_est_mxn": 6000.0,
+          "dia_de_pago": 15,
+          "productos": {
+            "cuenta_nu": true,
+            "cajita_turbo": true,
+            "prestamo_personal": false,
+            "inversiones": false,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 1945.0,
+            "utilizacion_tarjeta_pct": 31.4,
+            "dias_en_negativo_90d": 0,
+            "tasa_ahorro_90d_pct": 30.7,
+            "nps_ultimo": null
+          },
+          "solo_modelo": {
+            "engagement_score": 69.9,
+            "revenue_ltm_mxn": 516.0,
+            "es_fragil": false
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 25,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 2,
+              "monto_total_mxn": 1774.85,
+              "monto_prom_mxn": 887.43,
+              "n_recurrentes": 0
+            },
+            "deposit_in": {
+              "n": 2,
+              "monto_total_mxn": 7111.63,
+              "monto_prom_mxn": 3555.81,
+              "n_recurrentes": 1
+            },
+            "savings_move": {
+              "n": 5,
+              "monto_total_mxn": 3660.59,
+              "monto_prom_mxn": 732.12,
+              "n_recurrentes": 0
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 4,
+              "monto_total_mxn": 3678.66,
+              "monto_prom_mxn": 919.67,
+              "n_recurrentes": 0
+            },
+            "bill_payment": {
+              "n": 1,
+              "monto_total_mxn": 520.11,
+              "monto_prom_mxn": 520.11,
+              "n_recurrentes": 1
+            },
+            "deposit_in": {
+              "n": 2,
+              "monto_total_mxn": 7111.63,
+              "monto_prom_mxn": 3555.81,
+              "n_recurrentes": 1
+            },
+            "savings_move": {
+              "n": 9,
+              "monto_total_mxn": 6978.69,
+              "monto_prom_mxn": 775.41,
+              "n_recurrentes": 1
+            },
+            "card_payment": {
+              "n": 3,
+              "monto_total_mxn": 5096.99,
+              "monto_prom_mxn": 1699.0,
+              "n_recurrentes": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-15 07:45:54",
+              "tipo": "savings_move",
+              "monto_mxn": 1115.4000244140625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-15 07:13:40",
+              "tipo": "spei_out",
+              "monto_mxn": 1001.9000244140625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-09 10:00:58",
+              "tipo": "spei_out",
+              "monto_mxn": 772.9500122070312,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-29 21:08:29",
+              "tipo": "deposit_in",
+              "monto_mxn": 3568.780029296875,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-28 18:06:51",
+              "tipo": "savings_move",
+              "monto_mxn": 480.6600036621094,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-26 19:55:26",
+              "tipo": "savings_move",
+              "monto_mxn": 274.5899963378906,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-26 13:18:01",
+              "tipo": "savings_move",
+              "monto_mxn": 861.1400146484375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-18 08:20:24",
+              "tipo": "deposit_in",
+              "monto_mxn": 3542.85009765625,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-17 22:43:08",
+              "tipo": "savings_move",
+              "monto_mxn": 928.7999877929688,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-16 23:52:58",
+              "tipo": "savings_move",
+              "monto_mxn": 858.27001953125,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 4,
+          "n_eventos_72h": 5,
+          "n_eventos_7d": 8,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-06-09 15:19:05",
+              "horas_desde": 152.68,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-06-15 23:32:56",
+              "horas_desde": 0.45,
+              "n_24h": 2,
+              "n_72h": 3,
+              "n_7d": 5,
+              "hubo_start_24h": true
+            },
+            "bill_payment": {
+              "ultima_vista": "2026-04-16 23:47:20",
+              "horas_desde": 1440.21,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "card_statement": {
+              "ultima_vista": "2026-06-02 17:42:02",
+              "horas_desde": 318.3,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "savings_cajita": {
+              "ultima_vista": "2026-06-15 22:04:51",
+              "horas_desde": 1.92,
+              "n_24h": 2,
+              "n_72h": 2,
+              "n_7d": 2,
+              "hubo_start_24h": false
+            },
+            "card_settings": {
+              "ultima_vista": "2026-05-22 21:07:43",
+              "horas_desde": 578.87,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-15 23:32:56",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-15 22:04:51",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-15 06:41:28",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-15 00:00:16",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-13 08:01:31",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-11 12:58:26",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-09 15:19:05",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-09 01:21:06",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-02 17:42:02",
+              "pantalla": "card_statement",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-30 18:16:58",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-28 16:38:53",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-28 00:40:51",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-26 10:30:01",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-26 04:22:15",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-25 18:20:42",
+              "pantalla": "savings_cajita",
+              "accion": "start"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 8,
+          "opt_out": true,
+          "horas_desde_ultimo": 86.33,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 3,
+              "exposure_no_max": 3,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-26 18:07:55",
+              "cupo_restante": 0
+            },
+            "limit_increase": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-06-12 09:39:54",
+              "cupo_restante": 0
+            },
+            "bill_reminder": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-05-06 14:07:41",
+              "cupo_restante": 0
+            },
+            "loan_offer": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-06-04 19:23:28",
+              "cupo_restante": 1
+            },
+            "invest_start": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "payroll_portability": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-12 09:39:54",
+              "tipo": "limit_increase",
+              "superficie": "push",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-06-04 19:23:28",
+              "tipo": "loan_offer",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-05-26 18:07:55",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 3,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-05-06 14:07:41",
+              "tipo": "bill_reminder",
+              "superficie": "home_card",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-14 20:40:41",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-10 08:18:50",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-15 19:44:03",
+              "tipo": "bill_reminder",
+              "superficie": "push",
+              "exposure_no": 1,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-08 17:46:18",
+              "tipo": "limit_increase",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-16 00:00:00",
+          "es_fragil": false,
+          "motivo_fragilidad": [],
+          "dias_a_payday": 1,
+          "ventana_payday": true,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": 1.92,
+              "momento": "on_time",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 4,
+              "cupo_agotado": true
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": 1440.21,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 152.68,
+              "momento": "warm",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "clave": "multi_senal",
+      "titulo": "Dos intenciones a la vez → la función objetivo decide",
+      "customer_id": 6030902,
+      "corte": "2026-06-09",
+      "narrativa": "Señal fresca de ahorro Y de aumento de línea el mismo día. No es frágil, así que el aumento no está vetado — y sin embargo elegimos ahorro. Ahí se ve qué optimizamos: savings_goal da +6.38pp de tasa de ahorro y −0.46 días negativos; limit_increase da +245.6 MXN pero −2.22pp de ahorro y +0.93 días negativos. La correlación de rangos salud-vs-revenue es −0.829: el ranking se invierte, hay que elegir.",
+      "decision": {
+        "enviar": true,
+        "nudge_type": "savings_goal",
+        "surface": "in_app_modal",
+        "etiqueta_boton": "Crear una Cajita",
+        "momento": "on_time",
+        "razon_silencio": null,
+        "leyenda": "Entró a Cajitas hace 22 h. Es su exposición #2 de 2 a este mensaje.",
+        "sustituye_a": null
+      },
+      "ficha": {
+        "perfil": {
+          "customer_id": 6030902,
+          "edad": 25,
+          "estado": "Queretaro",
+          "antiguedad_meses": 12,
+          "banda_ingreso": "8k-15k",
+          "ingreso_mensual_est_mxn": 22400.0,
+          "dia_de_pago": 30,
+          "productos": {
+            "cuenta_nu": true,
+            "cajita_turbo": true,
+            "prestamo_personal": false,
+            "inversiones": false,
+            "nomina_portada": false
+          },
+          "situacion_financiera": {
+            "saldo_promedio_mxn": 3472.0,
+            "utilizacion_tarjeta_pct": 31.6,
+            "dias_en_negativo_90d": 0,
+            "tasa_ahorro_90d_pct": 50.8,
+            "nps_ultimo": null
+          },
+          "solo_modelo": {
+            "engagement_score": 71.1,
+            "revenue_ltm_mxn": 798.0,
+            "es_fragil": false
+          }
+        },
+        "movimientos": {
+          "n_total_historico": 13,
+          "agregado_30d": {
+            "spei_out": {
+              "n": 1,
+              "monto_total_mxn": 2948.37,
+              "monto_prom_mxn": 2948.37,
+              "n_recurrentes": 0
+            },
+            "deposit_in": {
+              "n": 1,
+              "monto_total_mxn": 10329.65,
+              "monto_prom_mxn": 10329.65,
+              "n_recurrentes": 1
+            },
+            "savings_move": {
+              "n": 1,
+              "monto_total_mxn": 2343.99,
+              "monto_prom_mxn": 2343.99,
+              "n_recurrentes": 0
+            }
+          },
+          "agregado_90d": {
+            "spei_out": {
+              "n": 4,
+              "monto_total_mxn": 20426.62,
+              "monto_prom_mxn": 5106.66,
+              "n_recurrentes": 0
+            },
+            "deposit_in": {
+              "n": 2,
+              "monto_total_mxn": 23241.83,
+              "monto_prom_mxn": 11620.92,
+              "n_recurrentes": 1
+            },
+            "savings_move": {
+              "n": 5,
+              "monto_total_mxn": 9684.47,
+              "monto_prom_mxn": 1936.89,
+              "n_recurrentes": 1
+            },
+            "card_payment": {
+              "n": 2,
+              "monto_total_mxn": 18713.94,
+              "monto_prom_mxn": 9356.97,
+              "n_recurrentes": 0
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-06-08 14:10:38",
+              "tipo": "savings_move",
+              "monto_mxn": 2343.989990234375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-06-01 15:00:47",
+              "tipo": "deposit_in",
+              "monto_mxn": 10329.650390625,
+              "recurrente": true
+            },
+            {
+              "ts": "2026-05-28 10:39:42",
+              "tipo": "spei_out",
+              "monto_mxn": 2948.3701171875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-04 08:26:57",
+              "tipo": "spei_out",
+              "monto_mxn": 6562.3798828125,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-05-01 14:31:47",
+              "tipo": "savings_move",
+              "monto_mxn": 4236.83984375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-27 13:12:30",
+              "tipo": "spei_out",
+              "monto_mxn": 4922.64990234375,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-10 18:30:15",
+              "tipo": "card_payment",
+              "monto_mxn": 9584.6904296875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-05 16:41:54",
+              "tipo": "deposit_in",
+              "monto_mxn": 12912.1796875,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-03 17:57:33",
+              "tipo": "card_payment",
+              "monto_mxn": 9129.25,
+              "recurrente": false
+            },
+            {
+              "ts": "2026-04-02 11:49:10",
+              "tipo": "spei_out",
+              "monto_mxn": 5993.22021484375,
+              "recurrente": false
+            }
+          ]
+        },
+        "navegacion": {
+          "n_eventos_24h": 3,
+          "n_eventos_72h": 4,
+          "n_eventos_7d": 4,
+          "recencia_por_pantalla": {
+            "home": {
+              "ultima_vista": "2026-05-19 21:07:22",
+              "horas_desde": 482.88,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "transfer_spei": {
+              "ultima_vista": "2026-05-27 22:54:43",
+              "horas_desde": 289.09,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            },
+            "card_statement": {
+              "ultima_vista": "2026-06-08 08:45:49",
+              "horas_desde": 15.24,
+              "n_24h": 1,
+              "n_72h": 1,
+              "n_7d": 1,
+              "hubo_start_24h": true
+            },
+            "savings_cajita": {
+              "ultima_vista": "2026-06-08 02:01:40",
+              "horas_desde": 21.97,
+              "n_24h": 1,
+              "n_72h": 2,
+              "n_7d": 2,
+              "hubo_start_24h": false
+            },
+            "limit_increase": {
+              "ultima_vista": "2026-06-08 07:25:26",
+              "horas_desde": 16.58,
+              "n_24h": 1,
+              "n_72h": 1,
+              "n_7d": 1,
+              "hubo_start_24h": false
+            },
+            "card_settings": {
+              "ultima_vista": "2026-05-25 08:14:11",
+              "horas_desde": 351.76,
+              "n_24h": 0,
+              "n_72h": 0,
+              "n_7d": 0,
+              "hubo_start_24h": false
+            }
+          },
+          "ultimas_pantallas": [
+            {
+              "ts": "2026-06-08 08:45:49",
+              "pantalla": "card_statement",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-06-08 07:25:26",
+              "pantalla": "limit_increase",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-08 02:01:40",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-06-07 02:26:44",
+              "pantalla": "savings_cajita",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-27 22:54:43",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-25 08:14:11",
+              "pantalla": "card_settings",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-24 10:56:27",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-19 21:07:22",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-17 10:49:52",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-16 16:24:33",
+              "pantalla": "home",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-03 18:08:59",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-05-03 08:17:37",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-27 04:26:14",
+              "pantalla": "transfer_spei",
+              "accion": "start"
+            },
+            {
+              "ts": "2026-04-27 00:11:49",
+              "pantalla": "transfer_spei",
+              "accion": "view"
+            },
+            {
+              "ts": "2026-04-23 15:50:59",
+              "pantalla": "home",
+              "accion": "start"
+            }
+          ]
+        },
+        "nudges": {
+          "n_total": 5,
+          "opt_out": false,
+          "horas_desde_ultimo": 267.48,
+          "por_tipo": {
+            "savings_goal": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 1,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-04-25 11:09:00",
+              "cupo_restante": 1
+            },
+            "limit_increase": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "bill_reminder": {
+              "exposiciones": 2,
+              "exposure_no_max": 2,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-04-12 17:35:07",
+              "cupo_restante": 0
+            },
+            "loan_offer": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 1,
+              "ultimo_ts": "2026-05-28 20:31:23",
+              "cupo_restante": 1
+            },
+            "invest_start": {
+              "exposiciones": 0,
+              "exposure_no_max": 0,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": null,
+              "cupo_restante": 2
+            },
+            "payroll_portability": {
+              "exposiciones": 1,
+              "exposure_no_max": 1,
+              "n_enganchados": 0,
+              "n_descartados": 0,
+              "ultimo_ts": "2026-04-08 10:35:25",
+              "cupo_restante": 1
+            }
+          },
+          "ultimos": [
+            {
+              "ts": "2026-05-28 20:31:23",
+              "tipo": "loan_offer",
+              "superficie": "in_app_modal",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": true
+            },
+            {
+              "ts": "2026-04-25 11:09:00",
+              "tipo": "savings_goal",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": true,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-12 17:35:07",
+              "tipo": "bill_reminder",
+              "superficie": "home_card",
+              "exposure_no": 2,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-04-08 10:35:25",
+              "tipo": "payroll_portability",
+              "superficie": "push",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            },
+            {
+              "ts": "2026-03-17 11:21:18",
+              "tipo": "bill_reminder",
+              "superficie": "home_card",
+              "exposure_no": 1,
+              "enganchado": false,
+              "descartado": false
+            }
+          ]
+        },
+        "decision": {
+          "asof": "2026-06-09 00:00:00",
+          "es_fragil": false,
+          "motivo_fragilidad": [],
+          "dias_a_payday": 9,
+          "ventana_payday": false,
+          "senales_por_nudge": {
+            "savings_goal": {
+              "pantalla_acoplada": "savings_cajita",
+              "horas_desde_senal": 21.97,
+              "momento": "on_time",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "limit_increase": {
+              "pantalla_acoplada": "limit_increase",
+              "horas_desde_senal": 16.58,
+              "momento": "on_time",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "bill_reminder": {
+              "pantalla_acoplada": "bill_payment",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 3,
+              "cupo_agotado": true
+            },
+            "loan_offer": {
+              "pantalla_acoplada": "loan_simulation",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            },
+            "invest_start": {
+              "pantalla_acoplada": "investments",
+              "horas_desde_senal": null,
+              "momento": "never",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 1,
+              "cupo_agotado": false
+            },
+            "payroll_portability": {
+              "pantalla_acoplada": "home",
+              "horas_desde_senal": 482.88,
+              "momento": "cold",
+              "hubo_start_24h": false,
+              "exposure_no_siguiente": 2,
+              "cupo_agotado": false
+            }
+          }
+        }
+      }
+    }
+  ]
+}
