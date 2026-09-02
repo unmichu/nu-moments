@@ -1,0 +1,55 @@
+{
+  "version": "v1",
+  "oferta": {
+    "savings_goal": {
+      "boton": "Crear una Cajita",
+      "razon": "Entró a Cajitas {cuando}{start}. Es su exposición #{exp} de {cap}."
+    },
+    "limit_increase": {
+      "boton": "Aumentar tu línea",
+      "razon": "Entró a aumento de línea {cuando}{start}. Es su exposición #{exp} de {cap}."
+    },
+    "loan_offer": {
+      "boton": "Simular un préstamo",
+      "razon": "Entró al simulador de préstamo {cuando}{start}. Es su exposición #{exp} de {cap}."
+    },
+    "bill_reminder": {
+      "boton": "Programar tu pago",
+      "razon": "Entró a pago de servicios {cuando}{start}. Es su exposición #{exp} de {cap}."
+    }
+  },
+  "momento": {
+    "on_time": "hace {h:.0f} h",
+    "warm": "hace {d:.0f} días"
+  },
+  "origen": {
+    "modelo": {
+      "etiqueta": "Lo explica el modelo",
+      "detalle": "El árbol y la regresión coinciden en la clase principal.",
+      "marca": null
+    },
+    "regla": {
+      "etiqueta": "Lo explica la regla",
+      "detalle": "El árbol y la regresión no coinciden: la explicación cae a la regla de recencia.",
+      "marca": "explicación por regla"
+    },
+    "paquete": {
+      "etiqueta": "Paquete precalculado",
+      "detalle": "Respuesta servida por el nivel 3 (demo_pack.json).",
+      "marca": "respaldo precalculado"
+    }
+  },
+  "coletillas": {
+    "start": " y llegó a iniciar el flujo",
+    "payday": " Además está a {dias} días de su día de pago, cuando esa acción es hasta 5x más probable.",
+    "sustitucion": " Sustituimos el aumento de línea, que hoy le haría daño.",
+    "desacuerdo": " (explicación por regla: el árbol y la regresión no coinciden en la clase principal)"
+  },
+  "silencio": {
+    "sin_senal": "No hay ninguna señal fresca de intención en la app. Sin señal el enganche cae a 10.3 %: hoy el asistente permanece en silencio.",
+    "cupo_agotado": "Tiene la intención, pero ya vio ese mensaje {n} veces. La 3ª exposición convierte 3.51 % y provoca 2.53 % de baja —0.72 bajas por cada clic—. El cupo es 2.",
+    "veto_fragilidad": "Detectamos que quiere ampliar su línea, pero {motivo}. Ofrecerle más crédito hoy le costaría días en descubierto mañana. Nos callamos.",
+    "opt_out": "Este cliente desactivó las notificaciones. No le hablamos.",
+    "fuera_de_catalogo": "La señal apunta a un producto fuera del catálogo del piloto ({producto})."
+  }
+}

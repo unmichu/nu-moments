@@ -3,8 +3,9 @@ import os
 import duckdb
 import pandas as pd
 
-BASE = "/Users/miguel.soto/Downloads/hackathon/d3_intent/data"
-OUT = "/Users/miguel.soto/Downloads/hackathon/recon/out"
+_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE = os.path.join(_ROOT, "data")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out")
 os.makedirs(OUT, exist_ok=True)
 
 pd.set_option("display.width", 250)

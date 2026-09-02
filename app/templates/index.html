@@ -1,0 +1,2233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nu-moments · tu asistente que sabe cuándo actuar</title>
+<script>
+// El tema se aplica ANTES de pintar para que no haya destello. Sin red.
+(function(){
+  try{
+    var g = localStorage.getItem('nu-moments-tema');
+    if(!g){ g = matchMedia('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro'; }
+    document.documentElement.setAttribute('data-tema', g);
+  }catch(e){ document.documentElement.setAttribute('data-tema','claro'); }
+})();
+</script>
+<script defer src="/static/alpine.min.js"></script>
+<style>
+:root{
+  --morado:#820AD1; --morado-osc:#5B0A93;
+  --acento:#7A0BC4;            /* texto e iconos interactivos */
+  --acento-suave:#F3E8FB;      /* fondos de acento */
+  --tinta:#16121A; --gris:#5F5869; --linea:#E2DCE8;
+  --fondo:#FAF8FC; --panel:#FFFFFF; --panel-2:#F6F2FA;
+  --verde:#0B7A44; --ambar:#8A5200; --rojo:#B3251E;
+  --verde-f:#E3F5EA; --ambar-f:#FBF0DA; --rojo-f:#FBE7E6; --neutro-f:#EDEAF1;
+  --cabecera:#820AD1; --cabecera-txt:#FFFFFF;
+  --radio:14px; --sombra:0 1px 2px rgba(22,18,26,.06);
+  /* gráficas · el segmento del cliente lleva el morado de la marca y el resto
+     tonos apagados: lo que se busca de un vistazo es «¿cuál soy yo?».
+     Los tonos están elegidos para separarse 3:1 del fondo de su tarjeta; el del
+     cliente además va marcado con forma (raya y punta), nunca solo con color. */
+  --seg-mio:#820AD1; --seg1:#9B7BBE; --seg2:#6B88B0; --seg3:#A98A55;
+  --seg-sil:#C7BED2; --barra:#948AA3;
+}
+[data-tema="oscuro"]{
+  --morado:#A855F7; --morado-osc:#7E22CE;
+  --acento:#D3AFF5;
+  --acento-suave:#2A1440;
+  --tinta:#F2EEF7; --gris:#A9A1B4; --linea:#3A3243;
+  --fondo:#141019; --panel:#1D1826; --panel-2:#241E2F;
+  --verde:#5FD69A; --ambar:#E3B15C; --rojo:#F08C86;
+  --verde-f:#16311F; --ambar-f:#33260F; --rojo-f:#3A1B1A; --neutro-f:#2A2434;
+  --cabecera:#2A1440; --cabecera-txt:#F2EEF7;
+  --sombra:0 1px 2px rgba(0,0,0,.4);
+  --seg-mio:#B478F0; --seg1:#8A6BAE; --seg2:#6A87AA; --seg3:#A08351;
+  --seg-sil:#4A4356; --barra:#6F667E;
+}
+/* `min-width:0` en todo: el mínimo automático de un hijo de flex o de grid es
+   su ancho de contenido mínimo, y basta un `white-space:nowrap` olvidado para
+   que ese mínimo reviente la pista, la columna, `main` y al final el `body`.
+   Con esto el contenido se ajusta o desborda dentro de su caja, nunca fuera. */
+*{box-sizing:border-box;min-width:0}
+[x-cloak]{display:none!important}
+body{margin:0;background:var(--fondo);color:var(--tinta);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acento)}
+:focus-visible{outline:3px solid var(--morado);outline-offset:2px;border-radius:6px}
+[data-tema="oscuro"] :focus-visible{outline-color:#D3AFF5}
+
+/* Ningún texto largo ni ninguna palabra sin espacios puede empujar la página:
+   parte la palabra antes de desbordar. Es el cinturón del ancho. */
+p,li,dd,dt,td,th,code,h1,h2,h3,summary{overflow-wrap:anywhere}
+
+/* Solo para lector de pantalla: la alternativa textual de cada gráfica cuando
+   no cabe enseñarla escrita. Nunca `display:none`, que la ocultaría también
+   para quien la necesita. */
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;border:0}
+
+header{background:var(--cabecera);color:var(--cabecera-txt);padding:16px 22px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;max-width:100%}
+@media(max-width:560px){header{padding:14px 12px;gap:10px}}
+header h1{font-size:19px;margin:0;font-weight:650;letter-spacing:-.2px}
+header .lema{opacity:.9;font-size:13px}
+header .der{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  max-width:100%}
+.pill{border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;
+  background:rgba(255,255,255,.18);white-space:nowrap;display:inline-flex;
+  align-items:center;gap:6px;color:var(--cabecera-txt);max-width:100%}
+[data-tema="oscuro"] .pill{background:rgba(255,255,255,.10)}
+.pill.ok{background:#0B7A44;color:#fff}
+.pill.fb{background:#8A5200;color:#fff}
+.corte-sel{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.30);
+  color:var(--cabecera-txt);border-radius:999px;padding:5px 10px;font:inherit;font-size:12px;
+  font-weight:600;cursor:pointer;max-width:100%;text-overflow:ellipsis}
+.corte-sel option{background:var(--panel);color:var(--tinta)}
+.tema-btn{background:rgba(255,255,255,.18);border:0;color:var(--cabecera-txt);
+  border-radius:999px;padding:6px 12px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.tema-btn:hover{background:rgba(255,255,255,.30)}
+
+/* ---------------- ayuda accesible: ratón, teclado y toque ---------------- */
+/* `flex:0 0 auto`: `*{min-width:0}` deja que este envoltorio encoja, y cuando
+   la etiqueta de al lado es larga la caja bajaba de 17 px y el botón redondo
+   sobresalía por la derecha (4-5 px a 320 px, 3 px a 2560 px). El botón tiene
+   un tamaño fijo; su envoltorio no debe poder quedarse más estrecho que él. */
+.ay{position:relative;display:inline-flex;align-items:center;flex:0 0 auto}
+.ay-b{width:17px;height:17px;min-width:17px;border-radius:50%;border:1px solid currentColor;
+  background:transparent;color:inherit;font:inherit;font-size:11px;line-height:1;
+  cursor:pointer;padding:0;opacity:.8;display:inline-flex;align-items:center;justify-content:center}
+.ay-b:hover{opacity:1}
+.ay-p{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  width:min(320px,78vw);background:var(--panel);color:var(--tinta);border:1px solid var(--linea);
+  border-radius:10px;padding:11px 13px;font-size:12.5px;line-height:1.5;font-weight:400;
+  box-shadow:0 8px 24px rgba(22,18,26,.18);z-index:60;text-align:left;white-space:normal}
+[data-tema="oscuro"] .ay-p{box-shadow:0 8px 24px rgba(0,0,0,.55)}
+.ay-p b{display:block;margin-bottom:4px;color:var(--acento);font-size:11px;
+  text-transform:uppercase;letter-spacing:.07em}
+.ay-p .sub{display:block;margin-top:6px;color:var(--gris)}
+.ay.der .ay-p{left:auto;right:0;transform:none}
+/* La burbuja es `position:absolute` y mide `min(320px,78vw)`: centrada sobre su
+   botón, si el botón está a menos de 160 px del borde, se sale — y una burbuja
+   abierta que se sale genera scroll horizontal en toda la página. Por eso, por
+   debajo del ancho en el que `main` pasa a una columna, se ancla al viewport de
+   borde a borde: así no hay ancho de burbuja que pueda desbordar.
+   El límite era 700 px y dejaba una banda huérfana: entre 701 y 1020 px la
+   burbuja seguía siendo absoluta y sobresalía (70 px a 768, 38 px a 800).
+   Ahora coincide con el breakpoint de `main`, que es el mismo número y por eso
+   `test_la_burbuja_de_ayuda_esta_anclada_hasta_una_columna` los compara. */
+@media(max-width:1020px){
+  .ay-p,.ay.der .ay-p{position:fixed;left:10px;right:10px;top:auto;bottom:10px;
+    width:auto;max-width:none;transform:none;z-index:90}
+}
+
+main{display:grid;grid-template-columns:340px minmax(0,1fr);gap:20px;padding:20px;
+  max-width:1440px;margin:0 auto;align-items:start}
+@media(max-width:1020px){main{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){main{padding:12px;gap:12px}}
+.tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:var(--radio);
+  padding:16px 18px;margin-bottom:16px;box-shadow:var(--sombra)}
+.tarjeta h2{font-size:12px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--gris);margin:0 0 12px;font-weight:700;display:flex;align-items:center;gap:7px}
+.caso{border:1px solid var(--linea);border-radius:11px;padding:11px 12px;
+  margin-bottom:8px;cursor:pointer;background:var(--panel);transition:.12s;width:100%;
+  text-align:left;font:inherit;color:inherit;display:block}
+.caso:hover{border-color:var(--morado);background:var(--acento-suave)}
+.caso.sel{border-color:var(--morado);background:var(--acento-suave);
+  box-shadow:inset 3px 0 0 var(--morado)}
+.caso .t{font-weight:620;font-size:13.5px;line-height:1.35}
+.caso .id{font-size:11.5px;color:var(--gris);margin-top:3px;font-variant-numeric:tabular-nums}
+.buscar,.sel-campo{width:100%;padding:9px 11px;border:1px solid var(--linea);border-radius:10px;
+  font:inherit;margin-bottom:10px;background:var(--panel);color:var(--tinta)}
+.buscar:focus,.sel-campo:focus{border-color:var(--morado)}
+.filtros{display:grid;gap:8px;margin-bottom:10px}
+.conteo{font-size:11.5px;color:var(--gris);margin:-4px 0 10px;line-height:1.45}
+.conteo b{color:var(--acento)}
+.campo-et{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--gris);font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+
+.kv{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;font-size:13.5px}
+.kv dt{color:var(--gris);display:flex;align-items:center;gap:6px}
+.kv dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.dos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media(max-width:1340px){.dos{grid-template-columns:minmax(0,1fr)}}
+.badge{display:inline-block;border-radius:6px;padding:2px 7px;font-size:11px;
+  font-weight:700;letter-spacing:.02em}
+.b-on_time{background:var(--verde-f);color:var(--verde)}
+.b-warm{background:var(--ambar-f);color:var(--ambar)}
+.b-cold,.b-never{background:var(--neutro-f);color:var(--gris)}
+.b-fragil{background:var(--rojo-f);color:var(--rojo)}
+
+/* ------------------------- el banner, como en la app -------------------- */
+/* La vista inicial es solo esto: título, la frase y el botón del porqué. El
+   detalle —factores, referencias, gráficas, traza— vive detrás del botón. */
+.oferta{border:2px solid var(--morado);border-radius:var(--radio);padding:18px;
+  background:var(--panel)}
+.oferta h3{margin:0 0 6px;font-size:19px;letter-spacing:-.3px}
+.oferta .frase{margin:0;font-size:14.5px;line-height:1.5}
+.acciones{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.boton{background:var(--morado);color:#fff;border:0;border-radius:10px;
+  padding:11px 18px;font:inherit;font-weight:640;cursor:pointer}
+.boton:hover{background:var(--morado-osc)}
+[data-tema="oscuro"] .boton{color:#1A0E28}
+.boton.sec{background:var(--panel);color:var(--acento);border:1px solid var(--morado)}
+[data-tema="oscuro"] .boton.sec{color:var(--acento)}
+.boton.sec:hover{background:var(--acento-suave)}
+.boton.chico{padding:8px 14px;font-size:13px}
+.leyenda{margin-top:12px;padding:12px 14px;background:var(--panel-2);
+  border-left:3px solid var(--morado);border-radius:0 10px 10px 0;font-size:14px}
+.leyenda .et{font-size:11px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--acento);font-weight:700;margin-bottom:4px}
+.meta-of{font-size:12.5px;color:var(--gris)}
+
+/* ------------------- descomposición del score en 3 factores ------------- */
+.desglose{margin-top:14px;border:1px solid var(--linea);border-radius:12px;
+  background:var(--panel-2);padding:14px}
+.desglose .cab{font-size:11px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--gris);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:7px;
+  flex-wrap:wrap}
+.factores{display:grid;gap:10px;align-items:stretch;
+  grid-template-columns:repeat(3,minmax(0,1fr)) auto minmax(0,1fr)}
+@media(max-width:1100px){.factores{grid-template-columns:minmax(0,1fr)}.factores .por{display:none}}
+.factor-w{display:flex;align-items:stretch;gap:10px}
+.factor-w > .factor{flex:1 1 auto;min-width:0}
+.factor{background:var(--panel);border:1px solid var(--linea);border-radius:10px;padding:11px 12px}
+.factor .et{font-size:11px;color:var(--gris);font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;display:flex;align-items:center;gap:6px;margin-bottom:6px;line-height:1.3}
+.factor .n{font-size:22px;font-weight:750;letter-spacing:-.5px;font-variant-numeric:tabular-nums;
+  color:var(--tinta)}
+.factor .ref{font-size:11.5px;color:var(--gris);margin-top:5px;line-height:1.45}
+.factor .ref b{color:var(--acento);font-weight:700}
+/* `total` y no `res`: la clase `.res` es la insignia de la traza y trae
+   `white-space:nowrap`. Compartirla convertía el ancho de «Percentil 99.52 %
+   frente a los demás en este corte» en el mínimo de la columna, y de ahí en el
+   scroll horizontal de toda la página. */
+.factor.total{border-color:var(--morado);background:var(--acento-suave)}
+.por{display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gris);
+  font-weight:700}
+.como-se-lee{margin-top:10px;font-size:12.5px;color:var(--gris);line-height:1.5}
+
+/* ======================================================================== */
+/* EL «POR QUÉ», CON GRÁFICAS                                               */
+/* Todo el dibujo es CSS salvo la curva de fatiga, que es un SVG en línea.   */
+/* Los porcentajes y los conteos vienen escritos de la API: la gráfica es la */
+/* misma cifra en otra forma, nunca una cifra distinta.                     */
+/* ======================================================================== */
+.porque{margin-top:16px;display:grid;gap:14px}
+.pq{display:grid;gap:14px}
+.g{border:1px solid var(--linea);border-radius:12px;background:var(--panel);padding:14px}
+.g-cab{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--gris);
+  font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.g-lee{font-size:13px;line-height:1.5;margin:10px 0 0}
+.g-lee b{color:var(--acento)}
+.g-nota{font-size:11.5px;color:var(--gris);margin:6px 0 0;line-height:1.45}
+/* `min(100%,260px)` y no `260px` a secas: el mínimo de una pista `minmax` es
+   un suelo duro, así que a 320 px la columna seguía midiendo 260 px dentro de
+   un contenedor de 218 px y la tarjeta se salía por la derecha. Con `min()` el
+   suelo cede cuando no cabe. */
+.g-dos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+
+/* ---- 1 · el reparto de los 38 000, con su segmento marcado ---- */
+.apilada{display:flex;height:26px;border-radius:7px;overflow:hidden;
+  border:1px solid var(--linea);background:var(--panel-2)}
+.apilada i{display:block;height:100%;min-width:2px}
+.apilada i.s1{background:var(--seg1)}
+.apilada i.s2{background:var(--seg2)}
+.apilada i.s3{background:var(--seg3)}
+.apilada i.sil{background:var(--seg-sil)}
+.apilada i.mio{background:var(--seg-mio);box-shadow:inset 0 0 0 2px var(--panel);min-width:6px}
+.g-leyenda{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:5px;font-size:12.5px}
+.g-leyenda li{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.g-leyenda .sw{width:11px;height:11px;border-radius:3px;flex:0 0 auto;
+  border:1px solid rgba(0,0,0,.12);transform:translateY(1px)}
+[data-tema="oscuro"] .g-leyenda .sw{border-color:rgba(255,255,255,.18)}
+.sw.s1{background:var(--seg1)}
+.sw.s2{background:var(--seg2)}
+.sw.s3{background:var(--seg3)}
+.sw.sil{background:var(--seg-sil)}
+.sw.mio{background:var(--seg-mio)}
+.g-leyenda .nm{flex:1 1 auto}
+.g-leyenda .vl{font-variant-numeric:tabular-nums;font-weight:650}
+.g-leyenda li.mio{font-weight:700}
+.g-leyenda li.mio .nm::after{content:" ← este cliente";color:var(--acento);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:11.5px;background:var(--panel-2);border:1px solid var(--linea);
+  border-radius:999px;padding:3px 9px;color:var(--gris)}
+.chip b{color:var(--tinta);font-variant-numeric:tabular-nums}
+
+/* ---- 2 · el histograma con la posición del cliente ---- */
+.hist-caja{position:relative}
+.hist{display:flex;align-items:flex-end;gap:1px;height:110px;
+  border-bottom:1px solid var(--linea);padding:0 1px}
+.hist i{flex:1 1 0;background:var(--barra);border-radius:2px 2px 0 0;min-height:2px}
+.hist i.mio{background:var(--seg-mio);box-shadow:0 0 0 1px var(--panel)}
+/* Un cubo con 0 clientes NO es un cubo bajito: el suelo de 1.8 % que mantiene
+   visibles los cubos de 1 o 2 personas dibujaba igual el vacío y el poblado.
+   El vacío se queda sin barra y solo deja su hueco marcado con puntos. */
+.hist i.vacio{background:transparent;min-height:0;box-shadow:none;border-radius:0;
+  border-top:2px dotted var(--linea)}
+.hist-marcas{position:absolute;left:1px;right:1px;top:0;bottom:0;pointer-events:none}
+.hist-marcas span{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px}
+.hist-marcas span.mediana{background:var(--gris)}
+.hist-marcas span.tasa_base{background:var(--ambar)}
+.hist-marcas span.cliente{background:var(--seg-mio);width:3px;margin-left:-1.5px}
+.hist-marcas span.cliente::after{content:"";position:absolute;top:-5px;left:50%;
+  transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;
+  border-top:6px solid var(--seg-mio)}
+.hist-eje{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:11px;color:var(--gris);margin-top:5px;font-variant-numeric:tabular-nums;gap:8px}
+.hist-eje .titulo{font-variant-numeric:normal;text-align:center;font-weight:650;
+  letter-spacing:.02em;text-transform:uppercase;font-size:10px}
+/* La advertencia que separa las dos lecturas: arriba la posición es
+   probabilidad en escala log; abajo, en `.regla`, es el percentil. */
+.eje-nota{margin:7px 0 0;font-size:11.5px;line-height:1.45;color:var(--gris);
+  border-left:3px solid var(--ambar);padding:2px 0 2px 9px}
+.eje-nota b{color:var(--tinta);font-variant-numeric:tabular-nums}
+/* La franja del score vive en su propia caja para que no se lea como una
+   continuación del eje de arriba. */
+.otra-escala{margin-top:16px;padding:12px 13px;border:1px solid var(--linea);
+  border-radius:11px;background:var(--panel-2)}
+.otra-escala .cab{font-size:11px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--acento);font-weight:700;margin-bottom:6px}
+.hist-ref{display:flex;flex-wrap:wrap;gap:12px;margin-top:9px;font-size:12px}
+.hist-ref span{display:inline-flex;align-items:center;gap:6px;color:var(--gris)}
+.hist-ref i{width:3px;height:13px;border-radius:2px;flex:0 0 auto}
+.hist-ref i.m-mediana{background:var(--gris)}
+.hist-ref i.m-tasa_base{background:var(--ambar)}
+.hist-ref i.m-cliente{background:var(--seg-mio);width:4px}
+.hist-ref b{color:var(--tinta);font-variant-numeric:tabular-nums}
+
+/* ---- 3 · la barra del cliente contra la de la población ---- */
+.cb + .cb{margin-top:14px;padding-top:14px;border-top:1px solid var(--linea)}
+.cb-t{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;
+  font-weight:650;margin-bottom:9px}
+.veces{background:var(--acento-suave);color:var(--acento);border-radius:999px;
+  padding:2px 9px;font-size:12px;font-weight:750;font-variant-numeric:tabular-nums}
+.cb-fila{display:grid;grid-template-columns:88px minmax(0,1fr) 74px;gap:9px;
+  align-items:center;margin-top:6px}
+@media(max-width:420px){.cb-fila{grid-template-columns:74px minmax(0,1fr) 66px;gap:6px}}
+.cb-et{font-size:11.5px;color:var(--gris);font-weight:650}
+.cb-pista{height:16px;border-radius:5px;background:var(--panel-2);
+  border:1px solid var(--linea);overflow:hidden}
+.cb-pista i{display:block;height:100%;background:var(--seg2);min-width:2px}
+.cb-pista i.mio{background:var(--seg-mio)}
+.cb-v{font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---- 4 · la recencia de la señal en los umbrales de la política ---- */
+.rec{position:relative;height:34px;border-radius:7px;overflow:hidden;
+  border:1px solid var(--linea);margin-top:2px}
+.rec-z{position:absolute;top:0;bottom:0;overflow:hidden}
+.rec-z.on_time{background:var(--verde-f);color:var(--verde)}
+.rec-z.warm{background:var(--ambar-f);color:var(--ambar)}
+.rec-z.cold{background:var(--neutro-f);color:var(--gris)}
+.rec-m{position:absolute;top:-1px;bottom:-1px;width:3px;margin-left:-1.5px;
+  background:var(--seg-mio);box-shadow:0 0 0 1px var(--panel)}
+.rec-eje{position:relative;height:16px;margin-top:3px;font-size:10.5px;color:var(--gris);
+  font-variant-numeric:tabular-nums}
+.rec-eje span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.rec-eje span.ini{transform:none;left:0}
+.rec-eje span.fin{transform:none;right:0;left:auto}
+.rec-leyenda{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:11.5px;
+  color:var(--gris)}
+.rec-leyenda span{display:inline-flex;align-items:center;gap:5px}
+.rec-leyenda i{width:11px;height:11px;border-radius:3px;flex:0 0 auto}
+.rec-leyenda i.on_time{background:var(--verde-f);box-shadow:inset 0 0 0 1px var(--verde)}
+.rec-leyenda i.warm{background:var(--ambar-f);box-shadow:inset 0 0 0 1px var(--ambar)}
+.rec-leyenda i.cold{background:var(--neutro-f);box-shadow:inset 0 0 0 1px var(--gris)}
+.rec-leyenda b{color:var(--tinta)}
+.fat-max{font-size:10.5px;color:var(--gris);font-variant-numeric:tabular-nums}
+
+/* ---- 5 · el cupo y la curva de fatiga ---- */
+.casillas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.casilla{min-width:64px;flex:0 0 auto;border:1px solid var(--linea);border-radius:9px;
+  padding:8px 12px;font-size:12px;text-align:center;background:var(--panel-2);color:var(--gris)}
+.casilla b{display:block;font-size:15px;font-weight:750;color:var(--tinta)}
+.casilla.usada{background:var(--neutro-f);border-color:var(--gris)}
+.casilla.siguiente{border-color:var(--morado);background:var(--acento-suave);color:var(--acento)}
+.casilla.siguiente b{color:var(--acento)}
+.fat{width:100%;height:auto;display:block;color:var(--gris);margin-top:6px}
+.fat .rejilla{stroke:var(--linea);stroke-width:1}
+.fat .eng{fill:none;stroke:var(--verde);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.fat .baja{fill:none;stroke:var(--rojo);stroke-width:2.5;stroke-dasharray:5 4;
+  stroke-linejoin:round;stroke-linecap:round}
+.fat .cap{stroke:var(--morado);stroke-width:2;stroke-dasharray:4 3}
+.fat .punto{fill:var(--seg-mio);stroke:var(--panel);stroke-width:2.5}
+.fat-eje{position:relative;height:15px;font-size:10.5px;color:var(--gris);
+  font-variant-numeric:tabular-nums}
+.fat-eje span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.fat-leyenda{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--gris);margin-top:8px}
+.fat-leyenda span{display:inline-flex;align-items:center;gap:6px}
+.fat-leyenda i{width:16px;height:3px;border-radius:2px;flex:0 0 auto}
+
+/* ---- la regla del percentil del score ---- */
+.regla{position:relative;height:14px;border-radius:7px;background:linear-gradient(
+  90deg,var(--panel-2),var(--acento-suave));border:1px solid var(--linea);margin-top:8px}
+.regla i{position:absolute;top:-3px;bottom:-3px;width:3px;margin-left:-1.5px;
+  background:var(--seg-mio);border-radius:2px}
+.regla-eje{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:10.5px;color:var(--gris);margin-top:4px;font-variant-numeric:tabular-nums;gap:8px}
+.regla-eje .titulo{font-variant-numeric:normal;text-align:center;font-weight:650;
+  letter-spacing:.02em;text-transform:uppercase;font-size:10px}
+
+.silencio{border:1px solid var(--linea);border-radius:var(--radio);padding:26px;
+  background:var(--panel);text-align:center}
+.silencio .icono{width:46px;height:46px;border-radius:50%;background:var(--acento-suave);
+  color:var(--acento);display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;font-size:22px;font-weight:700}
+.silencio h3{margin:0 0 10px;font-size:21px;letter-spacing:-.3px}
+.silencio .texto{max-width:620px;margin:0 auto;color:var(--tinta);font-size:15px}
+.contador{margin:18px auto 0;max-width:620px;background:var(--acento-suave);
+  border-radius:11px;padding:13px 16px}
+.contador .n{font-size:27px;font-weight:750;color:var(--acento);
+  font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.contador .d{font-size:12.5px;color:var(--gris);margin-top:2px}
+.barra{height:8px;border-radius:4px;background:var(--panel);margin-top:10px;overflow:hidden;display:flex}
+.barra i{display:block;background:var(--morado)}
+.barra u{display:block;background:var(--ambar)}
+
+details.traza{margin-top:16px;border:1px solid var(--linea);border-radius:11px;
+  background:var(--panel);text-align:left}
+details.traza summary{cursor:pointer;padding:11px 15px;font-size:13px;font-weight:640;
+  color:var(--acento);list-style:none;display:flex;gap:8px;align-items:center}
+details.traza summary::-webkit-details-marker{display:none}
+details.traza summary::before{content:"▸";transition:.15s}
+details.traza[open] summary::before{transform:rotate(90deg)}
+
+/* ------------------------- el recorrido de las puertas ------------------ */
+.ruta{display:flex;gap:5px;padding:4px 15px 12px;flex-wrap:wrap;align-items:center}
+.ruta .paso{flex:1 1 42px;min-width:42px;height:7px;border-radius:4px;background:var(--neutro-f)}
+.ruta .paso.pasa{background:var(--verde)}
+.ruta .paso.cierra{background:var(--rojo)}
+.ruta .paso.no_activa{background:repeating-linear-gradient(45deg,var(--neutro-f),
+  var(--neutro-f) 3px,var(--linea) 3px,var(--linea) 6px)}
+.puertas{padding:0 15px 12px}
+.puerta{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;padding:10px 0;
+  border-top:1px solid var(--linea);align-items:start}
+@media(max-width:480px){.puerta{grid-template-columns:26px minmax(0,1fr)}
+  .puerta > .res{grid-column:2;justify-self:start}}
+.puerta:first-child{border-top:0}
+.puerta .ord{width:26px;height:26px;border-radius:50%;background:var(--neutro-f);color:var(--gris);
+  font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.puerta.pasa .ord{background:var(--verde-f);color:var(--verde)}
+.puerta.cierra .ord{background:var(--rojo-f);color:var(--rojo)}
+.puerta .nom{font-weight:640;font-size:13.5px;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.puerta .que{font-size:12.5px;color:var(--gris);margin-top:3px;line-height:1.45}
+.puerta .prods{font-size:12px;color:var(--rojo);margin-top:4px;font-weight:600}
+.puerta code{font-size:11px;color:var(--gris);font-weight:400}
+.res{font-weight:700;font-size:11px;border-radius:6px;padding:3px 8px;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:5px}
+.res.pasa{background:var(--verde-f);color:var(--verde)}
+.res.cierra{background:var(--rojo-f);color:var(--rojo)}
+.res.no_activa,.res.no_evaluada{background:var(--neutro-f);color:var(--gris)}
+
+.grupo-sil{padding:2px 15px 14px}
+.grupo{border:1px solid var(--linea);border-radius:10px;margin-top:10px;overflow:hidden}
+.grupo .gcab{background:var(--panel-2);padding:9px 12px;display:flex;gap:8px;align-items:center;
+  flex-wrap:wrap;font-size:13px;font-weight:640}
+.grupo .gque{padding:8px 12px 0;font-size:12.5px;color:var(--gris);line-height:1.45}
+.sil-row{padding:9px 12px;font-size:13.5px;border-top:1px solid var(--linea);margin-top:8px}
+.sil-row .p{font-weight:640}
+.sil-row .r{color:var(--gris);margin-top:2px;font-size:13px}
+
+/* --------------------- línea del tiempo (sin red) --------------------- */
+/* El eje necesita un ancho mínimo para que dos marcas separadas por horas no
+   caigan en el mismo píxel. Por debajo de ese mínimo se desplaza **dentro** de
+   `.tl-scroll`; nunca arrastra la página. */
+.tl-scroll{overflow-x:auto;overflow-y:hidden;padding-bottom:2px}
+.tl{position:relative;border:1px solid var(--linea);border-radius:12px;
+  background:var(--panel-2);padding:14px 14px 8px;overflow:hidden;min-width:480px}
+.tl-ciega{position:absolute;top:0;bottom:0;right:0;background:repeating-linear-gradient(
+  135deg,transparent,transparent 5px,var(--linea) 5px,var(--linea) 6px);opacity:.75;
+  pointer-events:none}
+.tl-corte{position:absolute;top:0;bottom:0;width:2px;background:var(--morado);pointer-events:none}
+.tl-corte span{position:absolute;top:2px;left:4px;font-size:10px;font-weight:700;
+  color:var(--acento);white-space:nowrap;text-transform:uppercase;letter-spacing:.07em}
+.tl-fila{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;align-items:center;
+  margin-bottom:10px;position:relative}
+.tl-et{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--gris);
+  font-weight:700;line-height:1.3}
+.tl-pista{position:relative;height:26px;border-radius:6px;background:var(--panel);
+  border:1px solid var(--linea)}
+.tl-m{position:absolute;top:50%;transform:translate(-50%,-50%);border:0;padding:0;
+  cursor:pointer;background:var(--gris)}
+.tl-m.nav{width:9px;height:9px;border-radius:50%}
+.tl-m.nav.acoplada{background:var(--acento);width:11px;height:11px}
+.tl-m.av{width:5px;height:18px;border-radius:2px;background:var(--gris)}
+.tl-m.av.eng{background:var(--verde)}
+.tl-m.av.desc{background:var(--ambar)}
+.tl-m:hover,.tl-m:focus-visible{outline:2px solid var(--morado);outline-offset:2px;z-index:5}
+.tl-eje{display:flex;justify-content:space-between;font-size:10.5px;color:var(--gris);
+  font-variant-numeric:tabular-nums;padding-top:2px}
+.tl-leyenda{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--gris);margin-top:10px}
+.tl-leyenda span{display:inline-flex;align-items:center;gap:5px}
+.tl-leyenda i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.tl-leyenda i.b{width:5px;height:14px;border-radius:2px}
+.tl-detalle{margin-top:10px;padding:10px 12px;border-left:3px solid var(--morado);
+  background:var(--panel-2);border-radius:0 10px 10px 0;font-size:13px;min-height:44px}
+.tl-detalle .ts{color:var(--gris);font-size:12px;font-variant-numeric:tabular-nums}
+.tl-vacio{font-size:12.5px;color:var(--gris);padding:6px 0}
+.lista{list-style:none;padding:0;margin:0;font-size:13px}
+.lista li{padding:7px 0;border-top:1px solid var(--linea);display:flex;gap:10px}
+.lista li:first-child{border-top:0}
+.lista .ts{color:var(--gris);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12px}
+/* Una tabla no baja de su ancho de contenido mínimo: en un móvil se desplaza
+   dentro de su propio marco en vez de empujar el `body`. */
+.tabla-scroll{overflow-x:auto}
+table.t8{width:100%;border-collapse:collapse;font-size:13px;min-width:340px}
+table.t8 th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--gris);padding:6px 0;border-bottom:1px solid var(--linea);font-weight:700}
+table.t8 th .ay{vertical-align:middle}
+table.t8 td{padding:8px 0;border-top:1px solid var(--linea);vertical-align:top}
+table.t8 code{font-size:12px;color:var(--gris)}
+.vacio{color:var(--gris);font-size:13.5px}
+.cargando{color:var(--gris);font-size:14px;padding:22px;text-align:center}
+.narrativa{font-size:12.5px;color:var(--gris);margin-top:6px;line-height:1.45}
+
+/* ======================================================================== */
+/* BARRA DE PESTAÑAS                                                        */
+/* Dos pestañas de verdad (`role="tab"`, flechas y Inicio/Fin) y un enlace   */
+/* normal al panorama, que es otra página. El enlace vive FUERA del          */
+/* `tablist`: un `role="tab"` que navega a otra URL mentiría a quien use     */
+/* lector de pantalla.                                                      */
+/* La pestaña activa no se distingue solo por color: lleva la raya inferior  */
+/* y el peso de la letra, que se ven en claro, en oscuro y sin color.        */
+/* ======================================================================== */
+.pestanas{display:flex;flex-wrap:wrap;align-items:flex-end;gap:4px;
+  padding:0 22px;background:var(--panel);border-bottom:1px solid var(--linea)}
+@media(max-width:560px){.pestanas{padding:0 8px}}
+.pestanas-in{display:flex;flex-wrap:wrap;gap:4px}
+.pestana{appearance:none;background:transparent;border:0;border-bottom:3px solid transparent;
+  color:var(--gris);font:inherit;font-size:14px;font-weight:620;padding:12px 14px;
+  cursor:pointer;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  border-radius:9px 9px 0 0;margin-bottom:-1px;white-space:normal}
+.pestana:hover{color:var(--acento);background:var(--panel-2)}
+.pestana[aria-selected="true"]{color:var(--acento);border-bottom-color:var(--morado);
+  font-weight:780}
+.pestana .fl{font-size:11px;opacity:.8;font-weight:600}
+.pestana.enlace{margin-left:auto}
+
+/* ======================================================================== */
+/* PESTAÑA «CÓMO FUNCIONA»                                                  */
+/* Se lee de arriba abajo. Ninguna cifra está escrita aquí: todas vienen de  */
+/* `/api/explicacion`, que las cuenta sobre los 38 000 del corte.            */
+/* ======================================================================== */
+.explica{max-width:1080px;margin:0 auto;padding:22px}
+@media(max-width:560px){.explica{padding:14px 12px}}
+.ex-lede{font-size:16.5px;line-height:1.6;margin:0 0 10px;max-width:64ch}
+.ex-lede b{color:var(--acento)}
+.ex-sub{font-size:13.5px;line-height:1.6;color:var(--gris);margin:0;max-width:70ch}
+.ex-sec{margin-top:30px}
+.ex-sec > h2{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--gris);
+  margin:0 0 4px;font-weight:700}
+.ex-sec > h3{font-size:22px;letter-spacing:-.4px;margin:0 0 8px;line-height:1.25}
+.ex-p{font-size:14.5px;line-height:1.6;margin:0 0 10px;max-width:70ch}
+.ex-nota{font-size:12.5px;line-height:1.5;color:var(--gris);margin:10px 0 0;
+  border-left:3px solid var(--linea);padding:2px 0 2px 10px;max-width:74ch}
+.ex-aviso{margin:12px 0 0;padding:12px 14px;border-radius:11px;background:var(--ambar-f);
+  color:var(--ambar);font-size:13.5px;line-height:1.55;border:1px solid transparent}
+.ex-aviso b{display:block;margin-bottom:3px}
+
+/* --- el recorrido de un vistazo: señal → 3 números → 8 puertas → salida -- */
+.ex-mapa{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:14px 0 0}
+.ex-hito{flex:1 1 150px;border:1px solid var(--linea);border-radius:11px;background:var(--panel);
+  padding:10px 12px}
+.ex-hito .et{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--gris);
+  font-weight:700}
+.ex-hito .tx{font-size:13px;line-height:1.4;margin-top:3px;font-weight:620}
+.ex-hito.fin{border-color:var(--morado);background:var(--acento-suave)}
+.ex-fl{display:flex;align-items:center;color:var(--gris);font-size:18px;font-weight:700}
+
+/* --- las tres preguntas, en tarjetas --- */
+.ex-rejilla{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));
+  margin-top:14px}
+.ex-card{border:1px solid var(--linea);border-radius:12px;background:var(--panel);padding:15px 16px;
+  box-shadow:var(--sombra)}
+.ex-card.apagada{background:var(--panel-2)}
+.ex-card .ord{width:26px;height:26px;border-radius:50%;background:var(--acento-suave);
+  color:var(--acento);font-size:12px;font-weight:750;display:inline-flex;align-items:center;
+  justify-content:center;flex:0 0 auto}
+.ex-card h4{margin:0;font-size:16px;letter-spacing:-.2px;line-height:1.3}
+.ex-card .cab{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.ex-dl{margin:8px 0 0;font-size:13.5px;line-height:1.5}
+.ex-dl dt{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--gris);
+  font-weight:700;margin-top:9px}
+.ex-dl dd{margin:2px 0 0}
+.ex-marca{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 9px;
+  font-size:11px;font-weight:750;letter-spacing:.02em}
+.ex-marca.ml{background:var(--verde-f);color:var(--verde)}
+.ex-marca.no-ml{background:var(--ambar-f);color:var(--ambar)}
+.ex-marca.act{background:var(--acento-suave);color:var(--acento)}
+.ex-marca + .ex-marca{margin-left:6px}
+.ex-lista{list-style:none;padding:0;margin:6px 0 0;font-size:12.5px;color:var(--gris);
+  display:grid;gap:4px}
+.ex-lista li{display:flex;gap:7px;align-items:baseline}
+.ex-lista li::before{content:"·";color:var(--acento);font-weight:800}
+
+/* --- las ocho puertas --- */
+.ex-puerta{border:1px solid var(--linea);border-radius:12px;background:var(--panel);
+  padding:14px 15px;display:grid;gap:10px;grid-template-columns:30px minmax(0,1fr);
+  align-items:start;margin-top:10px}
+.ex-puerta.off{background:var(--panel-2);border-style:dashed}
+.ex-puerta .ord{width:30px;height:30px;border-radius:50%;background:var(--neutro-f);
+  color:var(--gris);font-size:12.5px;font-weight:750;display:flex;align-items:center;
+  justify-content:center}
+.ex-puerta.on .ord{background:var(--acento-suave);color:var(--acento)}
+.ex-puerta h4{margin:0;font-size:15.5px;letter-spacing:-.2px;line-height:1.3}
+.ex-puerta .top{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap;
+  justify-content:space-between}
+.ex-cifra{font-size:19px;font-weight:780;font-variant-numeric:tabular-nums;color:var(--acento);
+  letter-spacing:-.4px}
+.ex-cifra small{font-size:11.5px;font-weight:650;color:var(--gris);margin-left:5px;
+  letter-spacing:0}
+.ex-pista{height:9px;border-radius:5px;background:var(--panel-2);border:1px solid var(--linea);
+  overflow:hidden;margin-top:8px}
+.ex-pista i{display:block;height:100%;background:var(--morado);min-width:2px}
+.ex-puerta .bien{margin-top:8px;padding:9px 11px;border-radius:0 10px 10px 0;
+  background:var(--panel-2);border-left:3px solid var(--verde);font-size:13px;line-height:1.5}
+.ex-puerta .bien .et{font-size:10px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--verde);font-weight:750;display:block;margin-bottom:2px}
+
+/* --- los cuatro resultados --- */
+.ex-salida{border:1px solid var(--linea);border-radius:12px;background:var(--panel);padding:15px 16px}
+.ex-salida.callar{border-color:var(--morado);background:var(--acento-suave)}
+.ex-salida h4{margin:0 0 4px;font-size:17px;letter-spacing:-.2px}
+.ex-salida .n{font-size:26px;font-weight:780;color:var(--acento);font-variant-numeric:tabular-nums;
+  letter-spacing:-.6px;line-height:1.1}
+.ex-salida .n small{font-size:12.5px;font-weight:650;color:var(--gris);margin-left:6px;
+  letter-spacing:0}
+
+/* --- los nueve ejemplos --- */
+.ex-caso{border:1px solid var(--linea);border-radius:12px;background:var(--panel);padding:14px 15px}
+.ex-caso .qpasa{margin-top:8px;font-size:13.5px;font-weight:650;display:flex;gap:8px;
+  align-items:baseline;flex-wrap:wrap}
+.ex-caso .narr{font-size:12.5px;color:var(--gris);line-height:1.5;margin-top:7px}
+.ex-caso .idc{font-size:11px;color:var(--gris);font-variant-numeric:tabular-nums}
+.ex-tag{border-radius:999px;padding:3px 10px;font-size:11.5px;font-weight:750}
+.ex-tag.oferta{background:var(--verde-f);color:var(--verde)}
+.ex-tag.sustitucion{background:var(--ambar-f);color:var(--ambar)}
+.ex-tag.silencio{background:var(--neutro-f);color:var(--gris)}
+
+/* --- glosario --- */
+.ex-glo{border:1px solid var(--linea);border-radius:12px;background:var(--panel);padding:13px 15px}
+.ex-glo h4{margin:0 0 4px;font-size:14.5px;display:flex;gap:8px;align-items:baseline;
+  flex-wrap:wrap}
+.ex-glo p{margin:0;font-size:13px;line-height:1.55;color:var(--tinta)}
+.ex-glo .org{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gris);
+  font-weight:700}
+
+footer{padding:10px 24px 30px;color:var(--gris);font-size:11.5px;text-align:center}
+</style>
+</head>
+<body x-data="momentos()" x-init="arrancar()">
+
+<header>
+  <h1>nu&#8209;moments</h1>
+  <span class="lema">tu asistente que sabe cuándo actuar</span>
+  <div class="der">
+
+    <!-- selector de corte: las 5 fotos as-of que hay en disco -->
+    <span class="pill">
+      <label for="sel-corte">foto</label>
+      <select id="sel-corte" class="corte-sel" x-model="corteSel" @change="cambiarCorte()"
+              aria-label="Foto as-of con la que se decide">
+        <option value="">auto · la del escenario</option>
+        <template x-for="c in (ctx?.cortes ?? [])" :key="c.corte">
+          <option :value="c.corte"
+                  x-text="c.corte + ' · silencio ' + (c.cobertura?.pct_silencio_texto ?? '—')"></option>
+        </template>
+      </select>
+      <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+            @keydown.escape.window="cerrar()">
+        <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                :aria-expanded="v" aria-label="Qué son las fotos as-of">?</button>
+        <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+          <b>Foto as-of</b>
+          <span>«As-of» es «a fecha de»: la foto de los datos tal como estaban ese día.
+            Hay una tabla de <i>features</i> —las columnas que el modelo mira para
+            decidir, calculadas solo con lo ocurrido antes de esa fecha— por cada
+            corte. Elegir otra mueve la fecha desde la que
+            el sistema mira: cambia la decisión, y también cambia cuánta gente recibe aviso
+            ese día. Con «auto» cada escenario curado se evalúa en su propia fecha, que es
+            donde se verificó.</span>
+          <span class="sub" x-text="'Cortes disponibles: ' + (ctx?.cortes ?? []).map(c => c.corte).join(', ')"></span>
+        </span>
+      </span>
+    </span>
+
+    <!-- corte, con su explicación -->
+    <span class="pill">
+      <span x-text="'corte ' + corteActivo"></span>
+      <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+            @keydown.escape.window="cerrar()">
+        <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                :aria-expanded="v" aria-label="Qué significa el corte">?</button>
+        <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+          <b x-text="G.corte?.titulo ?? 'Corte'"></b>
+          <span x-text="G.corte?.texto"></span>
+        </span>
+      </span>
+    </span>
+
+    <!-- silencio, con su explicación -->
+    <span class="pill" x-show="coberturaActiva">
+      <span x-text="'silencio ' + (decision?.cobertura?.pct_silencio_texto ?? coberturaActiva?.pct_silencio_texto ?? '—')"></span>
+      <span class="ay der" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+            @keydown.escape.window="cerrar()">
+        <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                :aria-expanded="v" aria-label="Qué significa el silencio">?</button>
+        <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+          <b x-text="G.silencio?.titulo ?? 'Silencio'"></b>
+          <span x-text="G.silencio?.texto"></span>
+          <span class="sub" x-text="'A este corte: ' + (coberturaActiva?.pct_silencio_texto ?? '—') + ' de silencio y ' + (coberturaActiva?.pct_oferta_texto ?? '—') + ' de oferta.'"></span>
+        </span>
+      </span>
+    </span>
+
+    <span class="pill" :class="salud?.en_modelo ? 'ok' : 'fb'"
+          x-text="salud ? (salud.en_modelo ? 'modelo v1' : 'fallback: ' + salud.modelo) : '…'"></span>
+
+    <button type="button" class="tema-btn" @click="cambiarTema()"
+            :aria-label="'Cambiar a modo ' + (tema === 'oscuro' ? 'claro' : 'oscuro')"
+            x-text="tema === 'oscuro' ? '☀ modo claro' : '☾ modo oscuro'"></button>
+  </div>
+</header>
+
+<!-- ======================== BARRA DE PESTAÑAS ========================= -->
+<!-- «Panorama» apunta a otra página y por eso es un enlace normal, fuera del
+     `tablist`. Las dos pestañas de verdad se manejan con flechas, Inicio y Fin,
+     y el foco solo entra en la activa (patrón de tablist con `tabindex`). -->
+<nav class="pestanas" aria-label="Secciones">
+  <div class="pestanas-in" role="tablist" aria-label="Vistas de nu-moments">
+    <button type="button" role="tab" id="tab-decision" class="pestana"
+            aria-controls="panel-decision" :aria-selected="pestana === 'decision'"
+            :tabindex="pestana === 'decision' ? 0 : -1"
+            @click="irA('decision')" @keydown.arrow-right.prevent="irA('como', true)"
+            @keydown.arrow-left.prevent="irA('como', true)"
+            @keydown.home.prevent="irA('decision', true)"
+            @keydown.end.prevent="irA('como', true)">Decisión</button>
+    <button type="button" role="tab" id="tab-como" class="pestana"
+            aria-controls="panel-como" :aria-selected="pestana === 'como'"
+            :tabindex="pestana === 'como' ? 0 : -1"
+            @click="irA('como')" @keydown.arrow-right.prevent="irA('decision', true)"
+            @keydown.arrow-left.prevent="irA('decision', true)"
+            @keydown.home.prevent="irA('decision', true)"
+            @keydown.end.prevent="irA('como', true)">Cómo funciona</button>
+  </div>
+  <a class="pestana enlace" href="/dashboard">Panorama <span class="fl" aria-hidden="true">↗</span></a>
+</nav>
+
+<div id="panel-decision" role="tabpanel" aria-labelledby="tab-decision"
+     x-show="pestana === 'decision'">
+<main>
+  <!-- ============================ SELECTOR ============================ -->
+  <section>
+    <div class="tarjeta">
+      <h2>Escenarios curados</h2>
+      <template x-for="c in curados" :key="c.customer_id">
+        <button class="caso" :class="{sel: sel === c.customer_id}" @click="elegir(c)">
+          <div class="t" x-text="c.titulo"></div>
+          <div class="id" x-text="'#' + c.customer_id + ' · ' + c.corte"></div>
+        </button>
+      </template>
+      <p class="narrativa">
+        El 82.84 % de los clientes no tiene eventos en 24 h al corte del demo: un selector al azar
+        deja el panel vacío 4 de cada 5 veces.
+      </p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Búsqueda libre</h2>
+      <input class="buscar" type="search" placeholder="id de cliente…" aria-label="Buscar por id de cliente"
+             x-model="consulta" @input.debounce.350ms="buscar()">
+
+      <div class="filtros">
+        <div>
+          <label class="campo-et" for="f-oferta">
+            Qué le daría el sistema
+            <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                  @keydown.escape.window="cerrar()">
+              <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                      :aria-expanded="v" aria-label="Cómo funciona este filtro">?</button>
+              <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                <b>Filtro por decisión</b>
+                <span>No busca clientes «parecidos»: corre las mismas puertas y el mismo score
+                  sobre los 38 000 al corte elegido y devuelve a quien de verdad recibiría ese
+                  aviso —o a quien el sistema callaría, y por qué puerta.</span>
+                <span class="sub" x-text="'Corte del filtro: ' + corteFiltro"></span>
+              </span>
+            </span>
+          </label>
+          <select id="f-oferta" class="sel-campo" x-model="filtroOferta" @change="cambiarFiltro()">
+            <option value="">cualquiera</option>
+            <template x-for="p in (ctx?.catalogo ?? [])" :key="p">
+              <option :value="p" x-text="titulo(p) + conteoDe(p)"></option>
+            </template>
+            <option value="silencio" x-text="'Silencio' + conteoDe('silencio')"></option>
+          </select>
+        </div>
+
+        <div x-show="filtroOferta === 'silencio'" x-cloak>
+          <label class="campo-et" for="f-razon">Por qué se calla</label>
+          <select id="f-razon" class="sel-campo" x-model="filtroRazon" @change="buscar()">
+            <option value="">cualquier puerta</option>
+            <template x-for="r in razonesDisponibles" :key="r.puerta">
+              <option :value="r.puerta" x-text="r.nombre + ' (' + r.n.toLocaleString('es-MX') + ')'"></option>
+            </template>
+          </select>
+        </div>
+      </div>
+
+      <p class="conteo" x-show="nCoincidencias !== null" x-cloak>
+        <b x-text="(nCoincidencias ?? 0).toLocaleString('es-MX')"></b>
+        <span x-text="' de ' + (ctx?.n_clientes ?? 0).toLocaleString('es-MX') + ' clientes al corte ' + corteFiltro"></span>
+        <span x-show="pctCoincidencias" x-text="' · ' + pctCoincidencias"></span>
+      </p>
+      <p class="conteo" x-show="motivoFiltro" x-text="motivoFiltro"></p>
+      <template x-for="c in libres" :key="c.customer_id">
+        <button class="caso" :class="{sel: sel === c.customer_id}" @click="elegir(c)">
+          <div class="t" x-text="'#' + c.customer_id"></div>
+          <div class="id" x-text="c.estado + ' · ' + c.banda_ingreso + ' · utilización ' + (c.utilizacion_tarjeta_texto ?? pct(c.utilizacion_tarjeta_pct))"></div>
+        </button>
+      </template>
+      <p class="vacio" x-show="!libres.length">Sin resultados libres.</p>
+    </div>
+  </section>
+
+  <!-- ============================ DETALLE ============================= -->
+  <section>
+    <div class="cargando" x-show="!ficha && !cargando">
+      Elige un escenario para ver la ficha y la decisión.
+    </div>
+    <div class="cargando" x-show="cargando">Evaluando las 8 puertas…</div>
+
+    <template x-if="ficha && decision">
+      <div>
+        <!-- La narrativa del escenario trae porcentajes (tasa base, enganche):
+             es andamiaje del demo, no parte del banner, así que espera detrás
+             del mismo botón que el resto de los números. Antes de pulsarlo la
+             pantalla solo dice qué escenario es. -->
+        <div class="tarjeta" x-show="caso">
+          <h2>
+            Escenario
+            <!-- La nota del escenario viene del cuaderno de análisis y usa los
+                 nombres crudos de las columnas. Aquí se traducen; la lista
+                 completa está en «Cómo funciona», cuarta parte. -->
+            <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                  @keydown.escape.window="cerrar()">
+              <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                      :aria-expanded="v" aria-label="Cómo leer la nota del escenario">?</button>
+              <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                <b>La nota está en el idioma de los datos</b>
+                <span>Viene del cuaderno de análisis y nombra las columnas tal cual.
+                  <b>lift 30x</b> = treinta veces más probable que la tasa base;
+                  <b>exposure_no</b> = cuántas veces ya se le mostró ese aviso;
+                  <b>hours_since_last_nudge</b> = horas desde el aviso anterior;
+                  <b>cap</b> = el cupo, el tope de 2 repeticiones;
+                  <b>Δ</b> = cuánto mueve el aviso esa cifra, y al medirse en días
+                  en negativo un valor negativo es bueno;
+                  <b>view</b> y <b>start</b> = mirar una pantalla y empezar el flujo;
+                  <b>opt-out</b> y <b>nudge</b> = darse de baja de las notificaciones
+                  y el aviso en sí.</span>
+                <span class="sub">La lista entera está en «Cómo funciona», cuarta parte.</span>
+              </span>
+            </span>
+          </h2>
+          <div style="font-weight:640" x-text="caso?.titulo"></div>
+          <p class="narrativa" x-show="porque" x-cloak x-text="caso?.narrativa"></p>
+          <p class="meta-of" x-show="!porque">
+            Por qué este cliente está en el guion, con sus cifras, detrás de
+            «Mostrar por qué».
+          </p>
+        </div>
+
+        <!-- ---------- LA DECISIÓN ---------- -->
+        <div class="tarjeta">
+          <h2>
+            <span x-text="'Decisión · ' + decision.decision"></span>
+            <span x-text="'· modelo ' + (decision.modelo ?? '—')"></span>
+            <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                  @keydown.escape.window="cerrar()">
+              <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                      :aria-expanded="v" aria-label="Qué es el nivel del modelo">?</button>
+              <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                <b x-text="G.modelo?.titulo"></b><span x-text="G.modelo?.texto"></span>
+              </span>
+            </span>
+          </h2>
+
+          <template x-if="decision.ofertas && decision.ofertas.length">
+            <div>
+              <template x-for="(o, i) in decision.ofertas" :key="o.producto">
+                <div class="oferta" style="margin-bottom:12px" x-show="i === 0 || verTodas">
+
+                  <!-- ==================== EL BANNER ==================== -->
+                  <!-- Lo que vería el cliente en la app y nada más: el título y
+                       la frase. Ni un número, ni una referencia, ni una traza.
+                       El detalle empieza cuando se pulsa «Mostrar por qué». -->
+                  <h3 x-text="o.titulo"></h3>
+                  <p class="frase" x-text="o.razon"></p>
+
+                  <div class="acciones">
+                    <button type="button" class="boton" @click="alternarPorque(o.producto)"
+                            :aria-expanded="porque === o.producto"
+                            :aria-controls="'porque-' + o.producto"
+                            x-text="porque === o.producto ? 'Ocultar por qué' : 'Mostrar por qué'"></button>
+                    <span class="meta-of" x-show="porque !== o.producto">
+                      Lo que ve quien audita la decisión está detrás de este botón.
+                    </span>
+                  </div>
+
+                  <!-- =================== EL «POR QUÉ» ================== -->
+                  <div class="porque" :id="'porque-' + o.producto"
+                       x-show="porque === o.producto" x-cloak
+                       x-data="{g: o.explicacion?.graficas ?? null, ex: o.explicacion ?? null}">
+
+                    <p class="meta-of">
+                      <span x-text="o.producto"></span> ·
+                      superficie <span x-text="o.surface"></span>
+                      <template x-if="o.corte_features">
+                        <span> · features del corte <b x-text="o.corte_features"></b></span>
+                      </template>
+                      <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                            @keydown.escape.window="cerrar()">
+                        <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                                :aria-expanded="v" aria-label="Qué dice esta línea de identificadores">?</button>
+                        <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                          <b>Los nombres internos</b>
+                          <span>La misma decisión, escrita como la nombran los datos. El primero
+                            es la clave del producto (el título en español está arriba); la
+                            «superficie» es el sitio de la app donde saldría el aviso; y las
+                            <i>features</i> son las columnas que el modelo mira, calculadas con
+                            la foto de ese corte y solo con lo anterior a él.</span>
+                        </span>
+                      </span>
+                      <template x-if="o.sustituye_a">
+                        <span> · sustituye a <b x-text="o.sustituye_a"></b></span>
+                      </template>
+                    </p>
+
+                    <p class="g-nota" x-show="!g" x-text="ex?.motivo_sin_comparacion"></p>
+
+                    <template x-if="g">
+                      <div class="pq">
+
+                        <!-- ---- 1 · su lugar entre los 38 000 ---- -->
+                        <div class="g">
+                          <div class="g-cab">
+                            <span x-text="g.poblacion.titulo"></span>
+                            <span x-text="'· corte ' + g.poblacion.corte"></span>
+                            <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                  @keydown.escape.window="cerrar()">
+                              <button type="button" class="ay-b" @click="alternar()" @focus="abrir()"
+                                      @blur="cerrar()" :aria-expanded="v"
+                                      aria-label="Cómo se reparte la población">?</button>
+                              <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                <b x-text="G.silencio?.titulo"></b><span x-text="G.silencio?.texto"></span>
+                                <span class="sub">El reparto sale de correr las mismas 8 puertas y el
+                                  mismo score sobre toda la base en este corte, de una sola pasada.</span>
+                              </span>
+                            </span>
+                          </div>
+
+                          <div class="apilada" role="img" :aria-label="g.poblacion.alternativa">
+                            <template x-for="(s, si) in g.poblacion.segmentos" :key="s.clave">
+                              <i :class="claseSeg(s, si)" :style="'width:' + s.pct + '%'"></i>
+                            </template>
+                          </div>
+
+                          <ul class="g-leyenda">
+                            <template x-for="(s, si) in g.poblacion.segmentos" :key="s.clave">
+                              <li :class="{mio: s.es_del_cliente}">
+                                <span class="sw" :class="claseSeg(s, si)" aria-hidden="true"></span>
+                                <span class="nm" x-text="s.titulo"></span>
+                                <span class="vl" x-text="s.n_texto + ' · ' + s.pct_texto"></span>
+                              </li>
+                            </template>
+                          </ul>
+
+                          <p class="g-lee">
+                            De los <span x-text="g.poblacion.n_total_texto"></span> clientes evaluados hoy,
+                            <b x-text="segmentoMio(g)?.n_texto"></b>
+                            (<b x-text="segmentoMio(g)?.pct_texto"></b>) reciben este mismo aviso.
+                            A los demás el sistema les dice otra cosa o no les dice nada.
+                          </p>
+                          <div class="chips">
+                            <span class="chip" style="border-style:dashed">y se calla con:</span>
+                            <template x-for="r in g.poblacion.silencio_por_razon" :key="r.puerta">
+                              <span class="chip"><span x-text="r.etiqueta"></span>
+                                <b x-text="' ' + r.n_texto"></b>
+                                <span x-text="' (' + r.pct_texto + ')'"></span></span>
+                            </template>
+                          </div>
+                        </div>
+
+                        <!-- ---- 2 · dónde cae en la distribución ---- -->
+                        <div class="g">
+                          <div class="g-cab">
+                            <span x-text="g.distribucion.titulo"></span>
+                            <span x-text="'· ' + g.distribucion.eje"></span>
+                            <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                  @keydown.escape.window="cerrar()">
+                              <button type="button" class="ay-b" @click="alternar()" @focus="abrir()"
+                                      @blur="cerrar()" :aria-expanded="v"
+                                      aria-label="Cómo se lee el histograma">?</button>
+                              <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                <b x-text="G.p_intencion?.titulo"></b><span x-text="G.p_intencion?.texto"></span>
+                                <span class="sub">Cada barra es un tramo de probabilidad y su alto, cuánta
+                                  gente cae ahí. El eje es logarítmico porque la mediana está en
+                                  <span x-text="marcaDe(g, 'mediana')?.texto"></span> y el máximo en
+                                  <span x-text="g.distribucion.maximo_texto"></span>: en escala lineal
+                                  casi todos caerían en la primera barra.</span>
+                              </span>
+                            </span>
+                          </div>
+
+                          <div class="hist-caja">
+                            <div class="hist" role="img" :aria-label="g.distribucion.alternativa">
+                              <template x-for="(b, bi) in g.distribucion.histograma.bins" :key="bi">
+                                <i :class="{mio: bi === g.distribucion.histograma.bin_cliente,
+                                            vacio: b.n === 0}"
+                                   :title="b.n === 0 ? 'ningún cliente en este tramo'
+                                                     : b.n + ' clientes en este tramo'"
+                                   :style="'height:' + (b.n === 0 ? 0 : Math.max(b.alto_pct, 1.8)) + '%'"></i>
+                              </template>
+                            </div>
+                            <div class="hist-marcas" aria-hidden="true">
+                              <template x-for="m in g.distribucion.histograma.marcas" :key="m.clave">
+                                <span :class="m.clave" :style="'left:' + m.pos_pct + '%'"></span>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="hist-eje" aria-hidden="true">
+                            <span x-text="g.distribucion.minimo_texto"></span>
+                            <span class="titulo">probabilidad · escala log</span>
+                            <span x-text="g.distribucion.maximo_texto"></span>
+                          </div>
+                          <p class="eje-nota" x-show="g.distribucion.nota_escala">
+                            Esta franja <b>no</b> es un percentil: la marca de este cliente cae al
+                            <b x-text="g.distribucion.pos_pct_cliente_texto"></b> del ancho porque el
+                            eje mide probabilidad en escala logarítmica, mientras que su percentil es
+                            <b x-text="g.distribucion.percentil_texto"></b>.
+                          </p>
+                          <div class="hist-ref">
+                            <template x-for="m in g.distribucion.histograma.marcas" :key="m.clave">
+                              <span><i :class="'m-' + m.clave" aria-hidden="true"></i>
+                                <span x-text="m.etiqueta"></span> <b x-text="m.texto"></b></span>
+                            </template>
+                          </div>
+
+                          <p class="g-lee">
+                            Su probabilidad de intención es <b x-text="g.distribucion.valor_texto"></b>:
+                            percentil <b x-text="g.distribucion.percentil_texto"></b>.
+                            Solo <b x-text="g.distribucion.n_encima_texto"></b> de
+                            <span x-text="g.distribucion.n_total_texto"></span> tienen una más alta.
+                          </p>
+
+                          <template x-if="ex?.resultado?.referencia?.percentil !== null &&
+                                          ex?.resultado?.referencia?.percentil !== undefined">
+                            <div class="otra-escala">
+                              <p class="cab">otra escala · aquí la posición sí es el percentil</p>
+                              <p class="g-nota">Y el score, que es el que ordena a los candidatos:</p>
+                              <div class="regla" role="img"
+                                   :aria-label="'Regla de percentil del score, de 0 a 100: ' + ex.resultado.referencia.percentil_texto">
+                                <i :style="'left:' + ex.resultado.referencia.percentil + '%'"></i>
+                              </div>
+                              <div class="regla-eje" aria-hidden="true">
+                                <span x-text="pct(0)"></span>
+                                <span class="titulo">percentil · escala lineal</span>
+                                <span x-text="pct(100)"></span>
+                              </div>
+                              <p class="g-lee">
+                                Percentil <b x-text="ex.resultado.referencia.percentil_texto"></b> del score:
+                                solo <b x-text="ex.resultado.referencia.n_encima_texto"></b> de
+                                <span x-text="g.distribucion.n_total_texto"></span> tienen un score más alto
+                                para este producto en este corte.
+                              </p>
+                            </div>
+                          </template>
+                        </div>
+
+                        <!-- ---- 3 · su probabilidad contra la tasa base ---- -->
+                        <div class="g">
+                          <div class="g-cab">
+                            <span x-text="g.contra_base.titulo"></span>
+                            <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                  @keydown.escape.window="cerrar()">
+                              <button type="button" class="ay-b" @click="alternar()" @focus="abrir()"
+                                      @blur="cerrar()" :aria-expanded="v"
+                                      aria-label="Qué es la tasa base">?</button>
+                              <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                <b x-text="G.tasa_base?.titulo"></b><span x-text="G.tasa_base?.texto"></span>
+                              </span>
+                            </span>
+                          </div>
+                          <template x-for="b in g.contra_base.barras" :key="b.clave">
+                            <div class="cb">
+                              <div class="cb-t">
+                                <span x-text="b.titulo"></span>
+                                <span class="veces" x-text="b.veces_texto + ' la base'"></span>
+                                <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                      @keydown.escape.window="cerrar()">
+                                  <button type="button" class="ay-b" @click="alternar()" @focus="abrir()"
+                                          @blur="cerrar()" :aria-expanded="v"
+                                          :aria-label="'Qué mide ' + b.titulo">?</button>
+                                  <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                    <b x-text="b.titulo"></b><span x-text="b.que_mide"></span>
+                                  </span>
+                                </span>
+                              </div>
+                              <div class="cb-fila">
+                                <span class="cb-et">este cliente</span>
+                                <span class="cb-pista" aria-hidden="true">
+                                  <i class="mio" :style="'width:' + b.cliente.ancho_pct + '%'"></i></span>
+                                <span class="cb-v" x-text="b.cliente.texto"></span>
+                              </div>
+                              <div class="cb-fila">
+                                <span class="cb-et">la población</span>
+                                <span class="cb-pista" aria-hidden="true">
+                                  <i :style="'width:' + b.poblacion.ancho_pct + '%'"></i></span>
+                                <span class="cb-v" x-text="b.poblacion.texto"></span>
+                              </div>
+                              <p class="sr" x-text="b.alternativa"></p>
+                            </div>
+                          </template>
+                        </div>
+
+                        <div class="g-dos">
+                          <!-- ---- 4 · la recencia, en los umbrales de la política ---- -->
+                          <div class="g">
+                            <div class="g-cab">
+                              <span x-text="g.recencia.titulo"></span>
+                              <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                    @keydown.escape.window="cerrar()">
+                                <button type="button" class="ay-b" @click="alternar()" @focus="abrir()"
+                                        @blur="cerrar()" :aria-expanded="v"
+                                        aria-label="Qué es una señal">?</button>
+                                <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                  <b x-text="G.senal?.titulo"></b><span x-text="G.senal?.texto"></span>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="rec" role="img" :aria-label="g.recencia.alternativa">
+                              <template x-for="z in g.recencia.zonas" :key="z.clave">
+                                <span class="rec-z" :class="z.clave"
+                                      :style="'left:' + z.izq_pct + '%;width:' + z.ancho_pct + '%'"></span>
+                              </template>
+                              <span class="rec-m" x-show="g.recencia.pos_pct !== null"
+                                    :style="'left:' + g.recencia.pos_pct + '%'"></span>
+                            </div>
+                            <div class="rec-eje" aria-hidden="true">
+                              <span class="ini">0 h</span>
+                              <span :style="'left:' + g.recencia.zonas[0].ancho_pct + '%'"
+                                    x-text="g.recencia.umbral_on_time_h + ' h'"></span>
+                              <span :style="'left:' + (g.recencia.zonas[1].izq_pct + g.recencia.zonas[1].ancho_pct) + '%'"
+                                    x-text="(g.recencia.umbral_warm_h / 24) + ' d'"></span>
+                              <span class="fin" x-text="(g.recencia.dominio_h / 24) + ' d'"></span>
+                            </div>
+                            <div class="rec-leyenda">
+                              <template x-for="z in g.recencia.zonas" :key="z.clave">
+                                <span><i :class="z.clave" aria-hidden="true"></i>
+                                  <b x-text="z.etiqueta"></b>
+                                  <span x-text="z.clave === 'cold' ? 'más de ' + z.desde_h + ' h'
+                                                : 'hasta ' + z.hasta_h + ' h'"></span></span>
+                              </template>
+                            </div>
+                            <p class="g-lee">
+                              Entró a <b x-text="g.recencia.pantalla"></b> hace
+                              <b x-text="g.recencia.horas_texto"></b>:
+                              señal <b x-text="g.recencia.momento_etiqueta"></b>.
+                              <span x-show="g.recencia.fuera_de_eje">Queda fuera del eje, que llega hasta
+                                <span x-text="(g.recencia.dominio_h / 24) + ' días'"></span>.</span>
+                            </p>
+                            <p class="g-nota" x-text="g.recencia.momento_texto"></p>
+                          </div>
+
+                          <!-- ---- 5 · el cupo y la curva de fatiga ---- -->
+                          <div class="g">
+                            <div class="g-cab">
+                              <span x-text="g.cupo.titulo"></span>
+                              <span class="ay der" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                    @keydown.escape.window="cerrar()">
+                                <button type="button" class="ay-b" @click="alternar()" @focus="abrir()"
+                                        @blur="cerrar()" :aria-expanded="v"
+                                        aria-label="De dónde sale el cupo">?</button>
+                                <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                  <b x-text="G.cupo?.titulo"></b><span x-text="G.cupo?.texto"></span>
+                                  <span class="sub">La curva se cuenta sobre los avisos mostrados antes del
+                                    corte, y solo con las exposiciones que tienen al menos
+                                    <span x-text="g.cupo.min_avisos_por_exposicion"></span> avisos: por
+                                    encima de eso la tasa sería ruido.</span>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="casillas">
+                              <template x-for="c in g.cupo.casillas" :key="c.n">
+                                <div class="casilla"
+                                     :class="{usada: c.usada, siguiente: c.es_la_siguiente}">
+                                  <b x-text="'#' + c.n"></b>
+                                  <span x-text="c.usada ? 'ya mostrado'
+                                                : (c.es_la_siguiente ? 'este aviso' : 'libre')"></span>
+                                </div>
+                              </template>
+                            </div>
+                            <p class="g-nota"
+                               x-text="'Lleva ' + g.cupo.exposiciones + ' de ' + g.cupo.cap +
+                                       ' · le quedan ' + g.cupo.restante"></p>
+
+                            <template x-if="g.cupo.curva.length > 1">
+                              <div>
+                                <!-- `viewBox` se pone con `setAttribute`, no con `:viewBox`. El
+                                     analizador de HTML pasa a minúsculas los nombres de atributo,
+                                     así que `:viewBox` llega a Alpine como `:viewbox` y Alpine
+                                     escribe `viewbox`; SVG distingue mayúsculas y lo ignora. Sin
+                                     `viewBox` el dibujo se pinta 1:1 en px y el lienzo lo recorta:
+                                     por debajo de FAT.w las últimas exposiciones desaparecían y el
+                                     eje de HTML de abajo, que se reparte por porcentaje, dejaba de
+                                     coincidir con la curva. -->
+                                <svg class="fat" xmlns="http://www.w3.org/2000/svg"
+                                     x-effect="$el.setAttribute('viewBox', '0 0 ' + FAT.w + ' ' + FAT.h)"
+                                     role="img" :aria-label="g.cupo.alternativa">
+                                  <line class="rejilla" :x1="FAT.px" :y1="FAT.pb"
+                                        :x2="FAT.w - FAT.px" :y2="FAT.pb"></line>
+                                  <line class="cap" :x1="fatCapX(g.cupo.curva, g.cupo.cap)" :y1="FAT.pt - 4"
+                                        :x2="fatCapX(g.cupo.curva, g.cupo.cap)" :y2="FAT.pb"></line>
+                                  <polyline class="baja" :points="fatPuntos(g.cupo.curva, 'baja')"></polyline>
+                                  <polyline class="eng" :points="fatPuntos(g.cupo.curva, 'enganche')"></polyline>
+                                  <circle class="punto" r="5"
+                                          x-show="fatCliente(g.cupo.curva) !== null"
+                                          :cx="fatCliente(g.cupo.curva)?.cx ?? -99"
+                                          :cy="fatCliente(g.cupo.curva)?.cy ?? -99"></circle>
+                                </svg>
+                                <div class="fat-max" aria-hidden="true"
+                                     x-text="'eje vertical: de ' + pct(0) + ' a ' +
+                                             pct(100 * fatMax(g.cupo.curva))"></div>
+                                <div class="fat-eje" aria-hidden="true">
+                                  <template x-for="(p, pi) in g.cupo.curva" :key="p.exposure_no">
+                                    <span :style="'left:' + fatEjePct(g.cupo.curva, pi) + '%'"
+                                          x-text="'#' + p.exposure_no"></span>
+                                  </template>
+                                </div>
+                                <div class="fat-leyenda">
+                                  <span><i style="background:var(--verde)"></i> engancha</span>
+                                  <span><i style="background:var(--rojo)"></i> se da de baja</span>
+                                  <span><i style="background:var(--morado)"></i> el cupo</span>
+                                </div>
+                                <p class="g-nota">
+                                  Enganche por exposición:
+                                  <span x-text="g.cupo.curva.map(p => p.enganche_texto).join(' · ')"></span>.
+                                  Bajas: <span x-text="g.cupo.curva.map(p => p.baja_texto).join(' · ')"></span>.
+                                </p>
+                              </div>
+                            </template>
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+
+                    <!-- ============ EL NÚMERO, DESARMADO ============ -->
+                    <div class="desglose" x-show="ex">
+                      <div class="cab">
+                        <span>Los tres factores del score</span>
+                        <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                              @keydown.escape.window="cerrar()">
+                          <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                                  :aria-expanded="v" aria-label="Cómo se compone el score">?</button>
+                          <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                            <b x-text="G.score?.titulo"></b><span x-text="G.score?.texto"></span>
+                            <span class="sub" x-text="ex?.resultado?.formula"></span>
+                          </span>
+                        </span>
+                      </div>
+
+                      <div class="factores">
+                        <template x-for="(f, fi) in (ex?.factores ?? [])" :key="f.clave">
+                         <div class="factor-w">
+                          <div class="factor">
+                            <div class="et">
+                              <span x-text="f.titulo"></span>
+                              <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                    @keydown.escape.window="cerrar()">
+                                <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                                        :aria-expanded="v" :aria-label="'Qué mide ' + f.titulo">?</button>
+                                <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                  <b x-text="f.titulo"></b>
+                                  <span x-text="f.que_mide"></span>
+                                  <span class="sub" x-show="f.poblacion" x-text="'Población: ' + f.poblacion"></span>
+                                  <span class="sub" x-show="f.como_se_lee" x-text="f.como_se_lee"></span>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="n" x-text="f.texto"></div>
+                            <div class="ref" x-show="f.referencia && f.referencia.tasa_base !== null && f.referencia.tasa_base !== undefined">
+                              <span x-text="'Tasa base: ' + f.referencia?.tasa_base_texto"></span>
+                              <template x-if="f.referencia?.veces !== null && f.referencia?.veces !== undefined">
+                                <span> · <b x-text="f.referencia?.veces_texto"></b> la base</span>
+                              </template>
+                              <template x-if="f.referencia?.percentil !== null && f.referencia?.percentil !== undefined">
+                                <span><br>Supera al <b x-text="f.referencia?.percentil_texto"></b> de los clientes</span>
+                              </template>
+                              <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                    @keydown.escape.window="cerrar()">
+                                <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                                        :aria-expanded="v" aria-label="Contra qué se compara">?</button>
+                                <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                  <b x-text="f.referencia?.titulo"></b>
+                                  <span x-text="f.referencia?.texto"></span>
+                                  <span class="sub" x-show="f.referencia?.percentil !== null && f.referencia?.percentil !== undefined"
+                                        x-text="G.percentil?.texto"></span>
+                                </span>
+                              </span>
+                            </div>
+                            <div class="ref" x-show="f.clave === 'valor'" x-text="f.como_se_lee"></div>
+                          </div>
+                          <div class="por" aria-hidden="true"
+                               x-show="fi < (ex?.factores?.length ?? 0) - 1">×</div>
+                         </div>
+                        </template>
+
+                        <div class="por" aria-hidden="true">=</div>
+
+                        <div class="factor total">
+                          <div class="et">
+                            <span x-text="ex?.resultado?.titulo ?? 'Score'"></span>
+                            <span class="ay der" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                                  @keydown.escape.window="cerrar()">
+                              <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                                      :aria-expanded="v" aria-label="Cómo se lee el score">?</button>
+                              <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                                <b x-text="G.score?.titulo"></b><span x-text="G.score?.texto"></span>
+                                <span class="sub" x-text="ex?.resultado?.como_se_lee"></span>
+                              </span>
+                            </span>
+                          </div>
+                          <div class="n" x-text="ex?.resultado?.texto"></div>
+                          <div class="ref">
+                            <!-- «crudo» a secas no dice nada y el número iba sin
+                                 unidad: es el mismo score de arriba, sin redondear. -->
+                            <span x-text="'el mismo número sin redondear: ' + o.score + ' días'"></span>
+                            <template x-if="ex?.resultado?.referencia?.percentil !== null && ex?.resultado?.referencia?.percentil !== undefined">
+                              <span><br>Percentil <b x-text="ex?.resultado?.referencia?.percentil_texto"></b>
+                                frente a los demás en este corte</span>
+                            </template>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p class="como-se-lee" x-text="ex?.resultado?.como_se_lee"></p>
+                      <p class="como-se-lee" x-show="ex?.motivo_sin_comparacion"
+                         x-text="ex?.motivo_sin_comparacion"></p>
+                    </div>
+
+                    <div class="acciones" x-show="i === 0 && decision.ofertas.length > 1">
+                      <button type="button" class="boton sec chico" @click="verTodas = !verTodas"
+                              :aria-expanded="verTodas"
+                              x-text="verTodas ? 'Ocultar las otras candidatas'
+                                              : 'Ver las ' + decision.ofertas.length + ' candidatas'"></button>
+                      <span class="meta-of">Las candidatas son los productos que pasaron las 8 puertas;
+                        gana la de score más alto.</span>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </template>
+
+          <!-- silencio: pantalla diseñada, no una app rota -->
+          <template x-if="!decision.ofertas || !decision.ofertas.length">
+            <div class="silencio">
+              <div class="icono" aria-hidden="true">···</div>
+              <h3 x-text="decision.encabezado?.titulo ?? 'El sistema decidió callarse'"></h3>
+              <p class="texto" x-text="decision.encabezado?.texto"></p>
+              <div style="margin-top:10px;font-size:12px;color:var(--gris)">
+                <span x-text="'Se cerró en: ' + (puertaReportada?.puerta_nombre ?? '—')"></span>
+                <code x-text="decision.puerta_reportada ?? '—'"></code>
+              </div>
+
+              <div class="contador">
+                <div class="n" x-text="decision.cobertura?.pct_silencio_texto ?? '—'"></div>
+                <div class="d">de los clientes está hoy en esta situación
+                  (<span x-text="decision.cobertura?.n_clientes?.toLocaleString('es-MX')"></span>
+                  clientes evaluados al corte <span x-text="decision.cobertura?.asof"></span>)</div>
+                <div class="barra" role="img"
+                     :aria-label="'silencio ' + (decision.cobertura?.pct_silencio_texto ?? '') + ', oferta ' + (decision.cobertura?.pct_oferta_texto ?? '')">
+                  <i :style="'width:' + (decision.cobertura?.pct_silencio ?? 0) + '%'"></i>
+                  <u :style="'width:' + (decision.cobertura?.pct_oferta ?? 0) + '%'"></u>
+                </div>
+                <div class="d" style="margin-top:6px">
+                  silencio · oferta <span x-text="decision.cobertura?.pct_oferta_texto"></span>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <!-- ============ LA TRAZA, LEGIBLE ============ -->
+          <!-- La traza y los silencios son detalle de auditoría: con oferta viven
+               detrás de «Mostrar por qué»; en la pantalla de silencio, siempre. -->
+          <details class="traza" x-show="verDetalle" x-cloak>
+            <summary>Ver el recorrido de las 8 puertas</summary>
+            <div class="ruta" role="img" :aria-label="'Recorrido: ' + resumenRuta">
+              <template x-for="t in decision.traza" :key="t.puerta">
+                <span class="paso" :class="t.resultado"></span>
+              </template>
+            </div>
+            <p class="narrativa" style="padding:0 15px" x-text="G.traza?.texto"></p>
+            <div class="puertas">
+              <template x-for="t in decision.traza" :key="t.puerta">
+                <div class="puerta" :class="t.resultado">
+                  <div class="ord" x-text="t.orden"></div>
+                  <div>
+                    <div class="nom">
+                      <span x-text="t.puerta_nombre"></span>
+                      <code x-text="t.puerta"></code>
+                    </div>
+                    <div class="que" x-text="t.puerta_comprueba"></div>
+                    <div class="prods" x-show="t.resultado === 'cierra'"
+                         x-text="'Cierra: ' + productosDe(t).map(p => titulo(p)).join(', ')"></div>
+                    <div class="que" x-show="t.resultado === 'no_activa'"
+                         x-text="t.resultado_texto"></div>
+                  </div>
+                  <span class="res" :class="t.resultado">
+                    <span x-text="t.resultado_etiqueta"></span>
+                    <span class="ay der" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                          @keydown.escape.window="cerrar()">
+                      <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                              :aria-expanded="v" :aria-label="'Qué significa ' + t.resultado_etiqueta">?</button>
+                      <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                        <b x-text="t.resultado_etiqueta"></b>
+                        <span x-text="t.resultado_texto"></span>
+                        <span class="sub" x-text="'Cierra si: ' + t.puerta_cierra_si"></span>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+              </template>
+            </div>
+          </details>
+
+          <!-- ============ LOS SILENCIOS, AGRUPADOS ============ -->
+          <details class="traza" x-show="verDetalle && decision.silencios?.length" x-cloak>
+            <summary x-text="'Ver por qué se calló con ' + (decision.silencios?.length ?? 0) + ' productos'"></summary>
+            <div class="grupo-sil">
+              <template x-for="g in silenciosAgrupados" :key="g.puerta">
+                <div class="grupo">
+                  <div class="gcab">
+                    <span x-text="g.nombre"></span>
+                    <code x-text="g.puerta"></code>
+                    <span class="res" :class="g.activa ? 'cierra' : 'no_activa'"
+                          x-text="g.items.length + (g.items.length === 1 ? ' producto' : ' productos')"></span>
+                  </div>
+                  <div class="gque" x-text="g.comprueba"></div>
+                  <template x-for="s in g.items" :key="s.producto">
+                    <div class="sil-row">
+                      <div class="p" x-text="s.producto_titulo"></div>
+                      <div class="r" x-text="s.razon"></div>
+                    </div>
+                  </template>
+                </div>
+              </template>
+            </div>
+          </details>
+        </div>
+
+        <!-- ---------- FICHA ---------- -->
+        <!-- El expediente tampoco es lo que ve un cliente en la app. -->
+        <div class="dos" x-show="verDetalle" x-cloak>
+          <div class="tarjeta">
+            <h2>Perfil</h2>
+            <dl class="kv">
+              <dt>Cliente</dt><dd x-text="'#' + ficha.perfil.customer_id"></dd>
+              <dt>Edad / estado</dt><dd x-text="ficha.perfil.edad + ' · ' + ficha.perfil.estado"></dd>
+              <dt>Antigüedad</dt><dd x-text="ficha.perfil.antiguedad_meses + ' meses'"></dd>
+              <dt>Ingreso estimado</dt><dd x-text="fmt(ficha.perfil.ingreso_mensual_est_mxn) + ' MXN'"></dd>
+              <dt>Día de pago</dt><dd x-text="ficha.perfil.dia_de_pago"></dd>
+              <dt>Utilización tarjeta</dt><dd x-text="pct(ficha.perfil.situacion_financiera.utilizacion_tarjeta_pct)"></dd>
+              <dt>Días en negativo (90 d)</dt><dd x-text="ficha.perfil.situacion_financiera.dias_en_negativo_90d"></dd>
+              <dt>Saldo promedio</dt><dd x-text="fmt(ficha.perfil.situacion_financiera.saldo_promedio_mxn) + ' MXN'"></dd>
+              <dt>Tasa de ahorro (90 d)</dt><dd x-text="pct(ficha.perfil.situacion_financiera.tasa_ahorro_90d_pct)"></dd>
+            </dl>
+            <div style="margin-top:10px" x-show="ficha.decision.es_fragil">
+              <span class="badge b-fragil">frágil</span>
+              <span style="font-size:12.5px;color:var(--gris)"
+                    x-text="' ' + (ficha.decision.motivo_fragilidad || []).join(' · ')"></span>
+            </div>
+          </div>
+
+          <!-- ============ SEÑAL POR PRODUCTO, EXPLICADA ============ -->
+          <div class="tarjeta">
+            <h2>
+              Señal por producto
+              <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                    @keydown.escape.window="cerrar()">
+                <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                        :aria-expanded="v" aria-label="Qué es una señal">?</button>
+                <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                  <b x-text="G.senal?.titulo"></b><span x-text="G.senal?.texto"></span>
+                </span>
+              </span>
+            </h2>
+            <div class="tabla-scroll">
+            <table class="t8">
+              <thead><tr>
+                <th>Producto</th>
+                <th>Pantalla acoplada</th>
+                <th>Estado de la señal</th>
+                <th>Cupo
+                  <span class="ay der" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                        @keydown.escape.window="cerrar()">
+                    <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                            :aria-expanded="v" aria-label="Qué es el cupo">?</button>
+                    <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                      <b x-text="G.cupo?.titulo"></b><span x-text="G.cupo?.texto"></span>
+                    </span>
+                  </span>
+                </th>
+              </tr></thead>
+              <tbody>
+                <template x-for="p in decision.catalogo" :key="p">
+                  <tr>
+                    <td x-text="titulo(p)"></td>
+                    <td><code x-text="decision.senales[p].pantalla_acoplada"></code></td>
+                    <td>
+                      <span class="badge" :class="'b-' + decision.senales[p].momento"
+                            x-text="decision.senales[p].momento_etiqueta"></span>
+                      <span style="font-size:11.5px;color:var(--gris)"
+                            x-show="decision.senales[p].horas_desde_senal !== null"
+                            x-text="' ' + decision.senales[p].horas_desde_senal + ' h'"></span>
+                      <span class="ay der" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                            @keydown.escape.window="cerrar()">
+                        <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                                :aria-expanded="v" aria-label="Qué significa este estado">?</button>
+                        <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                          <b x-text="decision.senales[p].momento_etiqueta + ' · ' + decision.senales[p].momento"></b>
+                          <span x-text="decision.senales[p].momento_texto"></span>
+                        </span>
+                      </span>
+                    </td>
+                    <td>
+                      <span x-text="decision.senales[p].cupo_texto"></span>
+                      <span style="font-size:11.5px;color:var(--gris)"
+                            x-text="' · quedan ' + decision.senales[p].cupo_restante"></span>
+                    </td>
+                  </tr>
+                </template>
+                <template x-for="p in decision.fuera_de_catalogo" :key="p">
+                  <tr>
+                    <td x-text="titulo(p)"></td>
+                    <td colspan="3"><code>C0_fuera_de_catalogo</code>
+                      <span style="font-size:12px;color:var(--gris)"> · no se ofrece en el piloto</span></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ LA LÍNEA DEL TIEMPO ============ -->
+        <div class="tarjeta" x-show="linea && verDetalle" x-cloak>
+          <h2>
+            <span x-text="'Línea del tiempo · ' + (linea?.ventana_dias ?? 0) + ' días antes del corte'"></span>
+            <span class="ay" x-data="ayuda()" @mouseenter="abrir()" @mouseleave="cerrar()"
+                  @keydown.escape.window="cerrar()">
+              <button type="button" class="ay-b" @click="alternar()" @focus="abrir()" @blur="cerrar()"
+                      :aria-expanded="v" aria-label="Cómo se lee la línea del tiempo">?</button>
+              <span class="ay-p" role="tooltip" x-show="v" x-cloak>
+                <b>Navegación y avisos en el mismo eje</b>
+                <span>Arriba, cada vez que el cliente entró a una pantalla por su cuenta —la
+                  señal—. Abajo, cada aviso que se le mostró. Compartir eje es el punto: se ve
+                  si el aviso llegó cerca de la señal o lejos de ella.</span>
+                <span class="sub">La franja rayada de la derecha es la zona ciega: después del
+                  corte el sistema no mira, y por eso ahí no hay ni una marca.</span>
+              </span>
+            </span>
+          </h2>
+
+          <!-- El eje tiene un ancho mínimo legible: si no cabe, se desplaza aquí
+               dentro y no en el `body`. -->
+          <div class="tl-scroll">
+          <div class="tl">
+            <div class="tl-ciega" :style="'left:' + (linea?.corte_pos_pct ?? 100) + '%'"></div>
+            <div class="tl-corte" :style="'left:' + (linea?.corte_pos_pct ?? 100) + '%'">
+              <span>corte</span>
+            </div>
+
+            <div class="tl-fila">
+              <div class="tl-et" x-text="'Navegación · ' + (linea?.n_navegacion ?? 0)"></div>
+              <div class="tl-pista" role="group" aria-label="Pantallas que el cliente visitó">
+                <template x-for="(e, i) in (linea?.navegacion ?? [])" :key="'n' + i">
+                  <button type="button" class="tl-m nav"
+                          :class="{acoplada: esAcoplada(e.pantalla)}"
+                          :style="'left:' + e.pos_pct + '%'"
+                          :aria-label="e.etiqueta + ', ' + e.ts"
+                          @click="marca = e" @focus="marca = e" @mouseenter="marca = e"></button>
+                </template>
+              </div>
+            </div>
+
+            <div class="tl-fila">
+              <div class="tl-et" x-text="'Avisos · ' + (linea?.n_avisos ?? 0)"></div>
+              <div class="tl-pista" role="group" aria-label="Avisos que se le mostraron">
+                <template x-for="(a, i) in (linea?.avisos ?? [])" :key="'a' + i">
+                  <button type="button" class="tl-m av"
+                          :class="a.enganchado ? 'eng' : (a.descartado ? 'desc' : '')"
+                          :style="'left:' + a.pos_pct + '%'"
+                          :aria-label="a.etiqueta + ', ' + a.ts + ', ' + estadoAviso(a)"
+                          @click="marca = a" @focus="marca = a" @mouseenter="marca = a"></button>
+                </template>
+              </div>
+            </div>
+
+            <div class="tl-eje">
+              <span x-text="linea?.inicio?.slice(0, 16)"></span>
+              <span x-text="'corte ' + (linea?.asof ?? '').replace('T', ' ').slice(0, 16)"></span>
+              <span x-text="'zona ciega →'"></span>
+            </div>
+          </div>
+          </div>
+
+          <div class="tl-leyenda">
+            <span><i style="background:var(--acento)"></i> pantalla acoplada a un producto</span>
+            <span><i style="background:var(--gris)"></i> otra pantalla</span>
+            <span><i class="b" style="background:var(--verde)"></i> aviso enganchado</span>
+            <span><i class="b" style="background:var(--ambar)"></i> aviso descartado</span>
+            <span><i class="b" style="background:var(--gris)"></i> aviso sin respuesta</span>
+          </div>
+
+          <div class="tl-detalle" aria-live="polite">
+            <template x-if="marca">
+              <div>
+                <div style="font-weight:640" x-text="marca.etiqueta"></div>
+                <div class="ts">
+                  <span x-text="marca.ts"></span>
+                  <span x-text="' · ' + marca.horas_antes_del_corte + ' h antes del corte'"></span>
+                  <span x-show="marca.carril === 'aviso'" x-text="' · ' + estadoAviso(marca)"></span>
+                </div>
+              </div>
+            </template>
+            <div class="tl-vacio" x-show="!marca">
+              Pasa el ratón o tabula por las marcas para ver la hora exacta de cada una.
+            </div>
+          </div>
+
+          <p class="tl-vacio" x-show="linea && !linea.n_navegacion && !linea.n_avisos">
+            Sin navegación ni avisos en esta ventana. La ausencia de señal también es un dato:
+            es lo que hace que la puerta de señal reciente cierre.
+          </p>
+          <p class="narrativa" x-text="linea?.zona_ciega?.texto"></p>
+        </div>
+
+        <div class="dos" x-show="verDetalle" x-cloak>
+          <div class="tarjeta">
+            <h2 x-text="'Navegación reciente · ' + ficha.navegacion.n_eventos_24h + ' eventos en 24 h'"></h2>
+            <ul class="lista">
+              <template x-for="(e, i) in ficha.navegacion.ultimas_pantallas.slice(0, 8)" :key="i">
+                <li><span class="ts" x-text="e.ts"></span>
+                    <span x-text="e.pantalla"></span>
+                    <span style="color:var(--gris)" x-text="e.accion"></span></li>
+              </template>
+            </ul>
+            <p class="vacio" x-show="!ficha.navegacion.ultimas_pantallas.length">Sin navegación previa al corte.</p>
+          </div>
+
+          <div class="tarjeta">
+            <h2 x-text="'Historial de avisos · ' + ficha.nudges.n_total + ' mostrados'"></h2>
+            <div style="margin-bottom:8px" x-show="ficha.nudges.opt_out">
+              <span class="badge b-fragil">opt-out</span>
+            </div>
+            <ul class="lista">
+              <template x-for="(n, i) in ficha.nudges.ultimos.slice(0, 8)" :key="i">
+                <li><span class="ts" x-text="n.ts"></span>
+                    <span x-text="titulo(n.tipo)"></span>
+                    <span style="color:var(--gris)"
+                          x-text="'#' + n.exposure_no + (n.enganchado ? ' · enganchado' : (n.descartado ? ' · descartado' : ''))"></span></li>
+              </template>
+            </ul>
+            <p class="vacio" x-show="!ficha.nudges.ultimos.length">Nunca se le ha mostrado un aviso.</p>
+          </div>
+        </div>
+      </div>
+    </template>
+  </section>
+</main>
+</div>
+
+<!-- ===================== PESTAÑA «CÓMO FUNCIONA» ====================== -->
+<!-- Para alguien que no ha visto nunca el dataset. Ni un número está escrito
+     aquí: todo sale de `/api/explicacion`, que los cuenta sobre los 38 000 del
+     corte. Si cambia el corte, cambia la pestaña entera. -->
+<div id="panel-como" role="tabpanel" aria-labelledby="tab-como"
+     x-show="pestana === 'como'" x-cloak>
+<div class="explica">
+
+  <p class="cargando" x-show="!ex">Preparando la explicación…</p>
+
+  <template x-if="ex">
+    <div>
+      <!-- ------------------------ presentación ------------------------ -->
+      <p class="ex-lede">
+        Esto es un asistente que decide, para cada cliente y en cada día,
+        <b>una sola cosa</b>: si hay algo que merezca la pena decirle hoy, y qué.
+        La mayoría de las veces la respuesta es que no.
+      </p>
+      <p class="ex-sub">
+        Todo lo que sigue está contado con las cifras del corte
+        <b x-text="ex.corte"></b>, calculadas sobre los
+        <b x-text="ex.n_clientes_texto"></b> clientes de la base. Cambiar la foto
+        en el menú de arriba cambia todos los números de esta página.
+      </p>
+
+      <div class="ex-mapa" aria-hidden="true">
+        <div class="ex-hito"><span class="et">entra</span>
+          <div class="tx">Lo que el cliente hizo antes de hoy</div></div>
+        <span class="ex-fl">→</span>
+        <div class="ex-hito"><span class="et">tres preguntas</span>
+          <div class="tx">¿Qué quiere? ¿Es el momento? ¿Le sirve?</div></div>
+        <span class="ex-fl">→</span>
+        <div class="ex-hito"><span class="et">ocho comprobaciones</span>
+          <div class="tx">Las puertas, siempre en el mismo orden</div></div>
+        <span class="ex-fl">→</span>
+        <div class="ex-hito fin"><span class="et">sale</span>
+          <div class="tx">Ofrecer, sustituir, callar o no estar en catálogo</div></div>
+      </div>
+      <p class="sr">
+        El recorrido es: lo que el cliente hizo antes del corte entra en tres preguntas
+        —qué quiere, si es el momento y cuánto le aporta—, el resultado pasa por ocho
+        comprobaciones en orden y sale uno de cuatro resultados: ofrecer, sustituir,
+        callar o no estar en catálogo.
+      </p>
+
+      <!-- =================== 1 · LAS TRES PREGUNTAS =================== -->
+      <section class="ex-sec">
+        <h2>Primera parte</h2>
+        <h3>Las tres preguntas, en el orden en que se hacen</h3>
+        <p class="ex-p" x-text="ex.orden_de_ejecucion"></p>
+
+        <div class="ex-aviso">
+          <b>Dos son modelos. La tercera no.</b>
+          <span x-text="ex.aviso_sobre_el_tercero"></span>
+        </div>
+
+        <div class="ex-rejilla">
+          <template x-for="m in ex.modelos" :key="m.clave">
+            <div class="ex-card">
+              <div class="cab">
+                <span class="ord" x-text="m.orden"></span>
+                <h4 x-text="m.nombre"></h4>
+              </div>
+              <span class="ex-marca" :class="m.es_ml ? 'ml' : 'no-ml'"
+                    x-text="m.es_ml_texto"></span>
+              <dl class="ex-dl">
+                <dt>Qué responde</dt><dd x-text="m.responde"></dd>
+                <dt>Qué mira para responder</dt><dd x-text="limpio(m.mira)"></dd>
+                <dt>Qué devuelve</dt><dd x-text="m.devuelve"></dd>
+                <dt>Por qué va en este lugar</dt><dd x-text="m.por_que_aqui"></dd>
+                <dt x-text="m.es_ml ? 'Cómo aprende' : 'Por qué no es un modelo'"></dt>
+                <dd x-text="m.como_aprende"></dd>
+              </dl>
+              <ul class="ex-lista">
+                <li x-show="m.cifra" x-text="m.cifra"></li>
+                <template x-for="(d, i) in (m.detalle ?? [])" :key="i">
+                  <li x-text="d"></li>
+                </template>
+              </ul>
+            </div>
+          </template>
+        </div>
+
+        <div class="ex-rejilla">
+          <div class="ex-card apagada">
+            <div class="cab">
+              <span class="ord" aria-hidden="true">+</span>
+              <h4 x-text="ex.respaldo.nombre"></h4>
+            </div>
+            <span class="ex-marca no-ml" x-text="ex.respaldo.es_ml_texto"></span>
+            <span class="ex-marca act" x-text="'ahora mismo: ' + ex.nivel_activo"></span>
+            <dl class="ex-dl">
+              <dt>Qué responde</dt><dd x-text="ex.respaldo.responde"></dd>
+              <dt>Qué mira</dt><dd x-text="ex.respaldo.mira"></dd>
+              <dt>Por qué existe</dt><dd x-text="ex.respaldo.por_que_aqui"></dd>
+            </dl>
+            <ul class="ex-lista">
+              <template x-for="n in ex.escalera" :key="n.nivel">
+                <li><span><b x-text="n.titulo"></b> — <span x-text="n.texto"></span></span></li>
+              </template>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 2 · LAS OCHO PUERTAS ==================== -->
+      <section class="ex-sec">
+        <h2>Segunda parte</h2>
+        <h3>Las ocho puertas, y a quién deja fuera cada una</h3>
+        <p class="ex-p">
+          Antes de que salga un solo aviso, cada producto pasa por ocho
+          comprobaciones en un orden fijo. La primera que cierra detiene el
+          recorrido de ese producto y queda anotada como la razón. Una puntuación
+          altísima no abre ninguna: no hay forma de saltárselas.
+        </p>
+        <p class="ex-nota" x-text="ex.nota_conteo_puertas"></p>
+
+        <template x-for="p in ex.puertas" :key="p.puerta">
+          <div class="ex-puerta" :class="p.activa && p.orden ? 'on' : 'off'">
+            <span class="ord" x-text="p.orden ?? '—'"></span>
+            <div>
+              <div class="top">
+                <h4 x-text="p.nombre"></h4>
+                <span class="ex-cifra" x-show="p.n !== null">
+                  <span x-text="p.n_texto"></span>
+                  <small x-text="p.n === 1 ? 'persona' : 'personas'"></small>
+                </span>
+              </div>
+              <span class="ex-marca" :class="p.activa && p.orden ? 'act' : 'no-ml'"
+                    x-text="p.estado"></span>
+              <dl class="ex-dl">
+                <dt>Qué comprueba</dt><dd x-text="p.comprueba"></dd>
+                <dt>A quién deja fuera</dt><dd x-text="p.deja_fuera"></dd>
+              </dl>
+              <div x-show="p.n">
+                <div class="ex-pista">
+                  <i :style="'width:' + (p.pct_del_silencio ?? 0) + '%'"></i>
+                </div>
+                <p class="ex-nota">
+                  <span x-text="p.n_texto"></span> personas
+                  (<span x-text="p.pct_del_silencio_texto"></span> de todos los
+                  silencios de este corte,
+                  <span x-text="p.pct_de_la_base_texto"></span> de la base)
+                  se quedan sin aviso porque esta puerta se les cerró.
+                </p>
+              </div>
+              <p class="ex-nota" x-show="!p.n" x-text="p.motivo_cero"></p>
+              <div class="bien">
+                <span class="et">Por qué esto es bueno para el cliente</span>
+                <span x-text="p.bueno_porque"></span>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <div class="ex-aviso" style="margin-top:16px">
+          <b>Dos de las ocho no cierran a nadie, y no es un fallo</b>
+          <span x-text="ex.nota_no_activas"></span>
+          <span x-show="ex.puertas_no_activas.length">
+            En el piloto son
+            <b x-text="ex.puertas_no_activas.map(c => nombrePuerta(c)).join(' y ')"></b>.
+          </span>
+        </div>
+      </section>
+
+      <!-- ================= 3 · CÓMO SE DECIDE AL FINAL ================= -->
+      <section class="ex-sec">
+        <h2>Tercera parte</h2>
+        <h3>Cómo se toma la decisión final</h3>
+
+        <div class="ex-rejilla">
+          <template x-for="c in ex.cadena" :key="c.paso">
+            <div class="ex-card">
+              <div class="cab">
+                <span class="ord" x-text="c.paso"></span>
+                <h4 x-text="c.titulo"></h4>
+              </div>
+              <p class="ex-p" style="margin:0" x-text="c.texto"></p>
+              <p class="ex-nota" x-show="c.formula" x-text="c.formula"></p>
+            </div>
+          </template>
+        </div>
+
+        <h3 style="margin-top:26px">Y de ahí salen cuatro resultados</h3>
+        <div class="ex-rejilla">
+          <template x-for="r in ex.resultados" :key="r.clave">
+            <div class="ex-salida" :class="r.clave === 'silencio' ? 'callar' : ''">
+              <h4 x-text="r.titulo"></h4>
+              <div class="n" x-show="r.n !== null">
+                <span x-text="r.n_texto"></span>
+                <small x-text="r.pct_texto + ' de la base'"></small>
+              </div>
+              <dl class="ex-dl">
+                <dt>Qué ve el cliente</dt><dd x-text="r.que_ve"></dd>
+                <dt>Cuándo pasa</dt><dd x-text="r.cuando"></dd>
+                <dt>Por qué</dt><dd x-text="r.por_que"></dd>
+              </dl>
+              <p class="ex-nota" x-show="r.nota" x-text="r.nota"></p>
+            </div>
+          </template>
+        </div>
+
+        <div class="ex-aviso" style="margin-top:16px">
+          <b>Callar es un resultado, no un fallo</b>
+          <span x-text="ex.por_que_callar"></span>
+        </div>
+      </section>
+
+      <!-- =================== 4 · NUEVE CLIENTES REALES ================= -->
+      <section class="ex-sec">
+        <h2>Cuarta parte</h2>
+        <h3>Nueve clientes de verdad, uno por situación</h3>
+        <p class="ex-p">
+          No son ejemplos inventados: son nueve clientes del conjunto de datos,
+          cada uno elegido porque dispara una situación distinta. Lo que se
+          muestra al lado de cada uno es lo que el sistema decide hoy sobre él,
+          no lo que se esperaba que decidiera.
+        </p>
+
+        <!-- El texto de cada caso viene del cuaderno de análisis y usa los
+             nombres crudos de las columnas. Se traducen aquí, una vez, en vez
+             de dejar que cada tarjeta los suelte sin decir qué son. -->
+        <div class="ex-aviso">
+          <b>Las notas de abajo están escritas en el idioma de los datos</b>
+          <span>Vienen del cuaderno de análisis y usan los nombres de las columnas
+            tal cual. La traducción, de una vez:
+            <b>lift 30x</b> = treinta veces más probable que la tasa base;
+            <b>exposure_no</b> = cuántas veces se le ha mostrado ya ese aviso;
+            <b>hours_since_last_nudge</b> = horas desde el aviso anterior;
+            <b>cap</b> = el cupo, el tope de 2 repeticiones;
+            <b>Δ</b> = cuánto mueve el aviso esa cifra, y como se mide en días en
+            negativo, un número <b>negativo es bueno</b>;
+            <b>view</b> y <b>start</b> = mirar una pantalla y empezar el flujo;
+            <b>opt-out</b> y <b>nudge</b> = darse de baja de las notificaciones y
+            el aviso en sí;
+            <b>PIN Challenge (CNBV Art. 313)</b> = la norma mexicana que obliga a
+            pedir el PIN para cambiar preferencias, y que es la razón de que darse
+            de baja no se pueda deshacer desde la app.</span>
+        </div>
+
+        <div class="ex-rejilla">
+          <template x-for="c in ex.ejemplos" :key="c.customer_id">
+            <div class="ex-caso">
+              <h4 style="margin:0;font-size:15px;line-height:1.3" x-text="c.titulo"></h4>
+              <div class="idc" x-text="'cliente #' + c.customer_id + ' · corte ' + c.corte"></div>
+              <div class="qpasa">
+                <span class="ex-tag" :class="c.salida"
+                      x-text="{oferta:'Se le ofrece', sustitucion:'Se le sustituye',
+                               silencio:'Se calla'}[c.salida] ?? '—'"></span>
+                <span x-show="c.producto_titulo" x-text="c.producto_titulo"></span>
+                <span x-show="c.puerta_nombre" style="color:var(--gris);font-weight:600"
+                      x-text="c.puerta_nombre"></span>
+              </div>
+              <p class="ex-nota" x-show="c.sustituye_a_titulo"
+                 x-text="'Vino a pedir «' + c.sustituye_a_titulo + '» y se le da otra cosa.'"></p>
+              <p class="narr" x-text="c.narrativa"></p>
+              <p class="ex-nota" x-show="!c.coincide_con_el_guion">
+                Ojo: hoy este caso no da lo que promete el guion.
+              </p>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <!-- ========================= 5 · GLOSARIO ======================== -->
+      <section class="ex-sec">
+        <h2>Quinta parte</h2>
+        <h3>Qué significa cada palabra que aparece en pantalla</h3>
+        <p class="ex-p">
+          El mismo diccionario que usa la pestaña de decisión, ampliado con los
+          términos que allí se daban por sabidos. Cada entrada dice de dónde
+          viene, para que las dos pantallas no puedan contar cosas distintas.
+        </p>
+        <div class="ex-rejilla">
+          <template x-for="g in glosarioOrdenado" :key="g.clave">
+            <div class="ex-glo">
+              <h4><span x-text="g.titulo"></span>
+                  <span class="org" x-text="g.origen"></span></h4>
+              <p x-text="g.texto"></p>
+            </div>
+          </template>
+        </div>
+      </section>
+
+    </div>
+  </template>
+</div>
+</div>
+
+<footer>
+  nu-moments · los artefactos se cargan al arranque · el contador de silencio se
+  calcula sobre los 38 000 clientes, no está escrito en el HTML
+</footer>
+
+<script>
+// Ayuda accesible: se abre al pasar el ratón, al enfocar con el teclado y al
+// tocar. Se cierra con Escape. Un solo objeto por burbuja.
+function ayuda(){
+  return {
+    v: false,
+    abrir(){ this.v = true },
+    cerrar(){ this.v = false },
+    alternar(){ this.v = !this.v },
+  };
+}
+
+function momentos(){
+  return {
+    curados: [], libres: [], consulta: '',
+    sel: null, caso: null, ficha: null, decision: null,
+    salud: null, ctx: null, G: {}, cargando: false, verTodas: false,
+    corteSel: '', seleccionado: null,
+    filtroOferta: '', filtroRazon: '', nCoincidencias: null,
+    conteoOferta: null, conteoRazon: null, motivoFiltro: null,
+    linea: null, marca: null,
+    // La pestaña abierta y el contenido de «Cómo funciona». La explicación se
+    // pide una vez por corte y se recarga cuando se cambia de foto: sus cifras
+    // son las del corte, no las del día del demo.
+    pestana: 'decision', ex: null, exCorte: null,
+    // Qué oferta tiene el «por qué» abierto. `null` = la vista de cliente:
+    // banner y botón, nada más.
+    porque: null,
+    // La caja de la curva de fatiga, en unidades del viewBox. El SVG escala
+    // uniformemente, así que una x del viewBox es un porcentaje del ancho y el
+    // eje de HTML de debajo puede alinearse con la curva exactamente.
+    FAT: {w: 320, h: 112, px: 12, pt: 10, pb: 96},
+    tema: document.documentElement.getAttribute('data-tema') || 'claro',
+
+    async arrancar(){
+      const r = await fetch('/api/clientes');
+      const d = await r.json();
+      this.curados = d.clientes.filter(c => c.curado);
+      this.libres  = d.clientes.filter(c => !c.curado).slice(0, 8);
+      this.salud   = await (await fetch('/health')).json();
+      this.ctx     = await (await fetch('/api/contexto')).json();
+      this.G       = this.ctx.glosario || {};
+      await this.buscar();
+      if (this.curados.length) this.elegir(this.curados[0]);
+      // Enlace directo a la pestaña: /#como-funciona la abre ya cargada.
+      if (location.hash === '#como-funciona') await this.irA('como');
+    },
+
+    // ---------------------------------------------------- pestañas
+    // Dos pestañas de verdad; «Panorama» es un enlace a otra página y no pasa
+    // por aquí. `enfocar` es lo que hacen las flechas del teclado: mover el
+    // foco además de cambiar de panel, como pide el patrón de tablist.
+    async irA(nombre, enfocar){
+      this.pestana = nombre;
+      const hash = nombre === 'como' ? '#como-funciona' : '';
+      if (history.replaceState) history.replaceState(null, '', location.pathname + hash);
+      if (enfocar) this.$nextTick(() => document.getElementById('tab-' + nombre)?.focus());
+      if (nombre === 'como') await this.cargarExplicacion();
+    },
+
+    async cargarExplicacion(){
+      const corte = this.corteFiltro;
+      if (this.ex && this.exCorte === corte) return;
+      const p = new URLSearchParams();
+      if (corte) p.set('corte', corte);
+      this.ex = await (await fetch('/api/explicacion?' + p.toString())).json();
+      this.exCorte = corte;
+    },
+
+    // El texto de la API puede traer énfasis con asteriscos; la pantalla no los
+    // pinta como tales, así que se quitan en vez de enseñarlos crudos.
+    limpio(t){ return (t ?? '').replace(/\*\*/g, ''); },
+    nombrePuerta(codigo){
+      const p = (this.ex?.puertas ?? []).find(x => x.puerta === codigo);
+      return p ? p.nombre : codigo;
+    },
+    get glosarioOrdenado(){
+      const g = this.ex?.glosario ?? {};
+      return Object.keys(g)
+        .map(k => ({clave: k, ...g[k]}))
+        .sort((a, b) => a.titulo.localeCompare(b.titulo, 'es'));
+    },
+
+    // ---------------------------------------------------------- tema
+    cambiarTema(){
+      this.tema = this.tema === 'oscuro' ? 'claro' : 'oscuro';
+      document.documentElement.setAttribute('data-tema', this.tema);
+      try { localStorage.setItem('nu-moments-tema', this.tema); } catch(e) {}
+    },
+
+    // ------------------------------------------------------ derivados
+    get corteActivo(){
+      if (this.corteSel) return this.corteSel;
+      if (this.decision?.corte) return this.decision.corte;
+      if (this.caso?.corte) return this.caso.corte;
+      return this.ctx?.corte_demo ?? '';
+    },
+    get coberturaActiva(){
+      if (this.decision?.cobertura) return this.decision.cobertura;
+      const c = (this.ctx?.cortes ?? []).find(x => x.corte === this.corteActivo);
+      return c ? c.cobertura : null;
+    },
+    get puertaReportada(){
+      return (this.decision?.traza ?? []).find(t => t.puerta === this.decision?.puerta_reportada)
+          ?? (this.decision?.silencios ?? []).find(s => s.puerta === this.decision?.puerta_reportada);
+    },
+    get resumenRuta(){
+      return (this.decision?.traza ?? [])
+        .map(t => t.puerta_nombre + ': ' + t.resultado_etiqueta).join('; ');
+    },
+    // Los silencios agrupados por la puerta que los cerró, en el mismo orden de
+    // prioridad de reporte con el que llegan de la API.
+    get silenciosAgrupados(){
+      const out = [];
+      for (const s of (this.decision?.silencios ?? [])){
+        let g = out.find(x => x.puerta === s.puerta);
+        if (!g){
+          g = {puerta: s.puerta, nombre: s.puerta_nombre, comprueba: s.puerta_comprueba,
+               activa: s.puerta_activa, items: []};
+          out.push(g);
+        }
+        g.items.push(s);
+      }
+      return out;
+    },
+
+    // Las pantallas acopladas del catálogo, tal como las declara la decisión.
+    get pantallasAcopladas(){
+      const s = new Set();
+      for (const p of (this.decision?.catalogo ?? [])){
+        const a = this.decision?.senales?.[p]?.pantalla_acoplada;
+        if (a) s.add(a);
+      }
+      return s;
+    },
+    esAcoplada(pantalla){ return this.pantallasAcopladas.has(pantalla); },
+    estadoAviso(a){
+      return a.enganchado ? 'enganchado' : (a.descartado ? 'descartado' : 'sin respuesta');
+    },
+
+    productosDe(t){ return t.productos ?? (t.producto ? [t.producto] : []); },
+    titulo(p){ return this.ctx?.titulos?.[p] ?? p; },
+
+    // =============================================================
+    // El «por qué»: cerrado por defecto, y lo que hay detrás
+    // =============================================================
+    get hayOferta(){ return !!this.decision?.ofertas?.length; },
+    // Con oferta, el detalle se enseña solo si se pide. Sin oferta, la pantalla
+    // de silencio YA es la vista de auditoría y se enseña completa.
+    get verDetalle(){ return !this.hayOferta || this.porque !== null; },
+    alternarPorque(producto){
+      this.porque = (this.porque === producto) ? null : producto;
+    },
+
+    // El color de cada segmento del reparto de la población. El del cliente
+    // lleva el morado de la marca; el silencio, el gris más apagado.
+    claseSeg(s, i){
+      if (s.es_del_cliente) return 'mio';
+      if (s.clave === (this.ctx?.silencio ?? 'silencio')) return 'sil';
+      return 's' + ((i % 3) + 1);
+    },
+    segmentoMio(g){
+      return (g?.poblacion?.segmentos ?? []).find(s => s.es_del_cliente) ?? null;
+    },
+    marcaDe(g, clave){
+      return (g?.distribucion?.histograma?.marcas ?? []).find(m => m.clave === clave) ?? null;
+    },
+
+    // ---- la curva de fatiga, en coordenadas del viewBox ----
+    // Las dos series comparten eje vertical: es la única forma de ver que en la
+    // tercera exposición el enganche y las bajas casi se cruzan.
+    fatMax(curva){
+      return Math.max(...curva.map(p => Math.max(p.enganche, p.baja)), 1e-9);
+    },
+    fatX(curva, i){
+      const n = curva.length;
+      const f = n > 1 ? i / (n - 1) : 0.5;
+      return this.FAT.px + f * (this.FAT.w - 2 * this.FAT.px);
+    },
+    fatY(curva, v){
+      const alto = this.FAT.pb - this.FAT.pt;
+      return this.FAT.pb - (v / this.fatMax(curva)) * alto;
+    },
+    fatPuntos(curva, clave){
+      return curva.map((p, i) =>
+        this.fatX(curva, i).toFixed(1) + ',' + this.fatY(curva, p[clave]).toFixed(1)).join(' ');
+    },
+    fatEjePct(curva, i){ return 100 * this.fatX(curva, i) / this.FAT.w; },
+    // La raya del cupo cae ENTRE la última exposición permitida y la siguiente.
+    fatCapX(curva, cap){
+      if (curva.length < 2) return this.FAT.px;
+      const paso = (this.FAT.w - 2 * this.FAT.px) / (curva.length - 1);
+      return this.FAT.px + (cap - 0.5) * paso;
+    },
+    fatCliente(curva){
+      const i = curva.findIndex(p => p.es_del_cliente);
+      if (i < 0) return null;
+      return {cx: this.fatX(curva, i), cy: this.fatY(curva, curva[i].enganche)};
+    },
+
+    // ------------------------------------------------------ filtro
+    get corteFiltro(){ return this.corteSel || (this.ctx?.corte_demo ?? ''); },
+    get pctCoincidencias(){
+      const n = this.ctx?.n_clientes;
+      if (!n || this.nCoincidencias === null) return '';
+      return this.pct(100 * this.nCoincidencias / n) + ' de la base';
+    },
+    conteoDe(clave){
+      const n = this.conteoOferta?.[clave];
+      return (n === undefined || n === null) ? '' : ' (' + n.toLocaleString('es-MX') + ')';
+    },
+    get razonesDisponibles(){
+      const c = this.conteoRazon ?? {};
+      const nombres = {};
+      for (const p of (this.ctx?.puertas ?? [])) nombres[p.puerta] = p.puerta_nombre;
+      return Object.keys(c).sort((a, b) => c[b] - c[a])
+        .map(k => ({puerta: k, n: c[k], nombre: nombres[k] ?? k}));
+    },
+    cambiarFiltro(){
+      if (this.filtroOferta !== 'silencio') this.filtroRazon = '';
+      return this.buscar();
+    },
+
+    // ------------------------------------------------------- peticiones
+    async buscar(){
+      const p = new URLSearchParams();
+      const q = this.consulta.trim();
+      if (q) p.set('q', q);
+      if (this.corteFiltro) p.set('corte', this.corteFiltro);
+      if (this.filtroOferta) p.set('oferta', this.filtroOferta);
+      if (this.filtroRazon) p.set('razon', this.filtroRazon);
+      p.set('limite', '12');
+      const d = await (await fetch('/api/clientes?' + p.toString())).json();
+      this.libres = d.clientes.filter(c => !c.curado);
+      this.conteoOferta = d.conteo_por_oferta;
+      this.conteoRazon  = d.conteo_por_razon;
+      this.nCoincidencias = d.n_coincidencias;
+      this.motivoFiltro = d.filtro?.motivo ?? null;
+    },
+
+    // El `asof` con el que se decide. Con «auto» es el del escenario —la fecha
+    // exacta en la que cada uno de los 9 se verificó—; con un corte elegido, el
+    // mediodía de ese corte, que es donde está calculado el panorama.
+    asofPara(c){
+      return this.corteSel ? (this.corteSel + 'T12:00:00') : c.asof;
+    },
+
+    async cambiarCorte(){
+      await this.buscar();
+      if (this.seleccionado) await this.elegir(this.seleccionado);
+      // La explicación lleva las cifras del corte: al cambiar de foto se tira.
+      this.ex = null; this.exCorte = null;
+      if (this.pestana === 'como') await this.cargarExplicacion();
+    },
+
+    async elegir(c){
+      this.sel = c.customer_id;
+      this.seleccionado = c;
+      this.caso = c.curado ? c : null;
+      // Cada cliente arranca en la vista de cliente: el «por qué» se cierra.
+      this.cargando = true; this.porque = null; this.verTodas = false;
+      const asof = this.asofPara(c);
+      try {
+        const f = await fetch('/api/clientes/' + c.customer_id + '?asof=' + encodeURIComponent(asof));
+        this.ficha = await f.json();
+        const d = await fetch('/api/decidir', {
+          method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({customer_id: c.customer_id, asof: asof})
+        });
+        this.decision = await d.json();
+        this.marca = null;
+        const l = await fetch('/api/clientes/' + c.customer_id +
+                              '/linea-tiempo?asof=' + encodeURIComponent(asof));
+        this.linea = await l.json();
+      } finally { this.cargando = false; }
+    },
+
+    // Un único formato de porcentaje en toda la pantalla: XX.XX %
+    pct(v){ return (v === null || v === undefined) ? '—' : Number(v).toFixed(2) + ' %'; },
+    fmt(v){ return v === null || v === undefined ? '—' : Number(v).toLocaleString('es-MX'); }
+  };
+}
+</script>
+</body>
+</html>

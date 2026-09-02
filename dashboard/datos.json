@@ -1,0 +1,3134 @@
+{
+ "version": "2",
+ "generado_utc": "2026-09-02T17:29:01+00:00",
+ "segundos_de_construccion": 5.28,
+ "corte": "2026-06-16",
+ "asof": "2026-06-16T12:00:00",
+ "firma": {
+  "version": "2",
+  "data/customers.parquet": 766129,
+  "data/app_events.parquet": 10390936,
+  "data/financial_actions.parquet": 10273880,
+  "data/nudges.parquet": 5389495,
+  "data/nudge_outcomes.parquet": 3206854,
+  "pipeline/artifacts/metadata.json": 4083,
+  "pipeline/artifacts/tabla_valor.json": 1868,
+  "pipeline/artifacts/umbrales.json": 1721,
+  "pipeline/artifacts/modelo_intencion.pkl": 1244482,
+  "pipeline/artifacts/modelo_momento.pkl": 1880
+ },
+ "titulo": "Dashboard general · nu-moments",
+ "entradilla": "Todas las métricas del proyecto en una página, escritas para alguien que no ha visto el dataset ni ha estado en ninguna reunión. Cada bloque dice qué muestra y qué hay que concluir. Ninguna cifra está escrita a mano: todas salen de los cinco archivos de datos, de los recuentos del reconocimiento o de los modelos ya entrenados, y la procedencia va escrita en cada bloque.",
+ "glosario": [
+  {
+   "termino": "Aviso (o nudge)",
+   "definicion": "Un mensaje que la app le muestra al cliente sugiriéndole algo: una meta de ahorro, un recordatorio de pago, un préstamo. El dataset trae 285 000 de ellos con lo que pasó después."
+  },
+  {
+   "termino": "Señal",
+   "definicion": "Que el cliente haya entrado hace poco a la pantalla que corresponde al aviso. Es «fresca» si fue en las últimas 24 horas, «tibia» hasta 7 días y «fría» a partir de ahí."
+  },
+  {
+   "termino": "Clic (engaged)",
+   "definicion": "Que el cliente actuó sobre el aviso. No es lo mismo que hacer la acción: se puede clicar y no acabar, y se puede acabar sin haber clicado."
+  },
+  {
+   "termino": "Conversión a 7 días",
+   "definicion": "Que el cliente hiciera de verdad la acción del aviso en los 7 días siguientes a verlo. Es la métrica que importa; el clic solo es el paso intermedio."
+  },
+  {
+   "termino": "Frágil",
+   "definicion": "Un cliente con la tarjeta por encima del 70 % de utilización o con 3 o más días en negativo en los últimos 90. Es una definición operativa, la que usa el sistema para negarle crédito a quien le haría daño."
+  },
+  {
+   "termino": "λ (lambda)",
+   "definicion": "El precio, en pesos, de un día que el cliente pasa en descubierto. Sirve para poder sumar ingreso y salud financiera en una sola cuenta. El sistema usa 266 MXN, que es el precio que revela lo que ya se manda hoy."
+  },
+  {
+   "termino": "Tasa base",
+   "definicion": "El porcentaje de clientes que hace algo sin que nadie le diga nada. Es la referencia sin la cual ninguna probabilidad significa nada."
+  },
+  {
+   "termino": "Corte (as-of)",
+   "definicion": "El instante desde el que se mira. Todo lo que el sistema usa para decidir es estrictamente anterior al corte; lo posterior solo sirve para comprobar si acertó."
+  }
+ ],
+ "parametros": {
+  "corte": "2026-06-16",
+  "asof": "2026-06-16T12:00:00",
+  "cap_exposiciones": 2,
+  "umbral_senal_fresca_h": 24,
+  "umbral_senal_tibia_h": 168,
+  "lambda_mxn_por_dia_negativo": 266.0,
+  "ventana_conversion_dias": 7,
+  "catalogo": [
+   "Meta de ahorro",
+   "Aumento de línea",
+   "Oferta de préstamo",
+   "Recordatorio de pago"
+  ],
+  "n_pantallas": 10,
+  "n_productos": 6
+ },
+ "cabecera": [
+  {
+   "etiqueta": "El sistema se calla",
+   "valor": "86.43 %",
+   "detalle": "de los 38 000 clientes, hoy. Cada silencio con su motivo escrito.",
+   "bloque": "sistema"
+  },
+  {
+   "etiqueta": "Avisos que caen en el momento correcto",
+   "valor": "1.46 %",
+   "detalle": "El resto se manda sin ninguna señal reciente de que el cliente quiera eso.",
+   "bloque": "momento"
+  },
+  {
+   "etiqueta": "Cuántas veces más clic recibe ese momento",
+   "valor": "4.04×",
+   "detalle": "Mismo mensaje, mismo producto. Solo cambia cuándo. Es la tasa de clic, no la acción hecha.",
+   "bloque": "momento"
+  },
+  {
+   "etiqueta": "Avisos que reciben clic",
+   "valor": "11.45 %",
+   "detalle": "Y más de un tercio se cierran de forma activa.",
+   "bloque": "avisos"
+  },
+  {
+   "etiqueta": "El aviso más clicado es el que más daña",
+   "valor": "Aumento de línea",
+   "detalle": "Primero de seis en clics, último en salud financiera. Ahí está el conflicto del bloque 6.",
+   "bloque": "objetivos"
+  }
+ ],
+ "bloques": [
+  {
+   "clave": "clientes",
+   "titulo": "1 · Quiénes son estas 38 000 personas",
+   "resumen": "Antes de hablar de modelos: esta es la base de clientes. Ninguna persona es real — el dataset es 100 % sintético — pero la forma de la población es la que hay que tener en la cabeza para que el resto de las cifras signifique algo.",
+   "fuente": "data/customers.parquet · recalculado en cada construcción",
+   "cifras": [
+    {
+     "etiqueta": "Clientes en el dataset",
+     "valor": "38 000",
+     "detalle": "Es el denominador de casi todo lo que sigue."
+    },
+    {
+     "etiqueta": "Edad",
+     "valor": "35 años (mediana)",
+     "detalle": "La mitad tiene entre 28 y 42 años."
+    },
+    {
+     "etiqueta": "Antigüedad en el banco",
+     "valor": "30 meses (mediana)",
+     "detalle": "De 1 a 60 meses."
+    },
+    {
+     "etiqueta": "Ingreso mensual estimado",
+     "valor": "16 300 MXN (mediana)",
+     "detalle": "La media (19 346 MXN) es más alta porque hay una cola de ingresos altos."
+    },
+    {
+     "etiqueta": "Saldo medio en cuenta",
+     "valor": "2 069 MXN (mediana)",
+     "detalle": "Mediana, no media: unos pocos saldos muy grandes la desplazarían."
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "productos",
+     "tipo": "barras",
+     "titulo": "Qué productos tiene ya cada cliente",
+     "que_muestra": "El porcentaje de los 38 000 clientes que hoy tiene cada producto contratado. Un cliente puede tener varios.",
+     "que_concluir": "La base es sobre todo de cuenta y ahorro. Crédito e inversión son minoritarios: por eso una oferta de préstamo o de inversión le encaja a mucha menos gente de la que parece.",
+     "unidad": "% de los 38 000 clientes",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Cuenta Nu",
+       "clave": "has_cuenta_nu",
+       "n": 21898,
+       "valor": 57.63,
+       "texto": "57.63 %",
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Cajita Turbo (ahorro)",
+       "clave": "has_cajita_turbo",
+       "n": 5642,
+       "valor": 14.85,
+       "texto": "14.85 %",
+       "ancho_pct": 25.77
+      },
+      {
+       "etiqueta": "Nómina en Nu",
+       "clave": "has_payroll_portability",
+       "n": 7341,
+       "valor": 19.32,
+       "texto": "19.32 %",
+       "ancho_pct": 33.52
+      },
+      {
+       "etiqueta": "Préstamo personal",
+       "clave": "has_personal_loan",
+       "n": 2514,
+       "valor": 6.62,
+       "texto": "6.62 %",
+       "ancho_pct": 11.49
+      },
+      {
+       "etiqueta": "Inversiones",
+       "clave": "has_investments",
+       "n": 1917,
+       "valor": 5.04,
+       "texto": "5.04 %",
+       "ancho_pct": 8.75
+      }
+     ],
+     "alt": "Qué productos tiene ya cada cliente (en % de los 38 000 clientes). Cuenta Nu: 57.63 %; Cajita Turbo (ahorro): 14.85 %; Nómina en Nu: 19.32 %; Préstamo personal: 6.62 %; Inversiones: 5.04 %."
+    },
+    {
+     "clave": "ingreso",
+     "tipo": "barras",
+     "titulo": "En qué segmento de ingreso está cada cliente",
+     "que_muestra": "Reparto de los 38 000 clientes entre los cinco segmentos de ingreso que trae el dataset en la columna `income_band`.",
+     "que_concluir": "Casi la mitad de la base (48.96 %) cae en los dos segmentos más bajos. Cualquier recomendación que asuma holgura financiera se está dirigiendo a menos de la mitad de la gente.",
+     "unidad": "% de los 38 000 clientes",
+     "leyenda": null,
+     "aviso": "El nombre del segmento NO es un corte sobre el ingreso estimado: el dataset trae las dos cosas y no cuadran. La mediana del segmento más bajo es 9 800 MXN al mes y la del más alto es 27 700, y los dos abarcan desde 3 500 hasta más de 120 000. Leídos como pesos al mes, los tramos dirían algo falso; por eso aquí se nombran como lo que son: etiquetas de segmento. El ingreso estimado de verdad está dos filas más arriba, en las cifras: mediana 16 300 MXN.",
+     "filas": [
+      {
+       "etiqueta": "Segmento más bajo (el dataset lo llama «8k»)",
+       "clave": "<8k",
+       "n": 8017,
+       "valor": 21.1,
+       "texto": "21.10 %",
+       "ancho_pct": 75.74
+      },
+      {
+       "etiqueta": "Segmento «8k-15k»",
+       "clave": "8k-15k",
+       "n": 10586,
+       "valor": 27.86,
+       "texto": "27.86 %",
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Segmento «15k-30k»",
+       "clave": "15k-30k",
+       "n": 10264,
+       "valor": 27.01,
+       "texto": "27.01 %",
+       "ancho_pct": 96.95
+      },
+      {
+       "etiqueta": "Segmento «30k-60k»",
+       "clave": "30k-60k",
+       "n": 6447,
+       "valor": 16.97,
+       "texto": "16.97 %",
+       "ancho_pct": 60.91
+      },
+      {
+       "etiqueta": "Segmento más alto (el dataset lo llama «60k»)",
+       "clave": ">60k",
+       "n": 2686,
+       "valor": 7.07,
+       "texto": "7.07 %",
+       "ancho_pct": 25.38
+      }
+     ],
+     "alt": "En qué segmento de ingreso está cada cliente (en % de los 38 000 clientes). Segmento más bajo (el dataset lo llama «8k»): 21.10 %; Segmento «8k-15k»: 27.86 %; Segmento «15k-30k»: 27.01 %; Segmento «30k-60k»: 16.97 %; Segmento más alto (el dataset lo llama «60k»): 7.07 %."
+    },
+    {
+     "clave": "salud",
+     "tipo": "barras",
+     "titulo": "En qué situación financiera están",
+     "que_muestra": "Cuatro señales de tensión financiera, cada una sobre el total de clientes. La última es la definición de «frágil» que usa el sistema para vetar ofertas de crédito.",
+     "que_concluir": "Casi 1 de cada 5 clientes está en situación frágil. Ese es el grupo al que un aumento de línea le hace daño, y es el motivo de que exista una puerta que se lo niegue.",
+     "unidad": "% de los 38 000 clientes",
+     "leyenda": null,
+     "aviso": "«Frágil» aquí es una definición operativa, no un juicio: utilización de tarjeta por encima del 70 % o 3 o más días en negativo en los últimos 90.",
+     "filas": [
+      {
+       "etiqueta": "Ha estado en negativo algún día de los últimos 90",
+       "valor": 46.35,
+       "texto": "46.35 %",
+       "n": 17613,
+       "ancho_pct": 46.35
+      },
+      {
+       "etiqueta": "Usa más del 70 % de su línea de crédito",
+       "valor": 14.31,
+       "texto": "14.31 %",
+       "n": 5439,
+       "ancho_pct": 14.31
+      },
+      {
+       "etiqueta": "No aparta nada de ahorro (tasa de ahorro 0 %)",
+       "valor": 3.17,
+       "texto": "3.17 %",
+       "n": 1204,
+       "ancho_pct": 3.17
+      },
+      {
+       "etiqueta": "En situación frágil (una de las dos primeras, o las dos)",
+       "valor": 18.86,
+       "texto": "18.86 %",
+       "n": 7166,
+       "resaltar": true,
+       "ancho_pct": 18.86
+      }
+     ],
+     "alt": "En qué situación financiera están (en % de los 38 000 clientes). Ha estado en negativo algún día de los últimos 90: 46.35 %; Usa más del 70 % de su línea de crédito: 14.31 %; No aparta nada de ahorro (tasa de ahorro 0 %): 3.17 %; En situación frágil (una de las dos primeras, o las dos): 18.86 %."
+    },
+    {
+     "clave": "nps",
+     "tipo": "barras",
+     "titulo": "Cuánta gente nos ha dicho si está contenta",
+     "que_muestra": "Porcentaje de clientes que respondió la encuesta de satisfacción, separando a los frágiles del resto.",
+     "que_concluir": "Solo responde uno de cada tres, y responde por igual esté frágil o no. La satisfacción no se puede optimizar con esto: es una restricción del dataset, no un descuido.",
+     "unidad": "% que respondió la encuesta",
+     "leyenda": null,
+     "aviso": "Los frágiles que responden dan de media 6.19 sobre 10 y los no frágiles 8.20. La diferencia existe, pero sobre el 31 % que contesta: no se puede extrapolar al resto.",
+     "filas": [
+      {
+       "etiqueta": "Clientes frágiles",
+       "n": 7166,
+       "valor": 31.12,
+       "texto": "31.12 %",
+       "nota": "nota media 6.19 de 10",
+       "ancho_pct": 31.12
+      },
+      {
+       "etiqueta": "Clientes no frágiles",
+       "n": 30834,
+       "valor": 30.96,
+       "texto": "30.96 %",
+       "nota": "nota media 8.20 de 10",
+       "ancho_pct": 30.96
+      }
+     ],
+     "alt": "Cuánta gente nos ha dicho si está contenta (en % que respondió la encuesta). Clientes frágiles: 31.12 %; Clientes no frágiles: 30.96 %."
+    },
+    {
+     "clave": "payday",
+     "tipo": "barras",
+     "titulo": "Cuándo le pagan a cada cliente",
+     "que_muestra": "Día del mes en el que el cliente recibe su sueldo.",
+     "que_concluir": "Solo hay tres días de pago posibles: 1, 15 y 30. Eso convierte el calendario en una señal utilizable — y la mitad de la base cobra el día 15.",
+     "unidad": "% de los 38 000 clientes",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Día 1 del mes",
+       "clave": "1",
+       "n": 10502,
+       "valor": 27.64,
+       "texto": "27.64 %",
+       "ancho_pct": 62.15
+      },
+      {
+       "etiqueta": "Día 15 del mes",
+       "clave": "15",
+       "n": 16897,
+       "valor": 44.47,
+       "texto": "44.47 %",
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Día 30 del mes",
+       "clave": "30",
+       "n": 10601,
+       "valor": 27.9,
+       "texto": "27.90 %",
+       "ancho_pct": 62.74
+      }
+     ],
+     "alt": "Cuándo le pagan a cada cliente (en % de los 38 000 clientes). Día 1 del mes: 27.64 %; Día 15 del mes: 44.47 %; Día 30 del mes: 27.90 %."
+    }
+   ]
+  },
+  {
+   "clave": "comportamiento",
+   "titulo": "2 · Qué hacen dentro de la app, y qué hacen con su dinero",
+   "resumen": "Hay dos registros distintos: por dónde navega la gente (797 304 eventos) y qué mueve de dinero (566 682 acciones). El puente entre los dos es lo que hace posible predecir algo: la pantalla que alguien abre hoy anticipa la acción de mañana.",
+   "fuente": "analytics/recon/out/03_event_composition.csv, 02_action_type_dist.csv, 03_screen_action_p24h.csv, 03_screen_action_lift24h.csv, 03_event_gap_histogram.csv · el hueco de señal, recalculado desde data/app_events.parquet",
+   "cifras": [
+    {
+     "etiqueta": "Eventos de navegación",
+     "valor": "797 304",
+     "detalle": "119 días de historia. No hay identificador de sesión: agrupar eventos en sesiones es una decisión nuestra, no un dato."
+    },
+    {
+     "etiqueta": "Acciones financieras",
+     "valor": "566 682",
+     "detalle": "Unas 15 por cliente en los 119 días, de 4.6 tipos distintos."
+    },
+    {
+     "etiqueta": "Clientes sin ni un evento en las últimas 24 h",
+     "valor": "82.84 %",
+     "detalle": "Al corte 2026-06-16 a las 12:00. La señal fresca es rara: eso es lo que limita a cuánta gente se le puede hablar con fundamento."
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "acopladas",
+     "tipo": "barras",
+     "titulo": "La pantalla de hoy anticipa la acción de mañana",
+     "que_muestra": "Para cada pareja pantalla-producto: de los clientes que entraron a esa pantalla, qué porcentaje hizo la acción correspondiente en las 24 horas siguientes. Al lado, cuántas veces más probable es eso que en una visita cualquiera de la app —la media de las 10 pantallas—, que es la referencia con la que se calcula.",
+     "que_concluir": "Este es el hallazgo que sostiene todo el producto. Entrar al simulador de préstamo multiplica por 30 la probabilidad de pedir uno frente a una visita cualquiera. La intención no hay que adivinarla: el cliente la deja escrita al navegar.",
+     "unidad": "% que hace la acción en las 24 h siguientes",
+     "leyenda": null,
+     "aviso": "Ojo con el signo de la lectura: esto no dice que la pantalla cause la acción, dice que la anuncia. Es suficiente para decidir cuándo hablar, y no basta para atribuirse el mérito.",
+     "filas": [
+      {
+       "etiqueta": "Pagar un servicio → Pago de un servicio",
+       "clave": "bill_reminder",
+       "valor": 56.81,
+       "texto": "56.81 %",
+       "nota": "4.84× más probable que tras una visita cualquiera de la app",
+       "ancho_pct": 56.81
+      },
+      {
+       "etiqueta": "Cajita de ahorro → Traspaso a ahorro",
+       "clave": "savings_goal",
+       "valor": 49.39,
+       "texto": "49.39 %",
+       "nota": "7.64× más probable que tras una visita cualquiera de la app",
+       "ancho_pct": 49.39
+      },
+      {
+       "etiqueta": "Inversiones → Compra de inversión",
+       "clave": "invest_start",
+       "valor": 36.22,
+       "texto": "36.22 %",
+       "nota": "28.03× más probable que tras una visita cualquiera de la app",
+       "ancho_pct": 36.22
+      },
+      {
+       "etiqueta": "Aumentar la línea → Solicitud de aumento de línea",
+       "clave": "limit_increase",
+       "valor": 30.57,
+       "texto": "30.57 %",
+       "nota": "32.69× más probable que tras una visita cualquiera de la app",
+       "ancho_pct": 30.57
+      },
+      {
+       "etiqueta": "Simulador de préstamo → Solicitud de préstamo",
+       "clave": "loan_offer",
+       "valor": 24.84,
+       "texto": "24.84 %",
+       "nota": "30.16× más probable que tras una visita cualquiera de la app",
+       "ancho_pct": 24.84
+      }
+     ],
+     "alt": "La pantalla de hoy anticipa la acción de mañana (en % que hace la acción en las 24 h siguientes). Pagar un servicio → Pago de un servicio: 56.81 %; Cajita de ahorro → Traspaso a ahorro: 49.39 %; Inversiones → Compra de inversión: 36.22 %; Aumentar la línea → Solicitud de aumento de línea: 30.57 %; Simulador de préstamo → Solicitud de préstamo: 24.84 %."
+    },
+    {
+     "clave": "pantallas",
+     "tipo": "barras",
+     "titulo": "Por dónde pasa la gente en la app",
+     "que_muestra": "Reparto de los 797 304 eventos de navegación entre las 10 pantallas.",
+     "que_concluir": "Un cuarto del tráfico es solo la pantalla de inicio, que no dice nada de intención. Las pantallas que sí informan —préstamo, línea, inversiones— son las que menos tráfico tienen: entre las tres no llegan al 8 %.",
+     "unidad": "% de los 797 304 eventos",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Transferir por SPEI",
+       "clave": "transfer_spei",
+       "n": 205845,
+       "valor": 25.82,
+       "texto": "25.82 %",
+       "nota": "31.45 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Inicio",
+       "clave": "home",
+       "n": 189061,
+       "valor": 23.71,
+       "texto": "23.71 %",
+       "nota": "26.60 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 91.83
+      },
+      {
+       "etiqueta": "Pagar un servicio",
+       "clave": "bill_payment",
+       "n": 122970,
+       "valor": 15.42,
+       "texto": "15.42 %",
+       "nota": "30.80 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 59.72
+      },
+      {
+       "etiqueta": "Estado de cuenta",
+       "clave": "card_statement",
+       "n": 101320,
+       "valor": 12.71,
+       "texto": "12.71 %",
+       "nota": "29.07 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 49.23
+      },
+      {
+       "etiqueta": "Cajita de ahorro",
+       "clave": "savings_cajita",
+       "n": 72688,
+       "valor": 9.12,
+       "texto": "9.12 %",
+       "nota": "28.79 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 35.32
+      },
+      {
+       "etiqueta": "Inversiones",
+       "clave": "investments",
+       "n": 22584,
+       "valor": 2.83,
+       "texto": "2.83 %",
+       "nota": "26.28 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 10.96
+      },
+      {
+       "etiqueta": "Ayuda",
+       "clave": "support",
+       "n": 22478,
+       "valor": 2.82,
+       "texto": "2.82 %",
+       "nota": "16.22 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 10.92
+      },
+      {
+       "etiqueta": "Simulador de préstamo",
+       "clave": "loan_simulation",
+       "n": 20756,
+       "valor": 2.6,
+       "texto": "2.60 %",
+       "nota": "22.48 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 10.07
+      },
+      {
+       "etiqueta": "Ajustes de la tarjeta",
+       "clave": "card_settings",
+       "n": 20345,
+       "valor": 2.55,
+       "texto": "2.55 %",
+       "nota": "16.07 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 9.88
+      },
+      {
+       "etiqueta": "Aumentar la línea",
+       "clave": "limit_increase",
+       "n": 19257,
+       "valor": 2.42,
+       "texto": "2.42 %",
+       "nota": "24.27 % de esas visitas llegan a iniciar el flujo",
+       "ancho_pct": 9.37
+      }
+     ],
+     "alt": "Por dónde pasa la gente en la app (en % de los 797 304 eventos). Transferir por SPEI: 25.82 %; Inicio: 23.71 %; Pagar un servicio: 15.42 %; Estado de cuenta: 12.71 %; Cajita de ahorro: 9.12 %; Inversiones: 2.83 %; Ayuda: 2.82 %; Simulador de préstamo: 2.60 %; Ajustes de la tarjeta: 2.55 %; Aumentar la línea: 2.42 %."
+    },
+    {
+     "clave": "acciones",
+     "tipo": "barras",
+     "titulo": "Qué hace la gente con su dinero",
+     "que_muestra": "Reparto de las 566 682 acciones financieras por tipo.",
+     "que_concluir": "Casi un tercio de las ACCIONES son transferencias SPEI. Eso no es lo mismo que el acierto de predecir siempre «SPEI» a cada CLIENTE, que es 33.63 % de media (bloque 8) y va del 25.63 % al 41.62 % según el día: son dos denominadores distintos. La referencia contra la que hay que medirse es esa media, no contra cero.",
+     "unidad": "% de las 566 682 acciones",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Transferencia SPEI enviada",
+       "clave": "spei_out",
+       "n": 178502,
+       "valor": 31.5,
+       "texto": "31.50 %",
+       "nota": "99.00 % de los clientes la hace al menos una vez · importe medio 3 001 MXN",
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Depósito recibido",
+       "clave": "deposit_in",
+       "n": 121060,
+       "valor": 21.36,
+       "texto": "21.36 %",
+       "nota": "95.20 % de los clientes la hace al menos una vez · importe medio 13 558 MXN",
+       "ancho_pct": 67.81
+      },
+      {
+       "etiqueta": "Pago de un servicio",
+       "clave": "bill_payment",
+       "n": 106275,
+       "valor": 18.75,
+       "texto": "18.75 %",
+       "nota": "75.10 % de los clientes la hace al menos una vez · importe medio 1 392 MXN",
+       "ancho_pct": 59.52
+      },
+      {
+       "etiqueta": "Pago de la tarjeta",
+       "clave": "card_payment",
+       "n": 74758,
+       "valor": 13.19,
+       "texto": "13.19 %",
+       "nota": "85.00 % de los clientes la hace al menos una vez · importe medio 4 830 MXN",
+       "ancho_pct": 41.87
+      },
+      {
+       "etiqueta": "Traspaso a ahorro",
+       "clave": "savings_move",
+       "n": 55714,
+       "valor": 9.83,
+       "texto": "9.83 %",
+       "nota": "50.00 % de los clientes la hace al menos una vez · importe medio 2 335 MXN",
+       "ancho_pct": 31.21
+      },
+      {
+       "etiqueta": "Compra de inversión",
+       "clave": "investment_buy",
+       "n": 12826,
+       "valor": 2.26,
+       "texto": "2.26 %",
+       "nota": "17.30 % de los clientes la hace al menos una vez · importe medio 6 204 MXN",
+       "ancho_pct": 7.17
+      },
+      {
+       "etiqueta": "Solicitud de aumento de línea",
+       "clave": "limit_increase_request",
+       "n": 9277,
+       "valor": 1.64,
+       "texto": "1.64 %",
+       "nota": "18.20 % de los clientes la hace al menos una vez · importe medio 34 145 MXN",
+       "ancho_pct": 5.21
+      },
+      {
+       "etiqueta": "Solicitud de préstamo",
+       "clave": "loan_request",
+       "n": 8270,
+       "valor": 1.46,
+       "texto": "1.46 %",
+       "nota": "17.00 % de los clientes la hace al menos una vez · importe medio 67 063 MXN",
+       "ancho_pct": 4.63
+      }
+     ],
+     "alt": "Qué hace la gente con su dinero (en % de las 566 682 acciones). Transferencia SPEI enviada: 31.50 %; Depósito recibido: 21.36 %; Pago de un servicio: 18.75 %; Pago de la tarjeta: 13.19 %; Traspaso a ahorro: 9.83 %; Compra de inversión: 2.26 %; Solicitud de aumento de línea: 1.64 %; Solicitud de préstamo: 1.46 %."
+    },
+    {
+     "clave": "espera",
+     "tipo": "barras",
+     "titulo": "Cuánto tarda un cliente en volver a abrir la app",
+     "que_muestra": "Tiempo entre dos eventos consecutivos del mismo cliente.",
+     "que_concluir": "Casi la mitad de los huecos pasan de 3 días. La app no es un sitio donde la gente esté todo el rato: si el aviso no cae en la visita correcta, no cae.",
+     "unidad": "% de los huecos entre eventos",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "0-5 min",
+       "clave": "0-5m",
+       "n": 1305,
+       "valor": 0.17,
+       "texto": "0.17 %",
+       "nota": "acumulado 0.17 %",
+       "ancho_pct": 0.37
+      },
+      {
+       "etiqueta": "5-10 min",
+       "clave": "5-10m",
+       "n": 1355,
+       "valor": 0.18,
+       "texto": "0.18 %",
+       "nota": "acumulado 0.35 %",
+       "ancho_pct": 0.39
+      },
+      {
+       "etiqueta": "10-15 min",
+       "clave": "10-15m",
+       "n": 1389,
+       "valor": 0.18,
+       "texto": "0.18 %",
+       "nota": "acumulado 0.53 %",
+       "ancho_pct": 0.39
+      },
+      {
+       "etiqueta": "15-30 min",
+       "clave": "15-30m",
+       "n": 4213,
+       "valor": 0.55,
+       "texto": "0.55 %",
+       "nota": "acumulado 1.09 %",
+       "ancho_pct": 1.2
+      },
+      {
+       "etiqueta": "30-60 min",
+       "clave": "30-60m",
+       "n": 8244,
+       "valor": 1.09,
+       "texto": "1.09 %",
+       "nota": "acumulado 2.17 %",
+       "ancho_pct": 2.38
+      },
+      {
+       "etiqueta": "1-2 h",
+       "clave": "1-2h",
+       "n": 16101,
+       "valor": 2.12,
+       "texto": "2.12 %",
+       "nota": "acumulado 4.29 %",
+       "ancho_pct": 4.62
+      },
+      {
+       "etiqueta": "2-6 h",
+       "clave": "2-6h",
+       "n": 57611,
+       "valor": 7.59,
+       "texto": "7.59 %",
+       "nota": "acumulado 11.88 %",
+       "ancho_pct": 16.55
+      },
+      {
+       "etiqueta": "6-12 h",
+       "clave": "6-12h",
+       "n": 70094,
+       "valor": 9.23,
+       "texto": "9.23 %",
+       "nota": "acumulado 21.11 %",
+       "ancho_pct": 20.13
+      },
+      {
+       "etiqueta": "12-24 h",
+       "clave": "12-24h",
+       "n": 94626,
+       "valor": 12.46,
+       "texto": "12.46 %",
+       "nota": "acumulado 33.58 %",
+       "ancho_pct": 27.17
+      },
+      {
+       "etiqueta": "1-3 días",
+       "clave": "1-3d",
+       "n": 156148,
+       "valor": 20.57,
+       "texto": "20.57 %",
+       "nota": "acumulado 54.14 %",
+       "ancho_pct": 44.85
+      },
+      {
+       "etiqueta": ">3 días",
+       "clave": ">3d",
+       "n": 348192,
+       "valor": 45.86,
+       "texto": "45.86 %",
+       "nota": "acumulado 100.00 %",
+       "ancho_pct": 100.0
+      }
+     ],
+     "alt": "Cuánto tarda un cliente en volver a abrir la app (en % de los huecos entre eventos). 0-5 min: 0.17 %; 5-10 min: 0.18 %; 10-15 min: 0.18 %; 15-30 min: 0.55 %; 30-60 min: 1.09 %; 1-2 h: 2.12 %; 2-6 h: 7.59 %; 6-12 h: 9.23 %; 12-24 h: 12.46 %; 1-3 días: 20.57 %; >3 días: 45.86 %."
+    }
+   ]
+  },
+  {
+   "clave": "avisos",
+   "titulo": "3 · Los avisos que se mandan hoy, y en qué acaban",
+   "resumen": "285 000 avisos mostrados en 119 días, con lo que pasó después de cada uno. El tipo de aviso y el sitio donde aparece se asignaron AL AZAR, así que comparar unos con otros es una comparación limpia y no el reflejo de a quién se le mandaba qué.",
+   "fuente": "data/nudges.parquet + data/financial_actions.parquet vía analytics/metricas.py (embudo y conversión a 7 días, recalculados) · analytics/recon/out/04_by_nudge_type.csv, 04_by_surface.csv, 04_global_rates.csv",
+   "cifras": [
+    {
+     "etiqueta": "Avisos mostrados",
+     "valor": "285 000",
+     "detalle": "Uno por fila, con su resultado y sus consecuencias a 90 días."
+    },
+    {
+     "etiqueta": "Reciben clic",
+     "valor": "11.45 %",
+     "detalle": "Sobre los 285 000. Sobre los 237 603 que tienen una acción financiera acoplada, la cifra es 10.98 %."
+    },
+    {
+     "etiqueta": "Se cierran sin actuar",
+     "valor": "37.24 %",
+     "detalle": "Más de un tercio. Es el coste invisible de hablar de más."
+    },
+    {
+     "etiqueta": "Terminan en una baja de notificaciones",
+     "valor": "0.97 %",
+     "detalle": "Parece poco, hasta que se mira por número de repetición (bloque 4): ahí llega al 6.11 %."
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "clic_conversion",
+     "tipo": "barras_pareadas",
+     "titulo": "El aviso más clicado es el que menos sirve",
+     "que_muestra": "Para cada tipo de aviso, dos barras: el porcentaje que recibe clic y el porcentaje tras el que el cliente hace de verdad la acción en los 7 días siguientes.",
+     "que_concluir": "El aumento de línea es el primero en clics (18.90 %) y el último en conversión (1.31 %): de cada 14 clics, 13 no acaban en nada. Si el objetivo fuese el clic, este sería el mejor producto del catálogo. No lo es.",
+     "unidad": "% de los avisos de ese tipo",
+     "leyenda": {
+      "a": "Recibe clic",
+      "b": "Acaba en la acción (7 días)"
+     },
+     "aviso": "Las dos barras se miden sobre el mismo denominador, así que la segunda no es «de los que clicaron»: es del total de avisos. Un aviso puede convertir sin clic — y de hecho pasa. Falta un tipo de aviso, «Traer la nómina»: no hay ninguna acción financiera en el dataset que confirme que el cliente la trajo, así que su conversión no se puede medir y queda fuera.",
+     "filas": [
+      {
+       "etiqueta": "Recordatorio de pago",
+       "clave": "bill_reminder",
+       "n": 47562,
+       "a": {
+        "valor": 11.3,
+        "texto": "11.30 %",
+        "ancho_pct": 59.79
+       },
+       "b": {
+        "valor": 11.57,
+        "texto": "11.57 %",
+        "ancho_pct": 61.22
+       },
+       "nota": "eficiencia 1.02 — de cada 100 clics, 102 acaban en la acción",
+       "resaltar": false
+      },
+      {
+       "etiqueta": "Meta de ahorro",
+       "clave": "savings_goal",
+       "n": 47708,
+       "a": {
+        "valor": 8.95,
+        "texto": "8.95 %",
+        "ancho_pct": 47.35
+       },
+       "b": {
+        "valor": 6.34,
+        "texto": "6.34 %",
+        "ancho_pct": 33.54
+       },
+       "nota": "eficiencia 0.71 — de cada 100 clics, 71 acaban en la acción",
+       "resaltar": false
+      },
+      {
+       "etiqueta": "Empezar a invertir",
+       "clave": "invest_start",
+       "n": 47396,
+       "a": {
+        "valor": 7.17,
+        "texto": "7.17 %",
+        "ancho_pct": 37.94
+       },
+       "b": {
+        "valor": 1.87,
+        "texto": "1.87 %",
+        "ancho_pct": 9.89
+       },
+       "nota": "eficiencia 0.26 — de cada 100 clics, 26 acaban en la acción",
+       "resaltar": false
+      },
+      {
+       "etiqueta": "Aumento de línea",
+       "clave": "limit_increase",
+       "n": 47497,
+       "a": {
+        "valor": 18.9,
+        "texto": "18.90 %",
+        "ancho_pct": 100.0
+       },
+       "b": {
+        "valor": 1.31,
+        "texto": "1.31 %",
+        "ancho_pct": 6.93
+       },
+       "nota": "eficiencia 0.07 — de cada 100 clics, 7 acaban en la acción",
+       "resaltar": true
+      },
+      {
+       "etiqueta": "Oferta de préstamo",
+       "clave": "loan_offer",
+       "n": 47440,
+       "a": {
+        "valor": 8.58,
+        "texto": "8.58 %",
+        "ancho_pct": 45.4
+       },
+       "b": {
+        "valor": 1.22,
+        "texto": "1.22 %",
+        "ancho_pct": 6.46
+       },
+       "nota": "eficiencia 0.14 — de cada 100 clics, 14 acaban en la acción",
+       "resaltar": false
+      }
+     ],
+     "alt": "El aviso más clicado es el que menos sirve. Recordatorio de pago: clic 11.30 %, conversión a 7 días 11.57 %; Meta de ahorro: clic 8.95 %, conversión a 7 días 6.34 %; Empezar a invertir: clic 7.17 %, conversión a 7 días 1.87 %; Aumento de línea: clic 18.90 %, conversión a 7 días 1.31 %; Oferta de préstamo: clic 8.58 %, conversión a 7 días 1.22 %."
+    },
+    {
+     "clave": "embudo",
+     "tipo": "escalones",
+     "titulo": "El embudo completo, de la cobertura al efecto",
+     "que_muestra": "Los cinco escalones que el equipo definió como métricas primarias, con lo que mide cada uno explicado al lado.",
+     "que_concluir": "El embudo se estrecha muy rápido: se le habla al 13.57 % de los clientes, clica el 10.98 % y convierte el 4.47 %. Y el 4.47 % no es mérito del aviso: sin ningún clic la conversión ya es del 4.08 %, no cero. La brecha de verdad son los 3.47 puntos porcentuales de M5, que no son un 3.47 %.",
+     "unidad": "cada escalón en su propia unidad",
+     "leyenda": null,
+     "aviso": "M1 se mide sobre los 38 000 clientes y M2–M5 sobre los avisos. Son denominadores distintos: los escalones no se multiplican entre sí.",
+     "filas": [
+      {
+       "clave": "M1",
+       "etiqueta": "Cobertura de oferta (política, catálogo de 4)",
+       "valor": 13.57,
+       "texto": "13.57 %",
+       "unidad": "%",
+       "explica": "De cada 100 clientes, a cuántos les diría algo el sistema hoy.",
+       "ancho_pct": 100.0
+      },
+      {
+       "clave": "M2",
+       "etiqueta": "Tasa de clic (avisos con acción acoplada)",
+       "valor": 10.98,
+       "texto": "10.98 %",
+       "unidad": "%",
+       "explica": "De cada 100 avisos mostrados, cuántos reciben un clic.",
+       "ancho_pct": 80.91
+      },
+      {
+       "clave": "M3",
+       "etiqueta": "Conversión a 7 días",
+       "valor": 4.47,
+       "texto": "4.47 %",
+       "unidad": "%",
+       "explica": "De cada 100 avisos mostrados, tras cuántos el cliente hace de verdad la acción en los 7 días siguientes.",
+       "ancho_pct": 32.94
+      },
+      {
+       "clave": "M4",
+       "etiqueta": "Eficiencia del clic (M3/M2)",
+       "valor": 0.41,
+       "texto": "0.41",
+       "unidad": "razón",
+       "explica": "Qué fracción de los clics acaba en la acción. Es M3 dividido entre M2.",
+       "ancho_pct": 3.02
+      },
+      {
+       "clave": "M5",
+       "etiqueta": "Brecha con-clic / sin-clic",
+       "valor": 3.47,
+       "texto": "+3.47 pp",
+       "unidad": "pp",
+       "explica": "Cuánto más convierte un aviso con clic que uno sin clic.",
+       "ancho_pct": 25.57
+      }
+     ],
+     "alt": "El embudo completo, de la cobertura al efecto (en cada escalón en su propia unidad). Cobertura de oferta (política, catálogo de 4): 13.57 %; Tasa de clic (avisos con acción acoplada): 10.98 %; Conversión a 7 días: 4.47 %; Eficiencia del clic (M3/M2): 0.41; Brecha con-clic / sin-clic: +3.47 pp."
+    },
+    {
+     "clave": "resultado",
+     "tipo": "barras",
+     "titulo": "Qué pasa con un aviso cualquiera",
+     "que_muestra": "Reparto de los 285 000 avisos según lo que hizo el cliente después.",
+     "que_concluir": "El resultado normal de un aviso es que no pase nada: 9 de cada 10 no reciben clic, y más de un tercio se cierran de forma activa. Mandar un aviso no es gratis aunque no cueste dinero.",
+     "unidad": "% de los 285 000 avisos",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Le da clic y actúa sobre el aviso",
+       "valor": 11.45,
+       "texto": "11.45 %",
+       "ancho_pct": 11.45
+      },
+      {
+       "etiqueta": "Lo cierra sin hacer nada",
+       "valor": 37.24,
+       "texto": "37.24 %",
+       "ancho_pct": 37.24
+      },
+      {
+       "etiqueta": "Lo ignora (ni clic ni cierre)",
+       "valor": 51.31,
+       "texto": "51.31 %",
+       "ancho_pct": 51.31
+      },
+      {
+       "etiqueta": "Apaga las notificaciones justo después",
+       "valor": 0.97,
+       "texto": "0.97 %",
+       "resaltar": true,
+       "ancho_pct": 0.97
+      }
+     ],
+     "alt": "Qué pasa con un aviso cualquiera (en % de los 285 000 avisos). Le da clic y actúa sobre el aviso: 11.45 %; Lo cierra sin hacer nada: 37.24 %; Lo ignora (ni clic ni cierre): 51.31 %; Apaga las notificaciones justo después: 0.97 %."
+    },
+    {
+     "clave": "por_tipo",
+     "tipo": "barras",
+     "titulo": "Qué tipo de aviso funciona mejor (medido en clics)",
+     "que_muestra": "Porcentaje de clic por tipo de aviso, con el porcentaje de cierre y de baja al lado.",
+     "que_concluir": "El reparto de tipos fue aleatorio, así que estas diferencias son del producto y no de la selección de a quién se le mandó. Pero se miden en clics: la gráfica de arriba enseña que el orden cambia cuando se mide en acciones.",
+     "unidad": "% de clic",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Aumento de línea",
+       "clave": "limit_increase",
+       "n": 47497,
+       "valor": 18.9,
+       "texto": "18.90 %",
+       "nota": "33.91 % lo cierran sin actuar · 0.96 % apagan las notificaciones después",
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Traer la nómina",
+       "clave": "payroll_portability",
+       "n": 47397,
+       "valor": 13.85,
+       "texto": "13.85 %",
+       "nota": "36.45 % lo cierran sin actuar · 0.93 % apagan las notificaciones después",
+       "ancho_pct": 73.28
+      },
+      {
+       "etiqueta": "Recordatorio de pago",
+       "clave": "bill_reminder",
+       "n": 47562,
+       "valor": 11.3,
+       "texto": "11.30 %",
+       "nota": "37.17 % lo cierran sin actuar · 0.99 % apagan las notificaciones después",
+       "ancho_pct": 59.79
+      },
+      {
+       "etiqueta": "Meta de ahorro",
+       "clave": "savings_goal",
+       "n": 47708,
+       "valor": 8.95,
+       "texto": "8.95 %",
+       "nota": "38.31 % lo cierran sin actuar · 0.96 % apagan las notificaciones después",
+       "ancho_pct": 47.35
+      },
+      {
+       "etiqueta": "Oferta de préstamo",
+       "clave": "loan_offer",
+       "n": 47440,
+       "valor": 8.58,
+       "texto": "8.58 %",
+       "nota": "38.33 % lo cierran sin actuar · 0.97 % apagan las notificaciones después",
+       "ancho_pct": 45.4
+      },
+      {
+       "etiqueta": "Empezar a invertir",
+       "clave": "invest_start",
+       "n": 47396,
+       "valor": 7.17,
+       "texto": "7.17 %",
+       "nota": "39.30 % lo cierran sin actuar · 1.00 % apagan las notificaciones después",
+       "ancho_pct": 37.94
+      }
+     ],
+     "alt": "Qué tipo de aviso funciona mejor (medido en clics) (en % de clic). Aumento de línea: 18.90 %; Traer la nómina: 13.85 %; Recordatorio de pago: 11.30 %; Meta de ahorro: 8.95 %; Oferta de préstamo: 8.58 %; Empezar a invertir: 7.17 %."
+    },
+    {
+     "clave": "por_superficie",
+     "tipo": "barras",
+     "titulo": "Dónde conviene que aparezca el aviso",
+     "que_muestra": "Porcentaje de clic según el sitio en el que se muestra.",
+     "que_concluir": "La ventana dentro de la app convierte un 49 % mejor que el push (14.08 % contra 9.44 %). El sitio también se asignó al azar, así que la comparación es limpia.",
+     "unidad": "% de clic",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Ventana dentro de la app",
+       "clave": "in_app_modal",
+       "n": 56649,
+       "valor": 14.08,
+       "texto": "14.08 %",
+       "nota": "1.00 % apagan las notificaciones después",
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Tarjeta en el inicio",
+       "clave": "home_card",
+       "n": 136713,
+       "valor": 11.72,
+       "texto": "11.72 %",
+       "nota": "0.97 % apagan las notificaciones después",
+       "ancho_pct": 83.24
+      },
+      {
+       "etiqueta": "Notificación push",
+       "clave": "push",
+       "n": 91638,
+       "valor": 9.44,
+       "texto": "9.44 %",
+       "nota": "0.95 % apagan las notificaciones después",
+       "ancho_pct": 67.05
+      }
+     ],
+     "alt": "Dónde conviene que aparezca el aviso (en % de clic). Ventana dentro de la app: 14.08 %; Tarjeta en el inicio: 11.72 %; Notificación push: 9.44 %."
+    }
+   ]
+  },
+  {
+   "clave": "fatiga",
+   "titulo": "4 · Lo que cuesta repetir el mismo mensaje",
+   "resumen": "La misma recomendación mostrada otra vez no es neutral. Aquí está medido: cada repetición parte el clic por la mitad y duplica las bajas de notificaciones. De aquí sale el tope de 2 exposiciones por tipo de aviso, que no es un número elegido a dedo.",
+   "fuente": "data/nudges.parquet vía analytics/metricas.py · analytics/recon/out/04_fatigue_by_type.csv",
+   "cifras": [
+    {
+     "etiqueta": "Clic la primera vez",
+     "valor": "15.68 %",
+     "detalle": "159 817 avisos mostrados por primera vez."
+    },
+    {
+     "etiqueta": "Clic la tercera vez",
+     "valor": "3.51 %",
+     "detalle": "Menos de una cuarta parte del de la primera."
+    },
+    {
+     "etiqueta": "Bajas por cada clic en la tercera",
+     "valor": "0.72",
+     "detalle": "En la cuarta son 1.89: ahí ya se pierde más de lo que se gana."
+    },
+    {
+     "etiqueta": "Tope que aplica el sistema",
+     "valor": "2 veces por tipo de aviso",
+     "detalle": "El punto donde el coste supera al beneficio cae entre la segunda y la tercera."
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "curva",
+     "tipo": "curva",
+     "titulo": "Cada repetición vale la mitad, y cuesta el doble",
+     "que_muestra": "Dos líneas sobre el número de veces que se le ha mostrado a alguien el mismo tipo de aviso: la que baja es el porcentaje que le da clic, la que sube es el porcentaje que apaga las notificaciones después.",
+     "que_concluir": "Las dos líneas se cruzan entre la tercera y la cuarta repetición. A partir de ahí el aviso genera más bajas que clics — el mensaje sigue siendo el mismo, lo que ha cambiado es que ya lo habían visto.",
+     "unidad": "% de los avisos de esa repetición",
+     "leyenda": {
+      "a": "Le dan clic",
+      "b": "Apagan las notificaciones"
+     },
+     "aviso": "Las dos líneas comparten escala vertical, y la de bajas es mucho más pequeña en valor absoluto: lo que hay que mirar es la forma de cada una, no la distancia entre ellas.",
+     "filas": [
+      {
+       "etiqueta": "Vez nº 1",
+       "clave": "1",
+       "n": 159817,
+       "a": {
+        "valor": 15.68,
+        "texto": "15.68 %",
+        "ancho_pct": 100.0
+       },
+       "b": {
+        "valor": 0.279,
+        "texto": "0.28 %",
+        "ancho_pct": 1.78
+       },
+       "nota": "0.02 bajas por cada clic",
+       "resaltar": false
+      },
+      {
+       "etiqueta": "Vez nº 2",
+       "clave": "2",
+       "n": 80293,
+       "a": {
+        "valor": 7.83,
+        "texto": "7.83 %",
+        "ancho_pct": 49.94
+       },
+       "b": {
+        "valor": 1.27,
+        "texto": "1.27 %",
+        "ancho_pct": 8.1
+       },
+       "nota": "0.16 bajas por cada clic",
+       "resaltar": false
+      },
+      {
+       "etiqueta": "Vez nº 3",
+       "clave": "3",
+       "n": 31375,
+       "a": {
+        "valor": 3.51,
+        "texto": "3.51 %",
+        "ancho_pct": 22.39
+       },
+       "b": {
+        "valor": 2.531,
+        "texto": "2.53 %",
+        "ancho_pct": 16.14
+       },
+       "nota": "0.72 bajas por cada clic",
+       "resaltar": true
+      },
+      {
+       "etiqueta": "Vez nº 4",
+       "clave": "4",
+       "n": 10036,
+       "a": {
+        "valor": 1.75,
+        "texto": "1.75 %",
+        "ancho_pct": 11.16
+       },
+       "b": {
+        "valor": 3.308,
+        "texto": "3.31 %",
+        "ancho_pct": 21.1
+       },
+       "nota": "1.89 bajas por cada clic",
+       "resaltar": false
+      },
+      {
+       "etiqueta": "Vez nº 5",
+       "clave": "5",
+       "n": 2710,
+       "a": {
+        "valor": 0.7,
+        "texto": "0.70 %",
+        "ancho_pct": 4.46
+       },
+       "b": {
+        "valor": 4.502,
+        "texto": "4.50 %",
+        "ancho_pct": 28.71
+       },
+       "nota": "6.43 bajas por cada clic",
+       "resaltar": false
+      },
+      {
+       "etiqueta": "Vez nº 6 o más",
+       "clave": "6+",
+       "n": 769,
+       "a": {
+        "valor": 0.0,
+        "texto": "0.00 %",
+        "ancho_pct": 0.0
+       },
+       "b": {
+        "valor": 6.112,
+        "texto": "6.11 %",
+        "ancho_pct": 38.98
+       },
+       "nota": "clics: cero. Solo quedan bajas",
+       "resaltar": false
+      }
+     ],
+     "alt": "Cada repetición vale la mitad y cuesta el doble. Vez nº 1: clic 15.68 %, bajas 0.28 %, 0.02 bajas por cada clic; Vez nº 2: clic 7.83 %, bajas 1.27 %, 0.16 bajas por cada clic; Vez nº 3: clic 3.51 %, bajas 2.53 %, 0.72 bajas por cada clic; Vez nº 4: clic 1.75 %, bajas 3.31 %, 1.89 bajas por cada clic; Vez nº 5: clic 0.70 %, bajas 4.50 %, 6.43 bajas por cada clic; Vez nº 6 o más: clic 0.00 %, bajas 6.11 %, clics: cero. Solo quedan bajas.",
+     "svg": {
+      "series": [
+       {
+        "clave": "enganche",
+        "etiqueta": "Le dan clic",
+        "puntos": [
+         {
+          "x": 2.0,
+          "y": 2.0,
+          "etiqueta": "Vez nº 1",
+          "texto": "15.68 %"
+         },
+         {
+          "x": 21.2,
+          "y": 50.06,
+          "etiqueta": "Vez nº 2",
+          "texto": "7.83 %"
+         },
+         {
+          "x": 40.4,
+          "y": 76.51,
+          "etiqueta": "Vez nº 3",
+          "texto": "3.51 %"
+         },
+         {
+          "x": 59.6,
+          "y": 87.29,
+          "etiqueta": "Vez nº 4",
+          "texto": "1.75 %"
+         },
+         {
+          "x": 78.8,
+          "y": 93.71,
+          "etiqueta": "Vez nº 5",
+          "texto": "0.70 %"
+         },
+         {
+          "x": 98.0,
+          "y": 98.0,
+          "etiqueta": "Vez nº 6 o más",
+          "texto": "0.00 %"
+         }
+        ],
+        "polilinea": "2.0,2.0 21.2,50.06 40.4,76.51 59.6,87.29 78.8,93.71 98.0,98.0"
+       },
+       {
+        "clave": "baja",
+        "etiqueta": "Apagan las notificaciones",
+        "puntos": [
+         {
+          "x": 2.0,
+          "y": 96.29,
+          "etiqueta": "Vez nº 1",
+          "texto": "0.28 %"
+         },
+         {
+          "x": 21.2,
+          "y": 90.22,
+          "etiqueta": "Vez nº 2",
+          "texto": "1.27 %"
+         },
+         {
+          "x": 40.4,
+          "y": 82.5,
+          "etiqueta": "Vez nº 3",
+          "texto": "2.53 %"
+         },
+         {
+          "x": 59.6,
+          "y": 77.75,
+          "etiqueta": "Vez nº 4",
+          "texto": "3.31 %"
+         },
+         {
+          "x": 78.8,
+          "y": 70.44,
+          "etiqueta": "Vez nº 5",
+          "texto": "4.50 %"
+         },
+         {
+          "x": 98.0,
+          "y": 60.58,
+          "etiqueta": "Vez nº 6 o más",
+          "texto": "6.11 %"
+         }
+        ],
+        "polilinea": "2.0,96.29 21.2,90.22 40.4,82.5 59.6,77.75 78.8,70.44 98.0,60.58"
+       }
+      ],
+      "tope": 15.68,
+      "tope_texto": "15.68 %",
+      "ancho": 100.0,
+      "alto": 100.0
+     }
+    },
+    {
+     "clave": "por_tipo_fatiga",
+     "tipo": "barras",
+     "titulo": "La fatiga golpea a todos los productos por igual",
+     "que_muestra": "Cuántos puntos porcentuales de clic pierde cada tipo de aviso entre la primera y la tercera vez que se muestra.",
+     "que_concluir": "Ningún tipo se salva: a todos les queda entre el 19 % y el 24 % del clic original en la tercera pasada. La fatiga no es un problema de un producto concreto, es una propiedad de repetir.",
+     "unidad": "puntos porcentuales de clic perdidos",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Recordatorio de pago",
+       "clave": "bill_reminder",
+       "valor": 12.16,
+       "texto": "−12.16 pp",
+       "nota": "de 15.50 % la primera vez a 3.34 % la tercera — le queda el 21.50 %",
+       "ancho_pct": 62.65
+      },
+      {
+       "etiqueta": "Empezar a invertir",
+       "clave": "invest_start",
+       "valor": 7.94,
+       "texto": "−7.94 pp",
+       "nota": "de 10.01 % la primera vez a 2.07 % la tercera — le queda el 20.70 %",
+       "ancho_pct": 40.91
+      },
+      {
+       "etiqueta": "Aumento de línea",
+       "clave": "limit_increase",
+       "valor": 19.41,
+       "texto": "−19.41 pp",
+       "nota": "de 25.65 % la primera vez a 6.24 % la tercera — le queda el 24.30 %",
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Oferta de préstamo",
+       "clave": "loan_offer",
+       "valor": 9.49,
+       "texto": "−9.49 pp",
+       "nota": "de 11.79 % la primera vez a 2.30 % la tercera — le queda el 19.50 %",
+       "ancho_pct": 48.89
+      },
+      {
+       "etiqueta": "Traer la nómina",
+       "clave": "payroll_portability",
+       "valor": 14.69,
+       "texto": "−14.69 pp",
+       "nota": "de 18.83 % la primera vez a 4.14 % la tercera — le queda el 22.00 %",
+       "ancho_pct": 75.68
+      },
+      {
+       "etiqueta": "Meta de ahorro",
+       "clave": "savings_goal",
+       "valor": 9.45,
+       "texto": "−9.45 pp",
+       "nota": "de 12.39 % la primera vez a 2.94 % la tercera — le queda el 23.70 %",
+       "ancho_pct": 48.69
+      }
+     ],
+     "alt": "La fatiga golpea a todos los productos por igual (en puntos porcentuales de clic perdidos). Recordatorio de pago: −12.16 pp; Empezar a invertir: −7.94 pp; Aumento de línea: −19.41 pp; Oferta de préstamo: −9.49 pp; Traer la nómina: −14.69 pp; Meta de ahorro: −9.45 pp."
+    }
+   ]
+  },
+  {
+   "clave": "momento",
+   "titulo": "5 · Hablar con señal o hablar sin ella: no es el mismo producto",
+   "resumen": "«Momento» aquí significa una cosa concreta y medible: cuánto tiempo ha pasado desde que el cliente entró a la pantalla que corresponde al aviso. Cuatro estados, del más fresco al que nunca ocurrió.",
+   "fuente": "analytics/recon/out/04_moment_recency.csv, 04_moment_x_fatigue.csv, 07_payday_total.csv, 07_payday_mediation.csv",
+   "cifras": [
+    {
+     "etiqueta": "Avisos que caen con señal fresca",
+     "valor": "1.46 %",
+     "detalle": "Los otros 98.54 % se mandan sin que el cliente haya dado ninguna señal reciente."
+    },
+    {
+     "etiqueta": "Clic con señal fresca",
+     "valor": "41.63 %",
+     "detalle": "Contra 10.30 % cuando el cliente nunca entró a esa pantalla."
+    },
+    {
+     "etiqueta": "Cuánto mejor es el momento correcto",
+     "valor": "4.04×",
+     "detalle": "Mismo mensaje, mismo producto. Lo único que cambia es cuándo. Es clic, no la acción hecha: el glosario separa las dos."
+    },
+    {
+     "etiqueta": "Bajas con señal fresca",
+     "valor": "0.77 %",
+     "detalle": "Contra 1.19 % cuando la señal es fría: hablar a tiempo no solo convierte más, molesta menos."
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "momentos",
+     "tipo": "barras",
+     "titulo": "El mismo aviso, cuatro momentos distintos",
+     "que_muestra": "Porcentaje de clic según cuánto hacía que el cliente había entrado a la pantalla relacionada con el aviso.",
+     "que_concluir": "Cuando la señal es fresca el aviso recibe 4 veces más clic. Y fíjese en el detalle de cada barra: el estado que mejor funciona es el que menos avisos recibe.",
+     "unidad": "% de clic",
+     "leyenda": null,
+     "aviso": "La señal fresca no es aleatoria: quien entró ayer a Cajitas es distinto de quien no. Parte de esta diferencia es del momento y parte de quién es esa persona; el dataset no permite separarlas del todo.",
+     "filas": [
+      {
+       "etiqueta": "Señal fresca (entró hace ≤ 24 h)",
+       "clave": "0_on_time",
+       "n": 4165,
+       "valor": 41.63,
+       "texto": "41.63 %",
+       "cuota": 1.46,
+       "cuota_texto": "1.46 %",
+       "nota": "1.46 % de todos los avisos caen aquí · 3.63× la media",
+       "resaltar": true,
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Señal tibia (entre 24 h y 7 días)",
+       "clave": "1_warm",
+       "n": 19608,
+       "valor": 21.27,
+       "texto": "21.27 %",
+       "cuota": 6.88,
+       "cuota_texto": "6.88 %",
+       "nota": "6.88 % de todos los avisos caen aquí · 1.86× la media",
+       "resaltar": false,
+       "ancho_pct": 51.09
+      },
+      {
+       "etiqueta": "Señal fría (hace más de 7 días)",
+       "clave": "2_cold",
+       "n": 90536,
+       "valor": 10.11,
+       "texto": "10.11 %",
+       "cuota": 31.77,
+       "cuota_texto": "31.77 %",
+       "nota": "31.77 % de todos los avisos caen aquí · 0.88× la media",
+       "resaltar": false,
+       "ancho_pct": 24.29
+      },
+      {
+       "etiqueta": "Nunca entró a esa pantalla",
+       "clave": "3_nunca",
+       "n": 170691,
+       "valor": 10.3,
+       "texto": "10.30 %",
+       "cuota": 59.89,
+       "cuota_texto": "59.89 %",
+       "nota": "59.89 % de todos los avisos caen aquí · 0.90× la media",
+       "resaltar": false,
+       "ancho_pct": 24.74
+      }
+     ],
+     "alt": "El mismo aviso, cuatro momentos distintos (en % de clic). Señal fresca (entró hace ≤ 24 h): 41.63 %; Señal tibia (entre 24 h y 7 días): 21.27 %; Señal fría (hace más de 7 días): 10.11 %; Nunca entró a esa pantalla: 10.30 %."
+    },
+    {
+     "clave": "reparto_momento",
+     "tipo": "barras",
+     "titulo": "Y así se reparten hoy los avisos entre esos cuatro momentos",
+     "que_muestra": "Qué porcentaje de los 285 000 avisos se mandó en cada estado de señal.",
+     "que_concluir": "Solo 1.46 % de los avisos cae en el único momento que funciona bien; los otros 98.54 % se mandan a ciegas. No falta contenido: falta puntería.",
+     "unidad": "% de los 285 000 avisos",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Señal fresca (entró hace ≤ 24 h)",
+       "clave": "0_on_time",
+       "valor": 1.46,
+       "texto": "1.46 %",
+       "n": 4165,
+       "resaltar": true,
+       "ancho_pct": 1.46
+      },
+      {
+       "etiqueta": "Señal tibia (entre 24 h y 7 días)",
+       "clave": "1_warm",
+       "valor": 6.88,
+       "texto": "6.88 %",
+       "n": 19608,
+       "resaltar": false,
+       "ancho_pct": 6.88
+      },
+      {
+       "etiqueta": "Señal fría (hace más de 7 días)",
+       "clave": "2_cold",
+       "valor": 31.77,
+       "texto": "31.77 %",
+       "n": 90536,
+       "resaltar": false,
+       "ancho_pct": 31.77
+      },
+      {
+       "etiqueta": "Nunca entró a esa pantalla",
+       "clave": "3_nunca",
+       "valor": 59.89,
+       "texto": "59.89 %",
+       "n": 170691,
+       "resaltar": false,
+       "ancho_pct": 59.89
+      }
+     ],
+     "alt": "Y así se reparten hoy los avisos entre esos cuatro momentos (en % de los 285 000 avisos). Señal fresca (entró hace ≤ 24 h): 1.46 %; Señal tibia (entre 24 h y 7 días): 6.88 %; Señal fría (hace más de 7 días): 31.77 %; Nunca entró a esa pantalla: 59.89 %."
+    },
+    {
+     "clave": "momento_x_fatiga",
+     "tipo": "barras_pareadas",
+     "titulo": "El momento correcto compensa incluso la repetición",
+     "que_muestra": "Porcentaje de clic por número de repetición, separando los avisos con señal fresca del resto.",
+     "que_concluir": "Un aviso repetido por tercera vez pero con señal fresca (21.05 %) funciona mejor que uno mostrado por primera vez sin señal (15.12 %). El momento pesa más que la novedad.",
+     "unidad": "% de clic",
+     "leyenda": {
+      "a": "Con señal fresca",
+      "b": "Sin señal fresca"
+     },
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Vez nº 1",
+       "clave": "1",
+       "a": {
+        "valor": 52.95,
+        "texto": "52.95 %",
+        "ancho_pct": 100.0
+       },
+       "b": {
+        "valor": 15.12,
+        "texto": "15.12 %",
+        "ancho_pct": 28.56
+       },
+       "nota": "con señal fresca engancha 3.50× más"
+      },
+      {
+       "etiqueta": "Vez nº 2",
+       "clave": "2",
+       "a": {
+        "valor": 32.3,
+        "texto": "32.30 %",
+        "ancho_pct": 61.0
+       },
+       "b": {
+        "valor": 7.47,
+        "texto": "7.47 %",
+        "ancho_pct": 14.11
+       },
+       "nota": "con señal fresca engancha 4.32× más"
+      },
+      {
+       "etiqueta": "Vez nº 3",
+       "clave": "3",
+       "a": {
+        "valor": 21.05,
+        "texto": "21.05 %",
+        "ancho_pct": 39.75
+       },
+       "b": {
+        "valor": 3.25,
+        "texto": "3.25 %",
+        "ancho_pct": 6.14
+       },
+       "nota": "con señal fresca engancha 6.48× más"
+      },
+      {
+       "etiqueta": "Vez nº 4 o más",
+       "clave": "4",
+       "a": {
+        "valor": 8.72,
+        "texto": "8.72 %",
+        "ancho_pct": 16.47
+       },
+       "b": {
+        "valor": 1.34,
+        "texto": "1.34 %",
+        "ancho_pct": 2.53
+       },
+       "nota": "con señal fresca engancha 6.51× más"
+      }
+     ],
+     "alt": "El momento correcto compensa incluso la repetición (en % de clic). Vez nº 1: 52.95 % / 15.12 %; Vez nº 2: 32.30 % / 7.47 %; Vez nº 3: 21.05 % / 3.25 %; Vez nº 4 o más: 8.72 % / 1.34 %."
+    },
+    {
+     "clave": "payday",
+     "tipo": "barras",
+     "titulo": "El día de pago mueve la aguja, pero poco",
+     "que_muestra": "Porcentaje de clic dentro de los 3 días siguientes al día de pago del cliente, contra el resto del mes.",
+     "que_concluir": "La diferencia es de 1.59 puntos, muy lejos de los 31.52 que separan la señal fresca de la señal fría. Y buena parte de ella es indirecta: cerca del día de pago la gente entra más a la app, así que hay más señal fresca. El calendario ayuda; la señal decide.",
+     "unidad": "% de clic",
+     "leyenda": null,
+     "aviso": "Comparar esta gráfica con la primera del bloque sin mirar la escala lleva a la conclusión contraria: aquí el rango va de 11.31 % a 12.90 %, allí de 10.11 % a 41.63 %.",
+     "filas": [
+      {
+       "etiqueta": "El resto del mes",
+       "clave": "resto_del_mes",
+       "n": 259669,
+       "valor": 11.31,
+       "texto": "11.31 %",
+       "ancho_pct": 87.67
+      },
+      {
+       "etiqueta": "Los 3 días siguientes al día de pago",
+       "clave": "ventana_payday_d0_d2",
+       "n": 25331,
+       "valor": 12.9,
+       "texto": "12.90 %",
+       "ancho_pct": 100.0
+      }
+     ],
+     "alt": "El día de pago mueve la aguja, pero poco (en % de clic). El resto del mes: 11.31 %; Los 3 días siguientes al día de pago: 12.90 %."
+    }
+   ],
+   "tablas": [
+    {
+     "clave": "mediacion",
+     "titulo": "Por qué el día de pago parece importar más de lo que importa",
+     "que_muestra": "Los mismos avisos partidos en dos: dentro y fuera de la ventana del día de pago, y dentro de cada una, por estado de señal.",
+     "que_concluir": "Con el estado de señal fijo, la ventana del día de pago apenas cambia el clic (43.63 % contra 40.86 % con señal fresca). Lo que cambia es cuánta gente tiene señal fresca: 4.59 % dentro de la ventana contra 1.16 % fuera. El día de pago no convence a nadie: hace que más gente abra la app y deje señal.",
+     "columnas": [
+      "Ventana",
+      "Estado de señal",
+      "Avisos",
+      "% de esa ventana",
+      "% de clic"
+     ],
+     "filas": [
+      [
+       "El resto del mes",
+       "Señal fría o nunca",
+       "238 902",
+       "92.00 %",
+       "10.20 %"
+      ],
+      [
+       "El resto del mes",
+       "Señal fresca",
+       "3 003",
+       "1.16 %",
+       "40.86 %"
+      ],
+      [
+       "El resto del mes",
+       "Señal tibia",
+       "17 764",
+       "6.84 %",
+       "21.31 %"
+      ],
+      [
+       "Los 3 días tras el pago",
+       "Señal fría o nunca",
+       "22 325",
+       "88.13 %",
+       "10.64 %"
+      ],
+      [
+       "Los 3 días tras el pago",
+       "Señal fresca",
+       "1 162",
+       "4.59 %",
+       "43.63 %"
+      ],
+      [
+       "Los 3 días tras el pago",
+       "Señal tibia",
+       "1 844",
+       "7.28 %",
+       "20.88 %"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "clave": "objetivos",
+   "titulo": "6 · Clics, salud financiera e ingreso apuntan a sitios distintos",
+   "resumen": "Aquí está la pregunta que el reto pide contestar. El dataset trae lo que le pasó a cada cliente en los 90 días siguientes a cada aviso: días en negativo, tasa de ahorro, utilización de tarjeta e ingreso generado. Con eso se puede comprobar si el producto que más clics recibe es el que uno querría mandar.",
+   "fuente": "data/nudge_outcomes.parquet vía analytics/recon/out/05_rankings.csv, 05_master_by_type.csv, 05_tradeoff_price.csv, 07_policy_simulation.csv · pipeline/artifacts/tabla_valor.json",
+   "cifras": [
+    {
+     "etiqueta": "El aviso nº 1 en clics",
+     "valor": "Aumento de línea",
+     "detalle": "18.90 % de clic. Y el último de los 6 en salud financiera."
+    },
+    {
+     "etiqueta": "Lo que cuesta en días en negativo",
+     "valor": "+0.93 días por clic",
+     "detalle": "Media entre los 8 975 avisos de este tipo que recibieron clic. Sumado sobre los 47 497 mostrados, el tipo entero deja 8 283 días en descubierto."
+    },
+    {
+     "etiqueta": "Lo que genera en ingreso",
+     "valor": "+245.56 MXN por clic",
+     "detalle": "Mismo denominador: los 8 975 avisos con clic. Sumado sobre los 47 497 mostrados son 2 206 623 MXN. Es el tipo de aviso más rentable de los seis."
+    },
+    {
+     "etiqueta": "El precio que revela el statu quo",
+     "valor": "266 MXN por día en negativo",
+     "detalle": "Las dos cifras de arriba, divididas: 2 206 623 MXN ÷ 8 283 días = 266 MXN. Es lo que el sistema actual está cobrando implícitamente por cada día que empuja a un cliente al descubierto. Ese número no lo eligió nadie: se deduce de lo que ya se manda."
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "salud_por_tipo",
+     "tipo": "barras_divergentes",
+     "titulo": "Qué le hace cada aviso a la salud financiera del cliente",
+     "que_muestra": "Cambio medio en días en negativo en los 90 días siguientes al aviso. A la izquierda del cero está lo bueno (menos días en descubierto).",
+     "que_concluir": "Los recordatorios de pago y las metas de ahorro quitan días en negativo. El aumento de línea los añade. Y es el que más clics recibe: por eso «optimizar el clic» no es una opción neutral.",
+     "unidad": "días en negativo ganados o evitados, por aviso mostrado",
+     "leyenda": {
+      "izq": "Le quita días en descubierto al cliente",
+      "der": "Se los añade",
+      "bueno": "izq"
+     },
+     "aviso": "Estos promedios son sobre TODOS los avisos de ese tipo, no solo los que recibieron clic. El aviso ignorado tiene efecto cero y diluye la media.",
+     "filas": [
+      {
+       "etiqueta": "Recordatorio de pago",
+       "clave": "bill_reminder",
+       "valor": -0.094,
+       "texto": "-0.094 días",
+       "nota": "ahorro +0.007 pp · utilización de tarjeta -0.000 pp · ingreso -8.4 MXN",
+       "lado": "izq",
+       "ancho_pct": 27.01,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Meta de ahorro",
+       "clave": "savings_goal",
+       "valor": -0.043,
+       "texto": "-0.043 días",
+       "nota": "ahorro +0.566 pp · utilización de tarjeta -0.228 pp · ingreso +1.0 MXN",
+       "lado": "izq",
+       "ancho_pct": 12.36,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Traer la nómina",
+       "clave": "payroll_portability",
+       "valor": -0.001,
+       "texto": "-0.001 días",
+       "nota": "ahorro +0.433 pp · utilización de tarjeta -0.003 pp · ingreso +5.7 MXN",
+       "lado": "izq",
+       "ancho_pct": 0.29,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Oferta de préstamo",
+       "clave": "loan_offer",
+       "valor": -0.001,
+       "texto": "-0.001 días",
+       "nota": "ahorro -0.187 pp · utilización de tarjeta +0.423 pp · ingreso +22.4 MXN",
+       "lado": "izq",
+       "ancho_pct": 0.29,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Empezar a invertir",
+       "clave": "invest_start",
+       "valor": 0.001,
+       "texto": "+0.001 días",
+       "nota": "ahorro -0.004 pp · utilización de tarjeta -0.009 pp · ingreso +6.7 MXN",
+       "lado": "der",
+       "ancho_pct": 0.29,
+       "bueno": false
+      },
+      {
+       "etiqueta": "Aumento de línea",
+       "clave": "limit_increase",
+       "valor": 0.174,
+       "texto": "+0.174 días",
+       "nota": "ahorro -0.414 pp · utilización de tarjeta +2.037 pp · ingreso +46.5 MXN",
+       "lado": "der",
+       "ancho_pct": 50.0,
+       "bueno": false
+      }
+     ],
+     "alt": "Qué le hace cada aviso a la salud financiera del cliente (en días en negativo ganados o evitados, por aviso mostrado). Recordatorio de pago: -0.094 días; Meta de ahorro: -0.043 días; Traer la nómina: -0.001 días; Oferta de préstamo: -0.001 días; Empezar a invertir: +0.001 días; Aumento de línea: +0.174 días."
+    },
+    {
+     "clave": "ingreso_por_tipo",
+     "tipo": "barras_divergentes",
+     "titulo": "Y qué le hace al ingreso del banco",
+     "que_muestra": "Cambio medio en ingreso generado en los 90 días siguientes, por aviso mostrado.",
+     "que_concluir": "El orden es casi el contrario. El recordatorio de pago es el mejor para el cliente y el único que le cuesta dinero al banco (−8.40 MXN por aviso). Ahí está el conflicto, con números.",
+     "unidad": "MXN de ingreso por aviso mostrado",
+     "leyenda": {
+      "izq": "El banco pierde dinero",
+      "der": "El banco gana",
+      "bueno": "der"
+     },
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Aumento de línea",
+       "clave": "limit_increase",
+       "valor": 46.5,
+       "texto": "+46.5 MXN",
+       "lado": "der",
+       "ancho_pct": 50.0,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Oferta de préstamo",
+       "clave": "loan_offer",
+       "valor": 22.4,
+       "texto": "+22.4 MXN",
+       "lado": "der",
+       "ancho_pct": 24.09,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Empezar a invertir",
+       "clave": "invest_start",
+       "valor": 6.7,
+       "texto": "+6.7 MXN",
+       "lado": "der",
+       "ancho_pct": 7.2,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Traer la nómina",
+       "clave": "payroll_portability",
+       "valor": 5.7,
+       "texto": "+5.7 MXN",
+       "lado": "der",
+       "ancho_pct": 6.13,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Meta de ahorro",
+       "clave": "savings_goal",
+       "valor": 1.0,
+       "texto": "+1.0 MXN",
+       "lado": "der",
+       "ancho_pct": 1.08,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Recordatorio de pago",
+       "clave": "bill_reminder",
+       "valor": -8.4,
+       "texto": "-8.4 MXN",
+       "lado": "izq",
+       "ancho_pct": 9.03,
+       "bueno": false
+      }
+     ],
+     "alt": "Y qué le hace al ingreso del banco (en MXN de ingreso por aviso mostrado). Aumento de línea: +46.5 MXN; Oferta de préstamo: +22.4 MXN; Empezar a invertir: +6.7 MXN; Traer la nómina: +5.7 MXN; Meta de ahorro: +1.0 MXN; Recordatorio de pago: -8.4 MXN."
+    },
+    {
+     "clave": "valor",
+     "tipo": "barras_divergentes",
+     "titulo": "Los dos objetivos, reducidos a una sola unidad",
+     "que_muestra": "El valor de cada producto expresado en días de descubierto evitados. La fórmula convierte el ingreso a días dividiéndolo por λ = 266 MXN, que es el precio que el propio statu quo revela.",
+     "que_concluir": "Con esta conversión, el aumento de línea tiene valor negativo: −0.0770 días. Por eso el sistema no lo ofrece a nadie. Si λ fuese 165 MXN —el precio estimado en el margen— pasaría a ser positivo: la decisión depende del precio, y el precio está declarado.",
+     "unidad": "días de descubierto evitados por clic",
+     "leyenda": {
+      "izq": "En balance, deja al cliente peor",
+      "der": "En balance, deja al cliente mejor",
+      "bueno": "der"
+     },
+     "aviso": "Cambiar λ cambia el orden. Es el parámetro más discutible de todo el sistema y por eso viaja escrito en el artefacto en vez de estar escondido en el código.",
+     "filas": [
+      {
+       "etiqueta": "Oferta de préstamo",
+       "clave": "loan_offer",
+       "valor": 0.9209,
+       "texto": "+0.9209 días",
+       "nota": "con λ = 165 MXN el valor sería +1.5201 días",
+       "lado": "der",
+       "ancho_pct": 50.0,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Meta de ahorro",
+       "clave": "savings_goal",
+       "valor": 0.6993,
+       "texto": "+0.6993 días",
+       "nota": "con λ = 165 MXN el valor sería +0.7266 días",
+       "lado": "der",
+       "ancho_pct": 37.97,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Recordatorio de pago",
+       "clave": "bill_reminder",
+       "valor": 0.5707,
+       "texto": "+0.5707 días",
+       "nota": "con λ = 165 MXN el valor sería +0.4015 días",
+       "lado": "der",
+       "ancho_pct": 30.99,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Empezar a invertir",
+       "clave": "invest_start",
+       "valor": 0.3596,
+       "texto": "+0.3596 días",
+       "nota": "con λ = 165 MXN el valor sería +0.5796 días · fuera del catálogo del piloto",
+       "lado": "der",
+       "ancho_pct": 19.52,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Traer la nómina",
+       "clave": "payroll_portability",
+       "valor": 0.2455,
+       "texto": "+0.2455 días",
+       "nota": "con λ = 165 MXN el valor sería +0.3378 días · fuera del catálogo del piloto",
+       "lado": "der",
+       "ancho_pct": 13.33,
+       "bueno": true
+      },
+      {
+       "etiqueta": "Aumento de línea",
+       "clave": "limit_increase",
+       "valor": -0.077,
+       "texto": "-0.0770 días",
+       "nota": "con λ = 165 MXN el valor sería +0.4881 días",
+       "lado": "izq",
+       "ancho_pct": 4.18,
+       "bueno": false
+      }
+     ],
+     "alt": "Los dos objetivos, reducidos a una sola unidad (en días de descubierto evitados por clic). Oferta de préstamo: +0.9209 días; Meta de ahorro: +0.6993 días; Recordatorio de pago: +0.5707 días; Empezar a invertir: +0.3596 días; Traer la nómina: +0.2455 días; Aumento de línea: -0.0770 días."
+    }
+   ],
+   "tablas": [
+    {
+     "clave": "rankings",
+     "titulo": "El mismo catálogo, tres órdenes distintos",
+     "que_muestra": "La posición de cada tipo de aviso en tres listas: por clics, por salud financiera del cliente y por ingreso generado. 1 es el mejor de los seis.",
+     "que_concluir": "El aumento de línea es 1º en clics, 1º en ingreso y 6º en salud. La meta de ahorro es 1ª en salud y 5ª en ingreso. No hay un orden «correcto»: hay que elegir uno y decir cuál.",
+     "columnas": [
+      "Tipo de aviso",
+      "Clic",
+      "Puesto por clics",
+      "Puesto por salud",
+      "Puesto por ingreso"
+     ],
+     "filas": [
+      [
+       "Aumento de línea",
+       "18.90 %",
+       "1º",
+       "6º",
+       "1º"
+      ],
+      [
+       "Traer la nómina",
+       "13.85 %",
+       "2º",
+       "2º",
+       "4º"
+      ],
+      [
+       "Recordatorio de pago",
+       "11.30 %",
+       "3º",
+       "3º",
+       "6º"
+      ],
+      [
+       "Meta de ahorro",
+       "8.95 %",
+       "4º",
+       "1º",
+       "5º"
+      ],
+      [
+       "Oferta de préstamo",
+       "8.58 %",
+       "5º",
+       "5º",
+       "2º"
+      ],
+      [
+       "Empezar a invertir",
+       "7.17 %",
+       "6º",
+       "4º",
+       "3º"
+      ]
+     ]
+    },
+    {
+     "clave": "politicas",
+     "titulo": "Ocho maneras de decidir a quién se le habla",
+     "que_muestra": "Cada fila es una política aplicada sobre los mismos 285 000 avisos observados. «No enviar» se cuenta como efecto cero, no como efecto desconocido.",
+     "que_concluir": "P0 (mandar todo) deja a los clientes con +1 679 días en negativo. P6 (solo con señal, con tope y vetando el crédito a los frágiles) los deja con -1 502 días, manda 6.90 % del volumen y retiene 4.60 % del ingreso. Ese es el precio de darle la vuelta al signo, y está a la vista.",
+     "columnas": [
+      "Política",
+      "Avisos enviados",
+      "% del volumen",
+      "% de clic",
+      "% del ingreso retenido",
+      "Días en negativo causados"
+     ],
+     "filas": [
+      [
+       "P0 · Mandar todos los avisos (lo que se hace hoy)",
+       "285 000",
+       "100.00 %",
+       "11.45 %",
+       "100.00 %",
+       "+1 679"
+      ],
+      [
+       "P1 · Como máximo 2 veces el mismo aviso",
+       "240 110",
+       "84.20 %",
+       "13.06 %",
+       "96.10 %",
+       "+1 612"
+      ],
+      [
+       "P2 · Solo si entró a la pantalla en las últimas 24 h",
+       "4 165",
+       "1.50 %",
+       "41.63 %",
+       "1.40 %",
+       "-414"
+      ],
+      [
+       "P3 · Solo si entró a la pantalla en los últimos 7 días",
+       "23 773",
+       "8.30 %",
+       "24.84 %",
+       "5.80 %",
+       "-1 374"
+      ],
+      [
+       "P4 · Nunca ofrecer aumento de línea a un cliente frágil",
+       "276 015",
+       "96.80 %",
+       "11.00 %",
+       "78.20 %",
+       "-3 031"
+      ],
+      [
+       "P5 · Señal de 24 h y como máximo 2 repeticiones",
+       "3 514",
+       "1.20 %",
+       "46.13 %",
+       "1.30 %",
+       "-391"
+      ],
+      [
+       "P6 · Optimizar la salud: señal de 7 días, tope de 2 y veto de crédito",
+       "19 693",
+       "6.90 %",
+       "27.97 %",
+       "4.60 %",
+       "-1 502"
+      ],
+      [
+       "P7 · Optimizar el ingreso: igual que P6 pero sin el veto de crédito",
+       "19 889",
+       "7.00 %",
+       "28.22 %",
+       "5.60 %",
+       "-1 289"
+      ]
+     ],
+     "nota": "La última columna es la que importa: con signo negativo, el sistema le está quitando días de descubierto a sus clientes en vez de añadírselos."
+    },
+    {
+     "clave": "precio",
+     "titulo": "Cuánto ingreso genera cada día en negativo que se causa",
+     "que_muestra": "Para cada tipo de aviso, el ingreso total entre los días en negativo totales que provoca. Es el «precio» implícito de la salud del cliente.",
+     "que_concluir": "El aumento de línea genera 266 MXN por cada día en descubierto que causa. Ese es el λ que usa el sistema, y no lo eligió el equipo: lo revela el statu quo.",
+     "columnas": [
+      "Tipo de aviso",
+      "Enviados",
+      "Clics",
+      "Ingreso total (MXN)",
+      "Días en negativo",
+      "MXN por día en negativo"
+     ],
+     "filas": [
+      [
+       "Aumento de línea",
+       "47 497",
+       "8 975",
+       "+2 206 623",
+       "+8 283",
+       "+266"
+      ],
+      [
+       "Oferta de préstamo",
+       "47 440",
+       "4 068",
+       "+1 062 372",
+       "-56",
+       "-18 971"
+      ],
+      [
+       "Empezar a invertir",
+       "47 396",
+       "3 396",
+       "+316 907",
+       "+36",
+       "+8 803"
+      ],
+      [
+       "Traer la nómina",
+       "47 397",
+       "6 563",
+       "+269 985",
+       "-48",
+       "-5 625"
+      ],
+      [
+       "Meta de ahorro",
+       "47 708",
+       "4 269",
+       "+49 303",
+       "-2 056",
+       "-24"
+      ],
+      [
+       "Recordatorio de pago",
+       "47 562",
+       "5 373",
+       "-397 793",
+       "-4 481",
+       "+89"
+      ]
+     ],
+     "nota": "Un valor negativo en la última columna significa que el aviso genera ingreso Y quita días en negativo: no hay conflicto que resolver ahí."
+    }
+   ]
+  },
+  {
+   "clave": "sistema",
+   "titulo": "7 · Lo que decide nuestro sistema, y por qué se calla",
+   "resumen": "Esto ya no es el dataset: es el motor corriendo sobre los 38 000 clientes. Ocho puertas en orden; si alguna cierra, no se habla. Cada silencio trae escrito por qué, y se puede contar.",
+   "fuente": "pipeline/politica.py + app/panorama.py sobre los 38 000 clientes en los 5 cortes disponibles · tasas base leídas de pipeline/artifacts/labels_intent.parquet",
+   "cifras": [
+    {
+     "etiqueta": "Clientes a los que hoy no se les dice nada",
+     "valor": "86.43 %",
+     "detalle": "32 843 de 38 000 en el corte 2026-06-16. El silencio es el resultado normal  no la excepción."
+    },
+    {
+     "etiqueta": "Clientes con oferta",
+     "valor": "13.57 %",
+     "detalle": "5 157 personas. Sin la puerta de valor serían 14.63 %: esa puerta sola añade 1.06 puntos de silencio."
+    },
+    {
+     "etiqueta": "Productos que el piloto puede ofrecer",
+     "valor": "4 de 6",
+     "detalle": "Fuera del catálogo: Empezar a invertir y Traer la nómina. Se excluyeron por conversión baja o por señal trivial."
+    },
+    {
+     "etiqueta": "Cómo se ordena lo que se ofrece",
+     "valor": "clic esperado × momento × valor",
+     "detalle": "score = p_intencion × p_enganche × V (modelo v1)"
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "reparto",
+     "tipo": "barras",
+     "titulo": "Qué recibe cada uno de los 38 000 clientes hoy",
+     "que_muestra": "El reparto completo en el corte 2026-06-16: quién recibe cada tipo de oferta y quién no recibe nada.",
+     "que_concluir": "Nueve de cada diez clientes no reciben nada, y el aumento de línea no aparece: su valor esperado es negativo, así que la puerta de valor lo cierra para todo el mundo. El catálogo tiene cuatro productos y el sistema usa tres.",
+     "unidad": "% de los 38 000 clientes",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Nadie le dice nada",
+       "clave": "silencio",
+       "n": 32843,
+       "valor": 86.43,
+       "texto": "86.43 %",
+       "resaltar": true,
+       "ancho_pct": 86.43
+      },
+      {
+       "etiqueta": "Recordatorio de pago",
+       "clave": "bill_reminder",
+       "n": 2802,
+       "valor": 7.37,
+       "texto": "7.37 %",
+       "resaltar": false,
+       "ancho_pct": 7.37
+      },
+      {
+       "etiqueta": "Meta de ahorro",
+       "clave": "savings_goal",
+       "n": 1748,
+       "valor": 4.6,
+       "texto": "4.60 %",
+       "resaltar": false,
+       "ancho_pct": 4.6
+      },
+      {
+       "etiqueta": "Oferta de préstamo",
+       "clave": "loan_offer",
+       "n": 607,
+       "valor": 1.6,
+       "texto": "1.60 %",
+       "resaltar": false,
+       "ancho_pct": 1.6
+      }
+     ],
+     "alt": "Qué recibe cada uno de los 38 000 clientes hoy (en % de los 38 000 clientes). Nadie le dice nada: 86.43 %; Recordatorio de pago: 7.37 %; Meta de ahorro: 4.60 %; Oferta de préstamo: 1.60 %."
+    },
+    {
+     "clave": "razones",
+     "tipo": "barras",
+     "titulo": "Por qué nos callamos, caso por caso",
+     "que_muestra": "De los clientes en silencio, qué puerta les cerró. Se reporta la puerta de mayor prioridad entre las que cerraron.",
+     "que_concluir": "El silencio no es una sola cosa. La mayoría es falta de señal —no sabemos qué quiere— pero hay 109 clientes a los que sí les adivinamos la intención y aun así no les hablamos, porque el producto les haría daño. Ese es el caso que justifica el sistema.",
+     "unidad": "% de los clientes en silencio",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Señal reciente de intención",
+       "clave": "S1_sin_senal",
+       "n": 27872,
+       "valor": 84.86,
+       "texto": "84.86 %",
+       "nota": "No hay nada que el cliente haya dado a entender que quiere. Interrumpir sería adivinar.",
+       "ancho_pct": 84.86
+      },
+      {
+       "etiqueta": "Cupo de exposiciones",
+       "clave": "S2_cupo",
+       "n": 2283,
+       "valor": 6.95,
+       "texto": "6.95 %",
+       "nota": "Ya se le dijo dos veces. La tercera cuesta más bajas que enganches.",
+       "ancho_pct": 6.95
+      },
+      {
+       "etiqueta": "Bajas de notificaciones",
+       "clave": "S0_opt_out",
+       "n": 2202,
+       "valor": 6.7,
+       "texto": "6.70 %",
+       "nota": "Se dio de baja. No se le vuelve a escribir, aunque el aviso le conviniera.",
+       "ancho_pct": 6.7
+      },
+      {
+       "etiqueta": "Valor esperado",
+       "clave": "S4_valor",
+       "n": 377,
+       "valor": 1.15,
+       "texto": "1.15 %",
+       "nota": "El valor es cero o negativo: en promedio el aviso deja al cliente peor.",
+       "ancho_pct": 1.15
+      },
+      {
+       "etiqueta": "Fragilidad financiera",
+       "clave": "S3_fragilidad",
+       "n": 109,
+       "valor": 0.33,
+       "texto": "0.33 %",
+       "nota": "Sí quería el producto, pero le dejaría peor. Es un veto, no una falta de datos.",
+       "ancho_pct": 0.33
+      }
+     ],
+     "alt": "Por qué nos callamos, caso por caso (en % de los clientes en silencio). Señal reciente de intención: 84.86 %; Cupo de exposiciones: 6.95 %; Bajas de notificaciones: 6.70 %; Valor esperado: 1.15 %; Fragilidad financiera: 0.33 %."
+    },
+    {
+     "clave": "cortes",
+     "tipo": "barras",
+     "titulo": "El silencio no es un número fijo: se recalcula cada día",
+     "que_muestra": "Porcentaje de clientes sin oferta en cada uno de los cortes disponibles.",
+     "que_concluir": "Va del 83.96 % al 89.26 % según el día. Si fuese siempre el mismo número, estaría escrito a mano en algún sitio en vez de calculado.",
+     "unidad": "% de clientes en silencio",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "2026-05-23",
+       "clave": "2026-05-23",
+       "valor": 83.96,
+       "texto": "83.96 %",
+       "n": 6094,
+       "nota": "16.04 % recibe algo — 6 094 de 38 000 clientes",
+       "resaltar": false,
+       "ancho_pct": 83.96
+      },
+      {
+       "etiqueta": "2026-05-30",
+       "clave": "2026-05-30",
+       "valor": 87.89,
+       "texto": "87.89 %",
+       "n": 4602,
+       "nota": "12.11 % recibe algo — 4 602 de 38 000 clientes",
+       "resaltar": false,
+       "ancho_pct": 87.89
+      },
+      {
+       "etiqueta": "2026-06-09",
+       "clave": "2026-06-09",
+       "valor": 87.91,
+       "texto": "87.91 %",
+       "n": 4593,
+       "nota": "12.09 % recibe algo — 4 593 de 38 000 clientes",
+       "resaltar": false,
+       "ancho_pct": 87.91
+      },
+      {
+       "etiqueta": "2026-06-14",
+       "clave": "2026-06-14",
+       "valor": 89.26,
+       "texto": "89.26 %",
+       "n": 4083,
+       "nota": "10.74 % recibe algo — 4 083 de 38 000 clientes",
+       "resaltar": false,
+       "ancho_pct": 89.26
+      },
+      {
+       "etiqueta": "2026-06-16",
+       "clave": "2026-06-16",
+       "valor": 86.43,
+       "texto": "86.43 %",
+       "n": 5157,
+       "nota": "13.57 % recibe algo — 5 157 de 38 000 clientes",
+       "resaltar": true,
+       "ancho_pct": 86.43
+      }
+     ],
+     "alt": "El silencio no es un número fijo: se recalcula cada día (en % de clientes en silencio). 2026-05-23: 83.96 %; 2026-05-30: 87.89 %; 2026-06-09: 87.91 %; 2026-06-14: 89.26 %; 2026-06-16: 86.43 %."
+    },
+    {
+     "clave": "base_intencion",
+     "tipo": "barras",
+     "titulo": "Contra qué hay que comparar una predicción",
+     "que_muestra": "Porcentaje de los 38 000 clientes que hizo de verdad cada acción en la ventana de etiqueta del corte 2026-06-16. Es la tasa base observada, contada, no estimada.",
+     "que_concluir": "Un modelo que le asigne a un cliente un 20 % de probabilidad de «Oferta de préstamo» está diciendo algo fuerte: la tasa base de esa acción es 1.26 %, o sea unas 16 veces menos. Sin esta gráfica al lado, un 20 % parece poco.",
+     "unidad": "% de los 38 000 clientes",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Meta de ahorro",
+       "clave": "savings_goal",
+       "valor": 5.92,
+       "texto": "5.92 %",
+       "nota": "acción que lo confirma: Traspaso a ahorro",
+       "ancho_pct": 55.28
+      },
+      {
+       "etiqueta": "Aumento de línea",
+       "clave": "limit_increase",
+       "valor": 1.42,
+       "texto": "1.42 %",
+       "nota": "acción que lo confirma: Solicitud de aumento de línea",
+       "ancho_pct": 13.26
+      },
+      {
+       "etiqueta": "Oferta de préstamo",
+       "clave": "loan_offer",
+       "valor": 1.26,
+       "texto": "1.26 %",
+       "nota": "acción que lo confirma: Solicitud de préstamo",
+       "ancho_pct": 11.76
+      },
+      {
+       "etiqueta": "Recordatorio de pago",
+       "clave": "bill_reminder",
+       "valor": 10.71,
+       "texto": "10.71 %",
+       "nota": "acción que lo confirma: Pago de un servicio",
+       "ancho_pct": 100.0
+      }
+     ],
+     "alt": "Contra qué hay que comparar una predicción (en % de los 38 000 clientes). Meta de ahorro: 5.92 %; Aumento de línea: 1.42 %; Oferta de préstamo: 1.26 %; Recordatorio de pago: 10.71 %."
+    }
+   ],
+   "tablas": [
+    {
+     "clave": "puertas",
+     "titulo": "Las ocho puertas, en el orden en que se evalúan",
+     "que_muestra": "Qué comprueba cada puerta y cuándo cierra. La primera que cierra termina el recorrido de ese producto.",
+     "que_concluir": "Ninguna puerta es un filtro de calidad del modelo: son condiciones de si conviene hablar. Dos de ellas —descartes repetidos y confianza del modelo— están implementadas y en el piloto no cierran a nadie; se muestran igual en vez de esconderse.",
+     "columnas": [
+      "Puerta",
+      "Qué comprueba",
+      "Cuándo se calla"
+     ],
+     "filas": [
+      [
+       "¿Quiere que le hablemos?",
+       "Si el cliente desactivó las notificaciones en algún aviso anterior.",
+       "Se dio de baja. No se le vuelve a escribir, aunque el aviso le conviniera."
+      ],
+      [
+       "¿La fecha es de fiar?",
+       "Si el día elegido cae en una zona de los datos que no sostiene una decisión (los 3 primeros días del panel son un artefacto del generador y los 3 últimos están censurados por la ventana de etiqueta de 7 días).",
+       "La fecha no es evaluable. Callarse es preferible a decidir con datos rotos."
+      ],
+      [
+       "¿Mostró interés hace poco?",
+       "Si entró a la pantalla acoplada al producto en los últimos 7 días.",
+       "No hay nada que el cliente haya dado a entender que quiere. Interrumpir sería adivinar."
+      ],
+      [
+       "¿Le queda cupo de avisos?",
+       "Cuántas veces se le ha mostrado ya este mismo tipo de aviso (tope: 2).",
+       "Ya se le dijo dos veces. La tercera cuesta más bajas que enganches."
+      ],
+      [
+       "¿Ya lo había descartado?",
+       "Cuántas veces cerró este mismo aviso sin actuar.",
+       "Descartó el aviso de forma repetida. En el piloto esta puerta no está activa."
+      ],
+      [
+       "¿Este producto le haría daño?",
+       "Si el cliente está en situación frágil (tarjeta por encima del 70 % de utilización o 3 o más días en negativo en 90) y el producto empeoraría eso.",
+       "Sí quería el producto, pero le dejaría peor. Es un veto, no una falta de datos."
+      ],
+      [
+       "¿El modelo está seguro?",
+       "Si la confianza del modelo llega al mínimo para hablar.",
+       "El modelo no llega al umbral. En el piloto esta puerta no está activa."
+      ],
+      [
+       "¿Aporta más de lo que quita?",
+       "El valor esperado del aviso, medido en días de descubierto evitados.",
+       "El valor es cero o negativo: en promedio el aviso deja al cliente peor."
+      ],
+      [
+       "Fuera del catálogo del piloto",
+       "Si el producto forma parte de los 4 que el piloto puede ofrecer.",
+       "El producto existe en los datos pero no se ofrece en el piloto."
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "clave": "modelos",
+   "titulo": "8 · Qué tan bien predicen los modelos, y contra qué",
+   "resumen": "Un porcentaje de acierto suelto no dice nada. Aquí cada cifra va con la referencia contra la que hay que leerla y con la población sobre la que se mide, que es donde suele estar el truco. Hay dos modelos: uno adivina QUÉ quiere el cliente, otro decide SI vale la pena hablarle ahora.",
+   "fuente": "analytics/evaluar.py sobre pipeline/artifacts/modelo_intencion.pkl y modelo_momento.pkl, evaluado en los cortes 2026-05-30, 2026-06-09, 2026-06-14 (ninguno usado para entrenar) · pipeline/artifacts/umbrales.json y metadata.json",
+   "cifras": [
+    {
+     "etiqueta": "Modelo de intención · acierto",
+     "valor": "43.80 %",
+     "detalle": "Contra 33.63 % de decir siempre la acción más común. Son 8 clases posibles."
+    },
+    {
+     "etiqueta": "Modelo de intención · estabilidad",
+     "valor": "2.65 pp de rango",
+     "detalle": "Contra 13.98 pp de la regla simple. Esta es la ganancia real: no acierta mucho más, acierta igual todos los días."
+    },
+    {
+     "etiqueta": "Modelo de momento · capacidad de ordenar",
+     "valor": "AUC 0.7104",
+     "detalle": "0.50 sería tirar una moneda; 1.00  adivinarlo siempre. Medido en 47 432 avisos que el modelo no vio al entrenar."
+    },
+    {
+     "etiqueta": "Modelo de momento · en el 1 % mejor",
+     "valor": "32.60 %",
+     "detalle": "De los avisos que el modelo pone arriba, este porcentaje recibe clic. La tasa base es 8.27 %: el modelo multiplica por 3.94."
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "predictores",
+     "tipo": "barras",
+     "titulo": "Seis maneras de adivinar la próxima acción, comparadas",
+     "que_muestra": "Porcentaje de acierto de cada predictor, con la población sobre la que se mide escrita al lado. Media de los 3 cortes de prueba.",
+     "que_concluir": "El modelo le saca 10 puntos a la referencia obligada. Pero donde hay señal fresca, la regla de una línea acierta casi lo mismo: la ganancia del modelo no es puntería, es que opina sobre todo el mundo y no solo sobre el 16 % que dejó una pista clara.",
+     "unidad": "% de acierto",
+     "leyenda": null,
+     "aviso": "Las barras NO son comparables entre sí sin leer la población que va debajo de cada nombre: las dos últimas se miden solo sobre el 16 % de clientes con señal fresca, que es el subconjunto fácil.",
+     "filas": [
+      {
+       "etiqueta": "Decir siempre «SPEI» (la acción más común)",
+       "clave": "baseline_constante",
+       "valor": 33.63,
+       "texto": "33.63 %",
+       "poblacion": "todos los clientes activos",
+       "nota": "medido sobre todos los clientes activos · La referencia obligada. Si un modelo no le gana a esto, no sirve.",
+       "explica": "La referencia obligada. Si un modelo no le gana a esto, no sirve.",
+       "rango": 15.99,
+       "rango_texto": "15.99 pp entre los 3 cortes",
+       "resaltar": false,
+       "por_corte": [
+        {
+         "corte": "2026-05-30",
+         "texto": "25.63 %"
+        },
+        {
+         "corte": "2026-06-09",
+         "texto": "41.62 %"
+        },
+        {
+         "corte": "2026-06-14",
+         "texto": "33.64 %"
+        }
+       ],
+       "ancho_pct": 51.93
+      },
+      {
+       "etiqueta": "Regla simple: la última pantalla que abrió",
+       "clave": "regla_hibrida",
+       "valor": 37.79,
+       "texto": "37.79 %",
+       "poblacion": "todos los clientes activos",
+       "nota": "medido sobre todos los clientes activos · Aplicada a toda la base. Donde no hay señal reciente, cae a «SPEI».",
+       "explica": "Aplicada a toda la base. Donde no hay señal reciente, cae a «SPEI».",
+       "rango": 13.98,
+       "rango_texto": "13.98 pp entre los 3 cortes",
+       "resaltar": false,
+       "por_corte": [
+        {
+         "corte": "2026-05-30",
+         "texto": "30.74 %"
+        },
+        {
+         "corte": "2026-06-09",
+         "texto": "44.72 %"
+        },
+        {
+         "corte": "2026-06-14",
+         "texto": "37.91 %"
+        }
+       ],
+       "ancho_pct": 58.35
+      },
+      {
+       "etiqueta": "Nuestro modelo, primera opción",
+       "clave": "modelo_top1",
+       "valor": 43.8,
+       "texto": "43.80 %",
+       "poblacion": "todos los clientes activos",
+       "nota": "medido sobre todos los clientes activos · Acierta la acción exacta que el cliente hará en los 7 días siguientes.",
+       "explica": "Acierta la acción exacta que el cliente hará en los 7 días siguientes.",
+       "rango": 2.65,
+       "rango_texto": "2.65 pp entre los 3 cortes",
+       "resaltar": true,
+       "por_corte": [
+        {
+         "corte": "2026-05-30",
+         "texto": "44.04 %"
+        },
+        {
+         "corte": "2026-06-09",
+         "texto": "45.01 %"
+        },
+        {
+         "corte": "2026-06-14",
+         "texto": "42.36 %"
+        }
+       ],
+       "ancho_pct": 67.63
+      },
+      {
+       "etiqueta": "Nuestro modelo, entre sus dos primeras opciones",
+       "clave": "modelo_top2",
+       "valor": 64.76,
+       "texto": "64.76 %",
+       "poblacion": "todos los clientes activos",
+       "nota": "medido sobre todos los clientes activos · Para un asistente que puede sugerir dos cosas, esta es la cifra útil.",
+       "explica": "Para un asistente que puede sugerir dos cosas, esta es la cifra útil.",
+       "rango": 4.44,
+       "rango_texto": "4.44 pp entre los 3 cortes",
+       "resaltar": false,
+       "por_corte": [
+        {
+         "corte": "2026-05-30",
+         "texto": "67.67 %"
+        },
+        {
+         "corte": "2026-06-09",
+         "texto": "63.23 %"
+        },
+        {
+         "corte": "2026-06-14",
+         "texto": "63.37 %"
+        }
+       ],
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Regla simple, solo donde hay señal fresca",
+       "clave": "regla_donde_senal",
+       "valor": 62.46,
+       "texto": "62.46 %",
+       "poblacion": "el ~16 % de activos con señal ≤ 24 h",
+       "nota": "medido sobre el ~16 % de activos con señal ≤ 24 h · En su terreno la regla es buenísima. El problema es que su terreno es pequeño.",
+       "explica": "En su terreno la regla es buenísima. El problema es que su terreno es pequeño.",
+       "rango": 2.22,
+       "rango_texto": "2.22 pp entre los 3 cortes",
+       "resaltar": false,
+       "por_corte": [
+        {
+         "corte": "2026-05-30",
+         "texto": "61.23 %"
+        },
+        {
+         "corte": "2026-06-09",
+         "texto": "63.45 %"
+        },
+        {
+         "corte": "2026-06-14",
+         "texto": "62.71 %"
+        }
+       ],
+       "ancho_pct": 96.45
+      },
+      {
+       "etiqueta": "Nuestro modelo, solo donde hay señal fresca",
+       "clave": "modelo_donde_senal",
+       "valor": 63.32,
+       "texto": "63.32 %",
+       "poblacion": "el ~16 % de activos con señal ≤ 24 h",
+       "nota": "medido sobre el ~16 % de activos con señal ≤ 24 h · Aquí el modelo EMPATA con la regla. Se dice primero, no se esconde.",
+       "explica": "Aquí el modelo EMPATA con la regla. Se dice primero, no se esconde.",
+       "rango": 2.93,
+       "rango_texto": "2.93 pp entre los 3 cortes",
+       "resaltar": false,
+       "por_corte": [
+        {
+         "corte": "2026-05-30",
+         "texto": "61.99 %"
+        },
+        {
+         "corte": "2026-06-09",
+         "texto": "64.92 %"
+        },
+        {
+         "corte": "2026-06-14",
+         "texto": "63.04 %"
+        }
+       ],
+       "ancho_pct": 97.78
+      }
+     ],
+     "alt": "Seis maneras de adivinar la próxima acción, comparadas (en % de acierto). Decir siempre «SPEI» (la acción más común): 33.63 %; Regla simple: la última pantalla que abrió: 37.79 %; Nuestro modelo, primera opción: 43.80 %; Nuestro modelo, entre sus dos primeras opciones: 64.76 %; Regla simple, solo donde hay señal fresca: 62.46 %; Nuestro modelo, solo donde hay señal fresca: 63.32 %."
+    },
+    {
+     "clave": "estabilidad",
+     "tipo": "barras",
+     "titulo": "Y por eso preferimos el modelo: se mueve mucho menos",
+     "que_muestra": "Cuántos puntos porcentuales se mueve el acierto de cada predictor entre el mejor y el peor de los 3 cortes de prueba. Menos es mejor.",
+     "que_concluir": "La regla simple pasa de 30.74 % a 44.72 % según el día que se mida. El modelo se mueve 2.65 puntos. Un asistente que un martes acierta y un jueves no, no es un asistente.",
+     "unidad": "puntos porcentuales de variación (menos es mejor)",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Decir siempre «SPEI» (la acción más común)",
+       "clave": "baseline_constante",
+       "valor": 15.99,
+       "texto": "15.99 pp",
+       "nota": "acierto medio 33.63 % sobre todos los clientes activos",
+       "resaltar": false,
+       "ancho_pct": 100.0
+      },
+      {
+       "etiqueta": "Regla simple: la última pantalla que abrió",
+       "clave": "regla_hibrida",
+       "valor": 13.98,
+       "texto": "13.98 pp",
+       "nota": "acierto medio 37.79 % sobre todos los clientes activos",
+       "resaltar": false,
+       "ancho_pct": 87.43
+      },
+      {
+       "etiqueta": "Nuestro modelo, primera opción",
+       "clave": "modelo_top1",
+       "valor": 2.65,
+       "texto": "2.65 pp",
+       "nota": "acierto medio 43.80 % sobre todos los clientes activos",
+       "resaltar": true,
+       "ancho_pct": 16.57
+      }
+     ],
+     "alt": "Y por eso preferimos el modelo: se mueve mucho menos (en puntos porcentuales de variación (menos es mejor)). Decir siempre «SPEI» (la acción más común): 15.99 pp; Regla simple: la última pantalla que abrió: 13.98 pp; Nuestro modelo, primera opción: 2.65 pp."
+    },
+    {
+     "clave": "barrido",
+     "tipo": "barras",
+     "titulo": "A cuánta gente hablarle: el intercambio, dibujado",
+     "que_muestra": "Si solo se le habla a los clientes con la predicción más segura, qué porcentaje de ellos acierta. Cada barra es un nivel de exigencia distinto.",
+     "que_concluir": "Hablarle a la mitad de la gente acierta el 55.09 %; hablarle al 5 % más seguro acierta el 81.59 %. El sistema está puesto en el 15 %, elegido en un corte aparte que no participa en la evaluación.",
+     "unidad": "% de acierto entre los seleccionados",
+     "leyenda": null,
+     "aviso": "El umbral se eligió en el corte 2026-05-23, distinto de los cortes de prueba. Elegirlo mirando el resultado de la prueba sería hacerse trampas al solitario.",
+     "filas": [
+      {
+       "etiqueta": "Hablarle al 50.00 % de la gente",
+       "clave": "0.5",
+       "valor": 55.09,
+       "texto": "55.09 %",
+       "n": 8896,
+       "nota": "umbral 0.1961 · 8 896 clientes",
+       "resaltar": false,
+       "ancho_pct": 67.52
+      },
+      {
+       "etiqueta": "Hablarle al 45.00 % de la gente",
+       "clave": "0.55",
+       "valor": 56.07,
+       "texto": "56.07 %",
+       "n": 8090,
+       "nota": "umbral 0.1974 · 8 090 clientes",
+       "resaltar": false,
+       "ancho_pct": 68.72
+      },
+      {
+       "etiqueta": "Hablarle al 40.00 % de la gente",
+       "clave": "0.6",
+       "valor": 57.12,
+       "texto": "57.12 %",
+       "n": 7279,
+       "nota": "umbral 0.1987 · 7 279 clientes",
+       "resaltar": false,
+       "ancho_pct": 70.01
+      },
+      {
+       "etiqueta": "Hablarle al 35.00 % de la gente",
+       "clave": "0.65",
+       "valor": 58.26,
+       "texto": "58.26 %",
+       "n": 6483,
+       "nota": "umbral 0.2001 · 6 483 clientes",
+       "resaltar": false,
+       "ancho_pct": 71.41
+      },
+      {
+       "etiqueta": "Hablarle al 30.00 % de la gente",
+       "clave": "0.7",
+       "valor": 59.36,
+       "texto": "59.36 %",
+       "n": 5704,
+       "nota": "umbral 0.2014 · 5 704 clientes",
+       "resaltar": false,
+       "ancho_pct": 72.75
+      },
+      {
+       "etiqueta": "Hablarle al 25.00 % de la gente",
+       "clave": "0.75",
+       "valor": 61.08,
+       "texto": "61.08 %",
+       "n": 4926,
+       "nota": "umbral 0.2030 · 4 926 clientes",
+       "resaltar": false,
+       "ancho_pct": 74.86
+      },
+      {
+       "etiqueta": "Hablarle al 20.00 % de la gente",
+       "clave": "0.8",
+       "valor": 63.2,
+       "texto": "63.20 %",
+       "n": 4158,
+       "nota": "umbral 0.2053 · 4 158 clientes",
+       "resaltar": false,
+       "ancho_pct": 77.46
+      },
+      {
+       "etiqueta": "Hablarle al 15.00 % de la gente",
+       "clave": "0.85",
+       "valor": 65.73,
+       "texto": "65.73 %",
+       "n": 3382,
+       "nota": "umbral 0.2093 · 3 382 clientes",
+       "resaltar": true,
+       "ancho_pct": 80.56
+      },
+      {
+       "etiqueta": "Hablarle al 10.00 % de la gente",
+       "clave": "0.9",
+       "valor": 72.24,
+       "texto": "72.24 %",
+       "n": 2518,
+       "nota": "umbral 0.2522 · 2 518 clientes",
+       "resaltar": false,
+       "ancho_pct": 88.54
+      },
+      {
+       "etiqueta": "Hablarle al 5.00 % de la gente",
+       "clave": "0.95",
+       "valor": 81.59,
+       "texto": "81.59 %",
+       "n": 1483,
+       "nota": "umbral 0.4305 · 1 483 clientes",
+       "resaltar": false,
+       "ancho_pct": 100.0
+      }
+     ],
+     "alt": "A cuánta gente hablarle: el intercambio, dibujado (en % de acierto entre los seleccionados). Hablarle al 50.00 % de la gente: 55.09 %; Hablarle al 45.00 % de la gente: 56.07 %; Hablarle al 40.00 % de la gente: 57.12 %; Hablarle al 35.00 % de la gente: 58.26 %; Hablarle al 30.00 % de la gente: 59.36 %; Hablarle al 25.00 % de la gente: 61.08 %; Hablarle al 20.00 % de la gente: 63.20 %; Hablarle al 15.00 % de la gente: 65.73 %; Hablarle al 10.00 % de la gente: 72.24 %; Hablarle al 5.00 % de la gente: 81.59 %."
+    }
+   ],
+   "tablas": [
+    {
+     "clave": "por_corte",
+     "titulo": "Los mismos predictores, corte a corte",
+     "que_muestra": "Sin promediar. Cada columna es un día distinto sobre el que se evaluó, y ninguno se usó para entrenar.",
+     "que_concluir": "El baseline pasa de 25.63 % a 41.62 % según el día: no es que mejore, es que la población cambia. Comparar contra un baseline medido en un solo corte es la trampa más fácil de este dataset.",
+     "columnas": [
+      "Predictor",
+      "2026-05-30",
+      "2026-06-09",
+      "2026-06-14",
+      "Media",
+      "Rango"
+     ],
+     "filas": [
+      [
+       "Decir siempre «SPEI» (la acción más común)",
+       "25.63 %",
+       "41.62 %",
+       "33.64 %",
+       "33.63 %",
+       "15.99 pp"
+      ],
+      [
+       "Regla simple: la última pantalla que abrió",
+       "30.74 %",
+       "44.72 %",
+       "37.91 %",
+       "37.79 %",
+       "13.98 pp"
+      ],
+      [
+       "Nuestro modelo, primera opción",
+       "44.04 %",
+       "45.01 %",
+       "42.36 %",
+       "43.80 %",
+       "2.65 pp"
+      ],
+      [
+       "Nuestro modelo, entre sus dos primeras opciones",
+       "67.67 %",
+       "63.23 %",
+       "63.37 %",
+       "64.76 %",
+       "4.44 pp"
+      ],
+      [
+       "Regla simple, solo donde hay señal fresca",
+       "61.23 %",
+       "63.45 %",
+       "62.71 %",
+       "62.46 %",
+       "2.22 pp"
+      ],
+      [
+       "Nuestro modelo, solo donde hay señal fresca",
+       "61.99 %",
+       "64.92 %",
+       "63.04 %",
+       "63.32 %",
+       "2.93 pp"
+      ]
+     ]
+    }
+   ],
+   "extra": {
+    "acuerdo_pct": 62.76,
+    "acuerdo_texto": "62.76 %",
+    "algoritmo": "HistGradientBoostingClassifier(max_depth=4, random_state=0)",
+    "n_features": 82,
+    "n_train_momento": 237568,
+    "variables_momento": [
+     "senal",
+     "exposure_no"
+    ]
+   }
+  },
+  {
+   "clave": "advertencias",
+   "titulo": "9 · Cómo leer todo esto sin equivocarse",
+   "resumen": "Cuatro cosas que hay que saber antes de citar cualquier número de esta página. No son notas al pie: cambian lo que las cifras significan.",
+   "fuente": "analytics/recon/out/06_randomization_tests.csv, 06_selection_bias.csv, 06_leakage_table.csv, 01_integrity.csv, 02_edge_effect.csv",
+   "cifras": [
+    {
+     "etiqueta": "Comparar tipos de aviso entre sí: se puede",
+     "valor": "18 de 18 pruebas dan «al azar»",
+     "detalle": "El tipo de aviso y la superficie se asignaron aleatoriamente. Se comprobó contra 9 características del cliente y ninguna sale relacionada. Así que las diferencias entre productos son del producto."
+    },
+    {
+     "etiqueta": "Comparar «con clic» contra «sin clic»: no se puede",
+     "valor": "no está aleatorizado",
+     "detalle": "Quién hace clic no se sorteó. Si los que clican convierten más, puede ser por el clic o porque ya iban a hacerlo. Esas columnas son diagnóstico, no efecto."
+    },
+    {
+     "etiqueta": "Los tres primeros días del panel están inflados",
+     "valor": "7.36× la mediana",
+     "detalle": "Es un artefacto de cómo se generaron los datos. Cualquier gráfica por día tiene ese escalón al principio, y el sistema se niega a decidir en esas fechas."
+    },
+    {
+     "etiqueta": "Integridad del dataset",
+     "valor": "0 filas huérfanas",
+     "detalle": "Las 10 comprobaciones de integridad cuadran. Los únicos huecos declarados: 89 clientes sin ningún aviso y el 69.01 % sin nota de satisfacción."
+    }
+   ],
+   "graficas": [
+    {
+     "clave": "sesgo",
+     "tipo": "barras",
+     "titulo": "A la gente más activa se le manda más: eso no se puede ignorar",
+     "que_muestra": "Número medio de avisos recibidos por cliente, agrupando a los 38 000 en quintos según lo activos que son en la app.",
+     "que_concluir": "El quinto más activo recibe el doble de avisos que el menos activo (9.96 contra 4.91). Así que cualquier cifra que mezcle clientes con avisos está mirando sobre todo a los clientes activos. La aleatorización cubre QUÉ aviso se manda, no CUÁNTOS.",
+     "unidad": "avisos por cliente en 119 días",
+     "leyenda": null,
+     "aviso": null,
+     "filas": [
+      {
+       "etiqueta": "Quinto 1 de actividad en la app (índice medio 22.98 de 100)",
+       "clave": "Q1",
+       "n": 7612,
+       "valor": 4.91,
+       "texto": "4.91 avisos por cliente",
+       "nota": "69 de esos clientes no recibió ni un aviso",
+       "ancho_pct": 49.3
+      },
+      {
+       "etiqueta": "Quinto 2 de actividad en la app (índice medio 40.97 de 100)",
+       "clave": "Q2",
+       "n": 7611,
+       "valor": 6.45,
+       "texto": "6.45 avisos por cliente",
+       "nota": "13 de esos clientes no recibió ni un aviso",
+       "ancho_pct": 64.76
+      },
+      {
+       "etiqueta": "Quinto 3 de actividad en la app (índice medio 54.05 de 100)",
+       "clave": "Q3",
+       "n": 7588,
+       "valor": 7.54,
+       "texto": "7.54 avisos por cliente",
+       "nota": "3 de esos clientes no recibió ni un aviso",
+       "ancho_pct": 75.7
+      },
+      {
+       "etiqueta": "Quinto 4 de actividad en la app (índice medio 66.66 de 100)",
+       "clave": "Q4",
+       "n": 7598,
+       "valor": 8.65,
+       "texto": "8.65 avisos por cliente",
+       "nota": "3 de esos clientes no recibió ni un aviso",
+       "ancho_pct": 86.85
+      },
+      {
+       "etiqueta": "Quinto 5 de actividad en la app (índice medio 82.57 de 100)",
+       "clave": "Q5",
+       "n": 7591,
+       "valor": 9.96,
+       "texto": "9.96 avisos por cliente",
+       "nota": "1 de esos clientes no recibió ni un aviso",
+       "ancho_pct": 100.0
+      }
+     ],
+     "alt": "A la gente más activa se le manda más: eso no se puede ignorar (en avisos por cliente en 119 días). Quinto 1 de actividad en la app (índice medio 22.98 de 100): 4.91 avisos por cliente; Quinto 2 de actividad en la app (índice medio 40.97 de 100): 6.45 avisos por cliente; Quinto 3 de actividad en la app (índice medio 54.05 de 100): 7.54 avisos por cliente; Quinto 4 de actividad en la app (índice medio 66.66 de 100): 8.65 avisos por cliente; Quinto 5 de actividad en la app (índice medio 82.57 de 100): 9.96 avisos por cliente."
+    }
+   ],
+   "tablas": [
+    {
+     "clave": "fuga",
+     "titulo": "Columnas que nunca entran como entrada del modelo, y por qué",
+     "que_muestra": "El inventario completo de columnas del dataset marcadas como peligrosas, con el motivo. «Fuga temporal» significa que la columna contiene información posterior al momento en el que el modelo tiene que decidir.",
+     "que_concluir": "Las 82 entradas del modelo se calculan solo desde la navegación y los avisos, con la marca de tiempo de cada fila y corte estricto. Cuesta algo de acierto y compra que el resultado sea reproducible. El índice de actividad en la app queda fuera porque genera tanto los eventos como los avisos: usarlo sería casi copiar la respuesta.",
+     "columnas": [
+      "Tabla",
+      "Columna",
+      "Cómo se usa",
+      "Motivo"
+     ],
+     "filas": [
+      [
+       "nudge_outcomes",
+       "delta_card_utilization_pct_90d",
+       "TARGET / NUNCA feature",
+       "posterior al nudge, +90d"
+      ],
+      [
+       "nudge_outcomes",
+       "delta_savings_rate_pct_90d",
+       "TARGET / NUNCA feature",
+       "posterior al nudge, +90d"
+      ],
+      [
+       "nudge_outcomes",
+       "delta_days_negative_90d",
+       "TARGET / NUNCA feature",
+       "posterior al nudge, +90d"
+      ],
+      [
+       "nudge_outcomes",
+       "delta_revenue_mxn_90d",
+       "TARGET / NUNCA feature",
+       "posterior al nudge, +90d"
+      ],
+      [
+       "nudges",
+       "engaged",
+       "TARGET del modelo de momento",
+       "resultado del nudge"
+      ],
+      [
+       "nudges",
+       "dismissed",
+       "TARGET / NUNCA feature",
+       "resultado del nudge"
+      ],
+      [
+       "nudges",
+       "opted_out_after",
+       "TARGET (coste) / NUNCA feature",
+       "posterior al nudge"
+      ],
+      [
+       "nudges",
+       "exposure_no",
+       "FEATURE VALIDA",
+       "conocida antes de enviar"
+      ],
+      [
+       "nudges",
+       "hours_since_last_nudge",
+       "FEATURE VALIDA",
+       "conocida antes de enviar"
+      ],
+      [
+       "customers",
+       "savings_rate_90d_pct",
+       "RIESGO: recalcular as-of corte",
+       "ventana 90d sin fecha, solapa el label"
+      ],
+      [
+       "customers",
+       "days_negative_90d",
+       "RIESGO: recalcular as-of corte",
+       "ventana 90d sin fecha, solapa el label"
+      ],
+      [
+       "customers",
+       "card_utilization_pct",
+       "RIESGO: sin timestamp",
+       "snapshot sin vintage declarado"
+      ],
+      [
+       "customers",
+       "revenue_ltm_mxn",
+       "RIESGO: sin timestamp",
+       "LTM sin vintage; correlaciona con util"
+      ],
+      [
+       "customers",
+       "engagement_score",
+       "RIESGO ALTO",
+       "determina volumen de eventos Y de nudges: casi el label"
+      ],
+      [
+       "customers",
+       "avg_balance_mxn",
+       "RIESGO: sin timestamp",
+       "snapshot sin vintage"
+      ],
+      [
+       "customers",
+       "nps_last_score",
+       "FEATURE DEBIL",
+       "69% nulo; correlaciona con fragilidad -> imputar es informativo"
+      ],
+      [
+       "customers",
+       "has_* / demograficos / payday_day_of_month",
+       "FEATURE VALIDA",
+       "estables, no posteriores"
+      ]
+     ]
+    },
+    {
+     "clave": "integridad",
+     "titulo": "Los controles de integridad, uno a uno",
+     "que_muestra": "Cada comprobación con el número de filas que la incumplen. Cero es lo que se busca en todas menos en las declaradas.",
+     "que_concluir": "El dataset está limpio: ninguna clave huérfana, ninguna contradicción entre «le dio clic» y «lo cerró». Los 89 clientes sin aviso son reales y están declarados.",
+     "columnas": [
+      "Comprobación",
+      "Filas que la incumplen"
+     ],
+     "filas": [
+      [
+       "app_events.customer_id huerfanos",
+       "0"
+      ],
+      [
+       "financial_actions.customer_id huerfanos",
+       "0"
+      ],
+      [
+       "nudges.customer_id huerfanos",
+       "0"
+      ],
+      [
+       "nudge_outcomes sin nudge",
+       "0"
+      ],
+      [
+       "nudges sin outcome",
+       "0"
+      ],
+      [
+       "clientes sin ningun app_event",
+       "0"
+      ],
+      [
+       "clientes sin ninguna financial_action",
+       "0"
+      ],
+      [
+       "clientes sin ningun nudge",
+       "89"
+      ],
+      [
+       "engaged & dismissed a la vez",
+       "0"
+      ],
+      [
+       "engaged & opted_out_after a la vez",
+       "0"
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "avisos": []
+}

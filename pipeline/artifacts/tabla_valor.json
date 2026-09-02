@@ -1,0 +1,65 @@
+{
+  "formula": "V = (-Δdías_negativos) + (Δingreso/λ) + 0.3·(Δahorro_pp/10)",
+  "unidad": "días de descubierto evitados por enganche",
+  "lambda_defecto": 266.0,
+  "lambda_alternativa": 165.0,
+  "peso_ahorro": 0.3,
+  "escala_ahorro_pp": 10.0,
+  "nota_deltas": "medias condicionadas a engaged=true; el aviso ignorado tiene efecto 0",
+  "productos": {
+    "savings_goal": {
+      "n_enganches": 4269,
+      "delta_dias_negativos": -0.4635,
+      "delta_ingreso_mxn": 11.843,
+      "delta_ahorro_pp": 6.3765,
+      "V_lambda_266": 0.6993,
+      "V_lambda_165": 0.7266,
+      "en_catalogo": true
+    },
+    "limit_increase": {
+      "n_enganches": 8975,
+      "delta_dias_negativos": 0.9337,
+      "delta_ingreso_mxn": 245.562,
+      "delta_ahorro_pp": -2.2147,
+      "V_lambda_266": -0.077,
+      "V_lambda_165": 0.4881,
+      "en_catalogo": true
+    },
+    "bill_reminder": {
+      "n_enganches": 5373,
+      "delta_dias_negativos": -0.8469,
+      "delta_ingreso_mxn": -73.502,
+      "delta_ahorro_pp": 0.0021,
+      "V_lambda_266": 0.5707,
+      "V_lambda_165": 0.4015,
+      "en_catalogo": true
+    },
+    "loan_offer": {
+      "n_enganches": 4068,
+      "delta_dias_negativos": -0.0082,
+      "delta_ingreso_mxn": 260.372,
+      "delta_ahorro_pp": -2.2046,
+      "V_lambda_266": 0.9209,
+      "V_lambda_165": 1.5201,
+      "en_catalogo": true
+    },
+    "invest_start": {
+      "n_enganches": 3396,
+      "delta_dias_negativos": -0.0011,
+      "delta_ingreso_mxn": 95.6,
+      "delta_ahorro_pp": -0.0318,
+      "V_lambda_266": 0.3596,
+      "V_lambda_165": 0.5796,
+      "en_catalogo": false
+    },
+    "payroll_portability": {
+      "n_enganches": 6563,
+      "delta_dias_negativos": -0.0013,
+      "delta_ingreso_mxn": 40.125,
+      "delta_ahorro_pp": 3.1121,
+      "V_lambda_266": 0.2455,
+      "V_lambda_165": 0.3378,
+      "en_catalogo": false
+    }
+  }
+}

@@ -9,6 +9,7 @@ __pycache__/
 pipeline/out/
 analytics/scan_*.csv
 *.log
+pipeline/artifacts/*.pkl
 
 # material de trabajo interno — NO se publica
 notas-orador.md

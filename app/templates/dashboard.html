@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nu-moments · dashboard general de métricas</title>
+<script>
+// El tema se decide ANTES de pintar para que no haya destello al cargar.
+// Sin red, sin dependencias: localStorage y la preferencia del sistema.
+(function(){
+  try{
+    var g = localStorage.getItem('nu-moments-tema');
+    if(!g){ g = matchMedia('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro'; }
+    document.documentElement.setAttribute('data-tema', g);
+  }catch(e){ document.documentElement.setAttribute('data-tema','claro'); }
+})();
+</script>
+<style>
+/* ==========================================================================
+   Paleta. Los dos temas definen EL MISMO juego de variables: ninguna regla de
+   más abajo vuelve a nombrar un color, así que no puede haber un color que
+   solo exista en claro o solo en oscuro.
+   ========================================================================== */
+:root{
+  --morado:#820AD1; --acento:#7A0BC4; --acento-suave:#F3E8FB;
+  --tinta:#16121A; --gris:#5F5869; --linea:#E2DCE8;
+  --fondo:#FAF8FC; --panel:#FFFFFF; --panel-2:#F6F2FA;
+  --verde:#0B7A44; --ambar:#8A5200; --rojo:#B3251E;
+  --verde-f:#E3F5EA; --ambar-f:#FBF0DA; --rojo-f:#FBE7E6;
+  --cabecera:#820AD1; --cabecera-txt:#FFFFFF;
+  --barra-a:#820AD1; --barra-b:#6B88B0; --barra-neutra:#948AA3;
+  --barra-mala:#B3251E; --pista:#EDEAF1;
+  --radio:14px; --sombra:0 1px 2px rgba(22,18,26,.06);
+}
+[data-tema="oscuro"]{
+  --morado:#A855F7; --acento:#D3AFF5; --acento-suave:#2A1440;
+  --tinta:#F2EEF7; --gris:#A9A1B4; --linea:#3A3243;
+  --fondo:#141019; --panel:#1D1826; --panel-2:#241E2F;
+  --verde:#5FD69A; --ambar:#E3B15C; --rojo:#F08C86;
+  --verde-f:#16311F; --ambar-f:#33260F; --rojo-f:#3A1B1A;
+  --cabecera:#2A1440; --cabecera-txt:#F2EEF7;
+  --barra-a:#B478F0; --barra-b:#6A87AA; --barra-neutra:#6F667E;
+  --barra-mala:#F08C86; --pista:#2A2434;
+  --sombra:0 1px 2px rgba(0,0,0,.4);
+}
+
+/* `min-width:0` en todo. El mínimo automático de un hijo de grid o de flex es
+   su ancho de contenido, y basta un `white-space:nowrap` olvidado para que ese
+   mínimo reviente la columna, el `main` y al final el `body`. Con esto el
+   contenido se ajusta o desborda dentro de su caja, nunca arrastrando la
+   página: es el requisito de «sin scroll horizontal entre 320 y 2560 px». */
+*{box-sizing:border-box;min-width:0}
+html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;background:var(--fondo);color:var(--tinta);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acento)}
+:focus-visible{outline:3px solid var(--morado);outline-offset:2px;border-radius:6px}
+[data-tema="oscuro"] :focus-visible{outline-color:#D3AFF5}
+
+/* Ninguna palabra larga ni ningún número puede empujar la página. */
+p,li,dd,dt,td,th,h1,h2,h3,h4,summary,figcaption{overflow-wrap:anywhere}
+
+/* Solo para lector de pantalla. Nunca `display:none`: eso lo ocultaría también
+   para quien lo necesita. */
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* ------------------------------------------------------------- cabecera --- */
+header{background:var(--cabecera);color:var(--cabecera-txt);padding:16px 22px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;max-width:100%}
+@media(max-width:560px){header{padding:14px 12px;gap:10px}}
+header h1{font-size:19px;margin:0;font-weight:650;letter-spacing:-.2px}
+header .lema{opacity:.9;font-size:13px}
+header .der{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;max-width:100%}
+.pill{border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;
+  background:rgba(255,255,255,.18);display:inline-flex;align-items:center;gap:6px;
+  color:var(--cabecera-txt);max-width:100%}
+[data-tema="oscuro"] .pill{background:rgba(255,255,255,.10)}
+a.pill{text-decoration:none}
+.tema-btn{background:rgba(255,255,255,.18);border:0;color:var(--cabecera-txt);
+  border-radius:999px;padding:6px 12px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.tema-btn:hover{background:rgba(255,255,255,.30)}
+
+main{max-width:1180px;margin:0 auto;padding:20px;display:grid;gap:20px;
+  grid-template-columns:minmax(0,1fr)}
+@media(max-width:560px){main{padding:12px;gap:14px}}
+
+.tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:var(--radio);
+  padding:18px 20px;box-shadow:var(--sombra)}
+@media(max-width:560px){.tarjeta{padding:14px}}
+.tarjeta > :first-child{margin-top:0}
+.tarjeta > :last-child{margin-bottom:0}
+
+h2.bloque{font-size:21px;margin:0 0 6px;letter-spacing:-.3px;line-height:1.25}
+p.resumen{margin:0 0 14px;color:var(--tinta);font-size:14.5px;max-width:78ch}
+p.fuente{margin:12px 0 0;font-size:12px;color:var(--gris);border-top:1px dashed var(--linea);
+  padding-top:10px}
+p.fuente b{color:var(--gris);text-transform:uppercase;letter-spacing:.07em;font-size:11px}
+
+/* ------------------------------------------------------------- entradilla -- */
+.portada h2{font-size:24px;margin:0 0 8px;letter-spacing:-.4px}
+.portada p{max-width:78ch}
+.como-leer{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
+  margin-top:14px}
+.como-leer div{background:var(--panel-2);border:1px solid var(--linea);border-radius:11px;
+  padding:11px 13px;font-size:13px}
+.como-leer b{display:block;color:var(--acento);font-size:11px;text-transform:uppercase;
+  letter-spacing:.07em;margin-bottom:4px}
+
+.params{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;list-style:none;padding:0}
+.params li{background:var(--panel-2);border:1px solid var(--linea);border-radius:999px;
+  padding:4px 11px;font-size:12px;color:var(--gris)}
+.params li b{color:var(--tinta);font-variant-numeric:tabular-nums}
+
+/* --------------------------------------------------------------- índice ---- */
+nav.indice ol{margin:0;padding-left:0;list-style:none;display:grid;gap:8px;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+nav.indice a{display:block;background:var(--panel-2);border:1px solid var(--linea);
+  border-radius:11px;padding:10px 12px;text-decoration:none;color:var(--tinta);font-size:13.5px;
+  font-weight:600;line-height:1.35}
+nav.indice a:hover{border-color:var(--morado);background:var(--acento-suave)}
+
+/* --------------------------------------------------------- cifras grandes -- */
+.cifras{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,215px),1fr));
+  margin:0 0 4px;padding:0;list-style:none}
+.cifras li{background:var(--panel-2);border:1px solid var(--linea);border-radius:12px;padding:13px 14px}
+.cifras .et{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--gris);
+  font-weight:700;line-height:1.3}
+.cifras .va{font-size:25px;font-weight:680;letter-spacing:-.6px;margin:5px 0 5px;
+  font-variant-numeric:tabular-nums;line-height:1.1;color:var(--acento)}
+.cifras .de{font-size:12.5px;color:var(--gris);line-height:1.45}
+.portada .cifras .va{font-size:29px}
+
+/* ------------------------------------------------------------- gráficas ---- */
+figure.g{margin:22px 0 0;padding:0}
+figure.g:first-of-type{margin-top:18px}
+figure.g figcaption{margin:0 0 12px}
+figure.g h4{margin:0 0 6px;font-size:16.5px;letter-spacing:-.2px;line-height:1.3}
+.qm,.qc,.av{margin:4px 0;font-size:13.5px;line-height:1.5;max-width:78ch}
+.qm{color:var(--gris)}
+.qc{color:var(--tinta)}
+.qm b,.qc b,.av b{font-size:11px;text-transform:uppercase;letter-spacing:.07em}
+.qm b{color:var(--gris)}
+.qc b{color:var(--acento)}
+.av{background:var(--ambar-f);border-left:3px solid var(--ambar);border-radius:0 9px 9px 0;
+  padding:9px 12px;color:var(--tinta)}
+.av b{color:var(--ambar)}
+.unidad{font-size:11.5px;color:var(--gris);margin:0 0 8px;text-transform:uppercase;
+  letter-spacing:.06em}
+/* La escala de las barras. Va pegada a la unidad porque es parte de cómo se
+   lee el eje: sin ella una barra llena se lee como «el 100 %», y no lo es. */
+.escala{font-size:11.5px;color:var(--gris);margin:-4px 0 9px;line-height:1.45}
+
+.leyenda{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 10px;font-size:12.5px;color:var(--gris)}
+.leyenda span{display:inline-flex;align-items:center;gap:6px}
+.leyenda i{width:12px;height:12px;border-radius:3px;display:inline-block;flex:none}
+.leyenda i.a{background:var(--barra-a)}
+.leyenda i.b{background:var(--barra-b)}
+
+/* Una fila de barra: etiqueta, pista y número. Las tres pistas son
+   `minmax(0,…)` para que puedan encogerse por debajo de su contenido. */
+.barras{display:grid;gap:9px}
+.fila{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr) minmax(0,auto);
+  gap:10px;align-items:center}
+@media(max-width:720px){
+  .fila{grid-template-columns:minmax(0,1fr) minmax(0,auto);}
+  .fila .et{grid-column:1 / -1}
+}
+.fila .et{font-size:13.5px;line-height:1.35}
+.fila .et small{display:block;color:var(--gris);font-size:11.5px;line-height:1.4;margin-top:2px}
+.pista{background:var(--pista);border-radius:6px;height:20px;position:relative;overflow:hidden}
+.pista .b{height:100%;border-radius:6px;background:var(--barra-neutra);min-width:2px}
+.fila.mio .pista .b{background:var(--barra-a)}
+.fila.mala .pista .b{background:var(--barra-mala)}
+.fila .va{font-size:13.5px;font-weight:650;font-variant-numeric:tabular-nums;text-align:right}
+.fila.mio .va{color:var(--acento)}
+
+/* Barras con signo. Salen de un cero central: el lado dice si el número es
+   bueno o malo y el largo dice cuánto. Con una barra normal el signo quedaría
+   solo en el color, y un dato malo y grande se leería igual que uno bueno y
+   grande. */
+.pista.dos-lados{position:relative;background:var(--pista)}
+.pista.dos-lados .cero{position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:var(--gris);opacity:.55}
+.pista.dos-lados .b{position:absolute;top:0;bottom:0;height:auto;border-radius:4px}
+.pista.dos-lados .b.izq{right:50%}
+.pista.dos-lados .b.der{left:50%}
+.pista.dos-lados .b.bien{background:var(--verde)}
+.pista.dos-lados .b.mal{background:var(--barra-mala)}
+.leyenda i.bien{background:var(--verde)}
+.leyenda i.mal{background:var(--barra-mala)}
+
+/* Barras pareadas: dos pistas finas apiladas dentro de la misma celda. */
+.par{display:grid;gap:4px}
+.par .pista{height:13px}
+.par .pista.a .b{background:var(--barra-a)}
+.par .pista.b .b{background:var(--barra-b)}
+.fila .va.par-va{display:grid;gap:2px;text-align:right;font-size:12.5px}
+.fila .va.par-va span:last-child{color:var(--gris);font-weight:600}
+
+/* Escalones del embudo. No son barras: son cinco medidas en unidades
+   distintas, y dibujarlas a la misma escala mentiría. */
+.escalones{display:grid;gap:10px;counter-reset:paso}
+.escalon{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:12px;
+  align-items:start;background:var(--panel-2);border:1px solid var(--linea);
+  border-radius:11px;padding:11px 13px}
+.escalon .num{background:var(--acento-suave);color:var(--acento);font-weight:750;font-size:12.5px;
+  border-radius:8px;padding:5px 9px;letter-spacing:.03em}
+.escalon .va{font-size:20px;font-weight:680;font-variant-numeric:tabular-nums;
+  letter-spacing:-.4px;color:var(--acento)}
+.escalon .nm{font-size:13.5px;font-weight:620;margin:1px 0 3px}
+.escalon .ex{font-size:12.5px;color:var(--gris);line-height:1.45}
+
+/* Curva. El `<svg>` no lleva ni una letra dentro: las etiquetas de los ejes van
+   en HTML alrededor, y así el texto no se estira con el dibujo. */
+.curva-caja{display:grid;gap:6px;grid-template-columns:minmax(0,auto) minmax(0,1fr)}
+.curva-y{display:grid;font-size:11px;color:var(--gris);font-variant-numeric:tabular-nums;
+  align-content:space-between;text-align:right;padding-right:2px}
+.curva-lienzo{background:var(--panel-2);border:1px solid var(--linea);border-radius:10px;
+  height:170px;width:100%;display:block}
+.curva-x{grid-column:2;display:flex;justify-content:space-between;font-size:11px;
+  color:var(--gris);gap:4px}
+.curva-x span{text-align:center;line-height:1.25}
+svg .rejilla{stroke:var(--linea);stroke-width:1;vector-effect:non-scaling-stroke}
+svg .serie-a{fill:none;stroke:var(--barra-a);stroke-width:2.5;vector-effect:non-scaling-stroke;
+  stroke-linejoin:round}
+svg .serie-b{fill:none;stroke:var(--barra-b);stroke-width:2.5;vector-effect:non-scaling-stroke;
+  stroke-dasharray:5 3;stroke-linejoin:round}
+/* Los extremos del eje horizontal se alinean con el primer y el último punto
+   de la curva, que están pegados a los bordes del lienzo. Sin esto la primera
+   y la última etiqueta sobresalen media palabra por cada lado. */
+.curva-x span:first-child{text-align:left}
+.curva-x span:last-child{text-align:right}
+
+/* --------------------------------------------------------------- tablas ---- */
+/* Lo intrínsecamente ancho se desplaza DENTRO de su contenedor. Nunca
+   arrastrando la página: eso es lo que rompe el ancho en móvil. */
+.tabla-envoltura{overflow-x:auto;border:1px solid var(--linea);border-radius:11px;
+  margin-top:10px;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:32rem}
+th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--linea);vertical-align:top}
+thead th{background:var(--panel-2);font-size:11.5px;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--gris);position:sticky;top:0}
+tbody tr:last-child td{border-bottom:0}
+td{font-variant-numeric:tabular-nums}
+td:first-child{font-variant-numeric:normal}
+.nota-tabla{font-size:12.5px;color:var(--gris);margin:8px 0 0;line-height:1.45}
+
+details{margin-top:10px}
+details summary{cursor:pointer;font-size:12.5px;color:var(--acento);font-weight:620;
+  padding:4px 0}
+details[open] summary{margin-bottom:2px}
+
+dl.glosario{margin:0;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
+dl.glosario div{background:var(--panel-2);border:1px solid var(--linea);border-radius:11px;
+  padding:11px 13px}
+dl.glosario dt{font-weight:680;font-size:13.5px;margin-bottom:3px}
+dl.glosario dd{margin:0;font-size:12.5px;color:var(--gris);line-height:1.5}
+
+.avisos{background:var(--rojo-f);border:1px solid var(--rojo);border-radius:11px;
+  padding:12px 14px;margin:0}
+.avisos b{color:var(--rojo)}
+.avisos ul{margin:6px 0 0;padding-left:20px;font-size:13px}
+
+footer{padding:8px 20px 34px;text-align:center;color:var(--gris);font-size:12px;
+  max-width:1180px;margin:0 auto}
+footer code{background:var(--panel-2);border:1px solid var(--linea);border-radius:5px;
+  padding:1px 5px;font-size:11.5px}
+</style>
+</head>
+<body>
+
+{#- ======================================================================= -#}
+{#- Macros. Todo el HTML de una gráfica se arma aquí una sola vez: si dos    -#}
+{#- gráficas se pintasen con código distinto, una de las dos acabaría sin    -#}
+{#- alternativa textual o sin su aviso.                                      -#}
+{#- ======================================================================= -#}
+
+{%- macro encabezado_grafica(g) -%}
+<figcaption>
+  <h4>{{ g.titulo }}</h4>
+  <p class="qm"><b>Qué muestra.</b> {{ g.que_muestra }}</p>
+  <p class="qc"><b>Qué hay que concluir.</b> {{ g.que_concluir }}</p>
+  {%- if g.aviso %}
+  <p class="av"><b>Cuidado al leerla.</b> {{ g.aviso }}</p>
+  {%- endif %}
+</figcaption>
+{%- endmacro -%}
+
+{%- macro tabla_de_apoyo(g) -%}
+<details>
+  <summary>Ver los números de esta gráfica en una tabla</summary>
+  <div class="tabla-envoltura">
+    <table>
+      <thead><tr>
+        <th>Concepto</th>
+        {%- if g.leyenda and g.leyenda.a %}<th>{{ g.leyenda.a }}</th><th>{{ g.leyenda.b }}</th>
+        {%- else %}<th>{{ g.unidad or 'Valor' }}</th>{% endif %}
+        <th>Detalle</th>
+      </tr></thead>
+      <tbody>
+      {%- for f in g.filas %}
+        <tr>
+          <td>{{ f.etiqueta }}</td>
+          {%- if g.leyenda and g.leyenda.a %}<td>{{ f.a.texto }}</td><td>{{ f.b.texto }}</td>
+          {%- else %}<td>{{ f.texto }}</td>{% endif %}
+          <td>{% if f.nota %}{{ f.nota }}{% elif f.n is not none %}{{ f.n }} casos{% else %}—{% endif %}</td>
+        </tr>
+      {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</details>
+{%- endmacro -%}
+
+{#- La escala de las barras, dicha en la propia gráfica. El ancho se calcula en
+    `app/dashboard_datos.py::_anchos`, donde la barra más larga se lleva el
+    100 % de la pista. Es lo correcto para comparar filas entre sí, pero sin
+    decirlo una barra llena se lee como «el 100 %»: en «Qué productos tiene ya
+    cada cliente» la barra de 57.63 % ocupa toda la pista. Va en un macro para
+    que ninguna gráfica de barras pueda quedarse sin ella. -#}
+{%- macro nota_escala(tipo='barras') -%}
+<p class="escala">
+  {%- if tipo == 'divergentes' -%}
+  Las barras están a escala <b>relativa a la más larga de esta gráfica</b>, que
+  llena su mitad de la pista: sirven para comparar las filas entre sí, no para
+  leer cada una contra un máximo. Lo que dice el lado es el signo; lo que dice
+  el largo es cuánto. La cifra exacta va escrita al lado de cada barra.
+  {%- elif tipo == 'pareadas' -%}
+  Las dos series comparten escala, y está <b>relativa a la barra más larga de
+  esta gráfica</b>, que ocupa la pista entera: sirven para comparar filas y
+  series entre sí, no para leer cada una contra el 100 %. La cifra exacta va
+  escrita al lado de cada barra.
+  {%- else -%}
+  Las barras están a escala <b>relativa a la más larga de esta gráfica</b>, que
+  ocupa la pista entera: sirven para comparar las filas entre sí, no para leer
+  cada una contra el 100 %. La cifra exacta va escrita al lado de cada barra.
+  {%- endif -%}
+</p>
+{%- endmacro -%}
+
+{%- macro grafica_barras(g) -%}
+{%- if g.unidad %}<p class="unidad">{{ g.unidad }}</p>{% endif %}
+{{ nota_escala() }}
+<div class="barras" role="img" aria-label="{{ g.alt }}">
+  {%- for f in g.filas %}
+  <div class="fila {% if f.resaltar %}mio{% elif f.negativo %}mala{% endif %}">
+    <div class="et">{{ f.etiqueta }}{% if f.nota %}<small>{{ f.nota }}</small>{% endif %}</div>
+    <div class="pista" aria-hidden="true"><div class="b" style="width:{{ f.ancho_pct }}%"></div></div>
+    <div class="va">{{ f.texto }}</div>
+  </div>
+  {%- endfor %}
+</div>
+{%- endmacro -%}
+
+{%- macro grafica_pareadas(g) -%}
+{%- if g.unidad %}<p class="unidad">{{ g.unidad }}</p>{% endif %}
+{{ nota_escala('pareadas') }}
+{%- if g.leyenda %}
+<p class="leyenda"><span><i class="a"></i>{{ g.leyenda.a }}</span><span><i class="b"></i>{{ g.leyenda.b }}</span></p>
+{%- endif %}
+<div class="barras" role="img" aria-label="{{ g.alt }}">
+  {%- for f in g.filas %}
+  <div class="fila {% if f.resaltar %}mio{% endif %}">
+    <div class="et">{{ f.etiqueta }}{% if f.nota %}<small>{{ f.nota }}</small>{% endif %}</div>
+    <div class="par" aria-hidden="true">
+      <div class="pista a"><div class="b" style="width:{{ f.a.ancho_pct }}%"></div></div>
+      <div class="pista b"><div class="b" style="width:{{ f.b.ancho_pct }}%"></div></div>
+    </div>
+    <div class="va par-va"><span>{{ f.a.texto }}</span><span>{{ f.b.texto }}</span></div>
+  </div>
+  {%- endfor %}
+</div>
+{%- endmacro -%}
+
+{%- macro grafica_divergentes(g) -%}
+{%- if g.unidad %}<p class="unidad">{{ g.unidad }}</p>{% endif %}
+{{ nota_escala('divergentes') }}
+{%- if g.leyenda %}
+{%- set izq_ok = g.leyenda.bueno == 'izq' %}
+<p class="leyenda"><span><i class="{{ 'bien' if izq_ok else 'mal' }}"></i>A la izquierda del cero · {{ g.leyenda.izq }}</span><span><i class="{{ 'mal' if izq_ok else 'bien' }}"></i>A la derecha · {{ g.leyenda.der }}</span></p>
+{%- endif %}
+<div class="barras" role="img" aria-label="{{ g.alt }}">
+  {%- for f in g.filas %}
+  <div class="fila">
+    <div class="et">{{ f.etiqueta }}{% if f.nota %}<small>{{ f.nota }}</small>{% endif %}</div>
+    <div class="pista dos-lados" aria-hidden="true">
+      <div class="cero"></div>
+      <div class="b {{ f.lado }} {{ 'bien' if f.bueno else 'mal' }}" style="width:{{ f.ancho_pct }}%"></div>
+    </div>
+    <div class="va">{{ f.texto }}</div>
+  </div>
+  {%- endfor %}
+</div>
+{%- endmacro -%}
+
+{%- macro grafica_escalones(g) -%}
+<div class="escalones" role="img" aria-label="{{ g.alt }}">
+  {%- for f in g.filas %}
+  <div class="escalon">
+    <div class="num">{{ f.clave }}</div>
+    <div>
+      <div class="va">{{ f.texto }}</div>
+      <div class="nm">{{ f.etiqueta }}</div>
+      <div class="ex">{{ f.explica }}</div>
+    </div>
+  </div>
+  {%- endfor %}
+</div>
+{%- endmacro -%}
+
+{%- macro grafica_curva(g) -%}
+{%- if g.unidad %}<p class="unidad">{{ g.unidad }}</p>{% endif %}
+{%- if g.leyenda %}
+<p class="leyenda"><span><i class="a"></i>{{ g.leyenda.a }}</span><span><i class="b"></i>{{ g.leyenda.b }}</span></p>
+{%- endif %}
+<div class="curva-caja" role="img" aria-label="{{ g.alt }}">
+  <div class="curva-y" aria-hidden="true">
+    <span>{{ g.svg.tope_texto }}</span><span>0.00 %</span>
+  </div>
+  <svg class="curva-lienzo" viewBox="0 0 {{ g.svg.ancho }} {{ g.svg.alto }}"
+       preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <line class="rejilla" x1="0" y1="{{ g.svg.alto / 2 }}" x2="{{ g.svg.ancho }}" y2="{{ g.svg.alto / 2 }}"></line>
+    {%- for s in g.svg.series %}
+    <polyline class="serie-{{ 'a' if loop.first else 'b' }}" points="{{ s.polilinea }}"></polyline>
+    {%- endfor %}
+  </svg>
+  <div class="curva-x" aria-hidden="true">
+    {%- for f in g.filas %}<span>{{ f.etiqueta }}</span>{% endfor %}
+  </div>
+</div>
+{%- endmacro -%}
+
+{%- macro grafica(g) -%}
+<figure class="g" id="g-{{ g.clave }}">
+  {{ encabezado_grafica(g) }}
+  {%- if g.tipo == 'barras' %}{{ grafica_barras(g) }}
+  {%- elif g.tipo == 'barras_pareadas' %}{{ grafica_pareadas(g) }}
+  {%- elif g.tipo == 'barras_divergentes' %}{{ grafica_divergentes(g) }}
+  {%- elif g.tipo == 'escalones' %}{{ grafica_escalones(g) }}
+  {%- elif g.tipo == 'curva' %}{{ grafica_curva(g) }}
+  {%- else %}{{ grafica_barras(g) }}{% endif %}
+  {{ tabla_de_apoyo(g) }}
+</figure>
+{%- endmacro -%}
+
+{%- macro tabla(t) -%}
+<figure class="g" id="t-{{ t.clave }}">
+  <figcaption>
+    <h4>{{ t.titulo }}</h4>
+    <p class="qm"><b>Qué muestra.</b> {{ t.que_muestra }}</p>
+    <p class="qc"><b>Qué hay que concluir.</b> {{ t.que_concluir }}</p>
+  </figcaption>
+  <div class="tabla-envoltura">
+    <table>
+      <thead><tr>{% for c in t.columnas %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+      <tbody>
+      {%- for fila in t.filas %}
+        <tr>{% for celda in fila %}<td>{{ celda }}</td>{% endfor %}</tr>
+      {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  {%- if t.nota %}<p class="nota-tabla">{{ t.nota }}</p>{% endif %}
+</figure>
+{%- endmacro -%}
+
+
+{#- ======================================================================= -#}
+<header>
+  <h1>nu-moments · dashboard general</h1>
+  <span class="lema">todas las métricas, explicadas de cero</span>
+  <div class="der">
+    {%- if d %}<span class="pill">corte {{ d.corte }}</span>{% endif %}
+    <a class="pill" href="/">← la demo</a>
+    <button class="tema-btn" type="button" onclick="cambiarTema()">Claro / oscuro</button>
+  </div>
+</header>
+
+<main>
+
+{%- if not d %}
+  <section class="tarjeta">
+    <h2 class="bloque">El dashboard no está disponible</h2>
+    <p class="resumen">{{ caido }}</p>
+    <div class="avisos"><b>Motivo:</b> {{ motivo or 'sin motivo registrado' }}</div>
+    <p class="fuente">Se reconstruye con <code>.venv/bin/python -m app.dashboard_datos</code>.</p>
+  </section>
+{%- else %}
+
+  {#- ---------------------------------------------------------- portada --- -#}
+  <section class="tarjeta portada">
+    <h2>{{ d.titulo }}</h2>
+    <p class="resumen">{{ d.entradilla }}</p>
+
+    <ul class="cifras">
+      {%- for c in d.cabecera %}
+      <li>
+        <div class="et">{{ c.etiqueta }}</div>
+        <div class="va">{{ c.valor }}</div>
+        <div class="de">{{ c.detalle }}</div>
+      </li>
+      {%- endfor %}
+    </ul>
+
+    <div class="como-leer">
+      <div><b>Cómo se lee</b> Cada gráfica dice qué muestra y qué hay que concluir.
+        Donde una gráfica se puede leer mal, lleva un aviso en amarillo dentro de
+        la propia gráfica.</div>
+      <div><b>De dónde salen los números</b> Al final de cada bloque está escrita
+        la procedencia exacta. Nada está escrito a mano; si un dato falta, el
+        bloque no aparece.</div>
+      <div><b>Qué significa un porcentaje</b> Siempre con dos decimales y siempre
+        con su denominador dicho al lado, porque el mismo número sobre poblaciones
+        distintas no es el mismo número.</div>
+      <div><b>Los datos son sintéticos</b> Ninguna persona de este dataset es real.
+        Son 38 000 clientes generados, 119 días de historia y 1.7 millones de filas.</div>
+    </div>
+
+    <ul class="params">
+      <li>Corte de referencia <b>{{ d.parametros.corte }}</b></li>
+      <li>Instante exacto <b>{{ d.parametros.asof }}</b></li>
+      <li>Tope de repeticiones <b>{{ d.parametros.cap_exposiciones }}</b></li>
+      <li>Señal fresca <b>≤ {{ d.parametros.umbral_senal_fresca_h }} h</b></li>
+      <li>Señal tibia <b>≤ {{ (d.parametros.umbral_senal_tibia_h / 24) | round | int }} días</b></li>
+      <li>Precio de un día en negativo <b>{{ d.parametros.lambda_mxn_por_dia_negativo | round | int }} MXN</b></li>
+      <li>Ventana de conversión <b>{{ d.parametros.ventana_conversion_dias }} días</b></li>
+      <li>Catálogo del piloto <b>{{ d.parametros.catalogo | join(', ') }}</b></li>
+    </ul>
+
+    {%- if d.avisos %}
+    <div class="avisos" style="margin-top:14px">
+      <b>Falta algo en esta página:</b>
+      <ul>{% for a in d.avisos %}<li>{{ a }}</li>{% endfor %}</ul>
+    </div>
+    {%- endif %}
+  </section>
+
+  {#- ----------------------------------------------------------- índice --- -#}
+  <nav class="tarjeta indice" aria-label="Índice de los bloques">
+    <h2 class="bloque">Qué hay en esta página</h2>
+    <ol>
+      {%- for b in d.bloques %}
+      <li><a href="#b-{{ b.clave }}">{{ b.titulo }}</a></li>
+      {%- endfor %}
+      <li><a href="#glosario">Glosario · las palabras que hay que traducir</a></li>
+    </ol>
+  </nav>
+
+  {#- --------------------------------------------------------- glosario --- -#}
+  <section class="tarjeta" id="glosario">
+    <h2 class="bloque">Glosario</h2>
+    <p class="resumen">Estas {{ d.glosario | length }} palabras aparecen en toda la
+      página y ninguna significa exactamente lo que parece a primera vista.
+      Conviene leerlas antes que las gráficas.</p>
+    <dl class="glosario">
+      {%- for t in d.glosario %}
+      <div><dt>{{ t.termino }}</dt><dd>{{ t.definicion }}</dd></div>
+      {%- endfor %}
+    </dl>
+
+    {#- Las abreviaturas de las gráficas. No están en `d.glosario` —que son las
+        palabras del dominio— pero aparecen crudas en los bloques 3, 8 y 9, y
+        sin ellas esas cifras no se pueden leer. Van aparte para no falsear el
+        recuento de arriba. -#}
+    <p class="resumen" style="margin-top:18px">Y cuatro abreviaturas que salen
+      en las gráficas sin avisar.</p>
+    <dl class="glosario">
+      <div><dt>pp (punto porcentual)</dt><dd>La diferencia entre dos
+        porcentajes. Pasar del 10 % al 12 % son 2 pp, no un 2 %: en «por ciento»
+        esa misma subida sería un 20 %. Cuando la página compara dos porcentajes
+        siempre lo hace en pp, para que la cifra no dependa de cuál se tome como
+        base.</dd></div>
+      <div><dt>AUC</dt><dd>«Área bajo la curva ROC». Mide una sola cosa: si se
+        toman al azar un aviso que recibió clic y otro que no, con qué
+        frecuencia el modelo le pone más nota al primero. 0.50 es tirar una
+        moneda y 1.00 es acertar siempre. No dice cuántos aciertos hay, solo si
+        el orden es bueno.</dd></div>
+      <div><dt>Baseline (o referencia obligada)</dt><dd>La forma más tonta de
+        predecir que aun así funciona un poco: aquí, decir siempre la acción más
+        común. Es el listón mínimo — un modelo que no le gane no sirve de
+        nada.</dd></div>
+      <div><dt>SPEI</dt><dd>El sistema de transferencias entre bancos de México.
+        En este dataset es sencillamente la acción financiera más frecuente, y
+        por eso es la que dice el baseline.</dd></div>
+    </dl>
+  </section>
+
+  {#- ---------------------------------------------------------- bloques --- -#}
+  {%- for b in d.bloques %}
+  <section class="tarjeta" id="b-{{ b.clave }}">
+    <h2 class="bloque">{{ b.titulo }}</h2>
+    <p class="resumen">{{ b.resumen }}</p>
+
+    {%- if b.cifras %}
+    <ul class="cifras">
+      {%- for c in b.cifras %}
+      <li>
+        <div class="et">{{ c.etiqueta }}</div>
+        <div class="va">{{ c.valor }}</div>
+        <div class="de">{{ c.detalle }}</div>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+
+    {%- for g in b.graficas or [] %}{{ grafica(g) }}{% endfor %}
+    {%- for t in b.tablas or [] %}{{ tabla(t) }}{% endfor %}
+
+    <p class="fuente"><b>De dónde salen estas cifras.</b> {{ b.fuente }}</p>
+  </section>
+  {%- endfor %}
+
+{%- endif %}
+</main>
+
+<footer>
+  {%- if d %}
+  <p>Generado el {{ d.generado_utc }} · {{ d.origen or 'construido en este proceso' }} ·
+     tardó {{ d.segundos_de_construccion }} s en calcularse.
+     Se regenera con <code>.venv/bin/python -m app.dashboard_datos</code>.</p>
+  <p>Los mismos datos en JSON: <a href="/api/dashboard">/api/dashboard</a>.
+     Ninguna parte de esta página pide nada a internet.</p>
+  {%- endif %}
+</footer>
+
+<script>
+// Lo único que hace JavaScript en esta página: cambiar el tema y recordarlo.
+// Sin él la página funciona igual, con el tema del sistema.
+function cambiarTema(){
+  var r = document.documentElement;
+  var n = r.getAttribute('data-tema') === 'oscuro' ? 'claro' : 'oscuro';
+  r.setAttribute('data-tema', n);
+  try{ localStorage.setItem('nu-moments-tema', n); }catch(e){}
+}
+</script>
+</body>
+</html>

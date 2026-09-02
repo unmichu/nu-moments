@@ -1,0 +1,85 @@
+{
+  "corte_seleccion": "2026-05-23",
+  "nota": "elegidos en el corte de umbrales; el test no participa",
+  "p_intencion_min": 0.2093,
+  "p_intencion_precision_pct": 65.73,
+  "p_intencion_cobertura_pct": 15.0,
+  "p_enganche_min": 0.1927,
+  "p_enganche_base_pct": 10.58,
+  "v_min": 0.0,
+  "cap_exposiciones": 2,
+  "umbral_on_time_h": 24,
+  "umbral_warm_h": 168,
+  "barrido": [
+    {
+      "cuantil": 0.5,
+      "umbral": 0.1961,
+      "cobertura_pct": 50.0,
+      "precision_pct": 55.09,
+      "n": 8896
+    },
+    {
+      "cuantil": 0.55,
+      "umbral": 0.1974,
+      "cobertura_pct": 45.0,
+      "precision_pct": 56.07,
+      "n": 8090
+    },
+    {
+      "cuantil": 0.6,
+      "umbral": 0.1987,
+      "cobertura_pct": 40.0,
+      "precision_pct": 57.12,
+      "n": 7279
+    },
+    {
+      "cuantil": 0.65,
+      "umbral": 0.2001,
+      "cobertura_pct": 35.0,
+      "precision_pct": 58.26,
+      "n": 6483
+    },
+    {
+      "cuantil": 0.7,
+      "umbral": 0.2014,
+      "cobertura_pct": 30.0,
+      "precision_pct": 59.36,
+      "n": 5704
+    },
+    {
+      "cuantil": 0.75,
+      "umbral": 0.203,
+      "cobertura_pct": 25.0,
+      "precision_pct": 61.08,
+      "n": 4926
+    },
+    {
+      "cuantil": 0.8,
+      "umbral": 0.2053,
+      "cobertura_pct": 20.0,
+      "precision_pct": 63.2,
+      "n": 4158
+    },
+    {
+      "cuantil": 0.85,
+      "umbral": 0.2093,
+      "cobertura_pct": 15.0,
+      "precision_pct": 65.73,
+      "n": 3382
+    },
+    {
+      "cuantil": 0.9,
+      "umbral": 0.2522,
+      "cobertura_pct": 10.0,
+      "precision_pct": 72.24,
+      "n": 2518
+    },
+    {
+      "cuantil": 0.95,
+      "umbral": 0.4305,
+      "cobertura_pct": 5.0,
+      "precision_pct": 81.59,
+      "n": 1483
+    }
+  ]
+}

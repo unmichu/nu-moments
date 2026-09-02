@@ -16,9 +16,9 @@ La dificultad no está en la interfaz, está en el juicio: saber qué quiere el 
 
 ## La tesis
 
-Hoy **el 98.5 % de los avisos se envían fuera del momento**. El 1.5 % que cae bien convierte **4 veces mejor** y genera **36 % menos bajas**.
+Hoy **el 98.5 % de los avisos se envían fuera del momento**. El 1.5 % que cae bien recibe **4 veces más clic** (41.63 % contra 10.30 %) y genera **36 % menos bajas** que la señal fría. Clic, no la acción hecha: son dos métricas distintas y el dashboard las separa.
 
-No nos falta contenido. Nos falta la decisión de callarnos: el sistema guarda silencio en el **86.0 %** de los casos, y cada silencio trae su razón auditable.
+No nos falta contenido. Nos falta la decisión de callarnos: el sistema guarda silencio en el **86.4 %** de los casos, y cada silencio trae su razón auditable.
 
 ## Instrucciones
 
@@ -32,21 +32,27 @@ make demo       # levanta la simulación en http://localhost:8000
 
 Requiere Python 3.12+. Los datos sintéticos ya están en `data/`, no hay que descargar nada.
 
+Dos pantallas en el mismo proceso: la simulación en `/` —con las pestañas «Decisión» y
+«Cómo funciona»— y el dashboard general en [`/dashboard`](docs/dashboard.md).
+
 ## Índice
 
 | Ruta | Contenido |
 |---|---|
 | [`docs/prd.md`](docs/prd.md) | Documento de producto: problema, feature, estados, alcance |
 | [`docs/arquitectura.md`](docs/arquitectura.md) | Flujo end-to-end, contratos de datos y de API |
+| [`docs/modelos.md`](docs/modelos.md) | **Los modelos en detalle**: entradas, uniones con su SQL, hiperparámetros, evaluación |
 | [`docs/metricas.md`](docs/metricas.md) | Árbol de métricas, función objetivo y guardrails |
+| [`docs/dashboard.md`](docs/dashboard.md) | El dashboard general (`GET /dashboard`): los 9 bloques, qué mide cada gráfica y de dónde sale |
 | [`docs/backlog.md`](docs/backlog.md) | Tareas por área con dependencias |
 | [`docs/decision-log.md`](docs/decision-log.md) | Decisiones tomadas y por qué |
 | [`docs/uso-de-ia.md`](docs/uso-de-ia.md) | Cómo usamos IA en el proceso |
 | [`instrucciones/`](instrucciones/) | **Guías ejecutables por área** — para una persona o para un agente de IA |
 | [`data/`](data/) | Dataset sintético (5 tablas, ~1.7 M filas) y su generador |
 | [`pipeline/`](pipeline/) | Ingesta, features, política de decisión, evidencias de ejecución |
+| [`app/`](app/) | El servicio de la demo: 10 endpoints, escalera de fallback y las dos pantallas |
 | [`analytics/`](analytics/) | EDA, modelos, métricas y controles de calidad |
-| [`dashboard/`](dashboard/) | Visualizaciones |
+| [`dashboard/`](dashboard/) | `datos.json`, el artefacto precalculado que sirve `GET /dashboard` |
 | [`pitch/`](pitch/) | Material de la presentación |
 
 ## Datos

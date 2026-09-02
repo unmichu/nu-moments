@@ -17,7 +17,7 @@ No los recalcules para "confirmar" — úsalos como **prueba de regresión de tu
 | Tasa base de esas acciones | 4.51 % · 1.52 % · 1.24 % |
 | Curva de fatiga (enganche) | 15.68 → 7.83 → 3.51 → 1.75 → 0.70 → 0.00 |
 | Curva de fatiga (baja) | 0.279 → 1.270 → 2.531 → 3.308 → 4.502 → 6.112 |
-| Cobertura | 14.0 % oferta / 86.0 % silencio |
+| Cobertura | 13.6 % oferta / 86.4 % silencio · 14.6/85.4 sin la puerta de valor |
 
 ---
 

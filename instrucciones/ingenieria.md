@@ -11,7 +11,7 @@ Medido en desarrollo: **0.69 s de arranque, 12 ms por petición**, datos en memo
 ## ING-1 · Entorno · BLOQUEA A TODOS
 
 ```bash
-cd /Users/miguel.soto/dev/nu-moments
+cd nu-moments
 make setup
 .venv/bin/python -c "import sklearn, fastapi, httpx, pandas, duckdb; print('ok')"
 ```
@@ -51,7 +51,7 @@ make setup
     {"puerta": "S7_confianza", "resultado": "no_activa"},
     {"puerta": "S4_valor", "resultado": "pasa"}
   ],
-  "cobertura": {"pct_silencio": 86.0, "pct_oferta": 14.0}
+  "cobertura": {"pct_silencio": 86.4, "pct_oferta": 13.6}
 }
 ```
 
@@ -169,7 +169,7 @@ Es criterio, no opinión. Córrelo antes de cada ensayo.
 
 ### El selector no puede ser aleatorio
 
-El **82.7 %** de los clientes no tiene eventos en las últimas 24 h. Con un selector al azar, el panel de actividad sale vacío cuatro de cada cinco veces. **Escenarios curados al frente**, búsqueda libre como secundaria.
+El **82.84 %** de los clientes no tiene eventos en las últimas 24 h al corte del demo (2026-06-16; entre 82.84 % y 88.16 % según el corte). Con un selector al azar, el panel de actividad sale vacío cuatro de cada cinco veces. **Escenarios curados al frente**, búsqueda libre como secundaria.
 
 ### El estado de silencio es una pantalla diseñada
 
@@ -178,7 +178,7 @@ Es el momento más importante de la demo y **no puede parecer que la app se romp
 - Que el sistema evaluó y decidió, no que falló
 - La razón, en lenguaje natural
 - La traza de las 8 puertas, plegada, para abrirla si alguien pregunta
-- El contador: *"el 86.0 % de los clientes está en esta situación"*
+- El contador: *"el 86.4 % de los clientes está en esta situación"* — leído del artefacto
 
 El contador **se lee del artefacto**, nunca escrito a mano en el HTML.
 

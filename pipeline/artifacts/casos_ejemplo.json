@@ -11,7 +11,7 @@
       "titulo": "Señal fresca de ahorro → Cajita",
       "customer_id": 6024615,
       "corte": "2026-06-16",
-      "narrativa": "Abrió Cajitas en las últimas 24 h y llegó a iniciar el flujo (start vale 1.09–1.56x más que un view). Está en el 5.9% de la base con señal fresca: enganche 41.63% contra 10.30% de quien nunca visitó la pantalla.",
+      "narrativa": "Abrió Cajitas en las últimas 24 h y llegó a iniciar el flujo (start vale 1.09–1.56x más que un view). Está en el 5.90 % de la base con señal fresca: enganche 41.63 % contra 10.30 % de quien nunca visitó la pantalla.",
       "decision": {
         "enviar": true,
         "nudge_type": "savings_goal",
@@ -923,7 +923,7 @@
       "titulo": "Frágil pide línea → el sistema sustituye la oferta",
       "customer_id": 6007107,
       "corte": "2026-06-16",
-      "narrativa": "Entró a aumento de línea, pero está frágil. limit_increase engancha 25.36% a los frágiles vs 17.39% al resto (+46%) y les cuesta +17.52pp de utilización y +2.06 días en negativo. El sistema veta la oferta que él pidió y pone en su lugar la que sí le sirve. Ese es el producto: no obedecer la señal, entenderla.",
+      "narrativa": "Entró a aumento de línea, pero está frágil. limit_increase engancha 25.36 % a los frágiles vs 17.39 % al resto (+45.83 %) y les cuesta +17.52pp de utilización y +2.06 días en negativo. El sistema veta la oferta que él pidió y pone en su lugar la que sí le sirve. Ese es el producto: no obedecer la señal, entenderla.",
       "decision": {
         "enviar": true,
         "nudge_type": "bill_reminder",
@@ -1383,7 +1383,7 @@
       "titulo": "Frágil pide línea → silencio por veto",
       "customer_id": 6016480,
       "corte": "2026-06-16",
-      "narrativa": "Misma señal, sin alternativa sana disponible: el asistente no dice nada. El veto toca solo el 3.2% del volumen y da la vuelta al signo del sistema (+1,679 → −3,031 días en descubierto). Cuesta 21.8% del revenue: 165 MXN por día de descubierto evitado.",
+      "narrativa": "Misma señal, sin alternativa sana disponible: el asistente no dice nada. El veto toca solo el 3.20 % del volumen y da la vuelta al signo del sistema (+1,679 → −3,031 días en descubierto). Cuesta 21.80 % del revenue: 165 MXN por día de descubierto evitado.",
       "decision": {
         "enviar": false,
         "nudge_type": null,
@@ -1776,7 +1776,7 @@
       "titulo": "Cupo agotado → silencio por fatiga",
       "customer_id": 6035011,
       "corte": "2026-06-16",
-      "narrativa": "Tiene la intención Y el historial: ya vio ese mensaje 3+ veces. En la 3ª exposición el enganche es 3.51% y el opt-out 2.53% → 0.72 bajas por cada clic; en la 4ª, 1.89. Por eso el cap es 2. Y no es cuestión de esperar: hours_since_last_nudge no tiene efecto controlando por exposure_no. Lo que fatiga es el CONTEO, no el reloj.",
+      "narrativa": "Tiene la intención Y el historial: ya vio ese mensaje 3+ veces. En la 3ª exposición el enganche es 3.51 % y el opt-out 2.53 % → 0.72 bajas por cada clic; en la 4ª, 1.89. Por eso el cap es 2. Y no es cuestión de esperar: hours_since_last_nudge no tiene efecto controlando por exposure_no. Lo que fatiga es el CONTEO, no el reloj.",
       "decision": {
         "enviar": false,
         "nudge_type": null,
@@ -2262,7 +2262,7 @@
       "titulo": "Sin señal reciente → silencio",
       "customer_id": 6033683,
       "corte": "2026-06-16",
-      "narrativa": "Cliente activo con historial rico, pero cero señal de intención en 7 días en las pantallas acopladas a una oferta. El 59.9% de los nudges de hoy se mandan así y convierten 10.30%. Aquí el asistente se calla — y ese silencio ES el producto.",
+      "narrativa": "Cliente activo con historial rico, pero cero señal de intención en 7 días en las pantallas acopladas a una oferta. El 59.90 % de los nudges de hoy se mandan así y convierten 10.30 %. Aquí el asistente se calla — y ese silencio ES el producto.",
       "decision": {
         "enviar": false,
         "nudge_type": null,
@@ -2754,7 +2754,7 @@
       "titulo": "Ventana de payday + señal → timing óptimo",
       "customer_id": 6028999,
       "corte": "2026-06-16",
-      "narrativa": "Está a ≤1 día de su día de pago Y acaba de entrar a Cajitas. En payday hay 3.9x más probabilidad de que exista señal fresca (4.6% vs 1.2%) y savings_move sube hasta 5.4x. Pero el efecto payday sobre el engagement es 100% MEDIADO: dentro de cada estrato de momento el enganche es idéntico. No mandamos por calendario; mandamos porque la señal apareció, y el calendario explica por qué apareció hoy.",
+      "narrativa": "Está a ≤1 día de su día de pago Y acaba de entrar a Cajitas. En payday hay 3.9x más probabilidad de que exista señal fresca (4.60 % vs 1.20 %) y savings_move sube hasta 5.4x. Pero el efecto payday sobre el engagement es totalmente MEDIADO: dentro de cada estrato de momento el enganche es idéntico. No mandamos por calendario; mandamos porque la señal apareció, y el calendario explica por qué apareció hoy.",
       "decision": {
         "enviar": true,
         "nudge_type": "savings_goal",

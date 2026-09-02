@@ -1,12 +1,21 @@
+# datos
 pandas==3.0.5
-pyarrow==25.0.0
+pyarrow==25.0.1
 duckdb==1.5.5
-scipy==1.16.3
+scipy==1.18.1
+
+# modelos
 scikit-learn==1.9.0
 joblib==1.6.0
+
+# visualización
 matplotlib==3.11.1
+
+# servicio
 fastapi==0.141.1
 uvicorn==0.52.4
 jinja2==3.1.6
-httpx==0.29.2
+
+# pruebas
 pytest==9.1.1
+httpx==0.28.1

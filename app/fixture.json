@@ -1,0 +1,26 @@
+{
+  "customer_id": 6007107,
+  "asof": "2026-06-16T12:00:00",
+  "decision": "sustitucion",
+  "modelo": "v1",
+  "ofertas": [
+    {"producto": "bill_reminder", "score": 0.412, "surface": "home_card",
+     "titulo": "Ponte al día sin intereses",
+     "razon": "Entraste a subir tu línea hace 8.6 horas y tu tarjeta está al 83.4 %. Un aumento ahora te costaría más de lo que te ayuda."}
+  ],
+  "silencios": [
+    {"producto": "limit_increase", "puerta": "S3_veto_dano",
+     "razon": "Utilización 83.4 % y 2 días en negativo en los últimos 90."}
+  ],
+  "traza": [
+    {"puerta": "S0_opt_out", "resultado": "pasa"},
+    {"puerta": "S6_fecha", "resultado": "pasa"},
+    {"puerta": "S1_sin_senal", "resultado": "pasa"},
+    {"puerta": "S2_cupo", "resultado": "pasa"},
+    {"puerta": "S5_descartes", "resultado": "no_activa"},
+    {"puerta": "S3_fragilidad", "resultado": "cierra", "producto": "limit_increase"},
+    {"puerta": "S7_confianza", "resultado": "no_activa"},
+    {"puerta": "S4_valor", "resultado": "pasa"}
+  ],
+  "cobertura": {"pct_silencio": 86.0, "pct_oferta": 14.0}
+}
